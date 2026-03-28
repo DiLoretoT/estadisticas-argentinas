@@ -16,8 +16,8 @@ export default async function DolarDetalle() {
       title="Dolar"
       subtitle="Cotizacion del dolar oficial (BCRA) y dolar blue. Series diarias y mensuales."
       charts={[
-        { data: oficialDiario.slice(-120), label: "Oficial diario", color: "var(--color-accent)", format: "peso" },
-        { data: blueDiario.slice(-120), label: "Blue diario", color: "var(--color-primary)", format: "peso" },
+        { data: oficialDiario, label: "Oficial diario", color: "var(--color-accent)", format: "peso" },
+        { data: blueDiario, label: "Blue diario", color: "var(--color-primary)", format: "peso" },
       ]}
       tables={[
         { title: "Oficial mensual", data: oficialMensual, valueLabel: "$", format: "peso" },

@@ -13,8 +13,8 @@ export default async function EuroDetalle() {
       title="Euro"
       subtitle="Cotizacion del euro publicada por el BCRA. Series diarias y mensuales."
       charts={[
-        { data: euroDiario.slice(-120), label: "Euro diario", color: "#6366f1", format: "peso" },
-        { data: euroMensual.slice(-60), label: "Euro mensual", color: "#8b5cf6", format: "peso" },
+        { data: euroDiario, label: "Euro diario", color: "#6366f1", format: "peso" },
+        { data: euroMensual, label: "Euro mensual", color: "#8b5cf6", format: "peso" },
       ]}
       tables={[
         { title: "Euro mensual", data: euroMensual, valueLabel: "$", format: "peso" },

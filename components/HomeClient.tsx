@@ -25,20 +25,24 @@ interface Props {
   };
 }
 
-function fmt(v: unknown, suffix = ""): string {
+/** Format a percentage that might be pre-multiplied (2.62) or raw decimal (0.07). */
+function pct(v: unknown): string {
   if (v == null) return "—";
   const n = Number(v);
-  if (isNaN(n)) return String(v);
-  return n.toLocaleString("es-AR", { maximumFractionDigits: 1 }) + suffix;
-}
-
-function pct(v: unknown): string {
-  return fmt(v, "%");
+  if (isNaN(n)) return "—";
+  // Values < 1 are raw decimals (0.07 = 7%), values >= 1 are already % (2.62 = 2.62%)
+  const display = Math.abs(n) < 1 ? n * 100 : n;
+  return display.toLocaleString("es-AR", { maximumFractionDigits: 1 }) + "%";
 }
 
 function peso(v: unknown): string {
   if (v == null) return "—";
   return `$${Number(v).toLocaleString("es-AR", { maximumFractionDigits: 0 })}`;
+}
+
+function val(obj: unknown, key: string): unknown {
+  if (obj && typeof obj === "object" && key in obj) return (obj as Record<string, unknown>)[key];
+  return undefined;
 }
 
 export function HomeClient({
@@ -55,6 +59,8 @@ export function HomeClient({
   const empl = empleo as Record<string, unknown>;
   const pobr = pobreza as Record<string, unknown>;
 
+  const inflMonthly = infl.monthly as Record<string, unknown> | undefined;
+  const inflYtd = infl.ytd as Record<string, unknown> | undefined;
   const td = (empl.tasa_desocupacion as Record<string, unknown>) || {};
   const te = (empl.tasa_empleo as Record<string, unknown>) || {};
   const tp = (pobr.tasa_pobreza as Record<string, unknown>) || {};
@@ -70,14 +76,15 @@ export function HomeClient({
           title="Indicadores clave"
           subtitle="Vista rapida de los principales datos macroeconomicos actualizados."
         />
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           <KpiCard
             label="Inflacion mensual"
-            value={pct(infl.monthly)}
-            detail={`Acumulado: ${pct(infl.ytd)}`}
+            value={pct(inflMonthly?.value)}
+            detail={`Acumulado: ${pct(inflYtd?.value)}`}
             trend="up"
             accentColor="var(--color-danger)"
             delay={0}
+            sparkData={series.inflacion.slice(-12).map(d => d[1])}
           />
           <KpiCard
             label="Dolar oficial"
@@ -85,6 +92,7 @@ export function HomeClient({
             detail={dolOf.period ? `Al ${dolOf.period}` : undefined}
             accentColor="var(--color-accent)"
             delay={0.05}
+            sparkData={series.dolarOficial.slice(-12).map(d => d[1])}
           />
           <KpiCard
             label="Dolar blue"
@@ -92,6 +100,7 @@ export function HomeClient({
             detail={dolBl.period ? `Al ${dolBl.period}` : undefined}
             accentColor="var(--color-primary)"
             delay={0.1}
+            sparkData={series.dolarBlue.slice(-12).map(d => d[1])}
           />
           <KpiCard
             label="Desocupacion"
@@ -100,6 +109,16 @@ export function HomeClient({
             trend="down"
             accentColor="var(--color-warning)"
             delay={0.15}
+            sparkData={series.desocupacion.slice(-8).map(d => d[1])}
+          />
+          <KpiCard
+            label="Pobreza"
+            value={pct(tp.value)}
+            detail={tp.period ? `S2 ${tp.period}` : undefined}
+            trend="up"
+            accentColor="var(--color-danger)"
+            delay={0.2}
+            sparkData={series.pobreza.slice(-6).map(d => d[1])}
           />
         </div>
       </section>
@@ -116,28 +135,28 @@ export function HomeClient({
             data={series.inflacion}
             label="Inflacion mensual (% IPC)"
             color="var(--color-danger)"
-            height={220}
+
             format="percent"
           />
           <AreaChart
             data={series.dolarOficial}
             label="Dolar oficial (cierre mensual)"
             color="var(--color-accent)"
-            height={220}
+
             format="peso"
           />
           <AreaChart
             data={series.dolarBlue}
             label="Dolar blue (cierre mensual)"
             color="var(--color-primary)"
-            height={220}
+
             format="peso"
           />
           <AreaChart
             data={series.ripte}
             label="RIPTE (var. mensual %)"
             color="#8b5cf6"
-            height={220}
+
             format="percent"
           />
         </div>
@@ -187,14 +206,14 @@ export function HomeClient({
             data={series.emae}
             label="EMAE (indice mensual)"
             color="var(--color-success)"
-            height={220}
+
             format="decimal"
           />
           <AreaChart
             data={series.pbi}
             label="PBI trimestral"
             color="var(--color-accent)"
-            height={220}
+
             format="index"
           />
         </div>
@@ -228,41 +247,16 @@ export function HomeClient({
             data={series.desocupacion}
             label="Tasa de desocupacion (%)"
             color="var(--color-warning)"
-            height={220}
+
             format="percent"
           />
           <AreaChart
             data={series.pobreza}
             label="Tasa de pobreza (%)"
             color="var(--color-danger)"
-            height={220}
+
             format="percent"
           />
-        </div>
-        <div className="grid md:grid-cols-2 gap-5 mt-5">
-          <div className="grid grid-cols-2 gap-4">
-            <KpiCard
-              label="Desocupacion"
-              value={pct(td.value)}
-              detail={td.period ? `${td.period}` : undefined}
-              accentColor="var(--color-warning)"
-            />
-            <KpiCard
-              label="Empleo"
-              value={pct(te.value)}
-              detail={te.period ? `${te.period}` : undefined}
-              accentColor="var(--color-success)"
-            />
-          </div>
-          <div className="grid grid-cols-1 gap-4">
-            <KpiCard
-              label="Pobreza"
-              value={pct(tp.value)}
-              detail={tp.period ? `S2 ${tp.period}` : undefined}
-              trend="up"
-              accentColor="var(--color-danger)"
-            />
-          </div>
         </div>
         <div className="grid grid-cols-2 gap-4 mt-8">
           <LinkCard

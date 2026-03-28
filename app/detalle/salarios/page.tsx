@@ -13,8 +13,8 @@ export default async function SalariosDetalle() {
       title="Salarios"
       subtitle="RIPTE (Remuneracion Imponible Promedio de los Trabajadores Estables) e indices salariales."
       charts={[
-        { data: ripteMensual.slice(-60), label: "RIPTE var. mensual (%)", color: "#8b5cf6", format: "percent" },
-        { data: ripteNivel.slice(-60), label: "RIPTE nivel", color: "var(--color-accent)", format: "index" },
+        { data: ripteMensual, label: "RIPTE var. mensual (%)", color: "#8b5cf6", format: "percent" },
+        { data: ripteNivel, label: "RIPTE nivel", color: "var(--color-accent)", format: "index" },
       ]}
       tables={[
         { title: "RIPTE variacion mensual", data: ripteMensual, valueLabel: "%", format: "percent" },

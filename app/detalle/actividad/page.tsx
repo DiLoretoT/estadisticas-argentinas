@@ -13,8 +13,8 @@ export default async function ActividadDetalle() {
       title="Actividad economica"
       subtitle="Estimador Mensual de Actividad Economica (EMAE) y Producto Bruto Interno (PBI)."
       charts={[
-        { data: emae.slice(-60), label: "EMAE mensual", color: "var(--color-success)", format: "decimal" },
-        { data: pbi.slice(-20), label: "PBI trimestral", color: "var(--color-accent)", format: "index" },
+        { data: emae, label: "EMAE mensual", color: "var(--color-success)", format: "decimal" },
+        { data: pbi, label: "PBI trimestral", color: "var(--color-accent)", format: "index" },
       ]}
       tables={[
         { title: "EMAE mensual", data: emae, valueLabel: "Indice", format: "decimal" },
