@@ -1,0 +1,15 @@
+{
+  "updated_at": "2026-03-28",
+  "source": {
+    "name": "INDEC",
+    "official": true
+  },
+  "tasa_pobreza": {
+    "period": "2025-07-01",
+    "value": 0.32
+  },
+  "linea_indigencia": {
+    "period": "2026-02-01",
+    "value": 644088.41
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "updated_at": "2026-03-28",
+  "source": {
+    "name": "INDEC",
+    "official": true
+  },
+  "tasa_desocupacion": {
+    "period": "2025-10-01",
+    "value": 0.07
+  },
+  "tasa_empleo": {
+    "period": "2025-10-01",
+    "value": 0.45
+  }
+}
