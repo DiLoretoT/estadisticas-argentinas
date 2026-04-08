@@ -1,6 +1,17 @@
+# Dependencies
 node_modules/
+etl/.venv/
+
+# Build
 .next/
+
+# Logs
 data/logs/
+
+# Python
 *.pyc
 __pycache__/
+
+# Environment
 .env
+.claude/settings.local.json

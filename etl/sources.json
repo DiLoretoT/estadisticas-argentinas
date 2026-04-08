@@ -1,0 +1,52 @@
+{
+  "inflacion": {
+    "series_api": "https://apis.datos.gob.ar/series/api/series",
+    "series_id_mensual": "101.1_I2NG_2016_M_22"
+  },
+  "inflacion_empalme": {
+    "method": "splice_ratio",
+    "segments": [
+      "ipc_gba_1999.json",
+      "inflacion_mensual.json"
+    ]
+  },
+  "dolar_oficial": {
+    "series_api": "https://apis.datos.gob.ar/series/api/series",
+    "series_id": "168.1_T_CAMBIOR_D_0_0_26",
+    "collapse": "month",
+    "collapse_aggregation": "end_of_period",
+    "bcra_base": "https://api.bcra.gob.ar/estadisticascambiarias/v1.0/",
+    "bcra_start": "1992-01-02"
+  },
+  "dolar_blue": {
+    "api_base": "https://api.argentinadatos.com/v1",
+    "casa": "blue"
+  },
+  "pbi": {
+    "series_api": "https://apis.datos.gob.ar/series/api/series",
+    "series_id_trimestral": "4.2_OGP_2004_T_17"
+  },
+  "emae": {
+    "series_api": "https://apis.datos.gob.ar/series/api/series",
+    "series_id": "11.3_VIPAA_2004_M_31"
+  },
+  "salarios": {
+    "series_api": "https://apis.datos.gob.ar/series/api/series",
+    "ripte_id": "158.1_REPTE_0_0_5",
+    "indice_salarios_id": "149.1_TL_INDIIOS_OCTU_0_21"
+  },
+  "euro": {
+    "bcra_base": "https://api.bcra.gob.ar/estadisticascambiarias/v1.0/",
+    "bcra_start": "1992-01-02"
+  },
+  "empleo": {
+    "series_api": "https://apis.datos.gob.ar/series/api/series",
+    "tasa_desocupacion_id": "42.3_EPH_PUNTUATAL_0_M_30",
+    "tasa_empleo_id": "44.2_ECTET_0_T_30"
+  },
+  "pobreza": {
+    "series_api": "https://apis.datos.gob.ar/series/api/series",
+    "tasa_pobreza_id": "64.2_POBLACION_NUA_0_0_34_74",
+    "linea_indigencia_id": "150.1_LA_INDICIA_0_D_16"
+  }
+}

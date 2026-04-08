@@ -1,0 +1,27 @@
+services:
+  postgres:
+    build:
+      context: .
+      dockerfile: docker/postgres.Dockerfile
+    image: estadisticas-argentinas-postgres:16
+    container_name: estadisticas-argentinas-postgres
+    restart: unless-stopped
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-estadisticapp}
+      POSTGRES_USER: ${POSTGRES_USER:-estadisticapp}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-estadisticapp}
+      TZ: ${PG_TIMEZONE:-UTC}
+      PGTZ: ${PG_TIMEZONE:-UTC}
+    command: ["postgres", "-c", "timezone=${PG_TIMEZONE:-UTC}"]
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-estadisticapp} -d ${POSTGRES_DB:-estadisticapp}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
