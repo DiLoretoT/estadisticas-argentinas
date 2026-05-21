@@ -37,8 +37,8 @@ export const metadata: Metadata = {
     "macroeconomía",
     "Datalogía",
   ],
-  authors: [{ name: "Tomás Di Loreto", url: "https://datalogia.app" }],
-  creator: "Tomás Di Loreto",
+  authors: [{ name: "Datalogía", url: "https://datalogia.app" }],
+  creator: "Datalogía",
   publisher: "Datalogía",
   openGraph: {
     type: "website",

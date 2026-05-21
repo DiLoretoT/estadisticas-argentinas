@@ -18,17 +18,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: BASE_URL,
       lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/argentina`,
-      lastModified: now,
       changeFrequency: "daily",
       priority: 1.0,
     },
     ...detalle.map((slug) => ({
-      url: `${BASE_URL}/argentina/detalle/${slug}`,
+      url: `${BASE_URL}/detalle/${slug}`,
       lastModified: now,
       changeFrequency: "daily" as const,
       priority: 0.8,

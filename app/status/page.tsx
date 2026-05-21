@@ -83,7 +83,7 @@ export default async function StatusPage() {
         }}
       >
         <Link
-          href="/argentina"
+          href="/"
           className="inline-flex items-center gap-1.5 text-xs font-medium mb-6"
           style={{ color: "var(--color-text-muted)" }}
         >
@@ -225,17 +225,7 @@ export default async function StatusPage() {
         <p className="mt-6 text-xs" style={{ color: "var(--color-text-muted)" }}>
           Si una serie está en estado <code className="px-1 rounded font-mono" style={{ background: "var(--color-bg-alt)" }}>error</code>{" "}
           de forma persistente, suele significar que el ID de la fuente cambió o que
-          la API está caída. Reportar en{" "}
-          <a
-            href="https://github.com/DiLoretoT/estadisticas-argentinas/issues"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline"
-            style={{ color: "var(--color-primary)" }}
-          >
-            issues del repo
-          </a>
-          .
+          la API está caída. El pipeline se ejecuta vía GitHub Actions dos veces al día.
         </p>
       </div>
 

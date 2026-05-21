@@ -23,7 +23,7 @@ export default async function CalculadoraPage() {
         }}
       >
         <Link
-          href="/argentina"
+          href="/"
           className="inline-flex items-center gap-1.5 text-xs font-medium mb-6 transition-colors duration-200"
           style={{ color: "var(--color-text-muted)" }}
         >

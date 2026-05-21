@@ -5,10 +5,11 @@ import { useTheme } from "@/components/ThemeProvider";
 import { motion } from "framer-motion";
 
 const navLinks = [
-  { href: "/argentina#indicadores", label: "Indicadores" },
-  { href: "/argentina#precios", label: "Precios" },
-  { href: "/argentina#actividad", label: "Actividad" },
-  { href: "/argentina#social", label: "Social" },
+  { href: "/#monedas", label: "Monedas" },
+  { href: "/#precios", label: "Precios" },
+  { href: "/#actividad", label: "Actividad" },
+  { href: "/#empleo", label: "Empleo" },
+  { href: "/#social", label: "Social" },
   { href: "/calculadora", label: "Calculadora" },
 ];
 

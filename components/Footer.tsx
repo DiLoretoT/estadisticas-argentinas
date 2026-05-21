@@ -8,7 +8,7 @@ export function Footer() {
       }}
     >
       <div className="mx-auto max-w-6xl px-5 py-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand + descripción */}
           <div className="md:col-span-2">
             <a
@@ -35,30 +35,55 @@ export function Footer() {
               className="text-sm leading-relaxed max-w-md"
               style={{ color: "var(--color-text-muted)" }}
             >
-              Indicadores macroeconómicos y sociales de Argentina con datos
-              oficiales, actualizados automáticamente desde APIs públicas.
-              Proyecto open source.
+              Estadísticas Argentinas es un producto de datos abiertos del
+              ecosistema Datalogía. Indicadores macroeconómicos y sociales con
+              fuentes oficiales, actualizados automáticamente.
             </p>
+            <a
+              href="https://datalogia.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-4 text-sm font-medium hover:underline"
+              style={{ color: "var(--color-primary)" }}
+            >
+              Conocer Datalogía →
+            </a>
           </div>
 
-          {/* Proyecto */}
+          {/* Navegación */}
           <div>
             <h4
               className="text-xs font-semibold uppercase tracking-wider mb-3"
               style={{ color: "var(--color-text)" }}
             >
-              Proyecto
+              Explorar
             </h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <a
-                  href="https://github.com/DiLoretoT/estadisticas-argentinas"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/calculadora"
                   className="hover:underline"
                   style={{ color: "var(--color-text-muted)" }}
                 >
-                  Repositorio en GitHub
+                  Calculadora de inflación
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/metodologia"
+                  className="hover:underline"
+                  style={{ color: "var(--color-text-muted)" }}
+                >
+                  Metodología y fuentes
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/status"
+                  className="hover:underline"
+                  style={{ color: "var(--color-text-muted)" }}
+                >
+                  Estado del pipeline
                 </a>
               </li>
               <li>
@@ -68,73 +93,6 @@ export function Footer() {
                   style={{ color: "var(--color-text-muted)" }}
                 >
                   API pública
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://github.com/DiLoretoT/estadisticas-argentinas/blob/main/docs/PLAN.md"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:underline"
-                  style={{ color: "var(--color-text-muted)" }}
-                >
-                  Roadmap
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://github.com/DiLoretoT/estadisticas-argentinas/blob/main/LICENSE"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:underline"
-                  style={{ color: "var(--color-text-muted)" }}
-                >
-                  Licencia MIT
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Autor */}
-          <div>
-            <h4
-              className="text-xs font-semibold uppercase tracking-wider mb-3"
-              style={{ color: "var(--color-text)" }}
-            >
-              Autor
-            </h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <a
-                  href="https://github.com/DiLoretoT"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:underline"
-                  style={{ color: "var(--color-text-muted)" }}
-                >
-                  GitHub
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.linkedin.com/in/tomas-di-loreto"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:underline"
-                  style={{ color: "var(--color-text-muted)" }}
-                >
-                  LinkedIn
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://datalogia.app"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:underline"
-                  style={{ color: "var(--color-text-muted)" }}
-                >
-                  datalogia.app
                 </a>
               </li>
             </ul>
@@ -155,8 +113,8 @@ export function Footer() {
             className="text-xs"
             style={{ color: "var(--color-text-muted)" }}
           >
-            © {new Date().getFullYear()} Tomás Di Loreto. Datos abiertos sin
-            garantía. No es asesoramiento financiero.
+            © {new Date().getFullYear()} Datalogía. Datos abiertos sin garantía.
+            No es asesoramiento financiero.
           </p>
         </div>
       </div>

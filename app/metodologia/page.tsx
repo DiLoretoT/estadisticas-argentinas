@@ -135,7 +135,7 @@ export default function MetodologiaPage() {
         }}
       >
         <Link
-          href="/argentina"
+          href="/"
           className="inline-flex items-center gap-1.5 text-xs font-medium mb-6 transition-colors duration-200"
           style={{ color: "var(--color-text-muted)" }}
         >
@@ -276,39 +276,28 @@ export default function MetodologiaPage() {
               relevantes de Argentina (corralito 2001, fin de la convertibilidad, default 2014,
               salida del cepo 2015, crisis 2018, PASO 2019, COVID, PASO 2023, devaluación
               Milei dic-2023, entre otros). Pasale el mouse al marcador en cualquier gráfico
-              para ver fecha y descripción. El catálogo completo está en{" "}
-              <a
-                href="https://github.com/DiLoretoT/estadisticas-argentinas/blob/main/data/events.json"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline"
-                style={{ color: "var(--color-primary)" }}
-              >
-                data/events.json
-              </a>{" "}
-              del repo y se puede extender enviando un PR.
+              para ver fecha y descripción.
             </p>
           </div>
         </section>
 
-        {/* Reproducibilidad */}
+        {/* Forma parte de Datalogía */}
         <section>
           <h2 className="text-xl font-bold mb-4" style={{ color: "var(--color-text)" }}>
-            Reproducibilidad
+            Forma parte de Datalogía
           </h2>
           <p className="text-sm leading-relaxed mb-3" style={{ color: "var(--color-text-muted)" }}>
-            Todo el código (ETL Python + frontend Next.js + schema PostgreSQL) está disponible
-            bajo licencia MIT en{" "}
+            Estadísticas Argentinas es un proyecto del ecosistema{" "}
             <a
-              href="https://github.com/DiLoretoT/estadisticas-argentinas"
+              href="https://datalogia.app"
               target="_blank"
               rel="noopener noreferrer"
               className="underline"
               style={{ color: "var(--color-primary)" }}
             >
-              GitHub
+              Datalogía
             </a>
-            . Para regenerar los datos localmente: <code className="px-1.5 py-0.5 rounded text-xs font-mono" style={{ background: "var(--color-bg-alt)", color: "var(--color-primary)" }}>make bootstrap</code>.
+            . Producto de datos abierto, sin paywall, sin registro.
           </p>
         </section>
       </div>

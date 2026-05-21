@@ -18,8 +18,13 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: "/detalle/:slug",
-        destination: "/argentina/detalle/:slug",
+        source: "/argentina",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/argentina/:path*",
+        destination: "/:path*",
         permanent: true,
       },
     ];
