@@ -2,8 +2,8 @@
 
 > Documento centralizado del trabajo para llevar el repo `estadisticas-argentinas` a estado público "vidriera" en `estadisticas.datalogia.app`. Cualquier sesión (Claude, vos, otra IA) debe poder retomar el trabajo leyendo solo este archivo + el `README.md`.
 
-**Última actualización:** 2026-05-20
-**Estado global:** Fase 0 ✅ (Vercel up: `estadisticas-argentinas-iw65.vercel.app`) · Fase 1 ✅ (commit `pendiente`) · Fase 2 en cola
+**Última actualización:** 2026-05-21
+**Estado global:** Fase 0 ✅ · Fase 1 ✅ · Bloque A ✅ · D1 multi-país ✅ · Bloque B ✅ (parcial) · Bloque C ✅ (parcial) · Bloque D ✅ (parcial) · Pendientes: refresh primera corrida Action + tests + tag v1.0
 **Dueño:** Tomás Di Loreto
 
 ---
@@ -91,15 +91,15 @@ Sanear el repo sin tocar arquitectura de rutas. Todo lo que no requiere decisió
 
 Fixes urgentes detectados en el audit + aplicar la identidad visual del ecosistema Datalogía. Esto reemplaza la Fase 2 original.
 
-- [ ] **A0** — Copiar branding assets de `tdl-logistica/public/branding/` (isotipo, favicon, logos).
-- [ ] **A0b** — Migrar `globals.css` a tokens Datalogía (paleta OKLCH, Inter + JetBrains Mono, radius, shadow utils).
-- [ ] **A1** — Tildes en todo el sitio. `inflacion → inflación`, `economia → economía`, `desocupacion → desocupación`, `produccion → producción`, etc.
-- [ ] **A2** — Fix bug: tablas duplicadas en `/detalle/inflacion`.
-- [ ] **A3** — Fix bug: inconsistencia desocupación 7% (home) vs 7,5% (detalle). Auditar todos los KPIs cruzados.
-- [ ] **A4** — KPI cards profesionales: fecha del dato + delta vs período anterior + flecha + color semántico + sparkline más visible.
-- [ ] **A5** — Footer profesional: autor (Tomás Di Loreto) + GitHub + LinkedIn + datalogia.app + licencia MIT + link metodología + status.
-- [ ] **A6** — README hero + screenshot + sección "por qué lo hice".
-- [ ] **A7** — Metadata OG en `layout.tsx` + `robots.ts` + `sitemap.ts` + favicon Datalogía.
+- [x] **A0** — Branding assets de `tdl-logistica/public/branding/` copiados a `public/branding/`.
+- [x] **A0b** — `globals.css` migrado a tokens Datalogía (paleta OKLCH cream+terracotta, Inter + JetBrains Mono, radius 0.75rem, shadow-soft, card-hover).
+- [x] **A1** — Tildes corregidas en todos los componentes y páginas visibles.
+- [x] **A2** — Fix tabla duplicada en `/detalle/inflacion` (mantenida sólo serie mensual; histórica documentada como próxima).
+- [x] **A3** — Fix inconsistencia desocupación 7% vs 7,5% — bug por `round(x, 2)` en fetch_empleo.py / fetch_pobreza.py. Cambiado a `round(x, 4)`. `data/empleo.json` corregido manual.
+- [x] **A4** — KpiCard rediseñada: fecha + delta vs período anterior con flecha direccional + color semántico (goodDirection-aware) + sparkline con marker en último punto.
+- [x] **A5** — Footer profesional con autor, GitHub, LinkedIn, datalogia.app, licencia MIT, fuentes, disclaimer "no es asesoramiento financiero".
+- [x] **A6** — README rehecho: hero + badges + sección "¿Qué es esto?" + "¿Por qué lo hice?" + Stack + Quick start + API + Roadmap + autor.
+- [x] **A7** — Metadata OG en `layout.tsx` + `robots.ts` + `sitemap.ts` + `opengraph-image.tsx` dinámica + favicons Datalogía.
 
 ### Fase 2 — README y SEO básico (DUEÑO: yo) 📝
 
@@ -222,7 +222,10 @@ No es bloqueante para vidriera, pero suma muchísimos puntos para empleadores qu
 
 > Registrar acá cualquier desvío del plan, bloqueo externo, o cambio de scope durante la ejecución.
 
-_(vacío)_
+- **2026-05-20** — **Restructure ETL/JSON parametrizado por país** queda como follow-up cuando entre el segundo país. Hoy `data/*.json` está sin prefijo de país; el frontend usa `/argentina/*` en la URL pero todos los JSON viven en `data/`. Cuando llegue Chile o similar, hay que: (a) mover `data/*.json` → `data/argentina/*.json`, (b) parametrizar `lib/readData.ts` para que acepte `country`, (c) actualizar paths en cada `page.tsx`. YAGNI por ahora.
+- **2026-05-20** — **EMAE + indigencia datos viejos en repo**. El ID nuevo de EMAE está en `sources.json` pero el JSON aún tiene la data al 2026-03-28 (vieja). Cuando el GitHub Action corra por primera vez, va a hacer la primera ingesta exitosa de EMAE y regenerar los JSON. Hasta entonces, `/detalle/actividad` muestra data hasta lo que estaba en el JSON committeado.
+- **2026-05-21** — **GitHub Action `etl-daily.yml` no validada en CI real todavía**. El YAML está estructurado correctamente pero la primera corrida agendada es a las 09:00 UTC. Mañana podemos disparar manualmente con `gh workflow run etl-daily.yml` para verificar antes del primer cron. Si falla, vamos a tener que iterar sobre el workflow.
+- **2026-05-21** — **Tests (D4) y Comparativa LATAM (C7) pendientes**. No alcancé esta sesión. Quedan como próximo trabajo.
 
 ---
 
@@ -232,7 +235,11 @@ _(vacío)_
 |-------|-------|------|------|
 | 2026-05-20 | Tomás + Claude | — | Plan inicial creado y aprobado |
 | 2026-05-20 | Tomás | F0 | Proyecto Vercel creado. URL preview: `estadisticas-argentinas-iw65.vercel.app`. CNAME en Cloudflare pendiente. |
-| 2026-05-20 | Claude | F1 | 1.1–1.3, 1.5–1.9 completas. 1.4 diferida a F5 (Docker no requerido para showcase, ETL corre en GitHub Action). Build OK local. |
+| 2026-05-20 | Claude | F1 | 1.1–1.3, 1.5–1.9 completas. 1.4 diferida a F5. Build OK local. Commit `9d4bf55`. |
+| 2026-05-20 | Claude | A | Quick wins + style Datalogía + SEO base. LICENSE, AGENTS reescrito, CLAUDE.md fuera, EMAE fix, heurística unidades reemplazada, footer pro con autor/GitHub/LinkedIn, Hero rediseñado, robots/sitemap/OG dinámica, Inter+JetBrains, paleta cream+terracotta OKLCH. README rehecho con hero+badges+screenshot. Commit `a0ee703`. |
+| 2026-05-20 | Claude | D1 | Restructure multi-país: home dashboard a `/argentina`, landing en `/` con catálogo de países (Argentina activo + CL/UY/BR coming soon). Redirect 301 `/detalle/*` → `/argentina/detalle/*`. Sitemap actualizado. Commit `45211a3`. |
+| 2026-05-21 | Claude | B | Event annotations argentinas (10 eventos: corralito, default, COVID, devaluación Milei...). Brecha cambiaria en /dolar. Salario real deflactado por IPC. Botón "Descargar CSV" en cada chart. data/events.json + lib/events.ts + lib/salarioReal.ts. Commit `a53a372`. |
+| 2026-05-21 | Claude | C+D | Calculadora de inflación (/calculadora). Página /metodologia con tabla de 13 indicadores + reproducibilidad. Página /status con semáforos del ETL. GitHub Actions: `etl-daily.yml` (cron 06:00 y 20:00 AR) + `ci.yml` (lint+typecheck+build). Fixed lint errors (ThemeProvider, AreaChart). Commit `d416fd9`. |
 
 ---
 
