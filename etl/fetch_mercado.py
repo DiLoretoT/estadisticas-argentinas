@@ -164,6 +164,17 @@ def _write_summary_and_series(
 
 def fetch_riesgo_pais() -> dict[str, Any]:
     series_key = "mercado_riesgo_pais"
+    # Upsert primero para que start_refresh_run no falle por FK
+    upsert_series(
+        series_id=series_key,
+        display_name="Riesgo país EMBI Argentina",
+        source_name="ArgentinaDatos (Ámbito)",
+        dataset="finanzas/indices/riesgo-pais",
+        official=False,
+        frequency="daily",
+        unit="puntos_basicos",
+        provider_series_id="riesgo_pais",
+    )
     run_id = start_refresh_run(series_key)
     try:
         url = "https://api.argentinadatos.com/v1/finanzas/indices/riesgo-pais"
@@ -249,6 +260,17 @@ def fetch_yahoo_series() -> dict[str, Any]:
     failed: list[str] = []
     for yahoo_ticker, key, display_name, unit in _YF_TICKERS:
         series_key = f"mercado_{key}"
+        # Upsert primero para satisfacer FK de refresh_runs
+        upsert_series(
+            series_id=series_key,
+            display_name=display_name,
+            source_name="Yahoo Finance",
+            dataset=f"v8/finance/chart/{yahoo_ticker}",
+            official=False,
+            frequency="daily",
+            unit=unit,
+            provider_series_id=yahoo_ticker,
+        )
         run_id = start_refresh_run(series_key)
         try:
             points = _fetch_yahoo_ticker(yahoo_ticker)
