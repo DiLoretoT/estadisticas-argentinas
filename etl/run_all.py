@@ -9,6 +9,7 @@ from fetch_empleo import main as fetch_empleo
 from fetch_euro import main as fetch_euro
 from fetch_inflacion import main as fetch_inflacion
 from fetch_monedas_latam import main as fetch_monedas_latam
+from fetch_mercado import main as fetch_mercado
 from fetch_monetario_bcra import main as fetch_monetario_bcra
 from fetch_pbi import main as fetch_pbi
 from fetch_pobreza import main as fetch_pobreza
@@ -32,6 +33,7 @@ _STEPS: list[tuple[str, object]] = [
   ("euro", fetch_euro),
   ("monedas_latam", fetch_monedas_latam),  # BRL, CLP, UYU, PEN, COP, PYG, MXN
   ("monetario_bcra", fetch_monetario_bcra),  # Base, reservas, TPM, BADLAR, M2, REM
+  ("mercado", fetch_mercado),  # Riesgo país EMBI, Merval, ADRs
   ("salarios", fetch_salarios),
   ("emae", fetch_emae),
   ("pbi", fetch_pbi),

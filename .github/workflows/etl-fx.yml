@@ -83,6 +83,7 @@ jobs:
           python etl/fetch_dolar.py
           python etl/fetch_dolares_alt.py
           python etl/fetch_monedas_latam.py
+          python etl/fetch_mercado.py
 
       - name: Generate status.json
         run: python etl/generate_status.py
