@@ -55,13 +55,8 @@ export const metadata: Metadata = {
     description:
       "Indicadores macroeconómicos y sociales de Argentina con datos oficiales.",
   },
-  icons: {
-    icon: [
-      { url: "/branding/favicon-32.png", sizes: "32x32", type: "image/png" },
-      { url: "/branding/icon-192.png", sizes: "192x192", type: "image/png" },
-    ],
-    apple: "/branding/apple-touch-icon.png",
-  },
+  // Next.js detecta automáticamente app/icon.png como favicon en todos los
+  // tamaños. No declaramos icons aquí para evitar duplicar/contradecir.
   robots: {
     index: true,
     follow: true,
