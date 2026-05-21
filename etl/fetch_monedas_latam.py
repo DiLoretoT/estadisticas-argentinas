@@ -107,8 +107,20 @@ def _fetch_bcra_pages(codigo: str, start: date, end: date) -> list[tuple[date, f
         results = payload.get("results", [])
         for row in results:
             fecha = row.get("fecha")
-            tipo_pase = row.get("tipoPase")
-            if not fecha or tipo_pase is None:
+            detalle = row.get("detalle") or []
+            if not fecha or not detalle:
+                continue
+            # `detalle` puede traer varias filas; nos quedamos con la que
+            # matchea el código pedido (típicamente 1 sola).
+            tipo_pase = None
+            for entry in detalle:
+                if entry.get("codigoMoneda") == codigo:
+                    tipo_pase = entry.get("tipoPase")
+                    break
+            if tipo_pase is None:
+                # Fallback: tomar el primero
+                tipo_pase = detalle[0].get("tipoPase")
+            if tipo_pase is None:
                 continue
             try:
                 pase = float(tipo_pase)
