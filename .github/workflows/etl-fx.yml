@@ -93,7 +93,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Pull latest before commit
-        run: git pull --rebase origin main
+        run: git pull --rebase --autostash origin main
 
       - name: Commit and push if changed
         run: |
