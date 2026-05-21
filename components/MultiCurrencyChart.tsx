@@ -25,13 +25,13 @@ interface MultiCurrencyChartProps {
   defaultBaseDate?: string;
 }
 
-// SVG coords
+// SVG coords — padding right generoso para end-labels.
 const W = 1000;
-const H = 420;
+const H = 460;
 const PAD_L = 56;
-const PAD_R = 14;
-const PAD_T = 14;
-const PAD_B = 32;
+const PAD_R = 110;
+const PAD_T = 22;
+const PAD_B = 36;
 const CHART_W = W - PAD_L - PAD_R;
 const CHART_H = H - PAD_T - PAD_B;
 
@@ -367,12 +367,13 @@ export function MultiCurrencyChart({
         {yTicks.map((yt, i) => (
           <text
             key={`y${i}`}
-            x={PAD_L - 8}
-            y={yt.y + 4}
-            fontSize="11"
+            x={PAD_L - 10}
+            y={yt.y}
+            fontSize="12"
             textAnchor="end"
+            dominantBaseline="middle"
             fill="var(--color-text-muted)"
-            fontFamily="var(--font-sans, system-ui)"
+            style={{ fontFamily: "var(--font-sans, system-ui)" }}
           >
             {yt.value.toFixed(0)}
           </text>
@@ -383,29 +384,106 @@ export function MultiCurrencyChart({
           <text
             key={`x${i}`}
             x={xt.x}
-            y={H - 6}
-            fontSize="11"
-            textAnchor="middle"
+            y={H - 12}
+            fontSize="12"
+            textAnchor={i === 0 ? "start" : i === xTicks.length - 1 ? "end" : "middle"}
             fill="var(--color-text-muted)"
-            fontFamily="var(--font-sans, system-ui)"
+            style={{ fontFamily: "var(--font-sans, system-ui)" }}
           >
             {formatDate(xt.date)}
           </text>
         ))}
 
-        {/* Series lines */}
-        {seriesPaths.map((sp) => (
-          <path
-            key={sp.key}
-            d={sp.path}
-            fill="none"
-            stroke={sp.color}
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            opacity={0.95}
-          />
-        ))}
+        {/* Series lines — la pinned (ARS) más gruesa y opaca, las demás más finas */}
+        {seriesPaths.map((sp) => {
+          const isPinned =
+            series.find((s) => s.key === sp.key)?.pinned === true;
+          return (
+            <path
+              key={sp.key}
+              d={sp.path}
+              fill="none"
+              stroke={sp.color}
+              strokeWidth={isPinned ? 3 : 1.8}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              opacity={isPinned ? 1 : 0.85}
+            />
+          );
+        })}
+
+        {/* End-labels: nombre + valor de cada serie al final de la línea */}
+        {(() => {
+          // Algoritmo simple para evitar choques: ordenar por Y final, separar
+          // verticalmente si están a menos de 16px.
+          const minSeparation = 16;
+          const lasts = seriesPaths
+            .map((sp) => {
+              const lastPt = sp.points[sp.points.length - 1];
+              if (!lastPt) return null;
+              return {
+                key: sp.key,
+                label: sp.label,
+                color: sp.color,
+                value: lastPt.value,
+                x: lastPt.x,
+                y: lastPt.y,
+                isPinned: series.find((s) => s.key === sp.key)?.pinned === true,
+              };
+            })
+            .filter((l): l is NonNullable<typeof l> => l !== null)
+            .sort((a, b) => a.y - b.y);
+
+          // Ajustar Y para separación mínima
+          for (let i = 1; i < lasts.length; i++) {
+            if (lasts[i].y - lasts[i - 1].y < minSeparation) {
+              lasts[i].y = lasts[i - 1].y + minSeparation;
+            }
+          }
+
+          return lasts.map((l) => (
+            <g key={`label-${l.key}`}>
+              <line
+                x1={l.x}
+                y1={l.y}
+                x2={W - PAD_R + 2}
+                y2={l.y}
+                stroke={l.color}
+                strokeWidth="1"
+                opacity={0.4}
+                strokeDasharray="2,3"
+              />
+              <circle
+                cx={l.x}
+                cy={
+                  seriesPaths.find((sp) => sp.key === l.key)?.points.slice(-1)[0]
+                    ?.y ?? l.y
+                }
+                r={l.isPinned ? 4 : 3}
+                fill={l.color}
+                stroke="var(--color-card)"
+                strokeWidth="1.5"
+              />
+              <text
+                x={W - PAD_R + 6}
+                y={l.y}
+                fontSize={l.isPinned ? 13 : 12}
+                fontWeight={l.isPinned ? 700 : 600}
+                fill={l.color}
+                textAnchor="start"
+                dominantBaseline="middle"
+                stroke="var(--color-card)"
+                strokeWidth="4"
+                paintOrder="stroke"
+                style={{ fontFamily: "var(--font-sans, system-ui)" }}
+              >
+                {l.label.replace(/^[^\sA-Za-z]+ /, "")}
+                {" "}
+                {l.value.toFixed(0)}
+              </text>
+            </g>
+          ));
+        })()}
 
         {/* Crosshair */}
         {hoverDate && xRange && (() => {
