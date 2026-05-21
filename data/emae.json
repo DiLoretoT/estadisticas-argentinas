@@ -1,7 +1,7 @@
 {
-  "updated_at": null,
-  "period": null,
-  "value": null,
+  "updated_at": "2026-05-21",
+  "period": "2026-01-01",
+  "value": 149.04,
   "source": {
     "name": "INDEC",
     "official": true

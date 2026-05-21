@@ -1,14 +1,14 @@
 {
-  "updated_at": "2026-03-28",
+  "updated_at": "2026-05-21",
   "monthly": {
-    "period": "2026-02",
-    "value": 2.62,
-    "vs_prev_month": -0.15,
-    "vs_prev_year": 0.38
+    "period": "2026-03",
+    "value": 3.41,
+    "vs_prev_month": 0.79,
+    "vs_prev_year": -0.44
   },
   "ytd": {
-    "period": "2026-02",
-    "value": 5.46
+    "period": "2026-03",
+    "value": 9.05
   },
   "source": {
     "name": "INDEC (IPC)",
