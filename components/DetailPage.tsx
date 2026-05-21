@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { AreaChart, type ChartEvent } from "@/components/AreaChart";
 import { DataTable } from "@/components/DataTable";
@@ -52,7 +51,7 @@ export function DetailPage({
       className="mx-auto max-w-5xl px-5"
       style={{ paddingTop: "calc(var(--navbar-h) + 2.5rem)", paddingBottom: "4rem" }}
     >
-      <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.3 }}>
+      <div>
         <Link
           href="/"
           className="inline-flex items-center gap-1.5 text-xs font-medium mb-6 transition-colors duration-200"
@@ -65,9 +64,9 @@ export function DetailPage({
           </svg>
           Volver
         </Link>
-      </motion.div>
+      </div>
 
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="mb-8">
+      <div className="mb-8">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] mb-2" style={{ color: "var(--color-primary)" }}>
           {eyebrow}
         </p>
@@ -77,7 +76,7 @@ export function DetailPage({
         <p className="mt-2 text-sm max-w-xl" style={{ color: "var(--color-text-muted)" }}>
           {subtitle}
         </p>
-      </motion.div>
+      </div>
 
       {/* Span selector */}
       <div className="mb-4">
@@ -113,10 +112,7 @@ export function DetailPage({
       </div>
 
       {/* Notes */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+      <div
         className="rounded-xl border p-6"
         style={{ background: "var(--color-card)", borderColor: "var(--color-border)", boxShadow: "var(--shadow-sm)" }}
       >
@@ -128,7 +124,7 @@ export function DetailPage({
           <span>Fuente: {source}</span>
           <span>Frecuencia: {frequency}</span>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }

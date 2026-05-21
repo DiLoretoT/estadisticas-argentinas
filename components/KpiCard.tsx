@@ -1,7 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
-
 interface KpiCardProps {
   label: string;
   value: string;
@@ -47,12 +45,8 @@ export function KpiCard({
     changeDirection === "up" ? "↑" : changeDirection === "down" ? "↓" : "";
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay }}
-      whileHover={{ y: -2 }}
-      className="rounded-xl p-4 border card-hover"
+    <div
+      className="rounded-xl p-4 border card-hover transition-transform duration-200 hover:-translate-y-0.5"
       style={{
         background: "var(--color-card)",
         borderColor: "var(--color-border)",
@@ -100,7 +94,7 @@ export function KpiCard({
           <Sparkline data={sparkData} color={accentColor} />
         )}
       </div>
-    </motion.div>
+    </div>
   );
 }
 

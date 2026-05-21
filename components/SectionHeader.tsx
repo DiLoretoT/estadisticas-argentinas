@@ -1,7 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
-
 interface SectionHeaderProps {
   id?: string;
   eyebrow?: string;
@@ -16,13 +12,7 @@ export function SectionHeader({
   subtitle,
 }: SectionHeaderProps) {
   return (
-    <motion.div
-      id={id}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="mb-8 scroll-mt-20"
-    >
+    <div id={id} className="mb-8 scroll-mt-20">
       {eyebrow && (
         <p
           className="text-xs font-semibold uppercase tracking-[0.2em] mb-2"
@@ -45,6 +35,6 @@ export function SectionHeader({
           {subtitle}
         </p>
       )}
-    </motion.div>
+    </div>
   );
 }

@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useState } from "react";
 import { formatValue as fmtVal, formatDate, type FormatType } from "@/lib/formatters";
 
@@ -25,10 +24,7 @@ export function DataTable({
   const fmt = (v: number) => fmtVal(v, format);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+    <div
       className="rounded-xl border overflow-hidden"
       style={{
         background: "var(--color-card)",
@@ -99,6 +95,6 @@ export function DataTable({
           </button>
         </div>
       )}
-    </motion.div>
+    </div>
   );
 }
