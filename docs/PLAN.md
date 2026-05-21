@@ -340,8 +340,9 @@ Generado a partir de research de fuentes oficiales argentinas + APIs internacion
 |---|---|---|---|
 | Sector monetario (base, M1/M2, TPM, BADLAR, reservas) | 🔥 Alta | M | BCRA API ya conocida, ETL similar a monedas LATAM. |
 | Mercado de capitales (Merval, ADRs, EMBI, bonos) | 🔥 Alta | L | Múltiples fuentes (BYMA, Yahoo, ambito.com). |
-| Sector externo (balanza comercial, reservas brutas/netas) | 🔥 Alta | M | INDEC ICA + BCRA. |
-| Sector fiscal (déficit, deuda, AFIP) | 🟡 Media | L | MECON + ARCA, varios endpoints. |
+| **Sector externo (importaciones + exportaciones + balanza)** ← pedido user 2026-05-21 | 🔥 Alta | M | INDEC ICA. Series mensuales: export total, import total, balanza, breakdown por uso económico (imports) y gran rubro (exports), top socios (BR/CH/USA/UE). |
+| **Deuda pública (interna + externa)** ← pedido user 2026-05-21 | 🔥 Alta | L | MECON Sec. Hacienda / ONP. Stock por moneda (ARS/USD), por legislación (local/ext), por acreedor (FMI, multilaterales, bonistas, intra-sector público), por instrumento (BONCER, AL30, GD30, dual, dollar-linked). |
+| Sector fiscal (déficit, recaudación AFIP) | 🟡 Media | L | MECON + ARCA, varios endpoints. (Deuda movida a fila propia arriba.) |
 | Cross-Análisis (página de scatter interactivo) | 🔥 Alta | L | Producto core. Requiere infraestructura nueva. |
 | Comparativa LATAM full (no solo monedas) | 🔥 Alta | M | Banco Mundial WDI API. |
 | Mapa por provincia | 🟡 Media | L | TopoJSON + datos por provincia. |
