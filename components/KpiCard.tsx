@@ -5,8 +5,14 @@ import { motion } from "framer-motion";
 interface KpiCardProps {
   label: string;
   value: string;
-  detail?: string;
-  trend?: "up" | "down" | "neutral";
+  /** Período del último dato (ej. "Feb 2026", "2026-03-27") */
+  period?: string;
+  /** Cambio vs período anterior. Si es porcentaje, pasalo como string ya formateado: "+1,2 pp" o "-0,3%". */
+  change?: string;
+  /** Direction del change. up = subió, down = bajó. */
+  changeDirection?: "up" | "down" | "neutral";
+  /** En qué dirección "subir" es bueno. Si "down" (ej. desocupación), un up se pinta como danger. */
+  goodDirection?: "up" | "down";
   accentColor?: string;
   delay?: number;
   sparkData?: number[];
@@ -15,19 +21,30 @@ interface KpiCardProps {
 export function KpiCard({
   label,
   value,
-  detail,
-  trend,
+  period,
+  change,
+  changeDirection,
+  goodDirection = "down",
   accentColor = "var(--color-primary)",
   delay = 0,
   sparkData,
 }: KpiCardProps) {
-  const trendIcon = trend === "up" ? "↑" : trend === "down" ? "↓" : "";
-  const trendColor =
-    trend === "up"
-      ? "var(--color-danger)"
-      : trend === "down"
+  // Determine semantic color of the change based on goodDirection
+  let changeColor = "var(--color-text-muted)";
+  if (changeDirection === "up") {
+    changeColor =
+      goodDirection === "up"
         ? "var(--color-success)"
-        : "var(--color-text-muted)";
+        : "var(--color-danger)";
+  } else if (changeDirection === "down") {
+    changeColor =
+      goodDirection === "up"
+        ? "var(--color-danger)"
+        : "var(--color-success)";
+  }
+
+  const arrow =
+    changeDirection === "up" ? "↑" : changeDirection === "down" ? "↓" : "";
 
   return (
     <motion.div
@@ -35,8 +52,8 @@ export function KpiCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.5, delay }}
-      whileHover={{ y: -2, boxShadow: "var(--shadow-md)" }}
-      className="rounded-xl p-4 border cursor-default"
+      whileHover={{ y: -2 }}
+      className="rounded-xl p-4 border card-hover"
       style={{
         background: "var(--color-card)",
         borderColor: "var(--color-border)",
@@ -45,46 +62,52 @@ export function KpiCard({
       }}
     >
       <p
-        className="text-[10px] font-semibold uppercase tracking-wider mb-1.5"
+        className="text-[10px] font-semibold uppercase tracking-wider mb-2"
         style={{ color: "var(--color-text-muted)" }}
       >
         {label}
       </p>
       <div className="flex items-end justify-between gap-2">
-        <div>
-          <div className="flex items-baseline gap-1.5">
-            <span
-              className="text-xl font-bold tabular-nums leading-none"
-              style={{ color: accentColor }}
-            >
-              {value}
-            </span>
-            {trendIcon && (
-              <span className="text-xs font-semibold" style={{ color: trendColor }}>
-                {trendIcon}
+        <div className="flex-1 min-w-0">
+          <span
+            className="block text-2xl font-bold tabular-nums leading-none"
+            style={{ color: "var(--color-text)" }}
+          >
+            {value}
+          </span>
+          <div className="flex items-center gap-1.5 mt-2 flex-wrap">
+            {change && (
+              <span
+                className="inline-flex items-center gap-0.5 text-xs font-semibold tabular-nums"
+                style={{ color: changeColor }}
+              >
+                {arrow && <span>{arrow}</span>}
+                {change}
+              </span>
+            )}
+            {period && (
+              <span
+                className="text-[10px] tabular-nums"
+                style={{ color: "var(--color-text-muted)" }}
+              >
+                · {period}
               </span>
             )}
           </div>
-          {detail && (
-            <p
-              className="text-[10px] mt-1"
-              style={{ color: "var(--color-text-muted)" }}
-            >
-              {detail}
-            </p>
-          )}
         </div>
 
         {/* Sparkline */}
-        {sparkData && sparkData.length > 1 && <Sparkline data={sparkData} color={accentColor} />}
+        {sparkData && sparkData.length > 1 && (
+          <Sparkline data={sparkData} color={accentColor} />
+        )}
       </div>
     </motion.div>
   );
 }
 
 function Sparkline({ data, color }: { data: number[]; color: string }) {
-  const w = 60;
-  const h = 24;
+  const w = 64;
+  const h = 28;
   const min = Math.min(...data);
   const max = Math.max(...data);
   const range = max - min || 1;
@@ -93,19 +116,38 @@ function Sparkline({ data, color }: { data: number[]; color: string }) {
     .map((v, i) => {
       const x = (i / (data.length - 1)) * w;
       const y = h - ((v - min) / range) * h;
-      return `${x.toFixed(1)},${y.toFixed(1)}`;
-    })
-    .join(" ");
+      return { x, y };
+    });
+
+  const pathD = points
+    .map((p, i) => `${i === 0 ? "M" : "L"}${p.x.toFixed(1)},${p.y.toFixed(1)}`)
+    .join("");
+
+  const areaD = `${pathD}L${points[points.length - 1].x.toFixed(1)},${h}L${points[0].x.toFixed(1)},${h}Z`;
 
   return (
-    <svg width={w} height={h} className="flex-shrink-0 opacity-60">
-      <polyline
-        points={points}
+    <svg
+      width={w}
+      height={h}
+      className="flex-shrink-0"
+      style={{ overflow: "visible" }}
+    >
+      <path d={areaD} fill={color} opacity={0.12} />
+      <path
+        d={pathD}
         fill="none"
         stroke={color}
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
+        opacity={0.9}
+      />
+      {/* Last point marker */}
+      <circle
+        cx={points[points.length - 1].x}
+        cy={points[points.length - 1].y}
+        r={2}
+        fill={color}
       />
     </svg>
   );

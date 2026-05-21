@@ -6,7 +6,7 @@
   },
   "tasa_desocupacion": {
     "period": "2025-10-01",
-    "value": 0.07
+    "value": 0.075
   },
   "tasa_empleo": {
     "period": "2025-10-01",

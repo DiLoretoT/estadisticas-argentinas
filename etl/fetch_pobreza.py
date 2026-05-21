@@ -113,7 +113,7 @@ def fetch_pobreza() -> dict[str, Any]:
   if latest_pobreza:
     payload["tasa_pobreza"] = {
       "period": latest_pobreza[0].strftime("%Y-%m-%d"),
-      "value": round(latest_pobreza[1], 2),
+      "value": round(latest_pobreza[1], 4),
     }
   if latest_linea_indigencia:
     payload["linea_indigencia"] = {

@@ -47,7 +47,7 @@ export function DataTable({
           <thead className="sticky top-0" style={{ background: "var(--color-bg-alt)" }}>
             <tr>
               <th className="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-text-muted)" }}>
-                Periodo
+                Período
               </th>
               <th className="px-4 py-2.5 text-right text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-text-muted)" }}>
                 {valueLabel}

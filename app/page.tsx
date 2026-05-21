@@ -1,14 +1,16 @@
 import { readIndicator, readSeries } from "@/lib/readData";
+import { getLastUpdated } from "@/lib/lastUpdated";
 import { HomeClient } from "@/components/HomeClient";
 
 export default async function Home() {
-  const [inflacion, dolarOficial, dolarBlue, empleo, pobreza] =
+  const [inflacion, dolarOficial, dolarBlue, empleo, pobreza, lastUpdated] =
     await Promise.all([
       readIndicator("inflacion.json"),
       readIndicator("dolar_oficial.json"),
       readIndicator("dolar_blue.json"),
       readIndicator("empleo.json"),
       readIndicator("pobreza.json"),
+      getLastUpdated(),
     ]);
 
   const [
@@ -40,6 +42,7 @@ export default async function Home() {
       dolarBlue={dolarBlue}
       empleo={empleo}
       pobreza={pobreza}
+      lastUpdated={lastUpdated ?? undefined}
       series={{
         inflacion: tail(inflacionSeries),
         dolarOficial: tail(dolarOficialSeries),

@@ -116,12 +116,12 @@ def fetch_empleo() -> dict[str, Any]:
   if latest_desocupacion:
     payload["tasa_desocupacion"] = {
       "period": latest_desocupacion[0].strftime("%Y-%m-%d"),
-      "value": round(latest_desocupacion[1], 2),
+      "value": round(latest_desocupacion[1], 4),
     }
   if latest_empleo:
     payload["tasa_empleo"] = {
       "period": latest_empleo[0].strftime("%Y-%m-%d"),
-      "value": round(latest_empleo[1], 2),
+      "value": round(latest_empleo[1], 4),
     }
   return payload
 

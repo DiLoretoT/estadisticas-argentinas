@@ -11,17 +11,17 @@ export default async function SalariosDetalle() {
     <DetailPage
       eyebrow="Ingresos"
       title="Salarios"
-      subtitle="RIPTE (Remuneracion Imponible Promedio de los Trabajadores Estables) e indices salariales."
+      subtitle="RIPTE (Remuneración Imponible Promedio de los Trabajadores Estables) e índices salariales."
       charts={[
-        { data: ripteMensual, label: "RIPTE var. mensual (%)", color: "#8b5cf6", format: "percent" },
-        { data: ripteNivel, label: "RIPTE nivel", color: "var(--color-accent)", format: "index" },
+        { data: ripteMensual, label: "RIPTE — variación mensual (%)", color: "var(--chart-8)", format: "percent" },
+        { data: ripteNivel, label: "RIPTE — nivel", color: "var(--chart-6)", format: "index" },
       ]}
       tables={[
-        { title: "RIPTE variacion mensual", data: ripteMensual, valueLabel: "%", format: "percent" },
-        { title: "RIPTE nivel", data: ripteNivel, valueLabel: "Indice", format: "index" },
+        { title: "RIPTE variación mensual", data: ripteMensual, valueLabel: "%", format: "percent" },
+        { title: "RIPTE nivel", data: ripteNivel, valueLabel: "Índice", format: "index" },
       ]}
-      notes="El RIPTE mide la remuneracion promedio sujeta a aportes de los trabajadores en relacion de dependencia registrados."
-      source="INDEC / SSPM via datos.gob.ar"
+      notes="El RIPTE mide la remuneración promedio sujeta a aportes de los trabajadores en relación de dependencia registrados. Próximamente: salario real deflactado por IPC."
+      source="INDEC · SSPM vía datos.gob.ar"
       frequency="Mensual"
     />
   );

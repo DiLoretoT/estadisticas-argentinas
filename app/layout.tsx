@@ -1,23 +1,71 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-mono",
   subsets: ["latin"],
+  display: "swap",
 });
+
+const SITE_URL = "https://estadisticas.datalogia.app";
 
 export const metadata: Metadata = {
-  title: "Estadisticas Argentinas",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Estadísticas Argentinas — Datalogía",
+    template: "%s · Estadísticas Argentinas",
+  },
   description:
-    "Indicadores macroeconomicos y sociales de Argentina con fuentes oficiales.",
+    "Indicadores macroeconómicos y sociales de Argentina con datos oficiales de INDEC y BCRA, actualizados automáticamente.",
+  keywords: [
+    "Argentina",
+    "estadísticas",
+    "inflación",
+    "IPC",
+    "dólar",
+    "INDEC",
+    "BCRA",
+    "macroeconomía",
+    "Datalogía",
+  ],
+  authors: [{ name: "Tomás Di Loreto", url: "https://datalogia.app" }],
+  creator: "Tomás Di Loreto",
+  publisher: "Datalogía",
+  openGraph: {
+    type: "website",
+    locale: "es_AR",
+    url: SITE_URL,
+    siteName: "Estadísticas Argentinas",
+    title: "Estadísticas Argentinas — Datalogía",
+    description:
+      "Indicadores macroeconómicos y sociales de Argentina con datos oficiales, actualizados automáticamente.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Estadísticas Argentinas — Datalogía",
+    description:
+      "Indicadores macroeconómicos y sociales de Argentina con datos oficiales.",
+  },
+  icons: {
+    icon: [
+      { url: "/branding/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/branding/icon-192.png", sizes: "192x192", type: "image/png" },
+    ],
+    apple: "/branding/apple-touch-icon.png",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -28,7 +76,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>

@@ -11,10 +11,10 @@ export default async function EuroDetalle() {
     <DetailPage
       eyebrow="Tipo de cambio"
       title="Euro"
-      subtitle="Cotizacion del euro publicada por el BCRA. Series diarias y mensuales."
+      subtitle="Cotización del euro publicada por el BCRA. Series diarias y mensuales."
       charts={[
-        { data: euroDiario, label: "Euro diario", color: "#6366f1", format: "peso" },
-        { data: euroMensual, label: "Euro mensual", color: "#8b5cf6", format: "peso" },
+        { data: euroDiario, label: "Euro diario", color: "var(--chart-8)", format: "peso" },
+        { data: euroMensual, label: "Euro mensual (cierre)", color: "var(--chart-6)", format: "peso" },
       ]}
       tables={[
         { title: "Euro mensual", data: euroMensual, valueLabel: "$", format: "peso" },

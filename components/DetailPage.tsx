@@ -118,7 +118,7 @@ export function DetailPage({
         style={{ background: "var(--color-card)", borderColor: "var(--color-border)", boxShadow: "var(--shadow-sm)" }}
       >
         <h3 className="text-sm font-semibold mb-3" style={{ color: "var(--color-text)" }}>
-          Notas metodologicas
+          Notas metodológicas
         </h3>
         <p className="text-sm" style={{ color: "var(--color-text-muted)" }}>{notes}</p>
         <div className="mt-4 flex gap-4 text-xs" style={{ color: "var(--color-text-muted)" }}>

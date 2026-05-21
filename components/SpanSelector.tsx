@@ -9,7 +9,7 @@ const DEFAULT_SPANS: Span[] = [
   { label: "1A", months: 12 },
   { label: "5A", months: 60 },
   { label: "10A", months: 120 },
-  { label: "Max", months: null },
+  { label: "Máx", months: null },
 ];
 
 interface SpanSelectorProps {

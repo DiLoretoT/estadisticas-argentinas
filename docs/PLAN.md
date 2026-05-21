@@ -27,6 +27,9 @@
 | D4 | Licencia **MIT** | Estándar para portfolio público, permite forks y reuso | 2026-05-20 |
 | D5 | GitHub Action que commitea data a `main` (no PR auto-merge) | Más simple, menos ruido. El workflow incluye `[skip ci]` solo si no hay cambios | 2026-05-20 |
 | D6 | `datalogia.app` queda libre para landing del producto Datalogía. Este proyecto usa subdominio `estadisticas.datalogia.app` | Separación de productos. `datalogia.app` raíz es para el SaaS principal | 2026-05-20 |
+| D7 | **Style de Datalogía** = paleta cream + terracotta + dark beige (importado de tdl-logistica). Inter + JetBrains Mono. OKLCH. Radius 0.75rem. | Unifica visualmente todos los productos del ecosistema Datalogía | 2026-05-20 |
+| D8 | **Tasa de indigencia** NO se muestra (sólo en PDF de INDEC, no hay serie continua en datos.gob.ar). Se reemplaza por "Línea de indigencia" (umbral $) | Subagente investigó catálogo completo. Confirmado | 2026-05-20 |
+| D9 | **Plan v2** incorpora 4 bloques (A quick wins, B diferenciadores, C showcase, D autopilot) basado en audit del sitio live + research apps similares (FRED, OWID, ArgenData) + tendencias 2026 | 3 subagentes paralelos generaron 30+ recomendaciones; priorizadas por impacto/esfuerzo | 2026-05-20 |
 
 ---
 
@@ -83,6 +86,20 @@ Sanear el repo sin tocar arquitectura de rutas. Todo lo que no requiere decisió
 **Listo cuando:** `npm run build` pasa local, `make run-all` deja `status.json` con todas `success`, repo tiene LICENSE, AGENTS/CLAUDE fuera del root, lint limpio.
 
 ---
+
+### Bloque A (Plan v2) — Quick wins críticos + style Datalogía ⚡
+
+Fixes urgentes detectados en el audit + aplicar la identidad visual del ecosistema Datalogía. Esto reemplaza la Fase 2 original.
+
+- [ ] **A0** — Copiar branding assets de `tdl-logistica/public/branding/` (isotipo, favicon, logos).
+- [ ] **A0b** — Migrar `globals.css` a tokens Datalogía (paleta OKLCH, Inter + JetBrains Mono, radius, shadow utils).
+- [ ] **A1** — Tildes en todo el sitio. `inflacion → inflación`, `economia → economía`, `desocupacion → desocupación`, `produccion → producción`, etc.
+- [ ] **A2** — Fix bug: tablas duplicadas en `/detalle/inflacion`.
+- [ ] **A3** — Fix bug: inconsistencia desocupación 7% (home) vs 7,5% (detalle). Auditar todos los KPIs cruzados.
+- [ ] **A4** — KPI cards profesionales: fecha del dato + delta vs período anterior + flecha + color semántico + sparkline más visible.
+- [ ] **A5** — Footer profesional: autor (Tomás Di Loreto) + GitHub + LinkedIn + datalogia.app + licencia MIT + link metodología + status.
+- [ ] **A6** — README hero + screenshot + sección "por qué lo hice".
+- [ ] **A7** — Metadata OG en `layout.tsx` + `robots.ts` + `sitemap.ts` + favicon Datalogía.
 
 ### Fase 2 — README y SEO básico (DUEÑO: yo) 📝
 

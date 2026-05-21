@@ -2,26 +2,31 @@ import { readSeries } from "@/lib/readData";
 import { DetailPage } from "@/components/DetailPage";
 
 export default async function InflacionDetalle() {
-  const [mensual, historica] = await Promise.all([
-    readSeries("inflacion_mensual.json"),
-    readSeries("inflacion_empalmada.json"),
-  ]);
+  const mensual = await readSeries("inflacion_mensual.json");
 
   return (
     <DetailPage
       eyebrow="Precios"
-      title="Inflacion"
-      subtitle="Indice de Precios al Consumidor (IPC). Variacion porcentual mensual con serie historica completa."
+      title="Inflación"
+      subtitle="Índice de Precios al Consumidor (IPC). Variación porcentual mensual desde 2016."
       charts={[
-        { data: mensual, label: "IPC mensual (%)", color: "var(--color-danger)", format: "percent" },
-        { data: historica, label: "Inflacion historica (%)", color: "var(--color-primary)", format: "percent" },
+        {
+          data: mensual,
+          label: "IPC — variación mensual (%)",
+          color: "var(--chart-1)",
+          format: "percent",
+        },
       ]}
       tables={[
-        { title: "Inflacion mensual", data: mensual, valueLabel: "%", format: "percent" },
-        { title: "Inflacion historica", data: historica, valueLabel: "%", format: "percent" },
+        {
+          title: "Inflación mensual",
+          data: mensual,
+          valueLabel: "%",
+          format: "percent",
+        },
       ]}
-      notes="La serie historica combina distintos periodos base del IPC para ofrecer una vision continua de largo plazo. Datos originales de INDEC."
-      source="INDEC via datos.gob.ar"
+      notes="Serie INDEC desde mayo 2016 (base IPC Nacional). El empalme con la serie histórica del IPC GBA (1943–2016) se incorporará próximamente; por la fragmentación metodológica entre regímenes (IPC-GBA, IPC-CABA con cobertura 2014–2017 y IPC Nacional desde 2016) requiere un proceso de empalme cuidadoso."
+      source="INDEC vía datos.gob.ar"
       frequency="Mensual"
     />
   );

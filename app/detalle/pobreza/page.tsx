@@ -11,18 +11,18 @@ export default async function PobrezaDetalle() {
     <DetailPage
       eyebrow="Social"
       title="Pobreza e indigencia"
-      subtitle="Tasa de pobreza semestral y linea de indigencia mensual (Canasta Basica Alimentaria)."
+      subtitle="Tasa de pobreza semestral y línea de indigencia mensual (Canasta Básica Alimentaria)."
       charts={[
-        { data: pobreza, label: "Tasa de pobreza (%)", color: "var(--color-danger)", format: "percent" },
-        { data: lineaIndigencia.slice(-60), label: "Linea de indigencia ($)", color: "var(--color-warning)", format: "peso" },
+        { data: pobreza, label: "Tasa de pobreza (%)", color: "var(--chart-7)", format: "percent" },
+        { data: lineaIndigencia.slice(-60), label: "Línea de indigencia ($ por adulto/mes)", color: "var(--chart-3)", format: "peso" },
       ]}
       tables={[
         { title: "Pobreza semestral", data: pobreza, valueLabel: "%", format: "percent" },
-        { title: "Linea de indigencia", data: lineaIndigencia, valueLabel: "$", format: "peso" },
+        { title: "Línea de indigencia", data: lineaIndigencia, valueLabel: "$", format: "peso" },
       ]}
-      notes="La tasa de pobreza indica el porcentaje de personas en hogares con ingresos por debajo de la Canasta Basica Total. La linea de indigencia refleja el valor mensual de la Canasta Basica Alimentaria para un adulto equivalente."
-      source="INDEC — EPH via datos.gob.ar"
-      frequency="Pobreza semestral / Indigencia mensual"
+      notes="La tasa de pobreza indica el porcentaje de personas en hogares con ingresos por debajo de la Canasta Básica Total. La línea de indigencia refleja el valor mensual de la Canasta Básica Alimentaria para un adulto equivalente. La tasa de indigencia (% personas) no se publica como serie continua en datos.gob.ar — sólo en informes PDF semestrales del INDEC."
+      source="INDEC — EPH vía datos.gob.ar"
+      frequency="Pobreza semestral · Indigencia mensual"
     />
   );
 }

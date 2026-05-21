@@ -13,18 +13,38 @@ export default async function DolarDetalle() {
   return (
     <DetailPage
       eyebrow="Tipo de cambio"
-      title="Dolar"
-      subtitle="Cotizacion del dolar oficial (BCRA) y dolar blue. Series diarias y mensuales."
+      title="Dólar"
+      subtitle="Cotización del dólar oficial (BCRA) y dólar blue. Series diarias y mensuales."
       charts={[
-        { data: oficialDiario, label: "Oficial diario", color: "var(--color-accent)", format: "peso" },
-        { data: blueDiario, label: "Blue diario", color: "var(--color-primary)", format: "peso" },
+        {
+          data: oficialDiario,
+          label: "Oficial diario",
+          color: "var(--chart-6)",
+          format: "peso",
+        },
+        {
+          data: blueDiario,
+          label: "Blue diario",
+          color: "var(--chart-3)",
+          format: "peso",
+        },
       ]}
       tables={[
-        { title: "Oficial mensual", data: oficialMensual, valueLabel: "$", format: "peso" },
-        { title: "Blue mensual", data: blueMensual, valueLabel: "$", format: "peso" },
+        {
+          title: "Oficial mensual",
+          data: oficialMensual,
+          valueLabel: "$",
+          format: "peso",
+        },
+        {
+          title: "Blue mensual",
+          data: blueMensual,
+          valueLabel: "$",
+          format: "peso",
+        },
       ]}
-      notes="El dolar oficial corresponde al tipo de cambio minorista de referencia del BCRA. El dolar blue proviene de fuentes no oficiales que recopilan cotizaciones del mercado paralelo."
-      source="BCRA / argentinadatos.com"
+      notes="El dólar oficial corresponde al tipo de cambio minorista de referencia del BCRA. El dólar blue proviene de fuentes no oficiales que recopilan cotizaciones del mercado paralelo. Próximamente: MEP, CCL, tarjeta y brecha cambiaria."
+      source="BCRA · argentinadatos.com"
       frequency="Diaria y mensual"
     />
   );
