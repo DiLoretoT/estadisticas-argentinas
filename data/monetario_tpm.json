@@ -1,0 +1,12 @@
+{
+  "updated_at": "2026-05-21",
+  "updated_at_time": "2026-05-21T15:29:18",
+  "period": "2025-07-10",
+  "value": 29.0,
+  "monthly_change": 0.0,
+  "unit": "porcentaje_anual",
+  "source": {
+    "name": "BCRA",
+    "official": true
+  }
+}
