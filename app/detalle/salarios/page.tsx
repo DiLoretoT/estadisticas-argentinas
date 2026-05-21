@@ -3,6 +3,8 @@ import { loadEvents, filterEventsForSeries } from "@/lib/events";
 import { computeSalarioReal } from "@/lib/salarioReal";
 import { DetailPage } from "@/components/DetailPage";
 
+export const revalidate = 1800;
+
 export default async function SalariosDetalle() {
   const [ripteMensual, ripteNivel, ipcMensual, events] = await Promise.all([
     readSeries("ripte_mensual.json"),

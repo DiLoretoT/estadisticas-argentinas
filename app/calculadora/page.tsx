@@ -10,6 +10,8 @@ export const metadata: Metadata = {
     "Calculadora oficial de inflación argentina. Convertí pesos entre fechas usando el IPC INDEC.",
 };
 
+export const revalidate = 1800;
+
 export default async function CalculadoraPage() {
   const ipcSeries = await readSeries("inflacion_mensual.json");
 

@@ -18,6 +18,8 @@ function computeBrecha(
   return out;
 }
 
+export const revalidate = 1800;
+
 export default async function DolarDetalle() {
   const [oficialMensual, oficialDiario, blueMensual, blueDiario, events] =
     await Promise.all([

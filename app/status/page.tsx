@@ -1,8 +1,11 @@
 import Link from "next/link";
-import { promises as fs } from "fs";
-import path from "path";
 import { Footer } from "@/components/Footer";
+import { getStatusEntries } from "@/lib/lastUpdated";
 import type { Metadata } from "next";
+
+// ISR: revalidamos /status cada 5 minutos para que los runs recientes del ETL
+// se reflejen rápido sin necesidad de redeployar.
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "Estado del ETL",
@@ -17,17 +20,6 @@ interface StatusEntry {
   last_date: string | null;
   row_count: number;
   error_message: string | null;
-}
-
-async function readStatus(): Promise<StatusEntry[]> {
-  try {
-    const filePath = path.join(process.cwd(), "data", "status.json");
-    const content = await fs.readFile(filePath, "utf-8");
-    return JSON.parse(content) as StatusEntry[];
-  } catch (error) {
-    console.error("[StatusPage] No pude leer status.json:", error);
-    return [];
-  }
 }
 
 function formatDateTime(iso: string | null): string {
@@ -65,7 +57,7 @@ function StatusBadge({ status }: { status: "success" | "error" }) {
 }
 
 export default async function StatusPage() {
-  const entries = await readStatus();
+  const entries = (await getStatusEntries()) as StatusEntry[];
   const okCount = entries.filter((e) => e.last_status === "success").length;
   const errCount = entries.filter((e) => e.last_status === "error").length;
   const lastRun = entries

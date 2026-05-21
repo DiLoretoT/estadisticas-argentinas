@@ -2,6 +2,8 @@ import { readSeries } from "@/lib/readData";
 import { loadEvents, filterEventsForSeries } from "@/lib/events";
 import { DetailPage } from "@/components/DetailPage";
 
+export const revalidate = 1800;
+
 export default async function InflacionDetalle() {
   const [mensual, events] = await Promise.all([
     readSeries("inflacion_mensual.json"),

@@ -3,6 +3,10 @@ import { getLastUpdated } from "@/lib/lastUpdated";
 import { computeSalarioReal } from "@/lib/salarioReal";
 import { HomeClient } from "@/components/HomeClient";
 
+// ISR: regenera la home cada 30 minutos en background. Los commits del ETL
+// al repo se reflejan automáticamente vía jsdelivr CDN, sin re-deploy.
+export const revalidate = 1800;
+
 export default async function Home() {
   const [
     inflacion,

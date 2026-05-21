@@ -1,6 +1,8 @@
 import { readSeries } from "@/lib/readData";
 import { DetailPage } from "@/components/DetailPage";
 
+export const revalidate = 1800;
+
 export default async function EuroDetalle() {
   const [euroDiario, euroMensual] = await Promise.all([
     readSeries("euro_diario.json"),
