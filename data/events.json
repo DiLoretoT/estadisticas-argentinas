@@ -4,51 +4,51 @@
     {
       "date": "2001-12-03",
       "label": "Corralito",
-      "description": "Restricción al retiro de depósitos bancarios. Profunda crisis económica.",
+      "description": "Restricción al retiro de depósitos bancarios. Crisis institucional, 5 presidentes en una semana.",
       "category": "crisis",
       "applies_to": ["all", "dolar_oficial", "ipc"]
     },
     {
       "date": "2002-01-06",
       "label": "Fin convertibilidad",
-      "description": "Salida del 1 a 1 con el dólar. Devaluación masiva del peso.",
+      "description": "Salida del 1 a 1 con el dólar. Devaluación masiva del peso de 1:1 a casi 4:1 en pocos meses.",
       "category": "devaluacion",
       "applies_to": ["all", "dolar_oficial", "ipc"]
     },
     {
       "date": "2014-07-30",
       "label": "Default técnico",
-      "description": "Default por fallo Griesa (fondos buitre).",
+      "description": "Default por fallo Griesa (fondos buitre). Argentina no pudo pagar bonos reestructurados.",
       "category": "default",
       "applies_to": ["all", "dolar_oficial", "dolar_blue"]
     },
     {
       "date": "2015-12-17",
       "label": "Salida del cepo (Macri)",
-      "description": "Levantamiento de restricciones cambiarias. Unificación del tipo de cambio.",
+      "description": "Levantamiento de restricciones cambiarias. Unificación del tipo de cambio; oficial salta ~40%.",
       "category": "politica",
-      "applies_to": ["all", "dolar_oficial", "dolar_blue"]
+      "applies_to": ["all", "dolar_oficial", "dolar_blue", "monedas"]
     },
     {
       "date": "2018-04-25",
       "label": "Crisis cambiaria 2018",
       "description": "Corrida cambiaria. Posterior acuerdo con el FMI por USD 50.000 M.",
       "category": "crisis",
-      "applies_to": ["all", "dolar_oficial", "dolar_blue"]
+      "applies_to": ["all", "dolar_oficial", "dolar_blue", "monedas", "monetario"]
     },
     {
       "date": "2019-08-11",
       "label": "PASO 2019",
-      "description": "Resultado electoral inesperado. Salto del dólar y caída de bonos.",
+      "description": "Resultado electoral inesperado. El dólar saltó 30% en un día; bonos cayeron 50%.",
       "category": "politica",
-      "applies_to": ["all", "dolar_oficial", "dolar_blue"]
+      "applies_to": ["all", "dolar_oficial", "dolar_blue", "monedas"]
     },
     {
       "date": "2019-09-01",
       "label": "Cepo 2.0",
-      "description": "Reimposición de controles cambiarios.",
+      "description": "Reimposición de controles cambiarios para frenar la salida de reservas.",
       "category": "politica",
-      "applies_to": ["dolar_oficial", "dolar_blue"]
+      "applies_to": ["dolar_oficial", "dolar_blue", "monetario"]
     },
     {
       "date": "2020-03-20",
@@ -60,16 +60,44 @@
     {
       "date": "2023-08-13",
       "label": "PASO 2023",
-      "description": "Milei gana las PASO. Devaluación del oficial del 22% al día siguiente.",
+      "description": "Milei gana las PASO. Devaluación del oficial del 22% al día siguiente, dólar paralelo dispara.",
       "category": "politica",
-      "applies_to": ["all", "dolar_oficial", "dolar_blue", "ipc"]
+      "applies_to": ["all", "dolar_oficial", "dolar_blue", "ipc", "monedas"]
     },
     {
       "date": "2023-12-13",
       "label": "Devaluación Milei",
-      "description": "Nuevo gobierno devalúa el peso oficial 118% en un día.",
+      "description": "Nuevo gobierno devalúa el peso oficial 118% en un día (de $366 a $800). Inicio del plan motosierra.",
       "category": "devaluacion",
-      "applies_to": ["all", "dolar_oficial", "ipc", "pobreza"]
+      "applies_to": ["all", "dolar_oficial", "ipc", "pobreza", "monedas", "monetario"]
+    },
+    {
+      "date": "2024-01-01",
+      "label": "Crawling peg 2% mensual",
+      "description": "Esquema cambiario: BCRA devalúa oficial 2% por mes, el resto se ajusta por demanda. Ancla nominal.",
+      "category": "politica",
+      "applies_to": ["dolar_oficial", "monedas", "monetario"]
+    },
+    {
+      "date": "2024-04-30",
+      "label": "Esquema 80/20",
+      "description": "Exportadores liquidan 80% al oficial y 20% al CCL (blend). Reduce brecha cambiaria.",
+      "category": "politica",
+      "applies_to": ["dolar_oficial", "dolar_blue", "monedas"]
+    },
+    {
+      "date": "2024-12-31",
+      "label": "Cierre 2024 con superávit",
+      "description": "Primer año con superávit fiscal en 14 años. Inflación anual baja a 117,8% (vs 211% en 2023).",
+      "category": "politica",
+      "applies_to": ["all", "ipc", "monetario"]
+    },
+    {
+      "date": "2025-04-11",
+      "label": "Salida parcial del cepo",
+      "description": "Levantamiento de controles para personas físicas. Nuevo acuerdo FMI USD 20.000 M.",
+      "category": "politica",
+      "applies_to": ["all", "dolar_oficial", "dolar_blue", "monedas", "monetario"]
     }
   ]
 }
