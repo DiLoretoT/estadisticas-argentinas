@@ -1,0 +1,40 @@
+{
+  "countries": [
+    {
+      "code": "argentina",
+      "name": "Argentina",
+      "flag": "🇦🇷",
+      "status": "active",
+      "description": "Inflación, dólar, actividad, empleo y pobreza con datos oficiales del INDEC y BCRA.",
+      "indicators_count": 12,
+      "sources": ["INDEC", "BCRA", "argentinadatos.com"]
+    },
+    {
+      "code": "chile",
+      "name": "Chile",
+      "flag": "🇨🇱",
+      "status": "coming_soon",
+      "description": "Próximamente: IPC, UF, IMACEC, desempleo desde INE y Banco Central.",
+      "indicators_count": 0,
+      "sources": ["INE", "Banco Central"]
+    },
+    {
+      "code": "uruguay",
+      "name": "Uruguay",
+      "flag": "🇺🇾",
+      "status": "coming_soon",
+      "description": "Próximamente: IPC, tipo de cambio, IMS desde INE y BCU.",
+      "indicators_count": 0,
+      "sources": ["INE", "BCU"]
+    },
+    {
+      "code": "brasil",
+      "name": "Brasil",
+      "flag": "🇧🇷",
+      "status": "coming_soon",
+      "description": "Próximamente: IPCA, Selic, PIB, desemprego desde IBGE y BACEN.",
+      "indicators_count": 0,
+      "sources": ["IBGE", "BACEN"]
+    }
+  ]
+}

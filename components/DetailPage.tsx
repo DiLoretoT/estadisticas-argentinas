@@ -52,7 +52,7 @@ export function DetailPage({
     >
       <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.3 }}>
         <Link
-          href="/"
+          href="/argentina"
           className="inline-flex items-center gap-1.5 text-xs font-medium mb-6 transition-colors duration-200"
           style={{ color: "var(--color-text-muted)" }}
           onMouseEnter={(e) => { e.currentTarget.style.color = "var(--color-primary)"; }}

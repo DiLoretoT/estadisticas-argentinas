@@ -5,10 +5,10 @@ import { useTheme } from "@/components/ThemeProvider";
 import { motion } from "framer-motion";
 
 const navLinks = [
-  { href: "/#indicadores", label: "Indicadores" },
-  { href: "/#precios", label: "Precios" },
-  { href: "/#actividad", label: "Actividad" },
-  { href: "/#social", label: "Social" },
+  { href: "/argentina#indicadores", label: "Indicadores" },
+  { href: "/argentina#precios", label: "Precios" },
+  { href: "/argentina#actividad", label: "Actividad" },
+  { href: "/argentina#social", label: "Social" },
 ];
 
 export function Navbar() {

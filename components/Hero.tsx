@@ -63,7 +63,7 @@ export function Hero({ lastUpdated }: HeroProps) {
         className="mt-8 flex flex-wrap items-center justify-center gap-3 relative"
       >
         <a
-          href="#indicadores"
+          href="/argentina#indicadores"
           className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-medium transition-all duration-200"
           style={{
             background: "var(--color-primary)",

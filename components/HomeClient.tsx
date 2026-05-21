@@ -223,28 +223,28 @@ export function HomeClient({
         {/* Navigation links */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
           <LinkCard
-            href="/detalle/inflacion"
+            href="/argentina/detalle/inflacion"
             icon="📈"
             title="Inflación"
             description="IPC mensual, acumulado e interanual"
             delay={0}
           />
           <LinkCard
-            href="/detalle/dolar"
+            href="/argentina/detalle/dolar"
             icon="💵"
             title="Dólar"
             description="Oficial, blue y brecha"
             delay={0.05}
           />
           <LinkCard
-            href="/detalle/euro"
+            href="/argentina/detalle/euro"
             icon="💶"
             title="Euro"
             description="Cotización diaria y mensual"
             delay={0.1}
           />
           <LinkCard
-            href="/detalle/salarios"
+            href="/argentina/detalle/salarios"
             icon="💰"
             title="Salarios"
             description="RIPTE e índice de salarios"
@@ -276,14 +276,14 @@ export function HomeClient({
         </div>
         <div className="grid grid-cols-2 gap-4 mt-8">
           <LinkCard
-            href="/detalle/actividad"
+            href="/argentina/detalle/actividad"
             icon="🏭"
             title="Actividad"
             description="EMAE y PBI trimestral"
             delay={0}
           />
           <LinkCard
-            href="/detalle/salarios"
+            href="/argentina/detalle/salarios"
             icon="📊"
             title="Salarios"
             description="RIPTE e índice salarial"
@@ -315,14 +315,14 @@ export function HomeClient({
         </div>
         <div className="grid grid-cols-2 gap-4 mt-8">
           <LinkCard
-            href="/detalle/empleo"
+            href="/argentina/detalle/empleo"
             icon="👷"
             title="Empleo"
             description="Desocupación y tasa de empleo"
             delay={0}
           />
           <LinkCard
-            href="/detalle/pobreza"
+            href="/argentina/detalle/pobreza"
             icon="📋"
             title="Pobreza"
             description="Pobreza e indigencia"

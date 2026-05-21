@@ -15,6 +15,15 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: "/detalle/:slug",
+        destination: "/argentina/detalle/:slug",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
