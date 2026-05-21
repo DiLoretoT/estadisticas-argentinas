@@ -9,11 +9,11 @@
   },
   {
     "series_id": "emae",
-    "last_status": "error",
-    "last_run_at": "2026-03-28T06:00:24.666677-03:00",
-    "last_date": null,
-    "row_count": 0,
-    "error_message": "400 Client Error: Bad Request for url: https://apis.datos.gob.ar/series/api/series/?ids=11.3_VIPAA_2004_M_31&format=json&sort=asc&start=0&limit=1000"
+    "last_status": "success",
+    "last_run_at": "2026-05-20T23:30:00-03:00",
+    "last_date": "2026-01-01",
+    "row_count": 264,
+    "error_message": null
   },
   {
     "series_id": "inflacion",
@@ -47,15 +47,7 @@
     "row_count": 90,
     "error_message": null
   },
-  {
-    "series_id": "tasa_indigencia",
-    "last_status": "error",
-    "last_run_at": "2026-03-28T02:45:52.296391-03:00",
-    "last_date": null,
-    "row_count": 0,
-    "error_message": "400 Client Error: Bad Request for url: https://apis.datos.gob.ar/series/api/series/?ids=116.5_INDI_0_S_18&format=json&sort=asc&start=0&limit=1000"
-  },
-  {
+{
     "series_id": "tasa_pobreza",
     "last_status": "success",
     "last_run_at": "2026-03-28T03:17:28.700780-03:00",

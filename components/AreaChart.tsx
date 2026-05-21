@@ -22,34 +22,14 @@ interface AreaChartProps {
   csvFilename?: string;
 }
 
-/** Resolve a CSS variable to a hex color at runtime. */
-function useResolvedColor(cssVar: string) {
+/**
+ * Hook deprecated en favor de pasar el cssVar directo al SVG. Mantenemos sólo
+ * el ref para el container, sin resolución de color (SVG soporta `var()` nativo
+ * en stroke/fill, lo cual respeta el theme switch automáticamente).
+ */
+function useChartContainer() {
   const ref = useRef<HTMLDivElement>(null);
-  const [hex, setHex] = useState(cssVar);
-
-  useEffect(() => {
-    if (!ref.current || !cssVar.startsWith("var(")) {
-      setHex(cssVar);
-      return;
-    }
-    const varName = cssVar.slice(4, -1);
-    const resolved = getComputedStyle(ref.current).getPropertyValue(varName).trim();
-    if (resolved) setHex(resolved);
-  }, [cssVar]);
-
-  // Re-resolve when theme changes (dark ↔ light)
-  useEffect(() => {
-    if (!ref.current || !cssVar.startsWith("var(")) return;
-    const obs = new MutationObserver(() => {
-      const varName = cssVar.slice(4, -1);
-      const resolved = getComputedStyle(ref.current!).getPropertyValue(varName).trim();
-      if (resolved) setHex(resolved);
-    });
-    obs.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
-    return () => obs.disconnect();
-  }, [cssVar]);
-
-  return { ref, hex };
+  return ref;
 }
 
 // SVG coordinate space
@@ -89,7 +69,8 @@ export function AreaChart({
   events = [],
   csvFilename,
 }: AreaChartProps) {
-  const { ref: containerRef, hex: resolvedColor } = useResolvedColor(color);
+  const containerRef = useChartContainer();
+  const resolvedColor = color;
   const svgRef = useRef<SVGSVGElement>(null);
   const [hoverIdx, setHoverIdx] = useState<number | null>(null);
   const [hoverEvent, setHoverEvent] = useState<number | null>(null);

@@ -33,5 +33,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "daily" as const,
       priority: 0.8,
     })),
+    {
+      url: `${BASE_URL}/calculadora`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/metodologia`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.5,
+    },
+    {
+      url: `${BASE_URL}/status`,
+      lastModified: now,
+      changeFrequency: "hourly" as const,
+      priority: 0.3,
+    },
   ];
 }

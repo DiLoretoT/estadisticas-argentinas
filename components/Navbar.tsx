@@ -9,6 +9,7 @@ const navLinks = [
   { href: "/argentina#precios", label: "Precios" },
   { href: "/argentina#actividad", label: "Actividad" },
   { href: "/argentina#social", label: "Social" },
+  { href: "/calculadora", label: "Calculadora" },
 ];
 
 export function Navbar() {
