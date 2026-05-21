@@ -1,11 +1,15 @@
 import { readSeries } from "@/lib/readData";
+import { loadEvents, filterEventsForSeries } from "@/lib/events";
 import { DetailPage } from "@/components/DetailPage";
 
 export default async function EmpleoDetalle() {
-  const [desocupacion, empleo] = await Promise.all([
+  const [desocupacion, empleo, events] = await Promise.all([
     readSeries("tasa_desocupacion.json"),
     readSeries("tasa_empleo.json"),
+    loadEvents(),
   ]);
+
+  const empleoEvents = filterEventsForSeries(events, "empleo", desocupacion);
 
   return (
     <DetailPage
@@ -13,8 +17,22 @@ export default async function EmpleoDetalle() {
       title="Empleo"
       subtitle="Tasas de desocupación y empleo trimestrales de la Encuesta Permanente de Hogares (EPH)."
       charts={[
-        { data: desocupacion, label: "Tasa de desocupación (%)", color: "var(--chart-4)", format: "percent" },
-        { data: empleo, label: "Tasa de empleo (%)", color: "var(--chart-2)", format: "percent" },
+        {
+          data: desocupacion,
+          label: "Tasa de desocupación (%)",
+          color: "var(--chart-4)",
+          format: "percent",
+          events: empleoEvents,
+          csvFilename: "tasa_desocupacion_argentina",
+        },
+        {
+          data: empleo,
+          label: "Tasa de empleo (%)",
+          color: "var(--chart-2)",
+          format: "percent",
+          events: empleoEvents,
+          csvFilename: "tasa_empleo_argentina",
+        },
       ]}
       tables={[
         { title: "Desocupación trimestral", data: desocupacion, valueLabel: "%", format: "percent" },

@@ -4,11 +4,22 @@ import { motion } from "framer-motion";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { formatValue as fmtVal, formatDate, type FormatType } from "@/lib/formatters";
 
+export interface ChartEvent {
+  date: string;
+  label: string;
+  description?: string;
+  category?: "crisis" | "devaluacion" | "default" | "politica";
+}
+
 interface AreaChartProps {
   data: [string, number][];
   color?: string;
   label?: string;
   format?: FormatType;
+  /** Events to annotate as vertical markers on the chart. */
+  events?: ChartEvent[];
+  /** If provided, shows a "Descargar CSV" button that exports the data as CSV with this filename. */
+  csvFilename?: string;
 }
 
 /** Resolve a CSS variable to a hex color at runtime. */
@@ -51,16 +62,55 @@ const PAD_B = 30;
 const CHART_W = W - PAD_L - PAD_R;
 const CHART_H = H - PAD_T - PAD_B;
 
+function downloadCSV(data: [string, number][], filename: string, valueLabel: string) {
+  const lines = ["fecha,valor"];
+  for (const [date, value] of data) {
+    lines.push(`${date},${value}`);
+  }
+  const csv = lines.join("\n");
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename.endsWith(".csv") ? filename : `${filename}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  // valueLabel currently unused but kept for future extension
+  void valueLabel;
+}
+
 export function AreaChart({
   data,
   color = "var(--color-primary)",
   label,
   format = "decimal",
+  events = [],
+  csvFilename,
 }: AreaChartProps) {
   const { ref: containerRef, hex: resolvedColor } = useResolvedColor(color);
   const svgRef = useRef<SVGSVGElement>(null);
   const [hoverIdx, setHoverIdx] = useState<number | null>(null);
+  const [hoverEvent, setHoverEvent] = useState<number | null>(null);
   const fmt = useCallback((v: number) => fmtVal(v, format), [format]);
+
+  // Compute event positions on the X axis given the data range
+  const eventMarkers = useMemo(() => {
+    if (!data.length || !events.length) return [];
+    const firstDate = new Date(data[0][0]).getTime();
+    const lastDate = new Date(data[data.length - 1][0]).getTime();
+    const range = lastDate - firstDate;
+    if (range <= 0) return [];
+    return events
+      .map((ev) => {
+        const t = new Date(ev.date).getTime();
+        if (isNaN(t) || t < firstDate || t > lastDate) return null;
+        const x = PAD_L + ((t - firstDate) / range) * CHART_W;
+        return { ...ev, x };
+      })
+      .filter((m): m is ChartEvent & { x: number } => m !== null);
+  }, [data, events]);
 
   const { points, linePath, areaPath, yTicks, xTicks, yMin, yMax } = useMemo(() => {
     if (!data.length)
@@ -173,13 +223,29 @@ export function AreaChart({
     >
       {/* Header */}
       {label && (
-        <div className="px-4 pt-3 pb-1 flex items-baseline justify-between">
-          <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-text-muted)" }}>
+        <div className="px-4 pt-3 pb-1 flex items-baseline justify-between gap-2">
+          <span className="text-xs font-semibold uppercase tracking-wider truncate" style={{ color: "var(--color-text-muted)" }}>
             {label}
           </span>
-          <span className="text-sm font-bold tabular-nums" style={{ color: resolvedColor }}>
-            {hoveredPt ? fmt(hoveredPt.value) : fmt(last.value)}
-          </span>
+          <div className="flex items-center gap-2 shrink-0">
+            <span className="text-sm font-bold tabular-nums" style={{ color: resolvedColor }}>
+              {hoveredPt ? fmt(hoveredPt.value) : fmt(last.value)}
+            </span>
+            {csvFilename && (
+              <button
+                onClick={() => downloadCSV(data, csvFilename, label || "")}
+                className="text-[10px] font-medium px-1.5 py-0.5 rounded transition-colors duration-150"
+                style={{
+                  color: "var(--color-text-muted)",
+                  border: "1px solid var(--color-border)",
+                }}
+                aria-label="Descargar serie como CSV"
+                title="Descargar como CSV"
+              >
+                CSV
+              </button>
+            )}
+          </div>
         </div>
       )}
 
@@ -243,6 +309,54 @@ export function AreaChart({
           transition={{ duration: 1.2, ease: "easeOut" }}
         />
 
+        {/* Event annotations (drawn before crosshair so crosshair sits on top) */}
+        {eventMarkers.map((ev, i) => (
+          <g
+            key={`ev-${i}`}
+            onMouseEnter={() => setHoverEvent(i)}
+            onMouseLeave={() => setHoverEvent(null)}
+            style={{ cursor: "help" }}
+          >
+            <line
+              x1={ev.x}
+              y1={PAD_T}
+              x2={ev.x}
+              y2={PAD_T + CHART_H}
+              stroke="var(--color-text-muted)"
+              strokeWidth={hoverEvent === i ? 1.5 : 1}
+              strokeDasharray="3,3"
+              opacity={hoverEvent === i ? 0.8 : 0.45}
+            />
+            <circle
+              cx={ev.x}
+              cy={PAD_T + 8}
+              r={hoverEvent === i ? 6 : 4}
+              fill="var(--color-card)"
+              stroke="var(--color-text-muted)"
+              strokeWidth="1.5"
+            />
+            <text
+              x={ev.x}
+              y={PAD_T + 12}
+              fontSize="9"
+              textAnchor="middle"
+              fill="var(--color-text-muted)"
+              fontFamily="var(--font-sans, system-ui)"
+              pointerEvents="none"
+            >
+              !
+            </text>
+            {/* Invisible hover area, wider for easier targeting */}
+            <rect
+              x={ev.x - 8}
+              y={PAD_T}
+              width={16}
+              height={CHART_H}
+              fill="transparent"
+            />
+          </g>
+        ))}
+
         {/* Hover crosshair + dot */}
         {hoveredPt && (
           <>
@@ -260,6 +374,44 @@ export function AreaChart({
           </>
         )}
       </svg>
+
+      {/* Event tooltip (when hovering an event marker) */}
+      {hoverEvent !== null && eventMarkers[hoverEvent] && (
+        <div
+          className="absolute pointer-events-none px-3 py-2 rounded-lg text-xs max-w-[220px]"
+          style={{
+            left: `${(eventMarkers[hoverEvent].x / W) * 100}%`,
+            top: "20%",
+            transform:
+              eventMarkers[hoverEvent].x > W / 2
+                ? "translate(-105%, 0)"
+                : "translate(5%, 0)",
+            background: "var(--color-card)",
+            border: "1px solid var(--color-border)",
+            boxShadow: "var(--shadow-md)",
+            color: "var(--color-text)",
+            zIndex: 11,
+          }}
+        >
+          <div className="font-semibold" style={{ color: "var(--color-text)" }}>
+            {eventMarkers[hoverEvent].label}
+          </div>
+          <div
+            className="tabular-nums mt-0.5"
+            style={{ color: "var(--color-text-muted)", fontSize: 10 }}
+          >
+            {formatDate(eventMarkers[hoverEvent].date)}
+          </div>
+          {eventMarkers[hoverEvent].description && (
+            <div
+              className="mt-1.5 leading-snug"
+              style={{ color: "var(--color-text-muted)" }}
+            >
+              {eventMarkers[hoverEvent].description}
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Tooltip */}
       {hoveredPt && (

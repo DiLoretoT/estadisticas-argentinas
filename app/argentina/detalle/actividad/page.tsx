@@ -1,11 +1,16 @@
 import { readSeries } from "@/lib/readData";
+import { loadEvents, filterEventsForSeries } from "@/lib/events";
 import { DetailPage } from "@/components/DetailPage";
 
 export default async function ActividadDetalle() {
-  const [emae, pbi] = await Promise.all([
+  const [emae, pbi, events] = await Promise.all([
     readSeries("emae_mensual.json"),
     readSeries("pbi_trimestral.json"),
+    loadEvents(),
   ]);
+
+  const emaeEvents = filterEventsForSeries(events, "emae", emae);
+  const pbiEvents = filterEventsForSeries(events, "pbi", pbi);
 
   return (
     <DetailPage
@@ -13,14 +18,28 @@ export default async function ActividadDetalle() {
       title="Actividad económica"
       subtitle="Estimador Mensual de Actividad Económica (EMAE) y Producto Bruto Interno (PBI)."
       charts={[
-        { data: emae, label: "EMAE mensual", color: "var(--chart-2)", format: "decimal" },
-        { data: pbi, label: "PBI trimestral", color: "var(--chart-6)", format: "index" },
+        {
+          data: emae,
+          label: "EMAE mensual — índice base 2004=100",
+          color: "var(--chart-2)",
+          format: "decimal",
+          events: emaeEvents,
+          csvFilename: "emae_mensual_argentina",
+        },
+        {
+          data: pbi,
+          label: "PBI trimestral (mill. $ constantes)",
+          color: "var(--chart-6)",
+          format: "index",
+          events: pbiEvents,
+          csvFilename: "pbi_trimestral_argentina",
+        },
       ]}
       tables={[
         { title: "EMAE mensual", data: emae, valueLabel: "Índice", format: "decimal" },
         { title: "PBI trimestral", data: pbi, valueLabel: "Mill. $", format: "index" },
       ]}
-      notes="El EMAE resume la actividad económica mensual con base 2004=100. El PBI trimestral se publica en millones de pesos a precios constantes (base 2004)."
+      notes="El EMAE resume la actividad económica mensual con base 2004=100. El PBI trimestral se publica en millones de pesos a precios constantes (base 2004). Los marcadores señalan eventos económicos que impactaron la actividad — pasale el mouse para detalle."
       source="INDEC · SSPM vía datos.gob.ar"
       frequency="EMAE mensual · PBI trimestral"
     />

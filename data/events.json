@@ -1,0 +1,75 @@
+{
+  "_description": "Eventos económicos argentinos relevantes para anotar sobre series temporales. Cada evento puede aplicar a múltiples series (campo applies_to).",
+  "events": [
+    {
+      "date": "2001-12-03",
+      "label": "Corralito",
+      "description": "Restricción al retiro de depósitos bancarios. Profunda crisis económica.",
+      "category": "crisis",
+      "applies_to": ["all", "dolar_oficial", "ipc"]
+    },
+    {
+      "date": "2002-01-06",
+      "label": "Fin convertibilidad",
+      "description": "Salida del 1 a 1 con el dólar. Devaluación masiva del peso.",
+      "category": "devaluacion",
+      "applies_to": ["all", "dolar_oficial", "ipc"]
+    },
+    {
+      "date": "2014-07-30",
+      "label": "Default técnico",
+      "description": "Default por fallo Griesa (fondos buitre).",
+      "category": "default",
+      "applies_to": ["all", "dolar_oficial", "dolar_blue"]
+    },
+    {
+      "date": "2015-12-17",
+      "label": "Salida del cepo (Macri)",
+      "description": "Levantamiento de restricciones cambiarias. Unificación del tipo de cambio.",
+      "category": "politica",
+      "applies_to": ["all", "dolar_oficial", "dolar_blue"]
+    },
+    {
+      "date": "2018-04-25",
+      "label": "Crisis cambiaria 2018",
+      "description": "Corrida cambiaria. Posterior acuerdo con el FMI por USD 50.000 M.",
+      "category": "crisis",
+      "applies_to": ["all", "dolar_oficial", "dolar_blue"]
+    },
+    {
+      "date": "2019-08-11",
+      "label": "PASO 2019",
+      "description": "Resultado electoral inesperado. Salto del dólar y caída de bonos.",
+      "category": "politica",
+      "applies_to": ["all", "dolar_oficial", "dolar_blue"]
+    },
+    {
+      "date": "2019-09-01",
+      "label": "Cepo 2.0",
+      "description": "Reimposición de controles cambiarios.",
+      "category": "politica",
+      "applies_to": ["dolar_oficial", "dolar_blue"]
+    },
+    {
+      "date": "2020-03-20",
+      "label": "Cuarentena COVID",
+      "description": "ASPO. Caída del PBI más profunda de la historia (-9.9% en 2020).",
+      "category": "crisis",
+      "applies_to": ["all", "emae", "pbi", "empleo"]
+    },
+    {
+      "date": "2023-08-13",
+      "label": "PASO 2023",
+      "description": "Milei gana las PASO. Devaluación del oficial del 22% al día siguiente.",
+      "category": "politica",
+      "applies_to": ["all", "dolar_oficial", "dolar_blue", "ipc"]
+    },
+    {
+      "date": "2023-12-13",
+      "label": "Devaluación Milei",
+      "description": "Nuevo gobierno devalúa el peso oficial 118% en un día.",
+      "category": "devaluacion",
+      "applies_to": ["all", "dolar_oficial", "ipc", "pobreza"]
+    }
+  ]
+}

@@ -1,8 +1,14 @@
 import { readSeries } from "@/lib/readData";
+import { loadEvents, filterEventsForSeries } from "@/lib/events";
 import { DetailPage } from "@/components/DetailPage";
 
 export default async function InflacionDetalle() {
-  const mensual = await readSeries("inflacion_mensual.json");
+  const [mensual, events] = await Promise.all([
+    readSeries("inflacion_mensual.json"),
+    loadEvents(),
+  ]);
+
+  const inflEvents = filterEventsForSeries(events, "ipc", mensual);
 
   return (
     <DetailPage
@@ -15,6 +21,8 @@ export default async function InflacionDetalle() {
           label: "IPC — variación mensual (%)",
           color: "var(--chart-1)",
           format: "percent",
+          events: inflEvents,
+          csvFilename: "inflacion_mensual_argentina",
         },
       ]}
       tables={[
@@ -25,7 +33,7 @@ export default async function InflacionDetalle() {
           format: "percent",
         },
       ]}
-      notes="Serie INDEC desde mayo 2016 (base IPC Nacional). El empalme con la serie histórica del IPC GBA (1943–2016) se incorporará próximamente; por la fragmentación metodológica entre regímenes (IPC-GBA, IPC-CABA con cobertura 2014–2017 y IPC Nacional desde 2016) requiere un proceso de empalme cuidadoso."
+      notes="Serie INDEC desde mayo 2016 (base IPC Nacional). Los marcadores sobre el gráfico (líneas punteadas verticales) señalan eventos macroeconómicos relevantes — pasale el mouse para ver el detalle. El empalme con la serie histórica del IPC GBA (1943–2016) se incorporará próximamente."
       source="INDEC vía datos.gob.ar"
       frequency="Mensual"
     />

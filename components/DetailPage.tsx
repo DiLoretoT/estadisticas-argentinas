@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { AreaChart } from "@/components/AreaChart";
+import { AreaChart, type ChartEvent } from "@/components/AreaChart";
 import { DataTable } from "@/components/DataTable";
 import { SpanSelector, filterBySpan } from "@/components/SpanSelector";
 import type { FormatType } from "@/lib/formatters";
@@ -13,6 +13,8 @@ interface ChartConfig {
   label: string;
   color: string;
   format?: FormatType;
+  events?: ChartEvent[];
+  csvFilename?: string;
 }
 
 interface TableConfig {
@@ -91,6 +93,8 @@ export function DetailPage({
             label={chart.label}
             color={chart.color}
             format={chart.format}
+            events={chart.events}
+            csvFilename={chart.csvFilename}
           />
         ))}
       </div>
