@@ -5,12 +5,13 @@ import { useTheme } from "@/components/ThemeProvider";
 import { motion } from "framer-motion";
 
 const navLinks = [
-  { href: "/#monedas", label: "Monedas" },
+  { href: "/#monedas", label: "Dólar" },
+  { href: "/#latam", label: "LATAM" },
   { href: "/#precios", label: "Precios" },
   { href: "/#actividad", label: "Actividad" },
   { href: "/#empleo", label: "Empleo" },
   { href: "/#social", label: "Social" },
-  { href: "/calculadora", label: "Calculadora" },
+  { href: "/calculadora", label: "Calc." },
 ];
 
 export function Navbar() {

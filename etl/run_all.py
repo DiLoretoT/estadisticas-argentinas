@@ -3,11 +3,12 @@ import sys
 
 from db import init_db, purge_old_refresh_runs
 from fetch_dolar import main as fetch_dolar
-from fetch_dolar_blue import main as fetch_dolar_blue
+from fetch_dolares_alt import main as fetch_dolares_alt
 from fetch_emae import main as fetch_emae
 from fetch_empleo import main as fetch_empleo
 from fetch_euro import main as fetch_euro
 from fetch_inflacion import main as fetch_inflacion
+from fetch_monedas_latam import main as fetch_monedas_latam
 from fetch_pbi import main as fetch_pbi
 from fetch_pobreza import main as fetch_pobreza
 from fetch_salarios import main as fetch_salarios
@@ -26,8 +27,9 @@ _STEPS: list[tuple[str, object]] = [
   ("inflacion", fetch_inflacion),
   ("inflacion_empalme", build_inflacion_empalme),
   ("dolar_oficial", fetch_dolar),
-  ("dolar_blue", fetch_dolar_blue),
+  ("dolares_alt", fetch_dolares_alt),   # blue, MEP, CCL, mayorista, cripto, tarjeta
   ("euro", fetch_euro),
+  ("monedas_latam", fetch_monedas_latam),  # BRL, CLP, UYU, PEN, COP, PYG, MXN
   ("salarios", fetch_salarios),
   ("emae", fetch_emae),
   ("pbi", fetch_pbi),

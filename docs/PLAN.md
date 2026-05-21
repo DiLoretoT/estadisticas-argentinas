@@ -243,6 +243,114 @@ No es bloqueante para vidriera, pero suma muchísimos puntos para empleadores qu
 
 ---
 
+## Plan v3 — Visión expandida: "Analizar TODO un país y cómo se relaciona"
+
+**Objetivo:** convertir el dashboard en el lugar donde alguien va a entender un país en TODAS sus dimensiones medibles y CÓMO se relacionan entre sí. Argentina como primer país; estructura preparada para LATAM.
+
+### Catálogo de indicadores por bloque temático
+
+Generado a partir de research de fuentes oficiales argentinas + APIs internacionales (Banco Mundial WDI, IMF, OECD MEI, CEPALSTAT).
+
+#### 1. Macroeconomía clásica ✅ (parcialmente cubierto)
+- **Indicadores**: PBI, EMAE, IPC nacional, IPC núcleo/regulados/estacionales, IPI manufacturero, salarios (RIPTE, IS).
+- **Cubierto**: IPC, RIPTE, EMAE, PBI.
+- **Faltante**: IPC desagregado (core/regulados/estacionales), IPI manufacturero, índice de salarios.
+- **Cross**: PBI vs salario real (productividad), IPC core vs headline.
+
+#### 2. Sector externo ❌ (pendiente)
+- **Indicadores**: balanza comercial (ICA INDEC), balanza de pagos, reservas BCRA brutas/netas, exportaciones por complejo, importaciones por uso económico, términos de intercambio.
+- **Fuentes**: INDEC ICA, BCRA API `api.bcra.gob.ar/estadisticas/v3.0/monetarias`.
+- **Cross**: reservas netas vs brecha cambiaria, exportaciones agro vs precios Chicago, importaciones de energía vs producción Vaca Muerta.
+
+#### 3. Sector fiscal ❌ (pendiente)
+- **Indicadores**: resultado primario, financiero, deuda pública por moneda/legislación, recaudación AFIP (IVA, Ganancias, Débitos/Créditos, retenciones), gasto por finalidad.
+- **Fuentes**: MECON Secretaría de Hacienda `economia.gob.ar/datos`, ARCA (ex-AFIP), ONP deuda.
+- **Cross**: déficit primario vs emisión BCRA, recaudación real vs EMAE, deuda/PBI vs riesgo país.
+
+#### 4. Sector monetario ❌ (pendiente)
+- **Indicadores**: base monetaria, M1/M2/M3, tasa de política monetaria (TPM), BADLAR, TM20, plazo fijo minorista, LELIQ/Notaliq/LEFI stock, encajes.
+- **Fuentes**: BCRA Principales Variables API `api.bcra.gob.ar`, `estadisticasbcra.com` (no oficial).
+- **Cross**: tasa real (TPM − inflación), base monetaria vs IPC con lag 6-12m, encajes vs créditos.
+
+#### 5. Mercado de capitales ❌ (pendiente)
+- **Indicadores**: Merval (pesos y CCL), ADRs (GGAL, YPF, PAM, BMA), bonos soberanos USD (AL30, GD30, GD35, GD41), bonos pesos (BONCER, duales, dollar-linked), riesgo país EMBI+, futuros Rofex/Matba.
+- **Fuentes**: BYMA, Rava, Investing, BondTerminal, ArgenStats.
+- **Cross**: Merval USD vs EMBI (correlación inversa ~−0.85), curva soberana hard-dollar, breakeven CER vs Lecaps.
+
+#### 6. Mercado laboral ✅ (parcialmente cubierto)
+- **Cubierto**: desocupación, tasa de empleo, RIPTE, salario real.
+- **Faltante**: subocupación, informalidad, ingresos por decil, productividad, costo laboral unitario (CLU).
+- **Cross**: salario real privado registrado vs informal (brecha), desocupación vs PBI (Okun argentina), informalidad vs pobreza.
+
+#### 7. Pobreza y distribución ✅ (parcialmente cubierto)
+- **Cubierto**: pobreza personas, línea de indigencia ($).
+- **Faltante**: indigencia (PDF only), Gini, ratio decil 10/1, NBI, pobreza por aglomerado.
+- **Cross**: pobreza vs salario real, Gini vs informalidad, pobreza infantil vs adulto mayor.
+
+#### 8. Demografía ❌ (pendiente)
+- **Indicadores**: población total + proyecciones, esperanza de vida, natalidad/mortalidad, migración neta, urbanización, estructura etaria, dependencia.
+- **Fuentes**: INDEC Censo 2022, DEIS estadísticas vitales, UN Population Division.
+
+#### 9. Producción sectorial ❌ (pendiente)
+- **Indicadores**: IPI manufacturero por rama, ISAC construcción + cemento, IPI minero, producción agrícola (cosecha por cultivo BCBA/BCR/MAGyP), petróleo/gas (SESCO), electricidad CAMMESA, ventas supermercados/shoppings/mayoristas.
+- **Fuentes**: INDEC, MAGyP datos.gob.ar, Secretaría de Energía, CAMMESA, BCR/BCBA.
+
+#### 10. Servicios públicos y tarifas ❌ (pendiente)
+- **Indicadores**: tarifa electricidad N1/N2/N3, gas, agua, transporte SUBE, subsidios económicos.
+- **Fuentes**: ENRE, ENARGAS, Secretaría de Energía.
+
+#### 11. Comercio interior y precios mayoristas ❌ (pendiente)
+- **Indicadores**: IPIM mayorista, gap IPC-IPIM, ventas supermercados, shoppings, autos 0km (ACARA), motos.
+- **Fuentes**: INDEC IPIM, ACARA, cámaras sectoriales.
+
+#### 12. Comparativas internacionales ⚠️ (recién arrancado con LATAM monedas)
+- **Cubierto**: monedas LATAM vs USD (BRL, CLP, UYU, PEN, COP, PYG, MXN) via BCRA.
+- **Faltante**: PBI per cápita PPA, inflación, desempleo, pobreza, riesgo país, deuda/PBI, esperanza de vida, Gini comparables.
+- **Fuente**: Banco Mundial WDI API `api.worldbank.org/v2/country/ARG;BRA;CHL;COL;MEX;PER;URY/indicator/...`, IMF Datamapper, CEPALSTAT.
+
+#### 13. Cross-correlations 🎯 (sección estrella futura)
+- Inflación m/m vs devaluación oficial m/m (pass-through con lag).
+- Brecha cambiaria vs reservas netas BCRA.
+- EMBI vs Merval USD vs reservas vs paridad bonos.
+- Pobreza semestral vs salario real promedio del semestre.
+- Recaudación real vs EMAE (elasticidad recaudación-actividad).
+- Tasa real ex-ante vs depósitos a plazo (demanda de dinero).
+
+### Top 15 features de producto (priorizadas por impacto)
+
+1. **Página "Cross-Análisis"**: scatter interactivo de cualquier 2 series con correlación, timeline scrubber y eventos macro marcados. **EL diferenciador.**
+2. **Calculadora de salario real personalizada**: usuario carga su sueldo histórico, ve poder de compra deflactado + vs RIPTE + vs CBT.
+3. **Comparador por presidencia/gestión**: filtros prearmados (Macri, Alberto, Milei) sobre cualquier indicador con resumen automático.
+4. **Mapa de Argentina por provincia**: choropleth con pobreza, empleo, PBG, exportaciones, deuda provincial.
+5. **Modo "Historia económica" scrollytelling**: 1990–2026 con highlights (convertibilidad, 2001, K, default 2014, cepo, Milei).
+6. **Dashboard "Día del mercado"**: vista live tipo Bloomberg — dólares, riesgo país, bonos, brecha, futuros, refresh cada 5 min.
+7. **Calendario de publicaciones INDEC/BCRA**: cuándo sale IPC, EMAE, EPH, balanza, REM. Newsletter opcional pre-publicación.
+8. **Brecha cambiaria desagregada completa** ✅ (PARCIAL — falta importador, exportador).
+9. **Comparador LATAM**: AR vs BRA/CHI/MEX/URY en cualquier serie con World Bank API.
+10. **Trackers de "promesas vs realidad"**: gobierno promete X de inflación/déficit, gráfico contra ejecutado.
+11. **Curva de bonos soberanos interactiva**: paridad, TIR, duration de AL30/GD30/GD35/GD41 con histórico.
+12. **Pirámide poblacional animada 1950–2050**: proyecciones + gasto previsional implícito.
+13. **Pass-through calculator**: dame devaluación X → te muestro inflación esperada por categoría usando elasticidades históricas.
+14. **API pública propia tipo FRED**: REST endpoint con series limpiadas + autodocumentado en `/api`.
+15. **Alertas por email/Telegram**: suscripción a "IPC publicado", "Reservas < umbral", "Riesgo país > 1500".
+
+### Roadmap por bloque (próximas sesiones)
+
+| Bloque | Prioridad | Esfuerzo | Notas |
+|---|---|---|---|
+| Sector monetario (base, M1/M2, TPM, BADLAR, reservas) | 🔥 Alta | M | BCRA API ya conocida, ETL similar a monedas LATAM. |
+| Mercado de capitales (Merval, ADRs, EMBI, bonos) | 🔥 Alta | L | Múltiples fuentes (BYMA, Yahoo, ambito.com). |
+| Sector externo (balanza comercial, reservas brutas/netas) | 🔥 Alta | M | INDEC ICA + BCRA. |
+| Sector fiscal (déficit, deuda, AFIP) | 🟡 Media | L | MECON + ARCA, varios endpoints. |
+| Cross-Análisis (página de scatter interactivo) | 🔥 Alta | L | Producto core. Requiere infraestructura nueva. |
+| Comparativa LATAM full (no solo monedas) | 🔥 Alta | M | Banco Mundial WDI API. |
+| Mapa por provincia | 🟡 Media | L | TopoJSON + datos por provincia. |
+| Modo historia (scrollytelling) | 🟢 Baja | L | Bonito para portfolio, no urgente. |
+| Calendario de publicaciones | 🟢 Baja | S | Scraping del INDEC + tabla. |
+| Calculadora pass-through | 🟢 Baja | M | Requiere modelo econométrico simple. |
+
+---
+
 ## Referencias
 
 - Repo: https://github.com/DiLoretoT/estadisticas-argentinas

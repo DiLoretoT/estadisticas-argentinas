@@ -6,18 +6,46 @@ import { AreaChart } from "@/components/AreaChart";
 import { SectionHeader } from "@/components/SectionHeader";
 import { LinkCard } from "@/components/LinkCard";
 import { Footer } from "@/components/Footer";
+import { MultiCurrencyChart, type CurrencySeries } from "@/components/MultiCurrencyChart";
+
+type Indicator = Record<string, unknown>;
+
+interface DolaresMap {
+  oficial: Indicator;
+  mayorista: Indicator;
+  mep: Indicator;
+  blue: Indicator;
+  ccl: Indicator;
+  cripto: Indicator;
+  tarjeta: Indicator;
+}
+
+interface MonedasLatamMap {
+  brl: Indicator;
+  clp: Indicator;
+  uyu: Indicator;
+  pen: Indicator;
+  cop: Indicator;
+  pyg: Indicator;
+  mxn: Indicator;
+}
 
 interface Props {
-  inflacion: Record<string, unknown>;
-  dolarOficial: Record<string, unknown>;
-  dolarBlue: Record<string, unknown>;
-  empleo: Record<string, unknown>;
-  pobreza: Record<string, unknown>;
+  inflacion: Indicator;
+  dolares: DolaresMap;
+  monedasLatam: MonedasLatamMap;
+  empleo: Indicator;
+  pobreza: Indicator;
   lastUpdated?: string;
   series: {
     inflacion: [string, number][];
     dolarOficial: [string, number][];
     dolarBlue: [string, number][];
+    dolarMep: [string, number][];
+    dolarCcl: [string, number][];
+    dolarMayorista: [string, number][];
+    dolarCripto: [string, number][];
+    dolarTarjeta: [string, number][];
     euro: [string, number][];
     ripte: [string, number][];
     salarioReal: [string, number][];
@@ -27,6 +55,16 @@ interface Props {
     empleo: [string, number][];
     pobreza: [string, number][];
     indigencia: [string, number][];
+    comparativaMonedas: {
+      ars: [string, number][];
+      brl: [string, number][];
+      clp: [string, number][];
+      uyu: [string, number][];
+      pen: [string, number][];
+      cop: [string, number][];
+      pyg: [string, number][];
+      mxn: [string, number][];
+    };
   };
 }
 
@@ -52,6 +90,13 @@ function decimal1(v: unknown): string {
   const n = Number(v);
   if (isNaN(n)) return "—";
   return n.toLocaleString("es-AR", { maximumFractionDigits: 1 });
+}
+
+function decimal2(v: unknown): string {
+  if (v == null) return "—";
+  const n = Number(v);
+  if (isNaN(n)) return "—";
+  return n.toLocaleString("es-AR", { maximumFractionDigits: 2 });
 }
 
 function formatPeriod(iso: unknown): string | undefined {
@@ -103,40 +148,34 @@ function deltaPctSeries(series: [string, number][]): number | null {
   return ((last - prev) / prev) * 100;
 }
 
-function computeBrechaActual(
-  oficial: [string, number][],
-  blue: [string, number][],
-): { value: number; period: string } | null {
-  if (!oficial.length || !blue.length) return null;
-  const oficialMap = new Map(oficial);
-  // find latest date present in both
-  const blueRev = [...blue].reverse();
-  for (const [date, blueValue] of blueRev) {
-    const oficialValue = oficialMap.get(date);
-    if (oficialValue && oficialValue !== 0) {
-      return {
-        value: (blueValue / oficialValue - 1) * 100,
-        period: date,
-      };
-    }
-  }
-  return null;
+function computeBrecha(
+  oficialValue: unknown,
+  altValue: unknown,
+): number | null {
+  const o = Number(oficialValue);
+  const a = Number(altValue);
+  if (!isFinite(o) || !isFinite(a) || o === 0) return null;
+  return (a / o - 1) * 100;
+}
+
+function val(obj: unknown, key: string): unknown {
+  if (obj && typeof obj === "object" && key in obj)
+    return (obj as Record<string, unknown>)[key];
+  return undefined;
 }
 
 // ---------- component ----------
 
 export function HomeClient({
   inflacion,
-  dolarOficial,
-  dolarBlue,
+  dolares,
+  monedasLatam,
   empleo,
   pobreza,
   lastUpdated,
   series,
 }: Props) {
   const infl = inflacion as Record<string, unknown>;
-  const dolOf = dolarOficial as Record<string, unknown>;
-  const dolBl = dolarBlue as Record<string, unknown>;
   const empl = empleo as Record<string, unknown>;
   const pobr = pobreza as Record<string, unknown>;
 
@@ -147,35 +186,19 @@ export function HomeClient({
   const tp = (pobr.tasa_pobreza as Record<string, unknown>) || {};
   const linea = (pobr.linea_indigencia as Record<string, unknown>) || {};
 
-  // Computed values
-  const euroLast = series.euro[series.euro.length - 1];
-  const euroPrev = series.euro[series.euro.length - 2];
-  const euroDeltaPct =
-    euroLast && euroPrev && euroPrev[1] !== 0
-      ? ((euroLast[1] - euroPrev[1]) / euroPrev[1]) * 100
-      : null;
+  // Brechas vs oficial
+  const oficialValue = val(dolares.oficial, "value");
+  const brechaBlue = computeBrecha(oficialValue, val(dolares.blue, "value"));
+  const brechaMep = computeBrecha(oficialValue, val(dolares.mep, "value"));
+  const brechaCcl = computeBrecha(oficialValue, val(dolares.ccl, "value"));
+  const brechaCripto = computeBrecha(oficialValue, val(dolares.cripto, "value"));
 
-  const brecha = computeBrechaActual(series.dolarOficial, series.dolarBlue);
-  const brechaPrev = (() => {
-    if (series.dolarOficial.length < 2 || series.dolarBlue.length < 2) return null;
-    const oM = new Map(series.dolarOficial);
-    const blueRev = [...series.dolarBlue].reverse();
-    let found: { value: number; date: string } | null = null;
-    let prev: { value: number; date: string } | null = null;
-    for (const [d, b] of blueRev) {
-      const o = oM.get(d);
-      if (o && o !== 0) {
-        const val = (b / o - 1) * 100;
-        if (!found) found = { value: val, date: d };
-        else {
-          prev = { value: val, date: d };
-          break;
-        }
-      }
-    }
-    if (found && prev) return found.value - prev.value;
-    return null;
-  })();
+  // Computed values for other sections
+  const euroLast = series.euro[series.euro.length - 1];
+  const euroDeltaPct =
+    series.euro.length >= 2
+      ? deltaPctSeries(series.euro)
+      : null;
 
   const emaeLast = series.emae[series.emae.length - 1];
   const emaeDeltaPct = deltaPctSeries(series.emae);
@@ -193,62 +216,224 @@ export function HomeClient({
   const indigenciaLast = series.indigencia[series.indigencia.length - 1];
   const indigenciaDeltaPct = deltaPctSeries(series.indigencia);
 
+  // ----- KPI dólares ARS (7 cards) -----
+  const dolaresArs: Array<{
+    label: string;
+    value: unknown;
+    period: unknown;
+    change: unknown;
+    sparkData: number[];
+    color: string;
+    badge?: string;
+  }> = [
+    {
+      label: "Oficial",
+      value: val(dolares.oficial, "value"),
+      period: val(dolares.oficial, "period"),
+      change: val(dolares.oficial, "monthly_change"),
+      sparkData: series.dolarOficial.slice(-12).map((d) => d[1]),
+      color: "var(--chart-6)",
+      badge: "BCRA",
+    },
+    {
+      label: "Mayorista",
+      value: val(dolares.mayorista, "value"),
+      period: val(dolares.mayorista, "period"),
+      change: val(dolares.mayorista, "monthly_change"),
+      sparkData: series.dolarMayorista.slice(-12).map((d) => d[1]),
+      color: "var(--chart-6)",
+    },
+    {
+      label: "MEP",
+      value: val(dolares.mep, "value"),
+      period: val(dolares.mep, "period"),
+      change: val(dolares.mep, "monthly_change"),
+      sparkData: series.dolarMep.slice(-12).map((d) => d[1]),
+      color: "var(--chart-3)",
+    },
+    {
+      label: "CCL",
+      value: val(dolares.ccl, "value"),
+      period: val(dolares.ccl, "period"),
+      change: val(dolares.ccl, "monthly_change"),
+      sparkData: series.dolarCcl.slice(-12).map((d) => d[1]),
+      color: "var(--chart-3)",
+    },
+    {
+      label: "Blue",
+      value: val(dolares.blue, "value"),
+      period: val(dolares.blue, "period"),
+      change: val(dolares.blue, "monthly_change"),
+      sparkData: series.dolarBlue.slice(-12).map((d) => d[1]),
+      color: "var(--chart-3)",
+    },
+    {
+      label: "Cripto",
+      value: val(dolares.cripto, "value"),
+      period: val(dolares.cripto, "period"),
+      change: val(dolares.cripto, "monthly_change"),
+      sparkData: series.dolarCripto.slice(-12).map((d) => d[1]),
+      color: "var(--chart-8)",
+    },
+    {
+      label: "Tarjeta",
+      value: val(dolares.tarjeta, "value"),
+      period: val(dolares.tarjeta, "period"),
+      change: val(dolares.tarjeta, "monthly_change"),
+      sparkData: series.dolarTarjeta.slice(-12).map((d) => d[1]),
+      color: "var(--chart-7)",
+    },
+  ];
+
+  // ----- KPI monedas LATAM -----
+  const monedasLatamCards: Array<{
+    flag: string;
+    label: string;
+    code: string;
+    indicator: Indicator;
+  }> = [
+    { flag: "🇧🇷", label: "Real brasileño", code: "BRL", indicator: monedasLatam.brl },
+    { flag: "🇨🇱", label: "Peso chileno", code: "CLP", indicator: monedasLatam.clp },
+    { flag: "🇺🇾", label: "Peso uruguayo", code: "UYU", indicator: monedasLatam.uyu },
+    { flag: "🇵🇪", label: "Sol peruano", code: "PEN", indicator: monedasLatam.pen },
+    { flag: "🇨🇴", label: "Peso colombiano", code: "COP", indicator: monedasLatam.cop },
+    { flag: "🇵🇾", label: "Guaraní paraguayo", code: "PYG", indicator: monedasLatam.pyg },
+    { flag: "🇲🇽", label: "Peso mexicano", code: "MXN", indicator: monedasLatam.mxn },
+  ];
+
+  // ----- MultiCurrencyChart series -----
+  const comparativeSeries: CurrencySeries[] = [
+    {
+      key: "ars",
+      label: "🇦🇷 ARS",
+      color: "var(--chart-1)",
+      data: series.comparativaMonedas.ars,
+      pinned: true,
+    },
+    {
+      key: "brl",
+      label: "🇧🇷 BRL",
+      color: "var(--chart-2)",
+      data: series.comparativaMonedas.brl,
+    },
+    {
+      key: "clp",
+      label: "🇨🇱 CLP",
+      color: "var(--chart-6)",
+      data: series.comparativaMonedas.clp,
+    },
+    {
+      key: "uyu",
+      label: "🇺🇾 UYU",
+      color: "var(--chart-3)",
+      data: series.comparativaMonedas.uyu,
+    },
+    {
+      key: "pen",
+      label: "🇵🇪 PEN",
+      color: "var(--chart-7)",
+      data: series.comparativaMonedas.pen,
+    },
+    {
+      key: "cop",
+      label: "🇨🇴 COP",
+      color: "var(--chart-8)",
+      data: series.comparativaMonedas.cop,
+    },
+    {
+      key: "pyg",
+      label: "🇵🇾 PYG",
+      color: "var(--chart-4)",
+      data: series.comparativaMonedas.pyg,
+    },
+    {
+      key: "mxn",
+      label: "🇲🇽 MXN",
+      color: "var(--chart-5)",
+      data: series.comparativaMonedas.mxn,
+    },
+  ].filter((s) => s.data && s.data.length > 0);
+
   return (
     <>
       <Hero lastUpdated={lastUpdated} />
 
-      {/* ════════════════════════════ MONEDAS ════════════════════════════ */}
+      {/* ════════════════════════════ DÓLAR ════════════════════════════ */}
       <section className="mx-auto max-w-6xl px-5 scroll-mt-20" id="monedas">
         <SectionHeader
           eyebrow="Tipo de cambio"
-          title="Monedas"
-          subtitle="Cotizaciones del dólar oficial, blue, euro y brecha cambiaria."
+          title="Dólar en Argentina"
+          subtitle="Todas las cotizaciones del peso argentino vs el dólar estadounidense."
         />
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          <KpiCard
-            label="Dólar oficial"
-            value={peso(dolOf.value)}
-            period={formatPeriod(dolOf.period)}
-            change={formatDeltaPct(dolOf.monthly_change)}
-            changeDirection={direction(dolOf.monthly_change)}
-            goodDirection="down"
-            accentColor="var(--chart-6)"
-            delay={0}
-            sparkData={series.dolarOficial.slice(-12).map((d) => d[1])}
-          />
-          <KpiCard
-            label="Dólar blue"
-            value={peso(dolBl.value)}
-            period={formatPeriod(dolBl.period)}
-            change={formatDeltaPct(dolBl.monthly_change)}
-            changeDirection={direction(dolBl.monthly_change)}
-            goodDirection="down"
-            accentColor="var(--chart-3)"
-            delay={0.05}
-            sparkData={series.dolarBlue.slice(-12).map((d) => d[1])}
-          />
-          <KpiCard
-            label="Euro"
-            value={euroLast ? peso(euroLast[1]) : "—"}
-            period={euroLast ? formatPeriod(euroLast[0]) : undefined}
-            change={formatDeltaPct(euroDeltaPct)}
-            changeDirection={direction(euroDeltaPct)}
-            goodDirection="down"
-            accentColor="var(--chart-8)"
-            delay={0.1}
-            sparkData={series.euro.slice(-12).map((d) => d[1])}
-          />
-          <KpiCard
-            label="Brecha cambiaria"
-            value={brecha ? decimal1(brecha.value) + "%" : "—"}
-            period={brecha ? formatPeriod(brecha.period) : undefined}
-            change={formatDeltaPP(brechaPrev)}
-            changeDirection={direction(brechaPrev)}
-            goodDirection="down"
-            accentColor="var(--chart-7)"
-            delay={0.15}
-          />
+
+        {/* 7 KPI cards de dólares ARS */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+          {dolaresArs.map((d, i) => (
+            <KpiCard
+              key={d.label}
+              label={d.label}
+              value={peso(d.value)}
+              period={formatPeriod(d.period)}
+              change={formatDeltaPct(d.change)}
+              changeDirection={direction(d.change)}
+              goodDirection="down"
+              accentColor={d.color}
+              delay={i * 0.04}
+              sparkData={d.sparkData}
+            />
+          ))}
         </div>
+
+        {/* Brecha cambiaria — card destacado */}
+        <div
+          className="rounded-2xl border p-5 md:p-6 mb-8"
+          style={{
+            background:
+              "linear-gradient(135deg, var(--color-primary-soft) 0%, transparent 80%)",
+            borderColor: "var(--color-primary)",
+            boxShadow: "var(--shadow-sm)",
+          }}
+        >
+          <div className="flex items-baseline justify-between mb-3 flex-wrap gap-2">
+            <h3
+              className="text-base font-bold"
+              style={{ color: "var(--color-text)" }}
+            >
+              Brecha cambiaria · {formatPeriod(val(dolares.oficial, "period"))}
+            </h3>
+            <span
+              className="text-[10px] uppercase tracking-wider"
+              style={{ color: "var(--color-text-muted)" }}
+            >
+              vs Oficial
+            </span>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              { label: "Blue", value: brechaBlue, color: "var(--chart-3)" },
+              { label: "MEP", value: brechaMep, color: "var(--chart-3)" },
+              { label: "CCL", value: brechaCcl, color: "var(--chart-3)" },
+              { label: "Cripto", value: brechaCripto, color: "var(--chart-8)" },
+            ].map((b) => (
+              <div key={b.label}>
+                <p
+                  className="text-[10px] font-semibold uppercase tracking-wider mb-1"
+                  style={{ color: "var(--color-text-muted)" }}
+                >
+                  {b.label}
+                </p>
+                <p
+                  className="text-2xl md:text-3xl font-bold tabular-nums"
+                  style={{ color: b.color }}
+                >
+                  {b.value !== null ? `${b.value > 0 ? "+" : ""}${decimal1(b.value)}%` : "—"}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Charts dólar */}
         <div className="grid md:grid-cols-2 gap-5">
           <AreaChart
             data={series.dolarOficial}
@@ -267,18 +452,77 @@ export function HomeClient({
           <LinkCard
             href="/detalle/dolar"
             icon="💵"
-            title="Dólar"
-            description="Oficial, blue y brecha — series diarias e históricas"
+            title="Dólar — detalle"
+            description="Series diarias, brecha, anotaciones macro"
             delay={0}
           />
           <LinkCard
-            href="/detalle/euro"
-            icon="💶"
-            title="Euro"
-            description="Cotización del BCRA en peso argentino"
+            href="/calculadora"
+            icon="🧮"
+            title="Calculadora"
+            description="Convertí pesos entre fechas con IPC"
             delay={0.05}
           />
         </div>
+      </section>
+
+      {/* ════════════════════════════ MÁS MONEDAS ════════════════════════════ */}
+      <section className="mx-auto max-w-6xl px-5 mt-20 scroll-mt-20" id="latam">
+        <SectionHeader
+          eyebrow="Otras monedas"
+          title="Más monedas — América Latina"
+          subtitle="Cotizaciones de las principales monedas latinoamericanas expresadas como unidades locales por dólar (BCRA)."
+        />
+
+        {/* Cards LATAM */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          {monedasLatamCards.map((m, i) => {
+            const value = val(m.indicator, "value");
+            const period = val(m.indicator, "period");
+            const change = val(m.indicator, "monthly_change");
+            return (
+              <KpiCard
+                key={m.code}
+                label={`${m.flag} ${m.code}`}
+                value={value != null ? decimal2(value) : "—"}
+                period={formatPeriod(period)}
+                change={formatDeltaPct(change)}
+                changeDirection={direction(change)}
+                goodDirection="down"
+                accentColor="var(--chart-2)"
+                delay={i * 0.04}
+              />
+            );
+          })}
+          {/* Euro como referencia complementaria */}
+          <KpiCard
+            label="🇪🇺 EUR"
+            value={euroLast ? peso(euroLast[1]) : "—"}
+            period={euroLast ? formatPeriod(euroLast[0]) : undefined}
+            change={formatDeltaPct(euroDeltaPct)}
+            changeDirection={direction(euroDeltaPct)}
+            goodDirection="down"
+            accentColor="var(--chart-8)"
+            delay={monedasLatamCards.length * 0.04}
+          />
+        </div>
+
+        {/* Comparativa normalizada */}
+        <MultiCurrencyChart
+          label="Devaluación comparada vs USD — base 100 en fecha elegida"
+          series={comparativeSeries}
+        />
+
+        <p
+          className="mt-4 text-xs leading-relaxed"
+          style={{ color: "var(--color-text-muted)" }}
+        >
+          <strong>Cómo leer este gráfico:</strong> cada línea es la moneda local
+          dividida por el USD, normalizada a 100 en la fecha base. Si Argentina
+          sube más rápido que Brasil, significa que el peso argentino se devaluó
+          más que el real. Una línea plana indica estabilidad cambiaria. Probá
+          anclar a "Pre-Milei" para ver el comportamiento desde diciembre 2023.
+        </p>
       </section>
 
       {/* ════════════════════════════ PRECIOS ════════════════════════════ */}
@@ -498,13 +742,19 @@ export function HomeClient({
           />
           <KpiCard
             label="Línea de indigencia"
-            value={linea.value ? peso(linea.value) : indigenciaLast ? peso(indigenciaLast[1]) : "—"}
+            value={
+              linea.value
+                ? peso(linea.value)
+                : indigenciaLast
+                  ? peso(indigenciaLast[1])
+                  : "—"
+            }
             period={
               linea.period
                 ? formatPeriod(linea.period)
                 : indigenciaLast
-                ? formatPeriod(indigenciaLast[0])
-                : undefined
+                  ? formatPeriod(indigenciaLast[0])
+                  : undefined
             }
             change={formatDeltaPct(indigenciaDeltaPct)}
             changeDirection={direction(indigenciaDeltaPct)}
