@@ -1,5 +1,6 @@
 import { promises as fs } from "fs";
 import path from "path";
+import { fetchDataJson } from "./cdn";
 
 export interface EconomicEvent {
   date: string;
@@ -10,8 +11,6 @@ export interface EconomicEvent {
 }
 
 const DEV = process.env.NODE_ENV === "development";
-const CDN_URL =
-  "https://cdn.jsdelivr.net/gh/DiLoretoT/estadisticas-argentinas@main/data/events.json";
 
 let cache: EconomicEvent[] | null = null;
 
@@ -31,16 +30,15 @@ export async function loadEvents(): Promise<EconomicEvent[]> {
     }
   }
 
-  try {
-    const res = await fetch(CDN_URL, { next: { revalidate: 86400 } });
-    if (!res.ok) return [];
-    const parsed = (await res.json()) as { events: EconomicEvent[] };
-    cache = parsed.events;
+  const data = await fetchDataJson<{ events: EconomicEvent[] }>(
+    "events.json",
+    86400,
+  );
+  if (data?.events) {
+    cache = data.events;
     return cache;
-  } catch (error) {
-    console.error("[loadEvents] fetch fail:", error);
-    return [];
   }
+  return [];
 }
 
 /** Filter events that apply to the given series tag and fall within the date range of the data */

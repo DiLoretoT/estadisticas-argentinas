@@ -1,17 +1,16 @@
 /**
- * Lectura de data del proyecto.
+ * Lectura de data del proyecto con CDN + fallback.
  *
- * Estrategia híbrida:
- *  - En desarrollo (NODE_ENV=development) leemos del filesystem local
- *    (más rápido y no depende de red).
- *  - En producción leemos vía CDN jsdelivr que sirve archivos directamente
- *    del repo en GitHub. Eso permite que los commits del ETL se reflejen
- *    en el sitio en producción SIN re-deploy de Vercel.
+ * Estrategia:
+ *  - Dev (NODE_ENV=development): filesystem local (sin red).
+ *  - Prod: fetch a jsdelivr CDN como PRIMARY, con timeout 4s y FALLBACK a
+ *    raw.githubusercontent.com si falla. Eso protege contra caída/corrupción
+ *    de jsdelivr.
  *
  * Cache:
- *  - En servidor (Server Components), Next.js cachea el `fetch()` y lo
- *    revalida según `revalidate` declarado en cada page.tsx.
- *  - jsdelivr a su vez cachea agresivamente en su CDN global.
+ *  - Next.js cachea cada `fetch()` server-side y revalida según el `revalidate`
+ *    declarado en cada page (30 min en general, 5 min en /status).
+ *  - jsdelivr y GitHub raw cachean a nivel CDN.
  */
 
 import { promises as fs } from "fs";
@@ -19,49 +18,69 @@ import path from "path";
 
 const DEV = process.env.NODE_ENV === "development";
 
-// jsdelivr permite congelar a un ref. `@main` siempre apunta al último commit
-// del branch main, que es el que el ETL actualiza vía GitHub Actions.
-const CDN_BASE =
+const PRIMARY_BASE =
   "https://cdn.jsdelivr.net/gh/DiLoretoT/estadisticas-argentinas@main/data";
+const FALLBACK_BASE =
+  "https://raw.githubusercontent.com/DiLoretoT/estadisticas-argentinas/main/data";
 
-// Revalidación de fetch en server-side (en segundos). 30 minutos.
-// La revalidación efectiva en el sitio depende del `revalidate` que declare
-// cada page, pero esto pone un límite superior aunque la página sea estática.
-const FETCH_REVALIDATE_SECONDS = 30 * 60;
+const FETCH_REVALIDATE_SECONDS = 30 * 60; // 30 min
+const FETCH_TIMEOUT_MS = 4000; // bail-out a fallback si tarda más
 
 const dataDir = path.join(process.cwd(), "data");
 const seriesDir = path.join(dataDir, "series");
 
+async function fetchWithTimeout(url: string): Promise<Response> {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+  try {
+    return await fetch(url, {
+      signal: controller.signal,
+      next: { revalidate: FETCH_REVALIDATE_SECONDS },
+    });
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 async function fetchJson<T>(relativeUrl: string, fallback: T): Promise<T> {
   if (DEV) {
     try {
-      const localPath = path.join(dataDir, relativeUrl);
-      const content = await fs.readFile(localPath, "utf-8");
+      const content = await fs.readFile(
+        path.join(dataDir, relativeUrl),
+        "utf-8",
+      );
       return JSON.parse(content) as T;
     } catch (error) {
       console.error(
-        `[readData] (dev) No pude leer local data/${relativeUrl}:`,
+        `[readData] (dev) local data/${relativeUrl}:`,
         error,
       );
       return fallback;
     }
   }
 
-  try {
-    const res = await fetch(`${CDN_BASE}/${relativeUrl}`, {
-      next: { revalidate: FETCH_REVALIDATE_SECONDS },
-    });
-    if (!res.ok) {
-      console.error(
-        `[readData] jsdelivr ${relativeUrl} → ${res.status} ${res.statusText}`,
+  // Producción: jsdelivr primero, GitHub raw como fallback.
+  for (const base of [PRIMARY_BASE, FALLBACK_BASE]) {
+    try {
+      const res = await fetchWithTimeout(`${base}/${relativeUrl}`);
+      if (res.ok) {
+        return (await res.json()) as T;
+      }
+      console.warn(
+        `[readData] ${base}/${relativeUrl} → ${res.status} ${res.statusText}`,
       );
-      return fallback;
+    } catch (error) {
+      console.warn(
+        `[readData] fetch ${base}/${relativeUrl} falló (timeout o red):`,
+        (error as Error).message,
+      );
     }
-    return (await res.json()) as T;
-  } catch (error) {
-    console.error(`[readData] fetch ${relativeUrl} falló:`, error);
-    return fallback;
   }
+
+  console.error(
+    `[readData] Tanto jsdelivr como GitHub raw fallaron para ${relativeUrl}`,
+  );
+  return fallback;
 }
 
 export async function readIndicator(

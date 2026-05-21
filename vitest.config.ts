@@ -5,6 +5,9 @@ export default defineConfig({
   test: {
     environment: "happy-dom",
     globals: true,
+    // Vitest no debe correr los tests de Playwright (tests/e2e/), que usan
+    // un test runner distinto.
+    exclude: ["**/node_modules/**", "**/.next/**", "**/tests/e2e/**"],
     coverage: {
       provider: "v8",
       reporter: ["text", "html"],

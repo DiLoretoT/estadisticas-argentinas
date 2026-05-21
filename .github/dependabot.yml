@@ -1,0 +1,41 @@
+version: 2
+updates:
+  # GitHub Actions — pinear a SHAs + actualizar semanal
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore(actions)"
+
+  # npm — frontend
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      next:
+        patterns:
+          - "next"
+          - "react*"
+          - "@types/react*"
+      dev-tools:
+        patterns:
+          - "vitest"
+          - "@vitest/*"
+          - "@playwright/test"
+          - "eslint*"
+          - "happy-dom"
+    commit-message:
+      prefix: "chore(deps)"
+
+  # pip — ETL Python
+  - package-ecosystem: pip
+    directory: /etl
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "chore(etl-deps)"

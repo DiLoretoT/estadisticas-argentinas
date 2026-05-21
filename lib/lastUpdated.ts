@@ -1,5 +1,6 @@
 import { promises as fs } from "fs";
 import path from "path";
+import { fetchDataJson } from "./cdn";
 
 interface StatusEntry {
   series_id: string;
@@ -11,8 +12,6 @@ interface StatusEntry {
 }
 
 const DEV = process.env.NODE_ENV === "development";
-const CDN_URL =
-  "https://cdn.jsdelivr.net/gh/DiLoretoT/estadisticas-argentinas@main/data/status.json";
 
 async function loadStatus(): Promise<StatusEntry[]> {
   if (DEV) {
@@ -25,14 +24,8 @@ async function loadStatus(): Promise<StatusEntry[]> {
       return [];
     }
   }
-  try {
-    const res = await fetch(CDN_URL, { next: { revalidate: 1800 } });
-    if (!res.ok) return [];
-    return (await res.json()) as StatusEntry[];
-  } catch (error) {
-    console.error("[lastUpdated] fetch fail:", error);
-    return [];
-  }
+  const data = await fetchDataJson<StatusEntry[]>("status.json", 300);
+  return data ?? [];
 }
 
 /**
