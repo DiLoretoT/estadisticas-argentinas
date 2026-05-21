@@ -1,16 +1,64 @@
 [
   {
+    "series_id": "dolar_blue",
+    "last_status": "success",
+    "last_run_at": "2026-05-21T11:10:34.649872-03:00",
+    "last_date": "2026-05-20",
+    "row_count": 5616,
+    "error_message": null
+  },
+  {
+    "series_id": "dolar_ccl",
+    "last_status": "success",
+    "last_run_at": "2026-05-21T11:10:35.382223-03:00",
+    "last_date": "2026-05-20",
+    "row_count": 4718,
+    "error_message": null
+  },
+  {
+    "series_id": "dolar_cripto",
+    "last_status": "success",
+    "last_run_at": "2026-05-21T11:10:36.061876-03:00",
+    "last_date": "2026-05-20",
+    "row_count": 1189,
+    "error_message": null
+  },
+  {
+    "series_id": "dolar_mayorista",
+    "last_status": "success",
+    "last_run_at": "2026-05-21T11:10:35.783896-03:00",
+    "last_date": "2026-05-20",
+    "row_count": 5476,
+    "error_message": null
+  },
+  {
+    "series_id": "dolar_mep",
+    "last_status": "success",
+    "last_run_at": "2026-05-21T11:10:34.975376-03:00",
+    "last_date": "2026-05-20",
+    "row_count": 2709,
+    "error_message": null
+  },
+  {
     "series_id": "dolar_oficial",
     "last_status": "success",
-    "last_run_at": "2026-05-21T07:18:26.371120-03:00",
+    "last_run_at": "2026-05-21T11:10:34.153806-03:00",
     "last_date": "2026-05-20",
     "row_count": 413,
     "error_message": null
   },
   {
+    "series_id": "dolar_tarjeta",
+    "last_status": "success",
+    "last_run_at": "2026-05-21T11:10:36.380096-03:00",
+    "last_date": "2026-05-20",
+    "row_count": 2302,
+    "error_message": null
+  },
+  {
     "series_id": "emae",
     "last_status": "success",
-    "last_run_at": "2026-05-21T07:18:33.408905-03:00",
+    "last_run_at": "2026-05-21T11:11:14.430570-03:00",
     "last_date": "2026-01-01",
     "row_count": 169,
     "error_message": null
@@ -18,7 +66,7 @@
   {
     "series_id": "inflacion",
     "last_status": "success",
-    "last_run_at": "2026-05-21T07:18:25.180551-03:00",
+    "last_run_at": "2026-05-21T11:10:32.930096-03:00",
     "last_date": "2026-03-01",
     "row_count": 119,
     "error_message": null
@@ -26,15 +74,71 @@
   {
     "series_id": "linea_indigencia",
     "last_status": "success",
-    "last_run_at": "2026-05-21T07:18:38.759187-03:00",
+    "last_run_at": "2026-05-21T11:11:19.826987-03:00",
     "last_date": "2026-03-01",
     "row_count": 120,
     "error_message": null
   },
   {
+    "series_id": "moneda_brl",
+    "last_status": "success",
+    "last_run_at": "2026-05-21T11:10:42.567720-03:00",
+    "last_date": null,
+    "row_count": 0,
+    "error_message": null
+  },
+  {
+    "series_id": "moneda_clp",
+    "last_status": "success",
+    "last_run_at": "2026-05-21T11:10:46.896646-03:00",
+    "last_date": null,
+    "row_count": 0,
+    "error_message": null
+  },
+  {
+    "series_id": "moneda_cop",
+    "last_status": "success",
+    "last_run_at": "2026-05-21T11:10:59.893267-03:00",
+    "last_date": null,
+    "row_count": 0,
+    "error_message": null
+  },
+  {
+    "series_id": "moneda_mxn",
+    "last_status": "success",
+    "last_run_at": "2026-05-21T11:11:08.028720-03:00",
+    "last_date": null,
+    "row_count": 0,
+    "error_message": null
+  },
+  {
+    "series_id": "moneda_pen",
+    "last_status": "success",
+    "last_run_at": "2026-05-21T11:10:55.581894-03:00",
+    "last_date": null,
+    "row_count": 0,
+    "error_message": null
+  },
+  {
+    "series_id": "moneda_pyg",
+    "last_status": "success",
+    "last_run_at": "2026-05-21T11:11:04.192850-03:00",
+    "last_date": null,
+    "row_count": 0,
+    "error_message": null
+  },
+  {
+    "series_id": "moneda_uyu",
+    "last_status": "success",
+    "last_run_at": "2026-05-21T11:10:50.819063-03:00",
+    "last_date": null,
+    "row_count": 0,
+    "error_message": null
+  },
+  {
     "series_id": "tasa_desocupacion",
     "last_status": "success",
-    "last_run_at": "2026-05-21T07:18:36.007869-03:00",
+    "last_run_at": "2026-05-21T11:11:16.908121-03:00",
     "last_date": "2025-10-01",
     "row_count": 90,
     "error_message": null
@@ -42,7 +146,7 @@
   {
     "series_id": "tasa_empleo",
     "last_status": "success",
-    "last_run_at": "2026-05-21T07:18:36.939514-03:00",
+    "last_run_at": "2026-05-21T11:11:17.874172-03:00",
     "last_date": "2025-10-01",
     "row_count": 90,
     "error_message": null
@@ -50,7 +154,7 @@
   {
     "series_id": "tasa_pobreza",
     "last_status": "success",
-    "last_run_at": "2026-05-21T07:18:37.835116-03:00",
+    "last_run_at": "2026-05-21T11:11:18.849522-03:00",
     "last_date": "2026-01-01",
     "row_count": 28,
     "error_message": null
