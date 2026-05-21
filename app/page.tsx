@@ -26,6 +26,22 @@ export default async function Home() {
     monedaCop,
     monedaPyg,
     monedaMxn,
+    // Mercado financiero
+    riesgoPais,
+    merval,
+    adrGgal,
+    adrYpf,
+    adrPam,
+    adrBma,
+    adrTeo,
+    // Sector monetario
+    baseMonetaria,
+    reservas,
+    tpm,
+    badlar,
+    plazoFijo30d,
+    m2PrivadoYoy,
+    remInflacion12m,
     lastUpdated,
   ] = await Promise.all([
     readIndicator("inflacion.json"),
@@ -45,6 +61,20 @@ export default async function Home() {
     readIndicator("moneda_cop.json"),
     readIndicator("moneda_pyg.json"),
     readIndicator("moneda_mxn.json"),
+    readIndicator("mercado_riesgo_pais.json"),
+    readIndicator("mercado_merval.json"),
+    readIndicator("mercado_ggal.json"),
+    readIndicator("mercado_ypf.json"),
+    readIndicator("mercado_pam.json"),
+    readIndicator("mercado_bma.json"),
+    readIndicator("mercado_teo.json"),
+    readIndicator("monetario_base_monetaria.json"),
+    readIndicator("monetario_reservas.json"),
+    readIndicator("monetario_tpm.json"),
+    readIndicator("monetario_badlar.json"),
+    readIndicator("monetario_plazo_fijo_30d.json"),
+    readIndicator("monetario_m2_privado_yoy.json"),
+    readIndicator("monetario_rem_inflacion_12m.json"),
     getLastUpdated(),
   ]);
 
@@ -74,6 +104,19 @@ export default async function Home() {
     empleoSeries,
     pobrezaSeries,
     indigenciaSeries,
+    // Mercado
+    riesgoPaisSeries,
+    mervalSeries,
+    ggalSeries,
+    ypfSeries,
+    // Monetario
+    baseMonetariaSeries,
+    reservasSeries,
+    tpmSeries,
+    badlarSeries,
+    plazoFijo30dSeries,
+    m2PrivadoYoySeries,
+    remInflacion12mSeries,
   ] = await Promise.all([
     readSeries("inflacion_mensual.json"),
     readSeries("dolar_oficial_mensual.json"),
@@ -100,6 +143,17 @@ export default async function Home() {
     readSeries("tasa_empleo.json"),
     readSeries("tasa_pobreza.json"),
     readSeries("linea_indigencia.json"),
+    readSeries("mercado_riesgo_pais_mensual.json"),
+    readSeries("mercado_merval_mensual.json"),
+    readSeries("mercado_ggal_mensual.json"),
+    readSeries("mercado_ypf_mensual.json"),
+    readSeries("monetario_base_monetaria_mensual.json"),
+    readSeries("monetario_reservas_mensual.json"),
+    readSeries("monetario_tpm_diario.json"),
+    readSeries("monetario_badlar_diario.json"),
+    readSeries("monetario_plazo_fijo_30d_diario.json"),
+    readSeries("monetario_m2_privado_yoy_mensual.json"),
+    readSeries("monetario_rem_inflacion_12m_mensual.json"),
   ]);
 
   const salarioRealSeries = computeSalarioReal(ripteNivelSeries, inflacionSeries);
@@ -127,6 +181,24 @@ export default async function Home() {
         pyg: monedaPyg,
         mxn: monedaMxn,
       }}
+      mercado={{
+        riesgoPais,
+        merval,
+        ggal: adrGgal,
+        ypf: adrYpf,
+        pam: adrPam,
+        bma: adrBma,
+        teo: adrTeo,
+      }}
+      monetario={{
+        baseMonetaria,
+        reservas,
+        tpm,
+        badlar,
+        plazoFijo30d,
+        m2PrivadoYoy,
+        remInflacion12m,
+      }}
       empleo={empleo}
       pobreza={pobreza}
       lastUpdated={lastUpdated ?? undefined}
@@ -148,6 +220,19 @@ export default async function Home() {
         empleo: empleoSeries.slice(-20),
         pobreza: pobrezaSeries,
         indigencia: indigenciaSeries.slice(-60),
+        // Mercado financiero
+        riesgoPais: tail(riesgoPaisSeries),
+        merval: tail(mervalSeries),
+        ggal: tail(ggalSeries),
+        ypf: tail(ypfSeries),
+        // Sector monetario
+        baseMonetaria: tail(baseMonetariaSeries),
+        reservas: tail(reservasSeries),
+        tpm: tail(tpmSeries),
+        badlar: tail(badlarSeries),
+        plazoFijo30d: tail(plazoFijo30dSeries),
+        m2PrivadoYoy: tail(m2PrivadoYoySeries),
+        remInflacion12m: tail(remInflacion12mSeries),
         // For MultiCurrencyChart — long histories used as-is
         comparativaMonedas: {
           ars: dolarOficialDiario,

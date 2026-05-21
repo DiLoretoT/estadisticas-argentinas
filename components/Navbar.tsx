@@ -9,9 +9,10 @@ const navLinks = [
   { href: "/#latam", label: "LATAM" },
   { href: "/#precios", label: "Precios" },
   { href: "/#actividad", label: "Actividad" },
+  { href: "/#mercado", label: "Mercado" },
+  { href: "/#monetario", label: "BCRA" },
   { href: "/#empleo", label: "Empleo" },
   { href: "/#social", label: "Social" },
-  { href: "/calculadora", label: "Calc." },
 ];
 
 export function Navbar() {

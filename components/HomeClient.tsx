@@ -30,10 +30,32 @@ interface MonedasLatamMap {
   mxn: Indicator;
 }
 
+interface MercadoMap {
+  riesgoPais: Indicator;
+  merval: Indicator;
+  ggal: Indicator;
+  ypf: Indicator;
+  pam: Indicator;
+  bma: Indicator;
+  teo: Indicator;
+}
+
+interface MonetarioMap {
+  baseMonetaria: Indicator;
+  reservas: Indicator;
+  tpm: Indicator;
+  badlar: Indicator;
+  plazoFijo30d: Indicator;
+  m2PrivadoYoy: Indicator;
+  remInflacion12m: Indicator;
+}
+
 interface Props {
   inflacion: Indicator;
   dolares: DolaresMap;
   monedasLatam: MonedasLatamMap;
+  mercado: MercadoMap;
+  monetario: MonetarioMap;
   empleo: Indicator;
   pobreza: Indicator;
   lastUpdated?: string;
@@ -55,6 +77,17 @@ interface Props {
     empleo: [string, number][];
     pobreza: [string, number][];
     indigencia: [string, number][];
+    riesgoPais: [string, number][];
+    merval: [string, number][];
+    ggal: [string, number][];
+    ypf: [string, number][];
+    baseMonetaria: [string, number][];
+    reservas: [string, number][];
+    tpm: [string, number][];
+    badlar: [string, number][];
+    plazoFijo30d: [string, number][];
+    m2PrivadoYoy: [string, number][];
+    remInflacion12m: [string, number][];
     comparativaMonedas: {
       ars: [string, number][];
       brl: [string, number][];
@@ -170,6 +203,8 @@ export function HomeClient({
   inflacion,
   dolares,
   monedasLatam,
+  mercado,
+  monetario,
   empleo,
   pobreza,
   lastUpdated,
@@ -717,6 +752,195 @@ export function HomeClient({
             title="Salarios"
             description="RIPTE nominal y real deflactado"
             delay={0.05}
+          />
+        </div>
+      </section>
+
+      {/* ════════════════════════════ MERCADO FINANCIERO ════════════════════════════ */}
+      <section className="mx-auto max-w-6xl px-5 mt-20 scroll-mt-20" id="mercado">
+        <SectionHeader
+          eyebrow="Finanzas"
+          title="Mercado financiero"
+          subtitle="Riesgo país, S&P Merval y ADRs argentinos. Datos de cierre diario."
+        />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <KpiCard
+            label="Riesgo país (EMBI)"
+            value={
+              val(mercado.riesgoPais, "value") != null
+                ? `${Math.round(Number(val(mercado.riesgoPais, "value")))} pb`
+                : "—"
+            }
+            period={formatPeriod(val(mercado.riesgoPais, "period"))}
+            change={formatDeltaPct(val(mercado.riesgoPais, "monthly_change"))}
+            changeDirection={direction(val(mercado.riesgoPais, "monthly_change"))}
+            goodDirection="down"
+            accentColor="var(--chart-7)"
+            sparkData={series.riesgoPais.slice(-12).map((d) => d[1])}
+          />
+          <KpiCard
+            label="Merval"
+            value={
+              val(mercado.merval, "value") != null
+                ? Math.round(Number(val(mercado.merval, "value"))).toLocaleString("es-AR")
+                : "—"
+            }
+            period={formatPeriod(val(mercado.merval, "period"))}
+            change={formatDeltaPct(val(mercado.merval, "monthly_change"))}
+            changeDirection={direction(val(mercado.merval, "monthly_change"))}
+            goodDirection="up"
+            accentColor="var(--chart-2)"
+            sparkData={series.merval.slice(-12).map((d) => d[1])}
+          />
+          <KpiCard
+            label="GGAL ADR"
+            value={
+              val(mercado.ggal, "value") != null
+                ? `US$ ${Number(val(mercado.ggal, "value")).toFixed(2)}`
+                : "—"
+            }
+            period={formatPeriod(val(mercado.ggal, "period"))}
+            change={formatDeltaPct(val(mercado.ggal, "monthly_change"))}
+            changeDirection={direction(val(mercado.ggal, "monthly_change"))}
+            goodDirection="up"
+            accentColor="var(--chart-6)"
+            sparkData={series.ggal.slice(-12).map((d) => d[1])}
+          />
+          <KpiCard
+            label="YPF ADR"
+            value={
+              val(mercado.ypf, "value") != null
+                ? `US$ ${Number(val(mercado.ypf, "value")).toFixed(2)}`
+                : "—"
+            }
+            period={formatPeriod(val(mercado.ypf, "period"))}
+            change={formatDeltaPct(val(mercado.ypf, "monthly_change"))}
+            changeDirection={direction(val(mercado.ypf, "monthly_change"))}
+            goodDirection="up"
+            accentColor="var(--chart-8)"
+            sparkData={series.ypf.slice(-12).map((d) => d[1])}
+          />
+        </div>
+        <div className="grid md:grid-cols-2 gap-5">
+          <AreaChart
+            data={series.riesgoPais}
+            label="Riesgo país EMBI (puntos básicos)"
+            color="var(--chart-7)"
+            format="index"
+          />
+          <AreaChart
+            data={series.merval}
+            label="S&P Merval (ARS, cierre mensual)"
+            color="var(--chart-2)"
+            format="index"
+          />
+        </div>
+      </section>
+
+      {/* ════════════════════════════ POLÍTICA MONETARIA ════════════════════════════ */}
+      <section className="mx-auto max-w-6xl px-5 mt-20 scroll-mt-20" id="monetario">
+        <SectionHeader
+          eyebrow="BCRA"
+          title="Política monetaria"
+          subtitle="Tasa de política, reservas, agregados monetarios y expectativas de inflación."
+        />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <KpiCard
+            label="TPM"
+            value={
+              val(monetario.tpm, "value") != null
+                ? `${Number(val(monetario.tpm, "value")).toFixed(1)}%`
+                : "—"
+            }
+            period={formatPeriod(val(monetario.tpm, "period"))}
+            accentColor="var(--chart-1)"
+            sparkData={series.tpm.slice(-24).map((d) => d[1])}
+          />
+          <KpiCard
+            label="Reservas BCRA"
+            value={
+              val(monetario.reservas, "value") != null
+                ? `US$ ${Math.round(Number(val(monetario.reservas, "value")) / 1000)} mil M`
+                : "—"
+            }
+            period={formatPeriod(val(monetario.reservas, "period"))}
+            change={formatDeltaPct(val(monetario.reservas, "monthly_change"))}
+            changeDirection={direction(val(monetario.reservas, "monthly_change"))}
+            goodDirection="up"
+            accentColor="var(--chart-6)"
+            sparkData={series.reservas.slice(-24).map((d) => d[1])}
+          />
+          <KpiCard
+            label="BADLAR"
+            value={
+              val(monetario.badlar, "value") != null
+                ? `${Number(val(monetario.badlar, "value")).toFixed(1)}%`
+                : "—"
+            }
+            period={formatPeriod(val(monetario.badlar, "period"))}
+            accentColor="var(--chart-3)"
+            sparkData={series.badlar.slice(-24).map((d) => d[1])}
+          />
+          <KpiCard
+            label="Plazo fijo 30d"
+            value={
+              val(monetario.plazoFijo30d, "value") != null
+                ? `${Number(val(monetario.plazoFijo30d, "value")).toFixed(1)}%`
+                : "—"
+            }
+            period={formatPeriod(val(monetario.plazoFijo30d, "period"))}
+            accentColor="var(--chart-3)"
+            sparkData={series.plazoFijo30d.slice(-24).map((d) => d[1])}
+          />
+          <KpiCard
+            label="REM inflación 12m"
+            value={
+              val(monetario.remInflacion12m, "value") != null
+                ? `${Number(val(monetario.remInflacion12m, "value")).toFixed(1)}%`
+                : "—"
+            }
+            period={formatPeriod(val(monetario.remInflacion12m, "period"))}
+            accentColor="var(--chart-1)"
+            sparkData={series.remInflacion12m.slice(-12).map((d) => d[1])}
+          />
+          <KpiCard
+            label="Base monetaria"
+            value={
+              val(monetario.baseMonetaria, "value") != null
+                ? `$${Math.round(Number(val(monetario.baseMonetaria, "value")) / 1000)} mil M`
+                : "—"
+            }
+            period={formatPeriod(val(monetario.baseMonetaria, "period"))}
+            change={formatDeltaPct(val(monetario.baseMonetaria, "monthly_change"))}
+            changeDirection={direction(val(monetario.baseMonetaria, "monthly_change"))}
+            goodDirection="down"
+            accentColor="var(--chart-4)"
+            sparkData={series.baseMonetaria.slice(-24).map((d) => d[1])}
+          />
+          <KpiCard
+            label="M2 priv. (YoY)"
+            value={
+              val(monetario.m2PrivadoYoy, "value") != null
+                ? `${Number(val(monetario.m2PrivadoYoy, "value")).toFixed(1)}%`
+                : "—"
+            }
+            period={formatPeriod(val(monetario.m2PrivadoYoy, "period"))}
+            accentColor="var(--chart-4)"
+            sparkData={series.m2PrivadoYoy.slice(-12).map((d) => d[1])}
+          />
+        </div>
+        <div className="grid md:grid-cols-2 gap-5">
+          <AreaChart
+            data={series.reservas}
+            label="Reservas internacionales BCRA (USD millones)"
+            color="var(--chart-6)"
+            format="index"
+          />
+          <AreaChart
+            data={series.tpm}
+            label="Tasa de política monetaria (% anual)"
+            color="var(--chart-1)"
+            format="decimal"
           />
         </div>
       </section>
