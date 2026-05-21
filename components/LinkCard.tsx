@@ -15,8 +15,7 @@ export function LinkCard({ href, icon, title, description, delay = 0 }: LinkCard
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay }}
       whileHover={{ y: -3, boxShadow: "var(--shadow-md)" }}
     >

@@ -176,9 +176,21 @@ export function MultiCurrencyChart({
   const svgRef = useRef<SVGSVGElement>(null);
   const [hoverDate, setHoverDate] = useState<string | null>(null);
 
+  // Universe de fechas válidas: unión de todas las fechas que aparecen en alguna
+  // serie visible. El crosshair siempre snapea a una de estas fechas (no a una
+  // posición arbitraria entre puntos). Esto evita la sensación de que el cursor
+  // "se mete" en zonas vacías sin data.
+  const validDates = useMemo(() => {
+    const set = new Set<string>();
+    for (const sp of seriesPaths) {
+      for (const p of sp.points) set.add(p.date);
+    }
+    return Array.from(set).sort();
+  }, [seriesPaths]);
+
   const handleMouseMove = useCallback(
     (e: React.MouseEvent<SVGSVGElement>) => {
-      if (!svgRef.current || !xRange) return;
+      if (!svgRef.current || !xRange || !validDates.length) return;
       const rect = svgRef.current.getBoundingClientRect();
       const mouseXSvg = ((e.clientX - rect.left) / rect.width) * W;
       const t = xRange.startT + ((mouseXSvg - PAD_L) / CHART_W) * xRange.span;
@@ -186,21 +198,19 @@ export function MultiCurrencyChart({
         setHoverDate(null);
         return;
       }
-      // Find closest point in the first visible series (proxy)
-      const ref = seriesPaths[0]?.points || [];
-      if (!ref.length) return;
-      let closest = ref[0];
+      // Snap a la fecha válida más cercana entre TODAS las series visibles.
+      let closestDate = validDates[0];
       let minDist = Infinity;
-      for (const p of ref) {
-        const dist = Math.abs(new Date(p.date).getTime() - t);
+      for (const d of validDates) {
+        const dist = Math.abs(new Date(d).getTime() - t);
         if (dist < minDist) {
           minDist = dist;
-          closest = p;
+          closestDate = d;
         }
       }
-      setHoverDate(closest.date);
+      setHoverDate(closestDate);
     },
-    [xRange, seriesPaths],
+    [xRange, validDates],
   );
 
   function toggle(key: string, pinned?: boolean) {
@@ -226,12 +236,30 @@ export function MultiCurrencyChart({
   const hoverValues = useMemo(() => {
     if (!hoverDate) return null;
     return seriesPaths.map((sp) => {
-      const point = sp.points.find((p) => p.date === hoverDate);
+      // Buscar match exacto primero
+      const exact = sp.points.find((p) => p.date === hoverDate);
+      if (exact) {
+        return {
+          key: sp.key,
+          label: sp.label,
+          color: sp.color,
+          value: exact.value,
+        };
+      }
+      // Carry forward: si la serie tiene frecuencia distinta (ej. mensual vs
+      // diaria), buscar el último punto cuya fecha sea <= hoverDate. Eso
+      // muestra el valor vigente en esa fecha aunque no haya publicación
+      // ese día específico.
+      let last: { date: string; value: number } | null = null;
+      for (const p of sp.points) {
+        if (p.date <= hoverDate) last = p;
+        else break;
+      }
       return {
         key: sp.key,
         label: sp.label,
         color: sp.color,
-        value: point ? point.value : null,
+        value: last ? last.value : null,
       };
     });
   }, [hoverDate, seriesPaths]);

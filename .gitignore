@@ -4,6 +4,7 @@ etl/.venv/
 
 # Build
 .next/
+tsconfig.tsbuildinfo
 
 # Logs
 data/logs/
@@ -11,8 +12,16 @@ data/logs/
 # Python
 *.pyc
 __pycache__/
+.pytest_cache/
 
 # Environment
 .env
 .claude/settings.local.json
-tsconfig.tsbuildinfo
+
+# Playwright
+test-results/
+playwright-report/
+playwright/.cache/
+
+# Vitest coverage
+coverage/
