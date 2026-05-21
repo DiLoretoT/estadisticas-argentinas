@@ -28,7 +28,8 @@
   },
   "emae": {
     "series_api": "https://apis.datos.gob.ar/series/api/series",
-    "series_id": "11.3_VIPAA_2004_M_31"
+    "series_id": "143.3_NO_PR_2004_A_21",
+    "_comment": "EMAE serie original mensual, base 2004=100. Desestacionalizada: 143.3_NO_PR_2004_A_31"
   },
   "salarios": {
     "series_api": "https://apis.datos.gob.ar/series/api/series",

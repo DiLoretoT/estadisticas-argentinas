@@ -25,15 +25,18 @@ interface Props {
   };
 }
 
-/** Format a percentage that might be pre-multiplied (2.62) or raw decimal (0.07). */
-function pct(v: unknown): string {
+function pctValue(v: unknown, multiplier: 1 | 100): string {
   if (v == null) return "—";
   const n = Number(v);
   if (isNaN(n)) return "—";
-  // Values < 1 are raw decimals (0.07 = 7%), values >= 1 are already % (2.62 = 2.62%)
-  const display = Math.abs(n) < 1 ? n * 100 : n;
-  return display.toLocaleString("es-AR", { maximumFractionDigits: 1 }) + "%";
+  return (n * multiplier).toLocaleString("es-AR", { maximumFractionDigits: 1 }) + "%";
 }
+
+// Inflación viene del ETL ya en %: 2.62 → "2,6%"
+const pctFromPercent = (v: unknown) => pctValue(v, 1);
+
+// Tasas (desocupación, pobreza, empleo) vienen en ratio decimal: 0.07 → "7,0%"
+const pctFromRatio = (v: unknown) => pctValue(v, 100);
 
 function peso(v: unknown): string {
   if (v == null) return "—";
@@ -79,8 +82,8 @@ export function HomeClient({
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           <KpiCard
             label="Inflacion mensual"
-            value={pct(inflMonthly?.value)}
-            detail={`Acumulado: ${pct(inflYtd?.value)}`}
+            value={pctFromPercent(inflMonthly?.value)}
+            detail={`Acumulado: ${pctFromPercent(inflYtd?.value)}`}
             trend="up"
             accentColor="var(--color-danger)"
             delay={0}
@@ -104,7 +107,7 @@ export function HomeClient({
           />
           <KpiCard
             label="Desocupacion"
-            value={pct(td.value)}
+            value={pctFromRatio(td.value)}
             detail={td.period ? `${td.period}` : undefined}
             trend="down"
             accentColor="var(--color-warning)"
@@ -113,7 +116,7 @@ export function HomeClient({
           />
           <KpiCard
             label="Pobreza"
-            value={pct(tp.value)}
+            value={pctFromRatio(tp.value)}
             detail={tp.period ? `S2 ${tp.period}` : undefined}
             trend="up"
             accentColor="var(--color-danger)"

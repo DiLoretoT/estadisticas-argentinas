@@ -3,7 +3,7 @@
 > Documento centralizado del trabajo para llevar el repo `estadisticas-argentinas` a estado público "vidriera" en `estadisticas.datalogia.app`. Cualquier sesión (Claude, vos, otra IA) debe poder retomar el trabajo leyendo solo este archivo + el `README.md`.
 
 **Última actualización:** 2026-05-20
-**Estado global:** Plan aprobado · Sesión 1 sin iniciar
+**Estado global:** Fase 0 ✅ (Vercel up: `estadisticas-argentinas-iw65.vercel.app`) · Fase 1 ✅ (commit `pendiente`) · Fase 2 en cola
 **Dueño:** Tomás Di Loreto
 
 ---
@@ -69,16 +69,16 @@ Trabajo que necesita tu mano y no puedo hacer yo. Idealmente listo antes o duran
 
 Sanear el repo sin tocar arquitectura de rutas. Todo lo que no requiere decisión de producto.
 
-- [ ] **1.1** — Agregar `LICENSE` MIT en root, año 2026, owner "Tomás Di Loreto".
-- [ ] **1.2** — Mover `AGENTS.md` y `CLAUDE.md` de root a `docs/internal/` (o eliminar si no aportan al lector externo). El `AGENTS.md` actual tiene un boilerplate de Next.js que no aplica.
-- [ ] **1.3** — Investigar IDs nuevos en datos.gob.ar para `emae` y `tasa_indigencia`. Buscar en el catálogo de series (`https://datosgobar.github.io/series-tiempo-ar-call-center/`). Actualizar `etl/sources.json` y validar que `fetch_emae.py` y la rama de `fetch_pobreza.py` que trae indigencia funcionen.
-- [ ] **1.4** — Correr `make bootstrap` localmente (o levantar Postgres y `python etl/run_all.py`). Verificar que las 10 series quedan en estado `success` en `status.json`. Commitear los JSON actualizados.
-- [ ] **1.5** — Arreglar bug de unidades en `components/HomeClient.tsx:34`. La heurística `Math.abs(n) < 1 ? n * 100 : n` es frágil. Normalizar en el ETL: que todos los valores de porcentaje queden en la misma unidad (decisión a tomar al arrancar la sub-tarea: o todo en decimal `0.0262` o todo en porcentaje `2.62`). Sacar la heurística del front.
-- [ ] **1.6** — Mejorar `lib/readData.ts`: en vez de `catch {} → return {}`, loguear el error (`console.error`) para que Vercel logs muestre qué falta. Mantener el fallback vacío para que la página no rompa.
-- [ ] **1.7** — Cambiar `package.json` script `"lint": "eslint"` por `"lint": "next lint"` (o `"eslint ."`). Validar que corre.
-- [ ] **1.8** — Validar `npm run build` localmente. Resolver warnings/errores que aparezcan.
-- [ ] **1.9** — Configurar `next.config.ts` mínimo razonable: headers de cache para `/data/*.json` (no aplica si el frontend los lee server-side, pero sí si se exponen vía `/api`), y al menos `experimental: { typedRoutes: true }` si conviene.
-- [ ] **1.10** — Commit consolidado de Fase 1: `chore: higiene base para vidriera pública`.
+- [x] **1.1** — Agregar `LICENSE` MIT en root, año 2026, owner "Tomás Di Loreto".
+- [x] **1.2** — Mover/reescribir `AGENTS.md` (boilerplate Next.js reemplazado por guía útil) y eliminar `CLAUDE.md` del root.
+- [x] **1.3** — IDs nuevos investigados. EMAE: `143.3_NO_PR_2004_A_21` (actualizado en `sources.json`). Tasa de indigencia: confirmado que **no existe** en datos.gob.ar como serie continua (solo en PDFs INDEC). Decisión: removerla del ETL (ya no está en `sources.json`).
+- [~] **1.4** — Diferido a Fase 5. El refresh local necesita Docker. La data al 2026-03-28 sigue funcionando; el primer refresh lo hará el GitHub Action.
+- [x] **1.5** — Heurística reemplazada por funciones explícitas `pctFromPercent` / `pctFromRatio` en `HomeClient.tsx`. Cada call site declara qué unidad espera.
+- [x] **1.6** — `readData.ts` ahora loguea con `console.error` los archivos que no encuentra. Fallback vacío preservado.
+- [x] **1.7** — Lint script cambiado a `"eslint ."`.
+- [x] **1.8** — `npm run build` valida OK localmente. 13 páginas estáticas + 2 API routes dinámicas. 0 errores.
+- [x] **1.9** — `next.config.ts` con `poweredByHeader: false` + Cache-Control para `/api/*` (s-maxage=3600, swr=86400).
+- [x] **1.10** — Commit consolidado de Fase 1: `chore: higiene base para vidriera pública`.
 
 **Listo cuando:** `npm run build` pasa local, `make run-all` deja `status.json` con todas `success`, repo tiene LICENSE, AGENTS/CLAUDE fuera del root, lint limpio.
 
@@ -214,6 +214,8 @@ _(vacío)_
 | Fecha | Quién | Fase | Nota |
 |-------|-------|------|------|
 | 2026-05-20 | Tomás + Claude | — | Plan inicial creado y aprobado |
+| 2026-05-20 | Tomás | F0 | Proyecto Vercel creado. URL preview: `estadisticas-argentinas-iw65.vercel.app`. CNAME en Cloudflare pendiente. |
+| 2026-05-20 | Claude | F1 | 1.1–1.3, 1.5–1.9 completas. 1.4 diferida a F5 (Docker no requerido para showcase, ETL corre en GitHub Action). Build OK local. |
 
 ---
 

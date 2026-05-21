@@ -13,7 +13,8 @@ export async function readIndicator(
       "utf-8"
     );
     return JSON.parse(content);
-  } catch {
+  } catch (error) {
+    console.error(`[readData] No pude leer indicador data/${fileName}:`, error);
     return {};
   }
 }
@@ -27,7 +28,8 @@ export async function readSeries(
       "utf-8"
     );
     return JSON.parse(content);
-  } catch {
+  } catch (error) {
+    console.error(`[readData] No pude leer serie data/series/${fileName}:`, error);
     return [];
   }
 }
