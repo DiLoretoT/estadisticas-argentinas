@@ -28,11 +28,11 @@ interface AreaChartProps {
 
 // SVG coordinate space — generoso a la derecha para end-labels.
 const W = 1000;
-const H = 380;
-const PAD_L = 56;
-const PAD_R = 86; // espacio para data label al final
-const PAD_T = 24;
-const PAD_B = 36;
+const H = 400;
+const PAD_L = 64;
+const PAD_R = 100; // espacio para data label al final
+const PAD_T = 28;
+const PAD_B = 52;
 const CHART_W = W - PAD_L - PAD_R;
 const CHART_H = H - PAD_T - PAD_B;
 
@@ -369,7 +369,8 @@ export function AreaChart({
             key={`y${i}`}
             x={PAD_L - 10}
             y={yt.y}
-            fontSize="12"
+            fontSize="16"
+            fontWeight="500"
             textAnchor="end"
             dominantBaseline="middle"
             fill="var(--color-text-muted)"
@@ -384,8 +385,9 @@ export function AreaChart({
           <text
             key={`x${i}`}
             x={xt.x}
-            y={H - 12}
-            fontSize="12"
+            y={H - 10}
+            fontSize="16"
+            fontWeight="500"
             textAnchor={i === 0 ? "start" : i === xTicks.length - 1 ? "end" : "middle"}
             fill="var(--color-text-muted)"
             style={{ fontFamily: "var(--font-sans, system-ui)" }}
@@ -419,7 +421,7 @@ export function AreaChart({
               x={W - PAD_R - 4}
               y={avgY - 4}
               fill="var(--color-text-muted)"
-              fontSize={11}
+              fontSize={14}
               fontWeight={500}
               textAnchor="end"
               dominantBaseline="auto"
@@ -459,7 +461,7 @@ export function AreaChart({
               x={maxPoint.x}
               y={maxPoint.y - 10}
               fill="var(--color-text)"
-              fontSize={11}
+              fontSize={14}
               fontWeight={600}
               textAnchor="middle"
               dominantBaseline="auto"
@@ -475,7 +477,7 @@ export function AreaChart({
               x={minPoint.x}
               y={minPoint.y + 14}
               fill="var(--color-text-muted)"
-              fontSize={11}
+              fontSize={14}
               fontWeight={500}
               textAnchor="middle"
               dominantBaseline="hanging"
@@ -536,10 +538,10 @@ export function AreaChart({
         {/* End-label: el valor actual a la derecha de la línea */}
         <circle cx={last.x} cy={last.y} r={4} fill={color} stroke="var(--color-card)" strokeWidth="2" />
         <HaloText
-          x={last.x + 7}
+          x={last.x + 8}
           y={last.y}
           fill={color}
-          fontSize={14}
+          fontSize={18}
           fontWeight={700}
           textAnchor="start"
           dominantBaseline="middle"

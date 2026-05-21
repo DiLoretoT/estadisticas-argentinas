@@ -27,11 +27,11 @@ interface MultiCurrencyChartProps {
 
 // SVG coords — padding right generoso para end-labels.
 const W = 1000;
-const H = 460;
-const PAD_L = 56;
-const PAD_R = 110;
-const PAD_T = 22;
-const PAD_B = 36;
+const H = 480;
+const PAD_L = 64;
+const PAD_R = 130;
+const PAD_T = 28;
+const PAD_B = 52;
 const CHART_W = W - PAD_L - PAD_R;
 const CHART_H = H - PAD_T - PAD_B;
 
@@ -397,7 +397,8 @@ export function MultiCurrencyChart({
             key={`y${i}`}
             x={PAD_L - 10}
             y={yt.y}
-            fontSize="12"
+            fontSize="16"
+            fontWeight="500"
             textAnchor="end"
             dominantBaseline="middle"
             fill="var(--color-text-muted)"
@@ -412,8 +413,9 @@ export function MultiCurrencyChart({
           <text
             key={`x${i}`}
             x={xt.x}
-            y={H - 12}
-            fontSize="12"
+            y={H - 10}
+            fontSize="16"
+            fontWeight="500"
             textAnchor={i === 0 ? "start" : i === xTicks.length - 1 ? "end" : "middle"}
             fill="var(--color-text-muted)"
             style={{ fontFamily: "var(--font-sans, system-ui)" }}
@@ -495,7 +497,7 @@ export function MultiCurrencyChart({
               <text
                 x={W - PAD_R + 6}
                 y={l.y}
-                fontSize={l.isPinned ? 13 : 12}
+                fontSize={l.isPinned ? 17 : 15}
                 fontWeight={l.isPinned ? 700 : 600}
                 fill={l.color}
                 textAnchor="start"
