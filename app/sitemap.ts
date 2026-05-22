@@ -28,6 +28,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     })),
     {
+      url: `${BASE_URL}/analisis`,
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.85,
+    },
+    {
       url: `${BASE_URL}/calculadora`,
       lastModified: now,
       changeFrequency: "monthly" as const,

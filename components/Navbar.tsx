@@ -14,6 +14,7 @@ const navLinks = [
   { href: "/#comercio", label: "Comercio" },
   { href: "/#empleo", label: "Empleo" },
   { href: "/#social", label: "Social" },
+  { href: "/analisis", label: "Análisis" },
 ];
 
 export function Navbar() {
