@@ -54,7 +54,7 @@ const NAV_GROUPS: NavGroup[] = [
     items: [
       { href: "/metodologia", label: "Metodología", description: "Fuentes y reproducibilidad" },
       { href: "/status", label: "Estado del pipeline", description: "Semáforos del ETL" },
-      { href: "/api/indicadores", label: "API pública", description: "Endpoints REST JSON" },
+      { href: "/api/v1/openapi.json", label: "API pública", description: "OpenAPI 3.1 spec — 42 series, CORS abierto" },
     ],
   },
 ];
