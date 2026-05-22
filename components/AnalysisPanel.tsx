@@ -114,9 +114,9 @@ export function AnalysisPanel(props: Props) {
             className="mt-3 text-[10px] italic"
             style={{ color: "var(--color-text-muted)" }}
           >
-            Análisis generado automáticamente a partir de la serie temporal. Usa
-            cálculos estadísticos determinísticos (sin IA). Se actualiza con
-            cada nuevo dato del ETL.
+            Análisis basado en cálculos estadísticos sobre la serie completa
+            (tendencia por regresión lineal, volatilidad, max/min, comparación
+            vs promedio histórico).
           </p>
         </div>
       )}

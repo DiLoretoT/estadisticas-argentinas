@@ -32,6 +32,10 @@ interface IndicatorMeta {
   unit: string;
   higher_is_better: boolean;
   source: string;
+  /** Agrupador opcional para UI: "Demografía", "Economía", "Social", "Política". */
+  category?: string;
+  /** Texto corto que ayuda al usuario a interpretar el indicador. */
+  description?: string;
 }
 
 interface Props {
@@ -128,8 +132,15 @@ function fmtValue(v: number, unit: string): string {
     return v.toLocaleString("es-AR");
   }
   if (unit === "km²") return v.toLocaleString("es-AR") + " km²";
-  if (unit === "hab/km²") return v.toLocaleString("es-AR", { maximumFractionDigits: 1 });
-  return v.toLocaleString("es-AR");
+  if (unit === "hab/km²")
+    return v.toLocaleString("es-AR", { maximumFractionDigits: 1 });
+  if (unit === "millones de USD") {
+    if (v >= 1000) return `US$ ${(v / 1000).toFixed(1)} mil M`;
+    return `US$ ${v.toLocaleString("es-AR", { maximumFractionDigits: 0 })} M`;
+  }
+  if (unit === "índice 0-1")
+    return v.toLocaleString("es-AR", { maximumFractionDigits: 3 });
+  return v.toLocaleString("es-AR", { maximumFractionDigits: 2 });
 }
 
 export function ArgentinaMap({
@@ -205,30 +216,87 @@ export function ArgentinaMap({
     return <div>Sin indicadores disponibles.</div>;
   }
 
+  // Agrupar indicadores por categoría
+  const categories = useMemo(() => {
+    const map = new Map<string, IndicatorMeta[]>();
+    for (const ind of indicators) {
+      const cat = ind.category || "Indicadores";
+      if (!map.has(cat)) map.set(cat, []);
+      map.get(cat)!.push(ind);
+    }
+    return Array.from(map.entries());
+  }, [indicators]);
+
   return (
     <div className="space-y-4">
-      {/* Selector */}
-      <div className="flex flex-wrap gap-2">
-        {indicators.map((ind) => (
-          <button
-            key={ind.key}
-            onClick={() => setCurrentInd(ind.key)}
-            className="text-sm px-3 py-1.5 rounded-lg border transition-colors"
-            style={{
-              background:
-                currentInd === ind.key
-                  ? "var(--color-primary)"
-                  : "var(--color-card)",
-              color:
-                currentInd === ind.key ? "#fff" : "var(--color-text)",
-              borderColor: "var(--color-border)",
-              fontWeight: currentInd === ind.key ? 600 : 400,
-            }}
-          >
-            {ind.label}
-          </button>
-        ))}
-      </div>
+      {/* Selector agrupado por categoría */}
+      {categories.length > 1 ? (
+        <div className="space-y-2">
+          {categories.map(([cat, inds]) => (
+            <div key={cat} className="flex flex-wrap items-center gap-2">
+              <span
+                className="text-[10px] font-semibold uppercase tracking-wider min-w-[80px]"
+                style={{ color: "var(--color-text-muted)" }}
+              >
+                {cat}
+              </span>
+              {inds.map((ind) => (
+                <button
+                  key={ind.key}
+                  onClick={() => setCurrentInd(ind.key)}
+                  className="text-sm px-3 py-1.5 rounded-lg border transition-colors"
+                  style={{
+                    background:
+                      currentInd === ind.key
+                        ? "var(--color-primary)"
+                        : "var(--color-card)",
+                    color:
+                      currentInd === ind.key ? "#fff" : "var(--color-text)",
+                    borderColor: "var(--color-border)",
+                    fontWeight: currentInd === ind.key ? 600 : 400,
+                  }}
+                  title={ind.description}
+                >
+                  {ind.label}
+                </button>
+              ))}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="flex flex-wrap gap-2">
+          {indicators.map((ind) => (
+            <button
+              key={ind.key}
+              onClick={() => setCurrentInd(ind.key)}
+              className="text-sm px-3 py-1.5 rounded-lg border transition-colors"
+              style={{
+                background:
+                  currentInd === ind.key
+                    ? "var(--color-primary)"
+                    : "var(--color-card)",
+                color:
+                  currentInd === ind.key ? "#fff" : "var(--color-text)",
+                borderColor: "var(--color-border)",
+                fontWeight: currentInd === ind.key ? 600 : 400,
+              }}
+              title={ind.description}
+            >
+              {ind.label}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Descripción del indicador actual */}
+      {indicatorMeta.description && (
+        <p
+          className="text-xs leading-relaxed"
+          style={{ color: "var(--color-text-muted)" }}
+        >
+          {indicatorMeta.description}
+        </p>
+      )}
 
       <div className="grid md:grid-cols-3 gap-5">
         {/* Mapa */}

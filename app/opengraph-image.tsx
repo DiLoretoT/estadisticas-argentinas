@@ -80,8 +80,7 @@ export default async function OGImage() {
               maxWidth: 900,
             }}
           >
-            Inflación · Dólar · Actividad · Empleo · Pobreza.
-            Actualizado automáticamente.
+            Inflación · Dólar · Actividad · Empleo · Pobreza · Deuda · Mercado.
           </p>
         </div>
 

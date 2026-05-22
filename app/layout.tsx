@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     template: "%s · Estadísticas Argentinas",
   },
   description:
-    "Indicadores macroeconómicos y sociales de Argentina con datos oficiales de INDEC y BCRA, actualizados automáticamente.",
+    "Indicadores macroeconómicos y sociales de Argentina con datos oficiales de INDEC, BCRA, MECON y otras fuentes.",
   keywords: [
     "Argentina",
     "estadísticas",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     siteName: "Estadísticas Argentinas",
     title: "Estadísticas Argentinas — Datalogía",
     description:
-      "Indicadores macroeconómicos y sociales de Argentina con datos oficiales, actualizados automáticamente.",
+      "Indicadores macroeconómicos y sociales de Argentina con datos oficiales.",
   },
   twitter: {
     card: "summary_large_image",

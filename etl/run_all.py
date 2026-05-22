@@ -14,6 +14,7 @@ from fetch_comparativa_latam import main as fetch_comparativa_latam
 from fetch_deuda import main as fetch_deuda
 from fetch_mercado import main as fetch_mercado
 from fetch_monetario_bcra import main as fetch_monetario_bcra
+from fetch_opex_provincial import main as fetch_opex_provincial
 from fetch_pbi import main as fetch_pbi
 from fetch_pobreza import main as fetch_pobreza
 from fetch_salarios import main as fetch_salarios
@@ -40,6 +41,7 @@ _STEPS: list[tuple[str, object]] = [
   ("comercio", fetch_comercio),  # ICA INDEC: export, import, balanza, breakdown
   ("deuda", fetch_deuda),  # MECON Excel: stock por instrumento 1992-actual
   ("comparativa_latam", fetch_comparativa_latam),  # World Bank WDI: 9 indicadores x 10 países
+  ("opex_provincial", fetch_opex_provincial),  # Exportaciones por provincia, INDEC OPEX
   ("salarios", fetch_salarios),
   ("emae", fetch_emae),
   ("pbi", fetch_pbi),

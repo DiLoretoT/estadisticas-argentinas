@@ -37,7 +37,7 @@ export function Footer() {
             >
               Estadísticas Argentinas es un producto de datos abiertos del
               ecosistema Datalogía. Indicadores macroeconómicos y sociales con
-              fuentes oficiales, actualizados automáticamente.
+              fuentes oficiales.
             </p>
             <a
               href="https://datalogia.app"

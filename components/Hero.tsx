@@ -52,8 +52,8 @@ export function Hero({ lastUpdated }: HeroProps) {
         className="mt-5 text-base md:text-lg max-w-xl relative"
         style={{ color: "var(--color-text-muted)" }}
       >
-        Indicadores macroeconómicos y sociales con fuentes oficiales,
-        actualizados automáticamente. Inflación, dólar, actividad, empleo y más.
+        Indicadores macroeconómicos y sociales con fuentes oficiales.
+        Inflación, dólar, actividad, empleo, mercado, deuda, comercio y más.
       </motion.p>
 
       <motion.div
