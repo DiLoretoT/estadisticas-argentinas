@@ -9,6 +9,8 @@ interface KpiCardProps {
   change?: string;
   /** Direction del change. up = subió, down = bajó. */
   changeDirection?: "up" | "down" | "neutral";
+  /** Sufijo aclaratorio del change. Default "m/m" (mes contra mes). Puede ser "a/a" (año contra año), "d/d", etc. */
+  changeLabel?: string;
   /** En qué dirección "subir" es bueno. Si "down" (ej. desocupación), un up se pinta como danger. */
   goodDirection?: "up" | "down";
   accentColor?: string;
@@ -24,9 +26,11 @@ export function KpiCard({
   changeDirection,
   goodDirection = "down",
   accentColor = "var(--color-primary)",
+  changeLabel = "m/m",
   delay = 0,
   sparkData,
 }: KpiCardProps) {
+  void delay;
   // Determine semantic color of the change based on goodDirection
   let changeColor = "var(--color-text-muted)";
   if (changeDirection === "up") {
@@ -73,9 +77,22 @@ export function KpiCard({
               <span
                 className="inline-flex items-center gap-0.5 text-xs font-semibold tabular-nums"
                 style={{ color: changeColor }}
+                title={
+                  changeLabel === "a/a"
+                    ? "Variación interanual (vs mismo período del año anterior)"
+                    : changeLabel === "m/m"
+                      ? "Variación mensual (vs período anterior)"
+                      : "Variación respecto al período anterior"
+                }
               >
                 {arrow && <span>{arrow}</span>}
                 {change}
+                <span
+                  className="font-normal ml-0.5 text-[10px] opacity-75"
+                  style={{ color: "var(--color-text-muted)" }}
+                >
+                  {changeLabel}
+                </span>
               </span>
             )}
             {period && (

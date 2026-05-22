@@ -84,6 +84,21 @@ export function MultiCurrencyChart({
     defaultBaseDate || minCommonDate,
   );
 
+  // Escala: lineal por default. Log se justifica cuando hay diferencias
+  // de varios órdenes de magnitud entre series (caso típico: ARS vs LATAM).
+  const [logScale, setLogScale] = useState<boolean>(false);
+
+  /** Transformación: en log usamos log10 del valor; valores <= 0 los clip a 1
+   *  (no debería pasar en este contexto, los índices base 100 son siempre > 0). */
+  function transform(v: number): number {
+    if (!logScale) return v;
+    return Math.log10(Math.max(v, 1));
+  }
+  function inverseTransform(v: number): number {
+    if (!logScale) return v;
+    return Math.pow(10, v);
+  }
+
   // If user toggles series and current baseDate is no longer feasible, snap
   // to the new minCommonDate.
   const effectiveBaseDate = baseDate < minCommonDate ? minCommonDate : baseDate;
@@ -116,11 +131,14 @@ export function MultiCurrencyChart({
   const yRange = useMemo(() => {
     const vals = normalized.flatMap((s) => s.dataIdx.map(([, v]) => v));
     if (!vals.length) return { min: 0, max: 100 };
-    const min = Math.min(...vals, 100);
-    const max = Math.max(...vals, 100);
-    const pad = (max - min) * 0.08 || 10;
-    return { min: min - pad, max: max + pad };
-  }, [normalized]);
+    // Trabajamos en el espacio transformado (lineal o log10)
+    const transformedVals = vals.map((v) => transform(v));
+    const tMin = Math.min(...transformedVals, transform(100));
+    const tMax = Math.max(...transformedVals, transform(100));
+    const pad = (tMax - tMin) * 0.08 || (logScale ? 0.1 : 10);
+    return { min: tMin - pad, max: tMax + pad };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [normalized, logScale]);
 
   // Build path for each visible series
   const seriesPaths = useMemo(() => {
@@ -133,7 +151,9 @@ export function MultiCurrencyChart({
       const points = s.dataIdx.map(([d, v]) => {
         const t = new Date(d).getTime();
         const x = PAD_L + ((t - startT) / span) * CHART_W;
-        const y = PAD_T + CHART_H - ((v - yMin) / yRangeSize) * CHART_H;
+        // y se calcula con el valor transformado (lineal o log10)
+        const tv = transform(v);
+        const y = PAD_T + CHART_H - ((tv - yMin) / yRangeSize) * CHART_H;
         return { x, y, date: d, value: v };
       });
       const path = points
@@ -146,18 +166,21 @@ export function MultiCurrencyChart({
     });
   }, [normalized, xRange, yRange]);
 
-  // Y axis ticks
+  // Y axis ticks. En escala log, los ticks se distribuyen en el espacio
+  // transformado pero los labels muestran el valor real (10^x).
   const yTicks = useMemo(() => {
     const yMin = yRange.min;
     const yMax = yRange.max;
     const yRangeSize = yMax - yMin || 1;
     const steps = 5;
     return Array.from({ length: steps + 1 }, (_, i) => {
-      const v = yMin + (yRangeSize * i) / steps;
+      const transformedVal = yMin + (yRangeSize * i) / steps;
+      const realVal = inverseTransform(transformedVal);
       const y = PAD_T + CHART_H - (i / steps) * CHART_H;
-      return { y, value: v };
+      return { y, value: realVal };
     });
-  }, [yRange]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [yRange, logScale]);
 
   // X axis ticks (5 dates)
   const xTicks = useMemo(() => {
@@ -298,12 +321,46 @@ export function MultiCurrencyChart({
             >
               {label}
             </h3>
-            <span
-              className="text-[10px] uppercase tracking-wider"
-              style={{ color: "var(--color-text-muted)" }}
-            >
-              Base 100 = {formatDate(effectiveBaseDate)}
-            </span>
+            <div className="flex items-center gap-3">
+              <span
+                className="text-[10px] uppercase tracking-wider"
+                style={{ color: "var(--color-text-muted)" }}
+              >
+                Base 100 = {formatDate(effectiveBaseDate)}
+              </span>
+              {/* Toggle Lineal/Log */}
+              <div
+                className="inline-flex rounded overflow-hidden border"
+                style={{ borderColor: "var(--color-border)" }}
+              >
+                <button
+                  onClick={() => setLogScale(false)}
+                  className="text-[10px] px-2 py-0.5 uppercase tracking-wider"
+                  style={{
+                    background: !logScale
+                      ? "var(--color-primary)"
+                      : "transparent",
+                    color: !logScale ? "#fff" : "var(--color-text-muted)",
+                  }}
+                  title="Escala lineal (default)"
+                >
+                  Lineal
+                </button>
+                <button
+                  onClick={() => setLogScale(true)}
+                  className="text-[10px] px-2 py-0.5 uppercase tracking-wider"
+                  style={{
+                    background: logScale
+                      ? "var(--color-primary)"
+                      : "transparent",
+                    color: logScale ? "#fff" : "var(--color-text-muted)",
+                  }}
+                  title="Escala logarítmica — recomendada cuando las series tienen rangos muy distintos (ARS vs LATAM)"
+                >
+                  Log
+                </button>
+              </div>
+            </div>
           </div>
         )}
 
@@ -397,14 +454,18 @@ export function MultiCurrencyChart({
             key={`y${i}`}
             x={PAD_L - 10}
             y={yt.y}
-            fontSize="16"
+            fontSize="19"
             fontWeight="500"
             textAnchor="end"
             dominantBaseline="middle"
             fill="var(--color-text-muted)"
             style={{ fontFamily: "var(--font-sans, system-ui)" }}
           >
-            {yt.value.toFixed(0)}
+            {yt.value >= 10000
+              ? `${(yt.value / 1000).toFixed(0)}K`
+              : yt.value >= 1000
+                ? yt.value.toFixed(0)
+                : yt.value.toFixed(yt.value < 10 ? 1 : 0)}
           </text>
         ))}
 
@@ -414,7 +475,7 @@ export function MultiCurrencyChart({
             key={`x${i}`}
             x={xt.x}
             y={H - 10}
-            fontSize="16"
+            fontSize="19"
             fontWeight="500"
             textAnchor={i === 0 ? "start" : i === xTicks.length - 1 ? "end" : "middle"}
             fill="var(--color-text-muted)"
@@ -586,7 +647,21 @@ export function MultiCurrencyChart({
         Cada serie es <strong>unidades locales por USD</strong>, normalizada a
         100 en la fecha base. Subir = la moneda se devaluó vs USD; bajar = se
         apreció. Una serie creciendo más rápido que otra significa mayor
-        devaluación relativa.
+        devaluación relativa.{" "}
+        {logScale ? (
+          <>
+            <strong>Estás viendo escala logarítmica</strong>: cada unidad del
+            eje Y representa una multiplicación por 10. Permite comparar series
+            con rangos muy distintos (ARS pasó de 100 a 16.000+, mientras BRL
+            apenas a ~190).
+          </>
+        ) : (
+          <>
+            <strong>Tip</strong>: si la línea de ARS aplasta a las demás (caso
+            típico desde 2018), cambiá a escala <strong>Log</strong> en el
+            toggle del header.
+          </>
+        )}
       </div>
     </div>
   );

@@ -24,6 +24,10 @@ interface AreaChartProps {
   showAverage?: boolean;
   /** Show min/max markers + labels. Default true. */
   showExtremes?: boolean;
+  /** Texto descriptivo corto que aparece debajo del chart. */
+  description?: string;
+  /** Fuente del dato (ej. "INDEC vía datos.gob.ar"). */
+  source?: string;
 }
 
 // SVG coordinate space — generoso a la derecha para end-labels.
@@ -106,6 +110,8 @@ export function AreaChart({
   csvFilename,
   showAverage = false,
   showExtremes = true,
+  description,
+  source,
 }: AreaChartProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const [hoverIdx, setHoverIdx] = useState<number | null>(null);
@@ -369,7 +375,7 @@ export function AreaChart({
             key={`y${i}`}
             x={PAD_L - 10}
             y={yt.y}
-            fontSize="16"
+            fontSize="19"
             fontWeight="500"
             textAnchor="end"
             dominantBaseline="middle"
@@ -386,7 +392,7 @@ export function AreaChart({
             key={`x${i}`}
             x={xt.x}
             y={H - 10}
-            fontSize="16"
+            fontSize="19"
             fontWeight="500"
             textAnchor={i === 0 ? "start" : i === xTicks.length - 1 ? "end" : "middle"}
             fill="var(--color-text-muted)"
@@ -644,6 +650,26 @@ export function AreaChart({
               {hoveredPt.value - hoveredPrev.value >= 0 ? "+" : ""}
               {fmt(hoveredPt.value - hoveredPrev.value)}
             </div>
+          )}
+        </div>
+      )}
+
+      {/* Descripción + fuente debajo del chart */}
+      {(description || source) && (
+        <div
+          className="px-4 py-2.5 border-t text-[11px] leading-relaxed"
+          style={{
+            borderColor: "var(--color-border)",
+            color: "var(--color-text-muted)",
+          }}
+        >
+          {description && (
+            <p className="mb-1">{description}</p>
+          )}
+          {source && (
+            <p className="text-[10px] uppercase tracking-wider opacity-80">
+              Fuente: {source}
+            </p>
           )}
         </div>
       )}

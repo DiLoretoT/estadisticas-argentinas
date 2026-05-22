@@ -996,6 +996,7 @@ export function HomeClient({
             period={formatPeriod(val(comercio.exportTotal, "period"))}
             change={formatDeltaPct(val(comercio.exportTotal, "yoy_change"))}
             changeDirection={direction(val(comercio.exportTotal, "yoy_change"))}
+            changeLabel="a/a"
             goodDirection="up"
             accentColor="var(--chart-2)"
             sparkData={series.exportTotal.slice(-12).map((d) => d[1])}
@@ -1010,6 +1011,7 @@ export function HomeClient({
             period={formatPeriod(val(comercio.importTotal, "period"))}
             change={formatDeltaPct(val(comercio.importTotal, "yoy_change"))}
             changeDirection={direction(val(comercio.importTotal, "yoy_change"))}
+            changeLabel="a/a"
             goodDirection="up"
             accentColor="var(--chart-6)"
             sparkData={series.importTotal.slice(-12).map((d) => d[1])}
@@ -1024,6 +1026,7 @@ export function HomeClient({
             period={formatPeriod(val(comercio.balanzaComercial, "period"))}
             change={formatDeltaPct(val(comercio.balanzaComercial, "yoy_change"))}
             changeDirection={direction(val(comercio.balanzaComercial, "yoy_change"))}
+            changeLabel="a/a"
             goodDirection="up"
             accentColor={
               Number(val(comercio.balanzaComercial, "value")) >= 0
@@ -1067,6 +1070,7 @@ export function HomeClient({
               period={formatPeriod(val(row.ind, "period"))}
               change={formatDeltaPct(val(row.ind, "yoy_change"))}
               changeDirection={direction(val(row.ind, "yoy_change"))}
+            changeLabel="a/a"
               goodDirection="up"
               accentColor={row.color}
             />
@@ -1099,6 +1103,7 @@ export function HomeClient({
               period={formatPeriod(val(row.ind, "period"))}
               change={formatDeltaPct(val(row.ind, "yoy_change"))}
               changeDirection={direction(val(row.ind, "yoy_change"))}
+            changeLabel="a/a"
               goodDirection="up"
               accentColor={row.color}
             />
@@ -1173,6 +1178,7 @@ export function HomeClient({
               }
               change={formatDeltaPct(val(row.ind, "yoy_change"))}
               changeDirection={direction(val(row.ind, "yoy_change"))}
+            changeLabel="a/a"
               goodDirection="down"
               accentColor={row.color}
               sparkData={

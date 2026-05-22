@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import { useTheme } from "@/components/ThemeProvider";
 
@@ -56,7 +57,13 @@ const NAV_GROUPS: NavGroup[] = [
   },
 ];
 
-function NavDropdown({ group }: { group: NavGroup }) {
+function NavDropdown({
+  group,
+  isActive,
+}: {
+  group: NavGroup;
+  isActive: boolean;
+}) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -68,6 +75,9 @@ function NavDropdown({ group }: { group: NavGroup }) {
     return () => document.removeEventListener("click", handler);
   }, [open]);
 
+  // Estado visual: abierto > activo > default
+  const showHighlight = open || isActive;
+
   return (
     <div
       ref={ref}
@@ -77,10 +87,13 @@ function NavDropdown({ group }: { group: NavGroup }) {
     >
       <button
         onClick={() => setOpen((o) => !o)}
-        className="px-3 py-1.5 text-sm rounded-lg transition-colors duration-200 inline-flex items-center gap-1"
+        className="px-3 py-1.5 text-sm rounded-lg transition-colors duration-200 inline-flex items-center gap-1 relative"
         style={{
-          color: open ? "var(--color-primary)" : "var(--color-text-muted)",
+          color: showHighlight
+            ? "var(--color-primary)"
+            : "var(--color-text-muted)",
           background: open ? "var(--color-primary-soft)" : "transparent",
+          fontWeight: isActive ? 600 : 400,
         }}
         aria-expanded={open}
       >
@@ -97,6 +110,12 @@ function NavDropdown({ group }: { group: NavGroup }) {
         >
           <path d="M2 4l4 4 4-4z" />
         </svg>
+        {isActive && !open && (
+          <span
+            className="absolute -bottom-0.5 left-3 right-3 h-0.5 rounded-full"
+            style={{ background: "var(--color-primary)" }}
+          />
+        )}
       </button>
 
       {open && (
@@ -197,9 +216,74 @@ function MobileMenu({
   );
 }
 
+/** Determina qué grupo está "activo" según el pathname o el #anchor visible. */
+function useActiveGroup(): string | null {
+  const pathname = usePathname();
+  const [activeAnchor, setActiveAnchor] = useState<string | null>(null);
+
+  // Scrollspy: detecta qué sección con id está visible en la home
+  useEffect(() => {
+    if (pathname !== "/") {
+      setActiveAnchor(null);
+      return;
+    }
+    const sectionIds = NAV_GROUPS[0].items
+      .filter((i) => i.href.startsWith("/#"))
+      .map((i) => i.href.replace("/#", ""));
+
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+
+    if (sections.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Tomamos la sección que está más arriba pero todavía intersectada
+        const intersecting = entries.filter((e) => e.isIntersecting);
+        if (intersecting.length > 0) {
+          // La de más arriba (menor y top)
+          intersecting.sort(
+            (a, b) =>
+              a.target.getBoundingClientRect().top -
+              b.target.getBoundingClientRect().top,
+          );
+          setActiveAnchor(intersecting[0].target.id);
+        }
+      },
+      {
+        rootMargin: "-80px 0px -60% 0px", // dispara cuando la sección entra al tercio superior
+        threshold: 0,
+      },
+    );
+
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, [pathname]);
+
+  // Determinar qué grupo contiene el path/anchor actual
+  for (const group of NAV_GROUPS) {
+    for (const item of group.items) {
+      if (item.href.startsWith("/#")) {
+        if (
+          pathname === "/" &&
+          activeAnchor &&
+          item.href === `/#${activeAnchor}`
+        ) {
+          return group.label;
+        }
+      } else if (item.href === pathname) {
+        return group.label;
+      }
+    }
+  }
+  return null;
+}
+
 export function Navbar() {
   const { theme, toggle } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const activeGroup = useActiveGroup();
 
   return (
     <nav
@@ -236,7 +320,11 @@ export function Navbar() {
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-1">
           {NAV_GROUPS.map((group) => (
-            <NavDropdown key={group.label} group={group} />
+            <NavDropdown
+              key={group.label}
+              group={group}
+              isActive={activeGroup === group.label}
+            />
           ))}
         </div>
 
