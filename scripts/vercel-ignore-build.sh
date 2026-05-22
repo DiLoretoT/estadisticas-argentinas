@@ -21,6 +21,14 @@ set -e
 # disponible. Si no, usamos HEAD^.
 PREV_SHA="${VERCEL_GIT_PREVIOUS_SHA:-HEAD^}"
 
+# Vercel hace shallow clone — el SHA previo puede no existir localmente
+# (típico en PRs y primer deploy). Si git no lo puede resolver, hacemos
+# build siempre (safe default).
+if ! git cat-file -e "$PREV_SHA^{commit}" 2>/dev/null; then
+  echo "Previous SHA $PREV_SHA no disponible en el clone — build de todos modos."
+  exit 1
+fi
+
 # Listado de archivos cambiados desde el commit previo
 CHANGED=$(git diff --name-only "$PREV_SHA" HEAD)
 
