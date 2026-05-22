@@ -1,0 +1,15 @@
+{
+  "updated_at": "2026-05-22",
+  "updated_at_time": "2026-05-22T00:14:18",
+  "period": "2026-02-01",
+  "value": 5174.26,
+  "monthly_change": 2.33,
+  "yoy_change": -11.77,
+  "unit": "millones_USD",
+  "categoria": "total",
+  "source": {
+    "name": "INDEC (ICA)",
+    "dataset": "datos.gob.ar series 74.3_IIT_0_M_25",
+    "official": true
+  }
+}

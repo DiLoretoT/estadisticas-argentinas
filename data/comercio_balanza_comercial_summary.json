@@ -1,0 +1,15 @@
+{
+  "updated_at": "2026-05-22",
+  "updated_at_time": "2026-05-22T00:14:19",
+  "period": "2026-02-01",
+  "value": 788.03,
+  "monthly_change": -63.99,
+  "yoy_change": 186.12,
+  "unit": "millones_USD",
+  "categoria": "balanza",
+  "source": {
+    "name": "INDEC (ICA)",
+    "dataset": "datos.gob.ar series 74.3_ISC_0_M_19",
+    "official": true
+  }
+}

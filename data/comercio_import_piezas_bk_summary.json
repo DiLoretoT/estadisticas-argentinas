@@ -1,0 +1,15 @@
+{
+  "updated_at": "2026-05-22",
+  "updated_at_time": "2026-05-22T00:14:27",
+  "period": "2026-02-01",
+  "value": 920.58,
+  "monthly_change": 3.31,
+  "yoy_change": -24.93,
+  "unit": "millones_USD",
+  "categoria": "import_uso",
+  "source": {
+    "name": "INDEC (ICA)",
+    "dataset": "datos.gob.ar series 74.3_IIPABC_0_M_50",
+    "official": true
+  }
+}
