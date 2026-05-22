@@ -50,12 +50,28 @@ interface MonetarioMap {
   remInflacion12m: Indicator;
 }
 
+interface ComercioMap {
+  exportTotal: Indicator;
+  importTotal: Indicator;
+  balanzaComercial: Indicator;
+  exportPrimarios: Indicator;
+  exportMoa: Indicator;
+  exportMoi: Indicator;
+  exportCombustibles: Indicator;
+  importIntermedios: Indicator;
+  importBkYPiezas: Indicator;
+  importConsumo: Indicator;
+  importCombustibles: Indicator;
+  importVehiculos: Indicator;
+}
+
 interface Props {
   inflacion: Indicator;
   dolares: DolaresMap;
   monedasLatam: MonedasLatamMap;
   mercado: MercadoMap;
   monetario: MonetarioMap;
+  comercio: ComercioMap;
   empleo: Indicator;
   pobreza: Indicator;
   lastUpdated?: string;
@@ -88,6 +104,9 @@ interface Props {
     plazoFijo30d: [string, number][];
     m2PrivadoYoy: [string, number][];
     remInflacion12m: [string, number][];
+    exportTotal: [string, number][];
+    importTotal: [string, number][];
+    balanzaComercial: [string, number][];
     comparativaMonedas: {
       ars: [string, number][];
       brl: [string, number][];
@@ -205,6 +224,7 @@ export function HomeClient({
   monedasLatam,
   mercado,
   monetario,
+  comercio,
   empleo,
   pobreza,
   lastUpdated,
@@ -941,6 +961,149 @@ export function HomeClient({
             label="Tasa de política monetaria (% anual)"
             color="var(--chart-1)"
             format="decimal"
+          />
+        </div>
+      </section>
+
+      {/* ════════════════════════════ SECTOR EXTERNO ════════════════════════════ */}
+      <section className="mx-auto max-w-6xl px-5 mt-20 scroll-mt-20" id="comercio">
+        <SectionHeader
+          eyebrow="Comercio exterior"
+          title="Sector externo"
+          subtitle="Exportaciones, importaciones y balanza comercial. Datos del ICA (INDEC), valor FOB para exports, CIF para imports."
+        />
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+          <KpiCard
+            label="Exportaciones"
+            value={
+              val(comercio.exportTotal, "value") != null
+                ? `US$ ${Math.round(Number(val(comercio.exportTotal, "value"))).toLocaleString("es-AR")} M`
+                : "—"
+            }
+            period={formatPeriod(val(comercio.exportTotal, "period"))}
+            change={formatDeltaPct(val(comercio.exportTotal, "yoy_change"))}
+            changeDirection={direction(val(comercio.exportTotal, "yoy_change"))}
+            goodDirection="up"
+            accentColor="var(--chart-2)"
+            sparkData={series.exportTotal.slice(-12).map((d) => d[1])}
+          />
+          <KpiCard
+            label="Importaciones"
+            value={
+              val(comercio.importTotal, "value") != null
+                ? `US$ ${Math.round(Number(val(comercio.importTotal, "value"))).toLocaleString("es-AR")} M`
+                : "—"
+            }
+            period={formatPeriod(val(comercio.importTotal, "period"))}
+            change={formatDeltaPct(val(comercio.importTotal, "yoy_change"))}
+            changeDirection={direction(val(comercio.importTotal, "yoy_change"))}
+            goodDirection="up"
+            accentColor="var(--chart-6)"
+            sparkData={series.importTotal.slice(-12).map((d) => d[1])}
+          />
+          <KpiCard
+            label="Balanza comercial"
+            value={
+              val(comercio.balanzaComercial, "value") != null
+                ? `US$ ${Number(val(comercio.balanzaComercial, "value")) >= 0 ? "+" : ""}${Math.round(Number(val(comercio.balanzaComercial, "value"))).toLocaleString("es-AR")} M`
+                : "—"
+            }
+            period={formatPeriod(val(comercio.balanzaComercial, "period"))}
+            change={formatDeltaPct(val(comercio.balanzaComercial, "yoy_change"))}
+            changeDirection={direction(val(comercio.balanzaComercial, "yoy_change"))}
+            goodDirection="up"
+            accentColor={
+              Number(val(comercio.balanzaComercial, "value")) >= 0
+                ? "var(--chart-2)"
+                : "var(--chart-7)"
+            }
+            sparkData={series.balanzaComercial.slice(-12).map((d) => d[1])}
+          />
+        </div>
+
+        {/* Breakdown rubros export */}
+        <h3
+          className="text-xs font-semibold uppercase tracking-wider mb-3"
+          style={{ color: "var(--color-text-muted)" }}
+        >
+          Exportaciones por gran rubro
+        </h3>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+          {[
+            {
+              label: "Productos primarios",
+              ind: comercio.exportPrimarios,
+              color: "var(--chart-3)",
+            },
+            { label: "MOA (Agropec.)", ind: comercio.exportMoa, color: "var(--chart-2)" },
+            { label: "MOI (Industrial)", ind: comercio.exportMoi, color: "var(--chart-6)" },
+            {
+              label: "Combustibles y energía",
+              ind: comercio.exportCombustibles,
+              color: "var(--chart-1)",
+            },
+          ].map((row) => (
+            <KpiCard
+              key={row.label}
+              label={row.label}
+              value={
+                val(row.ind, "value") != null
+                  ? `US$ ${Math.round(Number(val(row.ind, "value"))).toLocaleString("es-AR")} M`
+                  : "—"
+              }
+              period={formatPeriod(val(row.ind, "period"))}
+              change={formatDeltaPct(val(row.ind, "yoy_change"))}
+              changeDirection={direction(val(row.ind, "yoy_change"))}
+              goodDirection="up"
+              accentColor={row.color}
+            />
+          ))}
+        </div>
+
+        {/* Breakdown rubros import */}
+        <h3
+          className="text-xs font-semibold uppercase tracking-wider mb-3"
+          style={{ color: "var(--color-text-muted)" }}
+        >
+          Importaciones por uso económico
+        </h3>
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-8">
+          {[
+            { label: "Intermedios", ind: comercio.importIntermedios, color: "var(--chart-4)" },
+            { label: "BK + Piezas", ind: comercio.importBkYPiezas, color: "var(--chart-6)" },
+            { label: "Consumo", ind: comercio.importConsumo, color: "var(--chart-7)" },
+            { label: "Combustibles", ind: comercio.importCombustibles, color: "var(--chart-1)" },
+            { label: "Vehículos", ind: comercio.importVehiculos, color: "var(--chart-8)" },
+          ].map((row) => (
+            <KpiCard
+              key={row.label}
+              label={row.label}
+              value={
+                val(row.ind, "value") != null
+                  ? `US$ ${Math.round(Number(val(row.ind, "value"))).toLocaleString("es-AR")} M`
+                  : "—"
+              }
+              period={formatPeriod(val(row.ind, "period"))}
+              change={formatDeltaPct(val(row.ind, "yoy_change"))}
+              changeDirection={direction(val(row.ind, "yoy_change"))}
+              goodDirection="up"
+              accentColor={row.color}
+            />
+          ))}
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-5">
+          <AreaChart
+            data={series.exportTotal}
+            label="Exportaciones totales (USD millones, mensual)"
+            color="var(--chart-2)"
+            format="index"
+          />
+          <AreaChart
+            data={series.balanzaComercial}
+            label="Balanza comercial (USD millones)"
+            color="var(--chart-6)"
+            format="index"
           />
         </div>
       </section>

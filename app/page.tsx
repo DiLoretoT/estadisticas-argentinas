@@ -42,6 +42,19 @@ export default async function Home() {
     plazoFijo30d,
     m2PrivadoYoy,
     remInflacion12m,
+    // Sector externo
+    exportTotal,
+    importTotal,
+    balanzaComercial,
+    exportPrimarios,
+    exportMoa,
+    exportMoi,
+    exportCombustibles,
+    importIntermedios,
+    importBkYPiezas,
+    importConsumo,
+    importCombustibles,
+    importVehiculos,
     lastUpdated,
   ] = await Promise.all([
     readIndicator("inflacion.json"),
@@ -75,6 +88,19 @@ export default async function Home() {
     readIndicator("monetario_plazo_fijo_30d.json"),
     readIndicator("monetario_m2_privado_yoy.json"),
     readIndicator("monetario_rem_inflacion_12m.json"),
+    // Sector externo (comercio exterior)
+    readIndicator("comercio_exportaciones_total_summary.json"),
+    readIndicator("comercio_importaciones_total_summary.json"),
+    readIndicator("comercio_balanza_comercial_summary.json"),
+    readIndicator("comercio_export_primarios_summary.json"),
+    readIndicator("comercio_export_moa_summary.json"),
+    readIndicator("comercio_export_moi_summary.json"),
+    readIndicator("comercio_export_combustibles_summary.json"),
+    readIndicator("comercio_import_intermedios_summary.json"),
+    readIndicator("comercio_import_bk_y_piezas_summary.json"),
+    readIndicator("comercio_import_consumo_summary.json"),
+    readIndicator("comercio_import_combustibles_summary.json"),
+    readIndicator("comercio_import_vehiculos_summary.json"),
     getLastUpdated(),
   ]);
 
@@ -117,6 +143,10 @@ export default async function Home() {
     plazoFijo30dSeries,
     m2PrivadoYoySeries,
     remInflacion12mSeries,
+    // Comercio
+    exportTotalSeries,
+    importTotalSeries,
+    balanzaComercialSeries,
   ] = await Promise.all([
     readSeries("inflacion_mensual.json"),
     readSeries("dolar_oficial_mensual.json"),
@@ -154,6 +184,10 @@ export default async function Home() {
     readSeries("monetario_plazo_fijo_30d_diario.json"),
     readSeries("monetario_m2_privado_yoy_mensual.json"),
     readSeries("monetario_rem_inflacion_12m_mensual.json"),
+    // Series comercio exterior (mensuales)
+    readSeries("comercio_exportaciones_total.json"),
+    readSeries("comercio_importaciones_total.json"),
+    readSeries("comercio_balanza_comercial.json"),
   ]);
 
   const salarioRealSeries = computeSalarioReal(ripteNivelSeries, inflacionSeries);
@@ -199,6 +233,20 @@ export default async function Home() {
         m2PrivadoYoy,
         remInflacion12m,
       }}
+      comercio={{
+        exportTotal,
+        importTotal,
+        balanzaComercial,
+        exportPrimarios,
+        exportMoa,
+        exportMoi,
+        exportCombustibles,
+        importIntermedios,
+        importBkYPiezas,
+        importConsumo,
+        importCombustibles,
+        importVehiculos,
+      }}
       empleo={empleo}
       pobreza={pobreza}
       lastUpdated={lastUpdated ?? undefined}
@@ -233,6 +281,10 @@ export default async function Home() {
         plazoFijo30d: tail(plazoFijo30dSeries),
         m2PrivadoYoy: tail(m2PrivadoYoySeries),
         remInflacion12m: tail(remInflacion12mSeries),
+        // Comercio exterior
+        exportTotal: tail(exportTotalSeries),
+        importTotal: tail(importTotalSeries),
+        balanzaComercial: tail(balanzaComercialSeries),
         // For MultiCurrencyChart — long histories used as-is
         comparativaMonedas: {
           ars: dolarOficialDiario,

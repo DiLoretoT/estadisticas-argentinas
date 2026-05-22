@@ -11,6 +11,7 @@ const navLinks = [
   { href: "/#actividad", label: "Actividad" },
   { href: "/#mercado", label: "Mercado" },
   { href: "/#monetario", label: "BCRA" },
+  { href: "/#comercio", label: "Comercio" },
   { href: "/#empleo", label: "Empleo" },
   { href: "/#social", label: "Social" },
 ];
