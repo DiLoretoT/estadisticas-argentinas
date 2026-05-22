@@ -16,6 +16,7 @@ const navLinks = [
   { href: "/#empleo", label: "Empleo" },
   { href: "/#social", label: "Social" },
   { href: "/comparativa", label: "Comparativa" },
+  { href: "/mapa", label: "Mapa" },
   { href: "/analisis", label: "Análisis" },
   { href: "/calendario", label: "Calendario" },
 ];

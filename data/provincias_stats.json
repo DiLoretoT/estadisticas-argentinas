@@ -1,0 +1,52 @@
+{
+  "_description": "Estadísticas por provincia argentina. Fuente: INDEC Censo 2022 (población) + cálculos propios (densidad).",
+  "indicators": [
+    {
+      "key": "poblacion",
+      "label": "Población (Censo 2022)",
+      "unit": "habitantes",
+      "higher_is_better": true,
+      "source": "INDEC Censo Nacional 2022"
+    },
+    {
+      "key": "area_km2",
+      "label": "Superficie (km²)",
+      "unit": "km²",
+      "higher_is_better": true,
+      "source": "INDEC"
+    },
+    {
+      "key": "densidad",
+      "label": "Densidad poblacional (hab/km²)",
+      "unit": "hab/km²",
+      "higher_is_better": true,
+      "source": "Cálculo propio (Censo 2022 / superficie INDEC)"
+    }
+  ],
+  "data": [
+    { "provincia": "Buenos Aires", "poblacion": 17569053, "area_km2": 307571, "densidad": 57.12 },
+    { "provincia": "Capital Federal", "poblacion": 3120612, "area_km2": 200, "densidad": 15603.06 },
+    { "provincia": "Catamarca", "poblacion": 429562, "area_km2": 102602, "densidad": 4.19 },
+    { "provincia": "Chaco", "poblacion": 1142963, "area_km2": 99633, "densidad": 11.47 },
+    { "provincia": "Chubut", "poblacion": 603120, "area_km2": 224686, "densidad": 2.68 },
+    { "provincia": "Cordoba", "poblacion": 3798261, "area_km2": 165321, "densidad": 22.97 },
+    { "provincia": "Corrientes", "poblacion": 1212696, "area_km2": 88199, "densidad": 13.75 },
+    { "provincia": "Entre Rios", "poblacion": 1426426, "area_km2": 78781, "densidad": 18.11 },
+    { "provincia": "Formosa", "poblacion": 606041, "area_km2": 72066, "densidad": 8.41 },
+    { "provincia": "Jujuy", "poblacion": 797955, "area_km2": 53219, "densidad": 14.99 },
+    { "provincia": "La Pampa", "poblacion": 358428, "area_km2": 143440, "densidad": 2.5 },
+    { "provincia": "La Rioja", "poblacion": 393531, "area_km2": 89680, "densidad": 4.39 },
+    { "provincia": "Mendoza", "poblacion": 2014533, "area_km2": 148827, "densidad": 13.54 },
+    { "provincia": "Misiones", "poblacion": 1261294, "area_km2": 29801, "densidad": 42.32 },
+    { "provincia": "Neuquen", "poblacion": 726590, "area_km2": 94078, "densidad": 7.72 },
+    { "provincia": "Rio Negro", "poblacion": 762067, "area_km2": 203013, "densidad": 3.75 },
+    { "provincia": "Salta", "poblacion": 1440672, "area_km2": 155488, "densidad": 9.27 },
+    { "provincia": "San Juan", "poblacion": 818234, "area_km2": 89651, "densidad": 9.13 },
+    { "provincia": "San Luis", "poblacion": 540905, "area_km2": 76748, "densidad": 7.05 },
+    { "provincia": "Santa Cruz", "poblacion": 333473, "area_km2": 243943, "densidad": 1.37 },
+    { "provincia": "Santa Fe", "poblacion": 3556522, "area_km2": 133007, "densidad": 26.74 },
+    { "provincia": "Santiago del Estero", "poblacion": 1054028, "area_km2": 136351, "densidad": 7.73 },
+    { "provincia": "Tierra del Fuego", "poblacion": 185732, "area_km2": 21571, "densidad": 8.61 },
+    { "provincia": "Tucuman", "poblacion": 1694646, "area_km2": 22524, "densidad": 75.24 }
+  ]
+}
