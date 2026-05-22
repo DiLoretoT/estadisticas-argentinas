@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { promises as fs } from "fs";
 import path from "path";
-import { ArgentinaMap, type FeatureCollection } from "@/components/ArgentinaMap";
+import type { FeatureCollection } from "@/components/ArgentinaMap";
+import { ArgentinaMapLazy } from "@/components/ArgentinaMapLazy";
 import { Footer } from "@/components/Footer";
 import type { Metadata } from "next";
 
@@ -92,7 +93,7 @@ export default async function MapaPage() {
           </p>
         </div>
 
-        <ArgentinaMap
+        <ArgentinaMapLazy
           geojson={geojson}
           data={stats.data}
           indicators={stats.indicators}

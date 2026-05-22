@@ -67,8 +67,16 @@ export function LatamRanking({ indicator }: Props) {
     );
   }
 
-  // Calcular el valor máximo (en abs) para escalar las barras
-  const maxAbs = Math.max(...ranked.map((r) => Math.abs(r.value!)));
+  // Calcular el valor máximo (en abs) para escalar las barras.
+  // Si Argentina (u otro) es un outlier extremo (>3x el segundo), usamos
+  // el segundo valor como referencia para no aplastar todo el resto.
+  const sortedDesc = [...ranked].sort(
+    (a, b) => Math.abs(b.value!) - Math.abs(a.value!),
+  );
+  const topAbs = Math.abs(sortedDesc[0]?.value ?? 0);
+  const secondAbs = Math.abs(sortedDesc[1]?.value ?? 0);
+  const isOutlierTop = topAbs > 0 && secondAbs > 0 && topAbs / secondAbs > 3;
+  const scaleMax = isOutlierTop ? secondAbs * 1.15 : topAbs;
   const lastYear = ranked[0].year;
 
   return (
@@ -103,7 +111,11 @@ export function LatamRanking({ indicator }: Props) {
       <div className="px-3 py-2">
         {ranked.map((row, i) => {
           const isArg = row.iso3 === "ARG";
-          const widthPct = (Math.abs(row.value!) / maxAbs) * 100;
+          // Si la barra "real" exceda 100% (caso outlier), mostramos hasta 100%
+          // pero agregamos una marca visual (raya en el borde derecho).
+          const rawPct = (Math.abs(row.value!) / scaleMax) * 100;
+          const widthPct = Math.min(rawPct, 100);
+          const isClipped = rawPct > 100;
           const barColor = isArg ? "var(--color-primary)" : "var(--chart-6)";
           const textColor = isArg ? "var(--color-primary)" : "var(--color-text)";
           return (
@@ -144,6 +156,18 @@ export function LatamRanking({ indicator }: Props) {
                     opacity: isArg ? 1 : 0.55,
                   }}
                 />
+                {isClipped && (
+                  <div
+                    className="absolute inset-y-0 right-0 w-1"
+                    style={{
+                      background: barColor,
+                      borderTopRightRadius: 999,
+                      borderBottomRightRadius: 999,
+                      opacity: 1,
+                    }}
+                    title={`Valor real ${rawPct.toFixed(0)}% del 2do — escala recortada para legibilidad`}
+                  />
+                )}
               </div>
               <span
                 className="text-xs font-semibold tabular-nums w-24 text-right flex-shrink-0"

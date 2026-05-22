@@ -57,6 +57,24 @@ function fmtUSD(v: number): string {
   return `US$ ${v.toLocaleString("es-AR", { maximumFractionDigits: 0 })} M`;
 }
 
+function mainRubro(prov: {
+  export_pp?: number;
+  export_moa?: number;
+  export_moi?: number;
+  export_cye?: number;
+}): string {
+  const rubros: { key: string; label: string; value: number }[] = [
+    { key: "pp", label: "Productos primarios", value: prov.export_pp ?? 0 },
+    { key: "moa", label: "MOA — agroindustrial", value: prov.export_moa ?? 0 },
+    { key: "moi", label: "MOI — industrial", value: prov.export_moi ?? 0 },
+    { key: "cye", label: "Combustibles y energía", value: prov.export_cye ?? 0 },
+  ];
+  const total = rubros.reduce((s, r) => s + r.value, 0);
+  if (total <= 0) return "—";
+  const top = rubros.reduce((a, b) => (a.value > b.value ? a : b));
+  return `${top.label} (${((top.value / total) * 100).toFixed(0)}%)`;
+}
+
 export default async function ProvinciaPage({
   params,
 }: {
@@ -166,7 +184,7 @@ export default async function ProvinciaPage({
           )}
         </div>
 
-        {/* Sección: superficie + datos crudos */}
+        {/* Sección: contexto demográfico y económico */}
         <div
           className="rounded-xl border p-5 mb-8"
           style={{
@@ -190,14 +208,14 @@ export default async function ProvinciaPage({
             )}
             {prov.poblacion != null && prov.area_km2 != null && (
               <Detail
-                label="Densidad"
+                label="Densidad poblacional"
                 value={`${(prov.poblacion / prov.area_km2).toFixed(1)} hab/km²`}
               />
             )}
             {prov.idh != null && (
               <Detail
-                label="IDH (PNUD)"
-                value={`${prov.idh.toFixed(3)} (0-1)`}
+                label="IDH — Desarrollo Humano"
+                value={`${prov.idh.toFixed(3)} sobre 1`}
               />
             )}
             {prov.export_total != null && (
@@ -206,6 +224,20 @@ export default async function ProvinciaPage({
                 value={fmtUSD(prov.export_total)}
               />
             )}
+            {prov.poblacion != null && (
+              <Detail
+                label="% del país"
+                value={`${((prov.poblacion / 47000000) * 100).toFixed(2)}%`}
+              />
+            )}
+            {prov.export_pp != null &&
+              prov.export_total != null &&
+              prov.export_total > 0 && (
+                <Detail
+                  label="Principal rubro"
+                  value={mainRubro(prov)}
+                />
+              )}
           </div>
         </div>
 
