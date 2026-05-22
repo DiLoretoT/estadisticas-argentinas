@@ -10,6 +10,7 @@ from fetch_euro import main as fetch_euro
 from fetch_inflacion import main as fetch_inflacion
 from fetch_monedas_latam import main as fetch_monedas_latam
 from fetch_comercio import main as fetch_comercio
+from fetch_comparativa_latam import main as fetch_comparativa_latam
 from fetch_deuda import main as fetch_deuda
 from fetch_mercado import main as fetch_mercado
 from fetch_monetario_bcra import main as fetch_monetario_bcra
@@ -38,6 +39,7 @@ _STEPS: list[tuple[str, object]] = [
   ("mercado", fetch_mercado),  # Riesgo país EMBI, Merval, ADRs
   ("comercio", fetch_comercio),  # ICA INDEC: export, import, balanza, breakdown
   ("deuda", fetch_deuda),  # MECON Excel: stock por instrumento 1992-actual
+  ("comparativa_latam", fetch_comparativa_latam),  # World Bank WDI: 9 indicadores x 10 países
   ("salarios", fetch_salarios),
   ("emae", fetch_emae),
   ("pbi", fetch_pbi),

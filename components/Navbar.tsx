@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 const navLinks = [
   { href: "/#monedas", label: "Dólar" },
-  { href: "/#latam", label: "LATAM" },
+  { href: "/#latam", label: "Más monedas" },
   { href: "/#precios", label: "Precios" },
   { href: "/#actividad", label: "Actividad" },
   { href: "/#mercado", label: "Mercado" },
@@ -15,6 +15,7 @@ const navLinks = [
   { href: "/#deuda", label: "Deuda" },
   { href: "/#empleo", label: "Empleo" },
   { href: "/#social", label: "Social" },
+  { href: "/comparativa", label: "Comparativa" },
   { href: "/analisis", label: "Análisis" },
 ];
 

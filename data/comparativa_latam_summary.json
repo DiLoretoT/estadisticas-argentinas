@@ -1,0 +1,646 @@
+{
+  "updated_at": "2026-05-21",
+  "updated_at_time": "2026-05-21T23:16:14",
+  "countries": [
+    "ARG",
+    "BRA",
+    "CHL",
+    "URY",
+    "COL",
+    "MEX",
+    "PER",
+    "BOL",
+    "PRY",
+    "ECU"
+  ],
+  "country_labels": {
+    "ARG": "Argentina",
+    "BRA": "Brasil",
+    "CHL": "Chile",
+    "URY": "Uruguay",
+    "COL": "Colombia",
+    "MEX": "México",
+    "PER": "Perú",
+    "BOL": "Bolivia",
+    "PRY": "Paraguay",
+    "ECU": "Ecuador"
+  },
+  "indicators": [
+    {
+      "key": "pbi_pc_ppp",
+      "display_name": "PBI per cápita (USD PPP)",
+      "unit": "USD",
+      "higher_is_better": true,
+      "snapshot": [
+        {
+          "iso3": "ARG",
+          "country": "Argentina",
+          "year": "2024",
+          "value": 30431.19
+        },
+        {
+          "iso3": "BRA",
+          "country": "Brasil",
+          "year": "2024",
+          "value": 22338.48
+        },
+        {
+          "iso3": "CHL",
+          "country": "Chile",
+          "year": "2024",
+          "value": 36181.16
+        },
+        {
+          "iso3": "URY",
+          "country": "Uruguay",
+          "year": "2024",
+          "value": 36417.87
+        },
+        {
+          "iso3": "COL",
+          "country": "Colombia",
+          "year": "2024",
+          "value": 22349.44
+        },
+        {
+          "iso3": "MEX",
+          "country": "México",
+          "year": "2024",
+          "value": 26185.36
+        },
+        {
+          "iso3": "PER",
+          "country": "Perú",
+          "year": "2024",
+          "value": 17802.42
+        },
+        {
+          "iso3": "BOL",
+          "country": "Bolivia",
+          "year": "2024",
+          "value": 12877.64
+        },
+        {
+          "iso3": "PRY",
+          "country": "Paraguay",
+          "year": "2024",
+          "value": 18523.68
+        },
+        {
+          "iso3": "ECU",
+          "country": "Ecuador",
+          "year": "2024",
+          "value": 15840.27
+        }
+      ]
+    },
+    {
+      "key": "inflacion_anual",
+      "display_name": "Inflación anual (% IPC)",
+      "unit": "%",
+      "higher_is_better": false,
+      "snapshot": [
+        {
+          "iso3": "ARG",
+          "country": "Argentina",
+          "year": "2024",
+          "value": 219.88
+        },
+        {
+          "iso3": "BRA",
+          "country": "Brasil",
+          "year": "2024",
+          "value": 4.37
+        },
+        {
+          "iso3": "CHL",
+          "country": "Chile",
+          "year": "2024",
+          "value": 4.3
+        },
+        {
+          "iso3": "URY",
+          "country": "Uruguay",
+          "year": "2024",
+          "value": 4.85
+        },
+        {
+          "iso3": "COL",
+          "country": "Colombia",
+          "year": "2024",
+          "value": 6.61
+        },
+        {
+          "iso3": "MEX",
+          "country": "México",
+          "year": "2024",
+          "value": 4.72
+        },
+        {
+          "iso3": "PER",
+          "country": "Perú",
+          "year": "2024",
+          "value": 2.01
+        },
+        {
+          "iso3": "BOL",
+          "country": "Bolivia",
+          "year": "2024",
+          "value": 5.1
+        },
+        {
+          "iso3": "PRY",
+          "country": "Paraguay",
+          "year": "2024",
+          "value": 3.84
+        },
+        {
+          "iso3": "ECU",
+          "country": "Ecuador",
+          "year": "2024",
+          "value": 1.55
+        }
+      ]
+    },
+    {
+      "key": "desempleo",
+      "display_name": "Desempleo (% fuerza laboral)",
+      "unit": "%",
+      "higher_is_better": false,
+      "snapshot": [
+        {
+          "iso3": "ARG",
+          "country": "Argentina",
+          "year": "2025",
+          "value": 7.14
+        },
+        {
+          "iso3": "BRA",
+          "country": "Brasil",
+          "year": "2025",
+          "value": 5.97
+        },
+        {
+          "iso3": "CHL",
+          "country": "Chile",
+          "year": "2025",
+          "value": 8.97
+        },
+        {
+          "iso3": "URY",
+          "country": "Uruguay",
+          "year": "2025",
+          "value": 7.52
+        },
+        {
+          "iso3": "COL",
+          "country": "Colombia",
+          "year": "2025",
+          "value": 8.29
+        },
+        {
+          "iso3": "MEX",
+          "country": "México",
+          "year": "2025",
+          "value": 2.67
+        },
+        {
+          "iso3": "PER",
+          "country": "Perú",
+          "year": "2025",
+          "value": 5.12
+        },
+        {
+          "iso3": "BOL",
+          "country": "Bolivia",
+          "year": "2025",
+          "value": 2.97
+        },
+        {
+          "iso3": "PRY",
+          "country": "Paraguay",
+          "year": "2025",
+          "value": 4.8
+        },
+        {
+          "iso3": "ECU",
+          "country": "Ecuador",
+          "year": "2025",
+          "value": 3.31
+        }
+      ]
+    },
+    {
+      "key": "gini",
+      "display_name": "Gini (desigualdad)",
+      "unit": "índice",
+      "higher_is_better": false,
+      "snapshot": [
+        {
+          "iso3": "ARG",
+          "country": "Argentina",
+          "year": "2024",
+          "value": 42.4
+        },
+        {
+          "iso3": "BRA",
+          "country": "Brasil",
+          "year": "2024",
+          "value": 50.3
+        },
+        {
+          "iso3": "CHL",
+          "country": "Chile",
+          "year": "2024",
+          "value": 43.0
+        },
+        {
+          "iso3": "URY",
+          "country": "Uruguay",
+          "year": "2024",
+          "value": 40.0
+        },
+        {
+          "iso3": "COL",
+          "country": "Colombia",
+          "year": "2024",
+          "value": 54.4
+        },
+        {
+          "iso3": "MEX",
+          "country": "México",
+          "year": "2024",
+          "value": 42.6
+        },
+        {
+          "iso3": "PER",
+          "country": "Perú",
+          "year": "2024",
+          "value": 40.1
+        },
+        {
+          "iso3": "BOL",
+          "country": "Bolivia",
+          "year": "2024",
+          "value": 40.9
+        },
+        {
+          "iso3": "PRY",
+          "country": "Paraguay",
+          "year": "2024",
+          "value": 44.2
+        },
+        {
+          "iso3": "ECU",
+          "country": "Ecuador",
+          "year": "2025",
+          "value": 45.9
+        }
+      ]
+    },
+    {
+      "key": "esperanza_vida",
+      "display_name": "Esperanza de vida (años)",
+      "unit": "años",
+      "higher_is_better": true,
+      "snapshot": [
+        {
+          "iso3": "ARG",
+          "country": "Argentina",
+          "year": "2024",
+          "value": 77.54
+        },
+        {
+          "iso3": "BRA",
+          "country": "Brasil",
+          "year": "2024",
+          "value": 76.02
+        },
+        {
+          "iso3": "CHL",
+          "country": "Chile",
+          "year": "2024",
+          "value": 81.36
+        },
+        {
+          "iso3": "URY",
+          "country": "Uruguay",
+          "year": "2024",
+          "value": 78.29
+        },
+        {
+          "iso3": "COL",
+          "country": "Colombia",
+          "year": "2024",
+          "value": 77.91
+        },
+        {
+          "iso3": "MEX",
+          "country": "México",
+          "year": "2024",
+          "value": 75.26
+        },
+        {
+          "iso3": "PER",
+          "country": "Perú",
+          "year": "2024",
+          "value": 77.94
+        },
+        {
+          "iso3": "BOL",
+          "country": "Bolivia",
+          "year": "2024",
+          "value": 68.74
+        },
+        {
+          "iso3": "PRY",
+          "country": "Paraguay",
+          "year": "2024",
+          "value": 73.98
+        },
+        {
+          "iso3": "ECU",
+          "country": "Ecuador",
+          "year": "2024",
+          "value": 77.58
+        }
+      ]
+    },
+    {
+      "key": "deuda_externa",
+      "display_name": "Deuda externa total (USD M)",
+      "unit": "USD M",
+      "higher_is_better": false,
+      "snapshot": [
+        {
+          "iso3": "ARG",
+          "country": "Argentina",
+          "year": "2024",
+          "value": 242357155703.1
+        },
+        {
+          "iso3": "BRA",
+          "country": "Brasil",
+          "year": "2024",
+          "value": 605463780812.8
+        },
+        {
+          "iso3": "CHL",
+          "country": "Chile",
+          "year": null,
+          "value": null
+        },
+        {
+          "iso3": "URY",
+          "country": "Uruguay",
+          "year": null,
+          "value": null
+        },
+        {
+          "iso3": "COL",
+          "country": "Colombia",
+          "year": "2024",
+          "value": 201763641280.4
+        },
+        {
+          "iso3": "MEX",
+          "country": "México",
+          "year": "2024",
+          "value": 591255026725.0
+        },
+        {
+          "iso3": "PER",
+          "country": "Perú",
+          "year": "2024",
+          "value": 93268743431.7
+        },
+        {
+          "iso3": "BOL",
+          "country": "Bolivia",
+          "year": "2024",
+          "value": 15717587538.6
+        },
+        {
+          "iso3": "PRY",
+          "country": "Paraguay",
+          "year": "2024",
+          "value": 29963457224.3
+        },
+        {
+          "iso3": "ECU",
+          "country": "Ecuador",
+          "year": "2024",
+          "value": 60364730466.4
+        }
+      ]
+    },
+    {
+      "key": "exports_total",
+      "display_name": "Exportaciones bienes y servicios (USD)",
+      "unit": "USD",
+      "higher_is_better": true,
+      "snapshot": [
+        {
+          "iso3": "ARG",
+          "country": "Argentina",
+          "year": "2024",
+          "value": 96926387166.7
+        },
+        {
+          "iso3": "BRA",
+          "country": "Brasil",
+          "year": "2024",
+          "value": 387912477699.81
+        },
+        {
+          "iso3": "CHL",
+          "country": "Chile",
+          "year": "2024",
+          "value": 111122573200.71
+        },
+        {
+          "iso3": "URY",
+          "country": "Uruguay",
+          "year": "2024",
+          "value": 23406578844.7
+        },
+        {
+          "iso3": "COL",
+          "country": "Colombia",
+          "year": "2024",
+          "value": 69127800893.3
+        },
+        {
+          "iso3": "MEX",
+          "country": "México",
+          "year": "2024",
+          "value": 681313488945.0
+        },
+        {
+          "iso3": "PER",
+          "country": "Perú",
+          "year": "2024",
+          "value": 83324835863.21
+        },
+        {
+          "iso3": "BOL",
+          "country": "Bolivia",
+          "year": "2024",
+          "value": 10081323747.87
+        },
+        {
+          "iso3": "PRY",
+          "country": "Paraguay",
+          "year": "2024",
+          "value": 17546882659.59
+        },
+        {
+          "iso3": "ECU",
+          "country": "Ecuador",
+          "year": "2024",
+          "value": 38570377215.36
+        }
+      ]
+    },
+    {
+      "key": "imports_pct_gdp",
+      "display_name": "Importaciones (% del PBI)",
+      "unit": "%",
+      "higher_is_better": false,
+      "snapshot": [
+        {
+          "iso3": "ARG",
+          "country": "Argentina",
+          "year": "2024",
+          "value": 12.68
+        },
+        {
+          "iso3": "BRA",
+          "country": "Brasil",
+          "year": "2024",
+          "value": 17.65
+        },
+        {
+          "iso3": "CHL",
+          "country": "Chile",
+          "year": "2024",
+          "value": 30.14
+        },
+        {
+          "iso3": "URY",
+          "country": "Uruguay",
+          "year": "2024",
+          "value": 23.7
+        },
+        {
+          "iso3": "COL",
+          "country": "Colombia",
+          "year": "2024",
+          "value": 20.93
+        },
+        {
+          "iso3": "MEX",
+          "country": "México",
+          "year": "2024",
+          "value": 37.89
+        },
+        {
+          "iso3": "PER",
+          "country": "Perú",
+          "year": "2024",
+          "value": 22.94
+        },
+        {
+          "iso3": "BOL",
+          "country": "Bolivia",
+          "year": "2024",
+          "value": 25.54
+        },
+        {
+          "iso3": "PRY",
+          "country": "Paraguay",
+          "year": "2024",
+          "value": 39.63
+        },
+        {
+          "iso3": "ECU",
+          "country": "Ecuador",
+          "year": "2024",
+          "value": 26.92
+        }
+      ]
+    },
+    {
+      "key": "urbanizacion",
+      "display_name": "Urbanización (% población)",
+      "unit": "%",
+      "higher_is_better": true,
+      "snapshot": [
+        {
+          "iso3": "ARG",
+          "country": "Argentina",
+          "year": "2024",
+          "value": 92.27
+        },
+        {
+          "iso3": "BRA",
+          "country": "Brasil",
+          "year": "2024",
+          "value": 87.9
+        },
+        {
+          "iso3": "CHL",
+          "country": "Chile",
+          "year": "2024",
+          "value": 89.0
+        },
+        {
+          "iso3": "URY",
+          "country": "Uruguay",
+          "year": "2024",
+          "value": 95.6
+        },
+        {
+          "iso3": "COL",
+          "country": "Colombia",
+          "year": "2024",
+          "value": 78.52
+        },
+        {
+          "iso3": "MEX",
+          "country": "México",
+          "year": "2024",
+          "value": 79.75
+        },
+        {
+          "iso3": "PER",
+          "country": "Perú",
+          "year": "2024",
+          "value": 85.19
+        },
+        {
+          "iso3": "BOL",
+          "country": "Bolivia",
+          "year": "2024",
+          "value": 71.24
+        },
+        {
+          "iso3": "PRY",
+          "country": "Paraguay",
+          "year": "2024",
+          "value": 69.86
+        },
+        {
+          "iso3": "ECU",
+          "country": "Ecuador",
+          "year": "2024",
+          "value": 63.24
+        }
+      ]
+    }
+  ],
+  "source": {
+    "name": "World Bank — World Development Indicators",
+    "official": true
+  }
+}
