@@ -1,0 +1,13 @@
+{
+  "updated_at": "2026-05-22",
+  "updated_at_time": "2026-05-22T00:57:28",
+  "period": "2025-12-31",
+  "value": 102870.96,
+  "yoy_change": 22.29,
+  "unit": "millones_USD",
+  "source": {
+    "name": "MECON",
+    "dataset": "https://www.argentina.gob.ar/sites/default/files/deuda_publica_31-12-2025.xlsx",
+    "official": true
+  }
+}
