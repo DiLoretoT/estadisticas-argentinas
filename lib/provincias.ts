@@ -1,10 +1,5 @@
 /**
  * Helpers para perfiles provinciales.
- *
- * Maneja:
- *  - Lectura de provincias_stats.json (en server, fs en dev / fetch CDN en prod).
- *  - Slug ↔ nombre canónico.
- *  - Lookup por slug.
  */
 
 export interface ProvinciaStat {
@@ -37,13 +32,21 @@ export interface ProvinciasStatsFile {
   notes?: Record<string, string>;
 }
 
-/** Slugify: "Tierra del Fuego" → "tierra-del-fuego" */
+// Regex de combining marks construida dinamicamente con String.fromCharCode
+// para evitar tener caracteres combining literales en el source code (que
+// rompen builds en algunos entornos).
+const COMBINING_MARKS_REGEX = new RegExp(
+  "[" + String.fromCharCode(0x0300) + "-" + String.fromCharCode(0x036f) + "]",
+  "g",
+);
+
+/** Slugify: nombre canonico a kebab-case ASCII. */
 export function provinciaSlug(name: string): string {
   return name
     .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
+    .replace(COMBINING_MARKS_REGEX, "")
     .toLowerCase()
-    .replace(/[^\w\s-]/g, "")
+    .replace(/[^a-zA-Z0-9\s-]/g, "")
     .trim()
     .replace(/\s+/g, "-");
 }
@@ -67,7 +70,7 @@ export function listAllSlugs(stats: ProvinciasStatsFile): {
   }));
 }
 
-/** Computa el ranking de una provincia en un indicador dado, devuelve {rank, total}. */
+/** Computa el ranking de una provincia en un indicador dado. */
 export function rankIn(
   stats: ProvinciasStatsFile,
   provincia: string,

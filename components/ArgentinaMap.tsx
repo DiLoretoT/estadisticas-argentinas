@@ -144,13 +144,20 @@ function fmtValue(v: number, unit: string): string {
   return v.toLocaleString("es-AR", { maximumFractionDigits: 2 });
 }
 
+/** Regex de combining marks construido dinamicamente para evitar
+ *  caracteres combining literales en el source code. */
+const COMBINING_REGEX = new RegExp(
+  "[" + String.fromCharCode(0x0300) + "-" + String.fromCharCode(0x036f) + "]",
+  "g",
+);
+
 /** Slugify para URL de provincia. */
 function toSlug(name: string): string {
   return name
     .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
+    .replace(COMBINING_REGEX, "")
     .toLowerCase()
-    .replace(/[^\w\s-]/g, "")
+    .replace(/[^a-zA-Z0-9\s-]/g, "")
     .trim()
     .replace(/\s+/g, "-");
 }
