@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { readSeries } from "@/lib/readData";
 import { getSeriesById } from "@/lib/seriesCatalog";
+import { COMPARATIVAS } from "@/lib/comparativas";
 import { CrossAnalysisClient } from "@/components/CrossAnalysisClient";
+import { ComparativasDestacadas } from "@/components/ComparativasDestacadas";
 import { Footer } from "@/components/Footer";
 import type { Metadata } from "next";
 
@@ -38,10 +40,30 @@ export default async function AnalisisPage({
   const xMeta = getSeriesById(xId)!;
   const yMeta = getSeriesById(yId)!;
 
+  // Para el análisis cruzado custom
   const [xData, yData] = await Promise.all([
     readSeries(xMeta.file),
     readSeries(yMeta.file),
   ]);
+
+  // Para las comparativas destacadas pre-armadas: cargamos en paralelo TODAS
+  // las series únicas que aparecen en COMPARATIVAS, una sola vez por serie.
+  const requiredIds = new Set<string>();
+  for (const c of COMPARATIVAS) {
+    requiredIds.add(c.xId);
+    requiredIds.add(c.yId);
+  }
+  const seriesEntries = Array.from(requiredIds)
+    .map((id) => getSeriesById(id))
+    .filter((s): s is NonNullable<typeof s> => Boolean(s));
+
+  const loaded = await Promise.all(
+    seriesEntries.map(async (s) => {
+      const data = await readSeries(s.file).catch(() => []);
+      return [s.id, data] as const;
+    }),
+  );
+  const seriesData = new Map<string, [string, number][]>(loaded);
 
   return (
     <>
@@ -80,18 +102,42 @@ export default async function AnalisisPage({
             className="mt-3 text-base max-w-2xl"
             style={{ color: "var(--color-text-muted)" }}
           >
-            Elegí dos indicadores cualesquiera del catálogo y mirá cómo se
-            relacionan. Calculamos la correlación, R² y la regresión lineal
-            sobre los períodos en que ambas series tienen datos en común.
+            Compará dos indicadores cualesquiera con correlación + R² +
+            regresión. Más abajo hay comparativas <strong>pre-curadas</strong>{" "}
+            con el coeficiente estadístico correcto para cada caso.
           </p>
         </div>
 
-        <CrossAnalysisClient
-          xId={xId}
-          yId={yId}
-          xData={xData}
-          yData={yData}
-        />
+        {/* Comparativas destacadas pre-armadas */}
+        <section className="mb-16">
+          <ComparativasDestacadas seriesData={seriesData} />
+        </section>
+
+        {/* Análisis cruzado libre */}
+        <section>
+          <div className="mb-6">
+            <h2
+              className="text-2xl font-bold"
+              style={{ color: "var(--color-text)" }}
+            >
+              Análisis libre
+            </h2>
+            <p
+              className="mt-2 text-sm max-w-2xl"
+              style={{ color: "var(--color-text-muted)" }}
+            >
+              Elegí cualquier par de series para crear tu propia comparativa.
+              Usa Pearson por simplicidad — los coeficientes específicos por
+              caso están en las comparativas pre-curadas arriba.
+            </p>
+          </div>
+          <CrossAnalysisClient
+            xId={xId}
+            yId={yId}
+            xData={xData}
+            yData={yData}
+          />
+        </section>
       </div>
 
       <Footer />

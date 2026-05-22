@@ -651,12 +651,12 @@ export function HomeClient({
             source="INDEC"
           />
           <AreaChart
-            data={series.ripte}
-            label="RIPTE — variación mensual (%)"
-            color="var(--chart-8)"
+            data={series.remInflacion12m}
+            label="REM — expectativas inflación 12m (%)"
+            color="var(--chart-7)"
             format="percent"
-            description="Remuneración Imponible Promedio de Trabajadores Estables. Variación nominal del salario promedio del trabajo registrado."
-            source="MTEySS / SIPA"
+            description="Relevamiento de Expectativas de Mercado del BCRA. Inflación esperada por analistas para los próximos 12 meses. Buen termómetro de credibilidad anti-inflacionaria."
+            source="BCRA — REM"
           />
         </div>
         <div className="grid grid-cols-2 gap-4 mt-6">
@@ -799,19 +799,19 @@ export function HomeClient({
         </div>
         <div className="grid md:grid-cols-2 gap-5">
           <AreaChart
-            data={series.desocupacion}
-            label="Tasa de desocupación (%)"
-            color="var(--chart-4)"
+            data={series.ripte}
+            label="RIPTE — variación mensual (%)"
+            color="var(--chart-8)"
             format="percent"
-            description="Porcentaje de la población económicamente activa que busca trabajo y no lo encuentra. Encuesta de hogares urbanos."
-            source="INDEC — EPH"
+            description="Remuneración Imponible Promedio de Trabajadores Estables. Variación nominal del salario promedio del trabajo registrado. Comparalo con la inflación mensual para ver si ganaste o perdiste poder de compra."
+            source="MTEySS / SIPA"
           />
           <AreaChart
             data={series.salarioReal}
             label="Salario real (RIPTE / IPC, base 100)"
             color="var(--chart-2)"
-            format="decimal"
-            description="Poder adquisitivo del salario nominal después de descontar la inflación. Base 100 en el primer mes disponible."
+            format="index"
+            description="Poder adquisitivo del salario nominal después de descontar la inflación. Base 100 en el primer mes disponible — si está debajo de 100, el salario perdió poder de compra desde entonces."
             source="Cálculo propio sobre RIPTE (MTEySS) y IPC (INDEC)"
           />
         </div>
