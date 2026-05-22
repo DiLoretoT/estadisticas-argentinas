@@ -1,34 +1,208 @@
 "use client";
 
 import Link from "next/link";
+import { useState, useEffect, useRef } from "react";
 import { useTheme } from "@/components/ThemeProvider";
-import { motion } from "framer-motion";
 
-const navLinks = [
-  { href: "/#monedas", label: "Dólar" },
-  { href: "/#latam", label: "Más monedas" },
-  { href: "/#precios", label: "Precios" },
-  { href: "/#actividad", label: "Actividad" },
-  { href: "/#mercado", label: "Mercado" },
-  { href: "/#monetario", label: "BCRA" },
-  { href: "/#comercio", label: "Comercio" },
-  { href: "/#deuda", label: "Deuda" },
-  { href: "/#empleo", label: "Empleo" },
-  { href: "/#social", label: "Social" },
-  { href: "/comparativa", label: "Comparativa" },
-  { href: "/mapa", label: "Mapa" },
-  { href: "/analisis", label: "Análisis" },
-  { href: "/calendario", label: "Calendario" },
+interface NavItem {
+  href: string;
+  label: string;
+  description?: string;
+}
+
+interface NavGroup {
+  label: string;
+  items: NavItem[];
+}
+
+const NAV_GROUPS: NavGroup[] = [
+  {
+    label: "Indicadores",
+    items: [
+      { href: "/#monedas", label: "Dólar", description: "7 cotizaciones + brecha cambiaria" },
+      { href: "/#latam", label: "Más monedas", description: "BRL, CLP, UYU, PEN, COP, PYG, MXN, EUR" },
+      { href: "/#precios", label: "Precios", description: "IPC mensual, YTD, interanual" },
+      { href: "/#actividad", label: "Actividad", description: "EMAE y PBI" },
+      { href: "/#mercado", label: "Mercado financiero", description: "Riesgo país, Merval, ADRs" },
+      { href: "/#monetario", label: "Política monetaria", description: "TPM, Reservas, BADLAR, M2, REM" },
+      { href: "/#comercio", label: "Sector externo", description: "Exportaciones, importaciones, balanza" },
+      { href: "/#deuda", label: "Deuda pública", description: "Stock total 1992-2025" },
+      { href: "/#empleo", label: "Empleo e ingresos", description: "Desocupación, empleo, salario real" },
+      { href: "/#social", label: "Social", description: "Pobreza e indigencia" },
+    ],
+  },
+  {
+    label: "Análisis",
+    items: [
+      { href: "/analisis", label: "Análisis cruzado", description: "Scatter de 2 series + correlación" },
+      { href: "/comparativa", label: "Comparativa LATAM", description: "Argentina vs 9 países" },
+      { href: "/mapa", label: "Mapa por provincia", description: "Choropleth de las 24 jurisdicciones" },
+    ],
+  },
+  {
+    label: "Herramientas",
+    items: [
+      { href: "/calculadora", label: "Calculadora de inflación", description: "Convertir pesos entre fechas" },
+      { href: "/calendario", label: "Calendario INDEC", description: "Próximas publicaciones de datos" },
+    ],
+  },
+  {
+    label: "Sobre",
+    items: [
+      { href: "/metodologia", label: "Metodología", description: "Fuentes y reproducibilidad" },
+      { href: "/status", label: "Estado del pipeline", description: "Semáforos del ETL" },
+      { href: "/api/indicadores", label: "API pública", description: "Endpoints REST JSON" },
+    ],
+  },
 ];
+
+function NavDropdown({ group }: { group: NavGroup }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handler(e: MouseEvent) {
+      if (!ref.current?.contains(e.target as Node)) setOpen(false);
+    }
+    if (open) document.addEventListener("click", handler);
+    return () => document.removeEventListener("click", handler);
+  }, [open]);
+
+  return (
+    <div
+      ref={ref}
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className="px-3 py-1.5 text-sm rounded-lg transition-colors duration-200 inline-flex items-center gap-1"
+        style={{
+          color: open ? "var(--color-primary)" : "var(--color-text-muted)",
+          background: open ? "var(--color-primary-soft)" : "transparent",
+        }}
+        aria-expanded={open}
+      >
+        {group.label}
+        <svg
+          width="10"
+          height="10"
+          viewBox="0 0 12 12"
+          fill="currentColor"
+          style={{
+            transform: open ? "rotate(180deg)" : "rotate(0deg)",
+            transition: "transform 0.15s",
+          }}
+        >
+          <path d="M2 4l4 4 4-4z" />
+        </svg>
+      </button>
+
+      {open && (
+        <div
+          className="absolute left-0 top-full pt-2 z-50"
+          style={{ minWidth: 280 }}
+        >
+          <div
+            className="rounded-xl border overflow-hidden py-1"
+            style={{
+              background: "var(--color-card)",
+              borderColor: "var(--color-border)",
+              boxShadow: "var(--shadow-lg)",
+            }}
+          >
+            {group.items.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="block px-3 py-2 transition-colors duration-150"
+                style={{ color: "var(--color-text)" }}
+                onClick={() => setOpen(false)}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "var(--color-primary-soft)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "transparent";
+                }}
+              >
+                <div className="text-sm font-medium">{item.label}</div>
+                {item.description && (
+                  <div
+                    className="text-xs mt-0.5"
+                    style={{ color: "var(--color-text-muted)" }}
+                  >
+                    {item.description}
+                  </div>
+                )}
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function MobileMenu({
+  open,
+  onClose,
+}: {
+  open: boolean;
+  onClose: () => void;
+}) {
+  if (!open) return null;
+  return (
+    <div
+      className="fixed inset-x-0 top-[var(--navbar-h)] bottom-0 z-40 overflow-y-auto"
+      style={{
+        background: "var(--color-bg)",
+        borderTop: "1px solid var(--color-border)",
+      }}
+    >
+      <div className="px-5 py-4 space-y-6">
+        {NAV_GROUPS.map((group) => (
+          <div key={group.label}>
+            <h3
+              className="text-xs font-semibold uppercase tracking-wider mb-2"
+              style={{ color: "var(--color-text-muted)" }}
+            >
+              {group.label}
+            </h3>
+            <div className="space-y-1">
+              {group.items.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={onClose}
+                  className="block px-3 py-2 rounded-lg"
+                  style={{ color: "var(--color-text)" }}
+                >
+                  <div className="text-sm font-medium">{item.label}</div>
+                  {item.description && (
+                    <div
+                      className="text-xs mt-0.5"
+                      style={{ color: "var(--color-text-muted)" }}
+                    >
+                      {item.description}
+                    </div>
+                  )}
+                </Link>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export function Navbar() {
   const { theme, toggle } = useTheme();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <motion.nav
-      initial={{ y: -56 }}
-      animate={{ y: 0 }}
-      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+    <nav
       className="glass fixed top-0 inset-x-0 z-50 border-b"
       style={{
         height: "var(--navbar-h)",
@@ -37,7 +211,7 @@ export function Navbar() {
     >
       <div className="mx-auto max-w-6xl h-full flex items-center justify-between px-5">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 group">
+        <Link href="/" className="flex items-center gap-2 group flex-shrink-0">
           <img
             src="/branding/datalogia-isotipo.png"
             alt="Datalogía"
@@ -52,60 +226,68 @@ export function Navbar() {
             estadísticas
           </span>
           <span
-            className="text-lg font-light"
+            className="text-lg font-light hidden sm:inline"
             style={{ color: "var(--color-text-muted)" }}
           >
             argentinas
           </span>
         </Link>
 
-        {/* Nav links */}
+        {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-1">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="px-3 py-1.5 text-sm rounded-lg transition-colors duration-200"
-              style={{ color: "var(--color-text-muted)" }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = "var(--color-primary)";
-                e.currentTarget.style.background = "var(--color-primary-soft)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = "var(--color-text-muted)";
-                e.currentTarget.style.background = "transparent";
-              }}
-            >
-              {link.label}
-            </Link>
+          {NAV_GROUPS.map((group) => (
+            <NavDropdown key={group.label} group={group} />
           ))}
         </div>
 
-        {/* Theme toggle */}
-        <button
-          onClick={toggle}
-          className="w-9 h-9 flex items-center justify-center rounded-lg transition-colors duration-200"
-          style={{ color: "var(--color-text-muted)" }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = "var(--color-primary-soft)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = "transparent";
-          }}
-          aria-label="Cambiar tema"
-        >
-          {theme === "dark" ? (
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="12" cy="12" r="5" />
-              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-            </svg>
-          ) : (
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
-            </svg>
-          )}
-        </button>
+        {/* Right actions */}
+        <div className="flex items-center gap-1">
+          <button
+            onClick={toggle}
+            className="w-9 h-9 flex items-center justify-center rounded-lg transition-colors duration-200"
+            style={{ color: "var(--color-text-muted)" }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "var(--color-primary-soft)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "transparent";
+            }}
+            aria-label="Cambiar tema"
+          >
+            {theme === "dark" ? (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="5" />
+                <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+              </svg>
+            ) : (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+              </svg>
+            )}
+          </button>
+
+          {/* Mobile hamburger */}
+          <button
+            onClick={() => setMobileOpen((o) => !o)}
+            className="md:hidden w-9 h-9 flex items-center justify-center rounded-lg"
+            style={{ color: "var(--color-text-muted)" }}
+            aria-label="Menú"
+            aria-expanded={mobileOpen}
+          >
+            {mobileOpen ? (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <path d="M3 6h18M3 12h18M3 18h18" />
+              </svg>
+            )}
+          </button>
+        </div>
       </div>
-    </motion.nav>
+
+      <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} />
+    </nav>
   );
 }
