@@ -11,11 +11,13 @@ import type { NextConfig } from "next";
  */
 const CSP = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com",
+  // static.cloudflareinsights.com = beacon de Cloudflare Web Analytics
+  // (inyectado automáticamente por CF cuando el proxy está activo).
+  "script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com https://static.cloudflareinsights.com",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: https:",
   "font-src 'self' data:",
-  "connect-src 'self' https://cdn.jsdelivr.net https://raw.githubusercontent.com https://vitals.vercel-insights.com https://va.vercel-scripts.com",
+  "connect-src 'self' https://cdn.jsdelivr.net https://raw.githubusercontent.com https://vitals.vercel-insights.com https://va.vercel-scripts.com https://cloudflareinsights.com",
   "frame-ancestors 'none'",
   "base-uri 'self'",
   "form-action 'self'",
