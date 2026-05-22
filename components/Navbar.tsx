@@ -35,6 +35,7 @@ const NAV_GROUPS: NavGroup[] = [
   {
     label: "Análisis",
     items: [
+      { href: "/explorar", label: "Explorar series", description: "Multi-serie + doble eje + filtros de período" },
       { href: "/analisis", label: "Análisis cruzado", description: "Scatter de 2 series + correlación" },
       { href: "/comparativa", label: "Comparativa LATAM", description: "Argentina vs 9 países" },
       { href: "/mapa", label: "Mapa por provincia", description: "Choropleth de las 24 jurisdicciones" },
