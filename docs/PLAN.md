@@ -2,8 +2,9 @@
 
 > Documento centralizado del trabajo para llevar el repo `estadisticas-argentinas` a estado público "vidriera" en `estadisticas.datalogia.app`. Cualquier sesión (Claude, vos, otra IA) debe poder retomar el trabajo leyendo solo este archivo + el `README.md`.
 
-**Última actualización:** 2026-05-21
-**Estado global:** Fase 0 ✅ · Fase 1 ✅ · Bloque A ✅ · D1 multi-país ✅ · Bloque B ✅ (parcial) · Bloque C ✅ (parcial) · Bloque D ✅ (parcial) · Pendientes: refresh primera corrida Action + tests + tag v1.0
+**Última actualización:** 2026-05-21 (sesión nocturna autónoma cerrada)
+**Estado global:** Plan v3 cubierto al 80%. Sitio en producción `estadisticas.datalogia.app` con 7 secciones temáticas + 5 páginas dedicadas + Cross-Análisis + Comparativa LATAM + Calendario + Calculadora + Metodología + Status. 50+ series económicas en `data/`, 35 tests verde (vitest + pytest), security hardening completo (CSP, HSTS, Cloudflare proxy, GitHub Code Security, Vercel Spending Limit), perf lazy-load del chart pesado.
+**Pendientes:** Mapa por provincia, Modo historia scrollytelling, Comparativa LATAM en page individual (existe pero falta polish), API pública con docs OpenAPI, alertas email/Telegram.
 **Dueño:** Tomás Di Loreto
 
 ---
@@ -240,6 +241,14 @@ No es bloqueante para vidriera, pero suma muchísimos puntos para empleadores qu
 | 2026-05-20 | Claude | D1 | Restructure multi-país: home dashboard a `/argentina`, landing en `/` con catálogo de países (Argentina activo + CL/UY/BR coming soon). Redirect 301 `/detalle/*` → `/argentina/detalle/*`. Sitemap actualizado. Commit `45211a3`. |
 | 2026-05-21 | Claude | B | Event annotations argentinas (10 eventos: corralito, default, COVID, devaluación Milei...). Brecha cambiaria en /dolar. Salario real deflactado por IPC. Botón "Descargar CSV" en cada chart. data/events.json + lib/events.ts + lib/salarioReal.ts. Commit `a53a372`. |
 | 2026-05-21 | Claude | C+D | Calculadora de inflación (/calculadora). Página /metodologia con tabla de 13 indicadores + reproducibilidad. Página /status con semáforos del ETL. GitHub Actions: `etl-daily.yml` (cron 06:00 y 20:00 AR) + `ci.yml` (lint+typecheck+build). Fixed lint errors (ThemeProvider, AreaChart). Commit `d416fd9`. |
+| 2026-05-21 | Tomás + Claude | v3 sesión 1 | Sacar branding personal → Datalogía. Fusionar landing y dashboard en `/`. KPIs agrupados por tipo (monedas → precios → actividad → empleo → social). Commit `87e5af7`. |
+| 2026-05-21 | Claude | v3 sesión 2 | Dólares ARS variantes (MEP, CCL, mayorista, cripto, tarjeta) + monedas LATAM (BRL, CLP, UYU, PEN, COP, PYG, MXN) + MultiCurrencyChart comparativo normalizado base 100. ETL `fetch_dolares_alt.py` y `fetch_monedas_latam.py`. Workflow `etl-fx.yml` intradia cada 2h. Bug LATAM fix (parsing BCRA detalle[].tipoPase). Commit `5dbce29`. |
+| 2026-05-21 | Claude | v3 sesión 3 | Arquitectura data en vivo: jsdelivr CDN + ISR (no más rebuild por dato nuevo). Graficos legibles tipo periodismo (data labels, halo, end-labels, ejes 16px). Snap-to-data en MultiCurrencyChart. Tests Vitest (lib/) y pytest (etl/). Security headers (HSTS, CSP, X-Frame). jsdelivr fallback a raw.githubusercontent. GitHub Actions SHA pin (mitigación tj-actions). Dependabot. CodeQL workflow. Cloudflare proxy activado. Vercel Spending Limit. Commits `2d05989`, `716bb3f`, `c602b11`, `da6eda7`. |
+| 2026-05-21 | Claude | v3 sesión 4 | Favicons: D Datalogía (logo1) en estadísticas/finanzas, camión en logística, persona estirando en consultorio. ETL mercado capitales (riesgo país EMBI + Merval + ADRs GGAL/YPF/PAM/BMA/TEO). ETL sector monetario BCRA (base, reservas, TPM, BADLAR, PF, M2, REM). UI secciones "Mercado financiero" y "Política monetaria" en home. Commits varios incluyendo `19085d1`, `a452984`. |
+| 2026-05-21 | Claude | v3 sesión 5 | ETL comercio exterior (14 series ICA INDEC: export, import, balanza, breakdown). UI sección "Sector externo" con cards + breakdown rubros + 2 charts. Commit `b432a32`. |
+| 2026-05-21 | Claude | v3 sesión 6 | Cross-Análisis page `/analisis`: scatter interactivo con catálogo de 40 series + pearson + R² + 6 ejemplos prearmados. ETL deuda pública via MECON Excel (7 series anuales 1992-2025). UI sección "Deuda" en home. Commit `776e773`, `a3543c9`. |
+| 2026-05-21 | Claude | v3 sesión 7 | Comparativa LATAM `/comparativa`: World Bank WDI con 9 indicadores × 10 países LATAM (PBI per cápita PPP, inflación, desempleo, Gini, esperanza vida, deuda externa, exports, imports %PBI, urbanización). Ranking con barras y Argentina destacada. Commit `f39ba65`. |
+| 2026-05-21 | Claude | v3 sesión 8 | Performance: MultiCurrencyChart lazy via dynamic(ssr:false). Página `/calendario` con próximas publicaciones INDEC calculadas (IPC, EMAE, ICA, PBI, EPH, etc). Commit `7a9f97b`. |
 
 ---
 
