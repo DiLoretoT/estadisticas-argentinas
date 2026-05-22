@@ -4,6 +4,7 @@ import path from "path";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { ProvinciaRubrosChart } from "@/components/ProvinciaRubrosChart";
+import { FinanzasCTA } from "@/components/FinanzasCTA";
 import {
   findBySlug,
   listAllSlugs,
@@ -295,6 +296,8 @@ export default async function ProvinciaPage({
             </li>
           </ul>
         </div>
+
+        <FinanzasCTA variant="provincia" />
 
         {/* Navegación a otras provincias */}
         <div

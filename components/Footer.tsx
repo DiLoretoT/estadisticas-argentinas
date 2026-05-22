@@ -40,15 +40,27 @@ export function Footer() {
               ecosistema Datalogía. Indicadores macroeconómicos y sociales con
               fuentes oficiales.
             </p>
-            <a
-              href="https://datalogia.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block mt-4 text-sm font-medium hover:underline"
-              style={{ color: "var(--color-primary)" }}
-            >
-              Conocer Datalogía →
-            </a>
+            <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 items-center">
+              <a
+                href="https://datalogia.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block text-sm font-medium hover:underline"
+                style={{ color: "var(--color-primary)" }}
+              >
+                Conocer Datalogía →
+              </a>
+              <span style={{ color: "var(--color-text-muted)" }}>·</span>
+              <a
+                href="https://finanzas.datalogia.app/?utm_source=estadisticas-footer&utm_medium=cross-app&utm_campaign=ecosystem"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block text-sm font-medium hover:underline"
+                style={{ color: "var(--color-primary)" }}
+              >
+                Probar Datalogía Finanzas 💸 →
+              </a>
+            </div>
           </div>
 
           {/* Navegación */}
@@ -89,11 +101,11 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="/api/indicadores"
+                  href="/api/v1/openapi.json"
                   className="hover:underline"
                   style={{ color: "var(--color-text-muted)" }}
                 >
-                  API pública
+                  API pública (OpenAPI)
                 </a>
               </li>
             </ul>

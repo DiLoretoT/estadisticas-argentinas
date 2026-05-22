@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { readSeries } from "@/lib/readData";
 import { CalculadoraInflacion } from "@/components/CalculadoraInflacion";
+import { FinanzasCTA } from "@/components/FinanzasCTA";
 import { Footer } from "@/components/Footer";
 import type { Metadata } from "next";
 
@@ -113,6 +114,8 @@ export default async function CalculadoraPage() {
               IPC GBA o IPC CABA, que tienen metodologías distintas. Próximamente.
             </p>
           </div>
+
+          <FinanzasCTA variant="calculadora" />
         </div>
       </div>
 

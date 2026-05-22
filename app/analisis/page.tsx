@@ -4,6 +4,7 @@ import { getSeriesById } from "@/lib/seriesCatalog";
 import { COMPARATIVAS } from "@/lib/comparativas";
 import { CrossAnalysisClient } from "@/components/CrossAnalysisClient";
 import { ComparativasDestacadas } from "@/components/ComparativasDestacadas";
+import { FinanzasCTA } from "@/components/FinanzasCTA";
 import { Footer } from "@/components/Footer";
 import type { Metadata } from "next";
 
@@ -138,6 +139,8 @@ export default async function AnalisisPage({
             yData={yData}
           />
         </section>
+
+        <FinanzasCTA variant="inline" />
       </div>
 
       <Footer />
