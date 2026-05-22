@@ -8,6 +8,7 @@ import { LinkCard } from "@/components/LinkCard";
 import { Footer } from "@/components/Footer";
 import type { CurrencySeries } from "@/components/MultiCurrencyChart";
 import { MultiCurrencyChartLazy } from "@/components/MultiCurrencyChartLazy";
+import { AnalysisPanel } from "@/components/AnalysisPanel";
 
 type Indicator = Record<string, unknown>;
 
@@ -508,12 +509,16 @@ export function HomeClient({
             label="Dólar oficial (cierre mensual)"
             color="var(--chart-6)"
             format="peso"
+            description="Cotización oficial del USD informada por el BCRA, valor de cierre del último día hábil del mes."
+            source="BCRA — Cotizaciones"
           />
           <AreaChart
             data={series.dolarBlue}
             label="Dólar blue (cierre mensual)"
             color="var(--chart-3)"
             format="peso"
+            description="Cotización del dólar paralelo o 'blue' en el mercado informal de la Ciudad de Buenos Aires."
+            source="ArgentinaDatos / Ámbito"
           />
         </div>
         <div className="grid grid-cols-2 gap-4 mt-6">
@@ -530,6 +535,15 @@ export function HomeClient({
             title="Calculadora"
             description="Convertí pesos entre fechas con IPC"
             delay={0.05}
+          />
+        </div>
+      
+        <div className="mt-6">
+          <AnalysisPanel
+            data={series.dolarOficial}
+            noun="el dólar oficial"
+            format="currency_ars"
+            goodDirection="neutral"
           />
         </div>
       </section>
@@ -633,12 +647,16 @@ export function HomeClient({
             label="IPC — variación mensual (%)"
             color="var(--chart-1)"
             format="percent"
+            description="Variación del Índice de Precios al Consumidor respecto al mes anterior. Mide la inflación 'punta a punta' del mes."
+            source="INDEC"
           />
           <AreaChart
             data={series.ripte}
             label="RIPTE — variación mensual (%)"
             color="var(--chart-8)"
             format="percent"
+            description="Remuneración Imponible Promedio de Trabajadores Estables. Variación nominal del salario promedio del trabajo registrado."
+            source="MTEySS / SIPA"
           />
         </div>
         <div className="grid grid-cols-2 gap-4 mt-6">
@@ -655,6 +673,15 @@ export function HomeClient({
             title="Calculadora"
             description="Convertí pesos entre fechas usando el IPC"
             delay={0.05}
+          />
+        </div>
+      
+        <div className="mt-6">
+          <AnalysisPanel
+            data={series.inflacion}
+            noun="la inflación mensual"
+            format="percent"
+            goodDirection="down"
           />
         </div>
       </section>
@@ -696,12 +723,16 @@ export function HomeClient({
             label="EMAE — índice mensual base 2004=100"
             color="var(--chart-2)"
             format="decimal"
+            description="Estimador Mensual de Actividad Económica. Proxy mensual del PBI, captura la actividad de todos los sectores."
+            source="INDEC"
           />
           <AreaChart
             data={series.pbi}
             label="PBI trimestral (mill. $ constantes)"
             color="var(--chart-6)"
             format="index"
+            description="Producto Bruto Interno a precios constantes (volumen físico), sin efecto inflacionario."
+            source="INDEC — Cuentas Nacionales"
           />
         </div>
         <div className="mt-6">
@@ -711,6 +742,15 @@ export function HomeClient({
             title="Actividad"
             description="EMAE y PBI con eventos macro"
             delay={0}
+          />
+        </div>
+      
+        <div className="mt-6">
+          <AnalysisPanel
+            data={series.emae}
+            noun="la actividad económica"
+            format="index"
+            goodDirection="up"
           />
         </div>
       </section>
@@ -763,12 +803,16 @@ export function HomeClient({
             label="Tasa de desocupación (%)"
             color="var(--chart-4)"
             format="percent"
+            description="Porcentaje de la población económicamente activa que busca trabajo y no lo encuentra. Encuesta de hogares urbanos."
+            source="INDEC — EPH"
           />
           <AreaChart
             data={series.salarioReal}
             label="Salario real (RIPTE / IPC, base 100)"
             color="var(--chart-2)"
             format="decimal"
+            description="Poder adquisitivo del salario nominal después de descontar la inflación. Base 100 en el primer mes disponible."
+            source="Cálculo propio sobre RIPTE (MTEySS) y IPC (INDEC)"
           />
         </div>
         <div className="grid grid-cols-2 gap-4 mt-6">
@@ -785,6 +829,15 @@ export function HomeClient({
             title="Salarios"
             description="RIPTE nominal y real deflactado"
             delay={0.05}
+          />
+        </div>
+      
+        <div className="mt-6">
+          <AnalysisPanel
+            data={series.desocupacion}
+            noun="la tasa de desocupación"
+            format="percent"
+            goodDirection="down"
           />
         </div>
       </section>
@@ -860,12 +913,25 @@ export function HomeClient({
             label="Riesgo país EMBI (puntos básicos)"
             color="var(--chart-7)"
             format="index"
+            description="Sobretasa que pagan los bonos soberanos argentinos por encima del Tesoro de EE.UU. Mide la percepción de riesgo de default."
+            source="ArgentinaDatos / Ámbito"
           />
           <AreaChart
             data={series.merval}
             label="S&P Merval (ARS, cierre mensual)"
             color="var(--chart-2)"
             format="index"
+            description="Índice principal de la Bolsa de Comercio de Buenos Aires. Captura las acciones argentinas más líquidas."
+            source="Yahoo Finance"
+          />
+        </div>
+      
+        <div className="mt-6">
+          <AnalysisPanel
+            data={series.riesgoPais}
+            noun="el riesgo país"
+            format="basis_points"
+            goodDirection="down"
           />
         </div>
       </section>
@@ -968,12 +1034,25 @@ export function HomeClient({
             label="Reservas internacionales BCRA (USD millones)"
             color="var(--chart-6)"
             format="index"
+            description="Stock de reservas internacionales del Banco Central. Incluye oro, divisas y DEGs del FMI."
+            source="BCRA"
           />
           <AreaChart
             data={series.tpm}
             label="Tasa de política monetaria (% anual)"
             color="var(--chart-1)"
             format="decimal"
+            description="Tasa de referencia que fija el BCRA en sus operaciones de mercado abierto. Define el costo del dinero en pesos."
+            source="BCRA"
+          />
+        </div>
+      
+        <div className="mt-6">
+          <AnalysisPanel
+            data={series.reservas}
+            noun="las reservas del BCRA"
+            format="currency_usd"
+            goodDirection="up"
           />
         </div>
       </section>
@@ -1116,12 +1195,25 @@ export function HomeClient({
             label="Exportaciones totales (USD millones, mensual)"
             color="var(--chart-2)"
             format="index"
+            description="Valor FOB (Free On Board) de las exportaciones de bienes. Suma de productos primarios, MOA, MOI y combustibles."
+            source="INDEC — ICA (Intercambio Comercial Argentino)"
           />
           <AreaChart
             data={series.balanzaComercial}
             label="Balanza comercial (USD millones)"
             color="var(--chart-6)"
             format="index"
+            description="Diferencia entre exportaciones e importaciones de bienes. Positiva = superávit; negativa = déficit comercial."
+            source="INDEC — ICA"
+          />
+        </div>
+      
+        <div className="mt-6">
+          <AnalysisPanel
+            data={series.balanzaComercial}
+            noun="la balanza comercial"
+            format="currency_usd"
+            goodDirection="up"
           />
         </div>
       </section>
@@ -1193,12 +1285,16 @@ export function HomeClient({
             label="Deuda Pública Bruta Total (USD millones, anual)"
             color="var(--chart-7)"
             format="index"
+            description="Stock total de la Deuda Pública Bruta del Sector Público Nacional al cierre de cada año, expresada en dólares al tipo de cambio de cierre."
+            source="MECON — Secretaría de Finanzas"
           />
           <AreaChart
             data={series.deudaOrganismosIntl}
             label="Deuda con Organismos Internacionales — FMI/BIRF/BID (USD M)"
             color="var(--chart-1)"
             format="index"
+            description="Subcomponente de la deuda con multilaterales (FMI, Banco Mundial, BID). Los saltos en 2018 y 2025 corresponden a acuerdos con el FMI."
+            source="MECON — Secretaría de Finanzas"
           />
         </div>
         <p
@@ -1213,6 +1309,15 @@ export function HomeClient({
           acuerdo con el FMI (abril 2025). Datos del Ministerio de
           Economía, hoja A.2.5 del Excel trimestral de deuda.
         </p>
+      
+        <div className="mt-6">
+          <AnalysisPanel
+            data={series.deudaTotal}
+            noun="la deuda pública total"
+            format="currency_usd"
+            goodDirection="down"
+          />
+        </div>
       </section>
 
       {/* ════════════════════════════ SOCIAL ════════════════════════════ */}
@@ -1264,12 +1369,16 @@ export function HomeClient({
             label="Tasa de pobreza (%)"
             color="var(--chart-7)"
             format="percent"
+            description="Porcentaje de personas bajo la línea de pobreza (ingresos < Canasta Básica Total). Medición semestral por aglomerado urbano."
+            source="INDEC — EPH"
           />
           <AreaChart
             data={series.indigencia}
             label="Línea de indigencia ($ por adulto/mes)"
             color="var(--chart-3)"
             format="peso"
+            description="Valor monetario de la Canasta Básica Alimentaria por adulto equivalente. Define el umbral de indigencia."
+            source="INDEC — CBA/CBT"
           />
         </div>
         <div className="mt-6">
@@ -1279,6 +1388,15 @@ export function HomeClient({
             title="Pobreza e indigencia"
             description="Serie histórica completa de pobreza y CBA"
             delay={0}
+          />
+        </div>
+      
+        <div className="mt-6">
+          <AnalysisPanel
+            data={series.pobreza}
+            noun="la tasa de pobreza"
+            format="percent"
+            goodDirection="down"
           />
         </div>
       </section>
