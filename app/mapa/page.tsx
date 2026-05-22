@@ -85,9 +85,10 @@ export default async function MapaPage() {
             className="mt-3 text-base max-w-2xl"
             style={{ color: "var(--color-text-muted)" }}
           >
-            Indicadores demográficos por jurisdicción. Datos del INDEC Censo 2022.
-            Próximamente se sumarán exportaciones provinciales, empleo registrado
-            y PBG (Producto Bruto Geográfico).
+            5 indicadores por jurisdicción: población, superficie, densidad,
+            IDH (Desarrollo Humano), exportaciones provinciales (OPEX INDEC) y
+            tipo de economía derivado. <strong>Hacé click en cualquier
+            provincia</strong> para ver su perfil completo.
           </p>
         </div>
 

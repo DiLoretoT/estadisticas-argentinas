@@ -207,20 +207,82 @@ def _coerce_number(cell: Any) -> float | None:
     return None
 
 
-def parse_opex(content: bytes) -> dict[str, float]:
-    """Parsea el archivo OPEX y devuelve {provincia: total_USD_M}.
+def parse_opex(content: bytes) -> dict[str, dict[str, float]]:
+    """Parsea el OPEX y devuelve, por provincia, total + composición por rubro.
 
-    Soporta tanto .xls BIFF como HTML disfrazado de xls.
-    Estrategia: buscar filas con nombre de provincia + el mayor valor numérico
-    de esa fila como "Total" anual de exportaciones (formato típico OPEX).
+    Estructura: {provincia: {'total': X, 'pp': X, 'moa': X, 'moi': X, 'cye': X}}
+
+    El archivo tiene una hoja específica "OP-Rubros 2022-2025" donde las
+    columnas están organizadas como:
+      col 1: nombre de provincia
+      col 2-5: Total por año 2022, 2023, 2024, 2025
+      col 6-9: Productos Primarios (PP) por año
+      col 10-13: MOA (Manuf. Origen Agropecuario) por año
+      col 14-17: MOI (Manuf. Origen Industrial) por año
+      col 18-21: CyE (Combustibles y Energía) por año
+
+    Tomamos el ÚLTIMO año disponible (col 5/9/13/17/21).
     """
+    try:
+        wb = xlrd.open_workbook(file_contents=content)
+    except Exception as exc:
+        logger.error("xlrd.open_workbook falló: %s", exc)
+        return _parse_opex_fallback(content)
+
+    # Buscar la hoja "OP-Rubros"
+    target_sheet = None
+    for name in wb.sheet_names():
+        if "rubros" in name.lower():
+            target_sheet = wb.sheet_by_name(name)
+            break
+    if not target_sheet:
+        logger.warning("Hoja 'OP-Rubros' no encontrada — usando fallback.")
+        return _parse_opex_fallback(content)
+
+    # Columnas del último año disponible
+    LAST_YEAR_COLS = {
+        "total": 5,
+        "pp": 9,
+        "moa": 13,
+        "moi": 17,
+        "cye": 21,
+    }
+
+    results: dict[str, dict[str, float]] = {}
+    for r in range(target_sheet.nrows):
+        row = target_sheet.row_values(r)
+        # Provincia está en col 1 (a veces 0 si es región)
+        prov_cell = None
+        for cell in row[:3]:
+            if isinstance(cell, str):
+                prov = _normalize_province(cell)
+                if prov:
+                    prov_cell = prov
+                    break
+        if not prov_cell:
+            continue
+        # Extraer los 5 valores numéricos en sus columnas
+        values: dict[str, float] = {}
+        for key, col in LAST_YEAR_COLS.items():
+            if col < len(row):
+                n = _coerce_number(row[col])
+                if n is not None and n >= 0:
+                    values[key] = float(n)
+        if "total" in values and values["total"] > 0:
+            # Si ya existe esa provincia, conservar el de mayor total (debería ser único)
+            if prov_cell not in results or values["total"] > results[prov_cell].get("total", 0):
+                results[prov_cell] = values
+
+    return results
+
+
+def _parse_opex_fallback(content: bytes) -> dict[str, dict[str, float]]:
+    """Fallback genérico: solo total, sin composición. Útil si cambia la estructura."""
     rows = _rows_from_xls_bytes(content)
     if not rows:
         return {}
-
-    results: dict[str, float] = {}
+    out: dict[str, dict[str, float]] = {}
     for row in rows:
-        # Buscar provincia en las primeras 4 columnas
         prov_cell = None
         for cell in row[:4]:
             if isinstance(cell, str):
@@ -230,22 +292,49 @@ def parse_opex(content: bytes) -> dict[str, float]:
                     break
         if not prov_cell:
             continue
-        numeric_values: list[float] = []
+        nums: list[float] = []
         for c in row:
             n = _coerce_number(c)
             if n is not None and n > 0:
-                numeric_values.append(n)
-        if not numeric_values:
+                nums.append(n)
+        if not nums:
             continue
-        total = max(numeric_values)
-        if prov_cell not in results or total > results[prov_cell]:
-            results[prov_cell] = float(total)
+        total = max(nums)
+        if prov_cell not in out or total > out[prov_cell].get("total", 0):
+            out[prov_cell] = {"total": total}
+    return out
 
-    return results
+
+def _classify_economy(values: dict[str, float]) -> str | None:
+    """Clasifica el tipo de economía según composición de exportaciones.
+
+    Mira qué rubro tiene >50% del total y le pone un label descriptivo.
+    Si ningún rubro supera 40%, es "diversificada".
+    """
+    total = values.get("total", 0)
+    if total <= 0:
+        return None
+    rubros = {
+        "pp": "Agropecuaria primaria",
+        "moa": "Agroindustrial",
+        "moi": "Industrial",
+        "cye": "Energética / minera",
+    }
+    max_key, max_val = max(
+        ((k, values.get(k, 0)) for k in rubros), key=lambda x: x[1]
+    )
+    pct = max_val / total
+    if pct >= 0.50:
+        return f"{rubros[max_key]} ({pct * 100:.0f}% del total)"
+    if pct >= 0.40:
+        return f"Predominantemente {rubros[max_key].lower()} ({pct * 100:.0f}%)"
+    return "Diversificada"
 
 
-def update_provincias_stats(exports_by_provincia: dict[str, float]) -> None:
-    """Actualiza data/provincias_stats.json con los exports nuevos. Conserva el resto."""
+def update_provincias_stats(
+    exports_by_provincia: dict[str, dict[str, float]],
+) -> None:
+    """Actualiza data/provincias_stats.json con los exports nuevos + composición."""
     if not exports_by_provincia:
         logger.warning("No hay exports nuevos para actualizar.")
         return
@@ -256,24 +345,56 @@ def update_provincias_stats(exports_by_provincia: dict[str, float]) -> None:
     with stats_path.open("r", encoding="utf-8") as f:
         stats = json.load(f)
 
-    # Update data
+    # Update data — agrega total + composición + tipo_economia
     for entry in stats["data"]:
         prov = entry["provincia"]
         if prov in exports_by_provincia:
-            entry["export_total"] = round(exports_by_provincia[prov], 2)
+            values = exports_by_provincia[prov]
+            if "total" in values:
+                entry["export_total"] = round(values["total"], 2)
+            if "pp" in values:
+                entry["export_pp"] = round(values["pp"], 2)
+            if "moa" in values:
+                entry["export_moa"] = round(values["moa"], 2)
+            if "moi" in values:
+                entry["export_moi"] = round(values["moi"], 2)
+            if "cye" in values:
+                entry["export_cye"] = round(values["cye"], 2)
+            tipo = _classify_economy(values)
+            if tipo:
+                entry["tipo_economia"] = tipo
 
     # Update notes
     if "notes" not in stats:
         stats["notes"] = {}
     stats["notes"]["export_total"] = (
-        "Fuente: INDEC OPEX (anexo Excel). Valor anual o semestral según último publicado."
+        "Fuente: INDEC OPEX (anexo Excel). Total anual + composición por gran "
+        "rubro: PP (Productos primarios), MOA (Manuf. Origen Agropecuario), "
+        "MOI (Manuf. Origen Industrial), CyE (Combustibles y Energía)."
     )
+    stats["notes"]["tipo_economia"] = (
+        "Clasificación derivada: si un rubro concentra >50% de las "
+        "exportaciones, define el tipo de economía provincial."
+    )
+
+    # Asegurar que los indicators incluyen los nuevos campos como meta
+    existing_keys = {ind["key"] for ind in stats["indicators"]}
+    if "tipo_economia" not in existing_keys:
+        stats["indicators"].append({
+            "key": "tipo_economia",
+            "label": "Tipo de economía",
+            "category": "Economía",
+            "unit": "categórico",
+            "higher_is_better": True,
+            "source": "Derivado de OPEX (INDEC)",
+            "description": "Clasificación según el rubro de exportaciones dominante.",
+        })
 
     with stats_path.open("w", encoding="utf-8") as f:
         json.dump(stats, f, ensure_ascii=False, indent=2)
 
     logger.info(
-        "provincias_stats.json actualizado: %d provincias con exports.",
+        "provincias_stats.json actualizado: %d provincias con exports + composición.",
         len(exports_by_provincia),
     )
 

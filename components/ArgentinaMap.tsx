@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 
 // Tipos GeoJSON mínimos locales para no depender de @types/geojson
 interface PolygonGeom {
@@ -143,12 +144,24 @@ function fmtValue(v: number, unit: string): string {
   return v.toLocaleString("es-AR", { maximumFractionDigits: 2 });
 }
 
+/** Slugify para URL de provincia. */
+function toSlug(name: string): string {
+  return name
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-");
+}
+
 export function ArgentinaMap({
   geojson,
   data,
   indicators,
   defaultIndicator,
 }: Props) {
+  const router = useRouter();
   const [currentInd, setCurrentInd] = useState(
     defaultIndicator || indicators[0]?.key || "poblacion",
   );
@@ -330,6 +343,7 @@ export function ArgentinaMap({
                     transition: "stroke 0.15s, stroke-width 0.15s",
                   }}
                   onMouseEnter={() => setHoverProv(provincia)}
+                  onClick={() => router.push(`/provincia/${toSlug(provincia)}`)}
                   onMouseLeave={() => setHoverProv(null)}
                 >
                   <title>
@@ -430,6 +444,7 @@ export function ArgentinaMap({
                   }}
                   onMouseEnter={() => setHoverProv(row.provincia)}
                   onMouseLeave={() => setHoverProv(null)}
+                  onClick={() => router.push(`/provincia/${toSlug(row.provincia)}`)}
                 >
                   <span className="flex items-center gap-2">
                     <span

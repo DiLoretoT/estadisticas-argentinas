@@ -45,6 +45,15 @@
       "higher_is_better": true,
       "source": "INDEC — OPEX (Origen Provincial de Exportaciones), última base disponible",
       "description": "Valor FOB de las exportaciones de bienes con origen en la provincia. Datos anuales."
+    },
+    {
+      "key": "tipo_economia",
+      "label": "Tipo de economía",
+      "category": "Economía",
+      "unit": "categórico",
+      "higher_is_better": true,
+      "source": "Derivado de OPEX (INDEC)",
+      "description": "Clasificación según el rubro de exportaciones dominante."
     }
   ],
   "data": [
@@ -54,7 +63,12 @@
       "area_km2": 307571,
       "densidad": 57.12,
       "idh": 0.864,
-      "export_total": 33108.0
+      "export_total": 31683.84,
+      "export_pp": 6920.24,
+      "export_moa": 9866.61,
+      "export_moi": 11664.4,
+      "export_cye": 3232.59,
+      "tipo_economia": "Diversificada"
     },
     {
       "provincia": "Capital Federal",
@@ -62,7 +76,11 @@
       "area_km2": 200,
       "densidad": 15603.06,
       "idh": 0.882,
-      "export_total": 409.25
+      "export_total": 409.25,
+      "export_pp": 0.02,
+      "export_moa": 36.38,
+      "export_moi": 372.85,
+      "tipo_economia": "Industrial (91% del total)"
     },
     {
       "provincia": "Catamarca",
@@ -70,7 +88,11 @@
       "area_km2": 102602,
       "densidad": 4.19,
       "idh": 0.832,
-      "export_total": 810.78
+      "export_total": 401.83,
+      "export_pp": 24.5,
+      "export_moa": 11.72,
+      "export_moi": 365.61,
+      "tipo_economia": "Industrial (91% del total)"
     },
     {
       "provincia": "Chaco",
@@ -78,7 +100,11 @@
       "area_km2": 99633,
       "densidad": 11.47,
       "idh": 0.808,
-      "export_total": 516.64
+      "export_total": 234.97,
+      "export_pp": 152.2,
+      "export_moa": 78.85,
+      "export_moi": 3.91,
+      "tipo_economia": "Agropecuaria primaria (65% del total)"
     },
     {
       "provincia": "Chubut",
@@ -86,7 +112,12 @@
       "area_km2": 224686,
       "densidad": 2.68,
       "idh": 0.858,
-      "export_total": 3966.05
+      "export_total": 3966.05,
+      "export_pp": 667.12,
+      "export_moa": 91.35,
+      "export_moi": 1072.79,
+      "export_cye": 2134.78,
+      "tipo_economia": "Energética / minera (54% del total)"
     },
     {
       "provincia": "Cordoba",
@@ -94,7 +125,12 @@
       "area_km2": 165321,
       "densidad": 22.97,
       "idh": 0.851,
-      "export_total": 12863.4
+      "export_total": 10912.77,
+      "export_pp": 5017.36,
+      "export_moa": 4279.85,
+      "export_moi": 1593.99,
+      "export_cye": 21.58,
+      "tipo_economia": "Predominantemente agropecuaria primaria (46%)"
     },
     {
       "provincia": "Corrientes",
@@ -102,7 +138,11 @@
       "area_km2": 88199,
       "densidad": 13.75,
       "idh": 0.823,
-      "export_total": 335.58
+      "export_total": 335.58,
+      "export_pp": 178.58,
+      "export_moa": 114.14,
+      "export_moi": 42.85,
+      "tipo_economia": "Agropecuaria primaria (53% del total)"
     },
     {
       "provincia": "Entre Rios",
@@ -110,7 +150,12 @@
       "area_km2": 78781,
       "densidad": 18.11,
       "idh": 0.843,
-      "export_total": 2115.23
+      "export_total": 2115.23,
+      "export_pp": 1256.56,
+      "export_moa": 672.75,
+      "export_moi": 113.89,
+      "export_cye": 72.03,
+      "tipo_economia": "Agropecuaria primaria (59% del total)"
     },
     {
       "provincia": "Formosa",
@@ -118,7 +163,11 @@
       "area_km2": 72066,
       "densidad": 8.41,
       "idh": 0.812,
-      "export_total": 80.16
+      "export_total": 29.24,
+      "export_pp": 23.86,
+      "export_moa": 5.31,
+      "export_moi": 0.07,
+      "tipo_economia": "Agropecuaria primaria (82% del total)"
     },
     {
       "provincia": "Jujuy",
@@ -126,7 +175,11 @@
       "area_km2": 53219,
       "densidad": 14.99,
       "idh": 0.819,
-      "export_total": 1258.81
+      "export_total": 1258.81,
+      "export_pp": 522.67,
+      "export_moa": 165.46,
+      "export_moi": 570.67,
+      "tipo_economia": "Predominantemente industrial (45%)"
     },
     {
       "provincia": "La Pampa",
@@ -134,7 +187,12 @@
       "area_km2": 143440,
       "densidad": 2.5,
       "idh": 0.861,
-      "export_total": 1213.78
+      "export_total": 938.96,
+      "export_pp": 668.59,
+      "export_moa": 221.17,
+      "export_moi": 8.9,
+      "export_cye": 40.3,
+      "tipo_economia": "Agropecuaria primaria (71% del total)"
     },
     {
       "provincia": "La Rioja",
@@ -142,7 +200,11 @@
       "area_km2": 89680,
       "densidad": 4.39,
       "idh": 0.831,
-      "export_total": 245.85
+      "export_total": 163.35,
+      "export_pp": 6.93,
+      "export_moa": 115.02,
+      "export_moi": 41.4,
+      "tipo_economia": "Agroindustrial (70% del total)"
     },
     {
       "provincia": "Mendoza",
@@ -150,7 +212,12 @@
       "area_km2": 148827,
       "densidad": 13.54,
       "idh": 0.846,
-      "export_total": 1613.97
+      "export_total": 1538.87,
+      "export_pp": 208.26,
+      "export_moa": 994.58,
+      "export_moi": 233.49,
+      "export_cye": 102.54,
+      "tipo_economia": "Agroindustrial (65% del total)"
     },
     {
       "provincia": "Misiones",
@@ -158,7 +225,11 @@
       "area_km2": 29801,
       "densidad": 42.32,
       "idh": 0.819,
-      "export_total": 533.44
+      "export_total": 533.44,
+      "export_pp": 106.93,
+      "export_moa": 260.1,
+      "export_moi": 166.41,
+      "tipo_economia": "Predominantemente agroindustrial (49%)"
     },
     {
       "provincia": "Neuquen",
@@ -166,7 +237,12 @@
       "area_km2": 94078,
       "densidad": 7.72,
       "idh": 0.852,
-      "export_total": 4534.15
+      "export_total": 4534.15,
+      "export_pp": 60.51,
+      "export_moa": 23.08,
+      "export_moi": 68.29,
+      "export_cye": 4382.28,
+      "tipo_economia": "Energética / minera (97% del total)"
     },
     {
       "provincia": "Rio Negro",
@@ -174,7 +250,12 @@
       "area_km2": 203013,
       "densidad": 3.75,
       "idh": 0.847,
-      "export_total": 670.13
+      "export_total": 670.13,
+      "export_pp": 325.79,
+      "export_moa": 116.76,
+      "export_moi": 6.69,
+      "export_cye": 220.88,
+      "tipo_economia": "Predominantemente agropecuaria primaria (49%)"
     },
     {
       "provincia": "Salta",
@@ -182,7 +263,12 @@
       "area_km2": 155488,
       "densidad": 9.27,
       "idh": 0.821,
-      "export_total": 1431.57
+      "export_total": 1431.57,
+      "export_pp": 791.46,
+      "export_moa": 109.98,
+      "export_moi": 502.38,
+      "export_cye": 27.74,
+      "tipo_economia": "Agropecuaria primaria (55% del total)"
     },
     {
       "provincia": "San Juan",
@@ -190,7 +276,11 @@
       "area_km2": 89651,
       "densidad": 9.13,
       "idh": 0.835,
-      "export_total": 2101.12
+      "export_total": 2101.12,
+      "export_pp": 63.89,
+      "export_moa": 180.53,
+      "export_moi": 1856.7,
+      "tipo_economia": "Industrial (88% del total)"
     },
     {
       "provincia": "San Luis",
@@ -198,7 +288,12 @@
       "area_km2": 76748,
       "densidad": 7.05,
       "idh": 0.838,
-      "export_total": 880.21
+      "export_total": 685.76,
+      "export_pp": 369.51,
+      "export_moa": 178.74,
+      "export_moi": 137.52,
+      "export_cye": 0.0,
+      "tipo_economia": "Agropecuaria primaria (54% del total)"
     },
     {
       "provincia": "Santa Cruz",
@@ -206,7 +301,12 @@
       "area_km2": 243943,
       "densidad": 1.37,
       "idh": 0.854,
-      "export_total": 2952.95
+      "export_total": 2952.95,
+      "export_pp": 436.58,
+      "export_moa": 74.97,
+      "export_moi": 2094.2,
+      "export_cye": 347.19,
+      "tipo_economia": "Industrial (71% del total)"
     },
     {
       "provincia": "Santa Fe",
@@ -214,7 +314,12 @@
       "area_km2": 133007,
       "densidad": 26.74,
       "idh": 0.853,
-      "export_total": 19265.31
+      "export_total": 16189.63,
+      "export_pp": 2633.67,
+      "export_moa": 11919.34,
+      "export_moi": 1500.12,
+      "export_cye": 136.5,
+      "tipo_economia": "Agroindustrial (74% del total)"
     },
     {
       "provincia": "Santiago del Estero",
@@ -222,7 +327,11 @@
       "area_km2": 136351,
       "densidad": 7.73,
       "idh": 0.812,
-      "export_total": 1546.63
+      "export_total": 796.09,
+      "export_pp": 730.77,
+      "export_moa": 64.85,
+      "export_moi": 0.47,
+      "tipo_economia": "Agropecuaria primaria (92% del total)"
     },
     {
       "provincia": "Tierra del Fuego",
@@ -230,7 +339,12 @@
       "area_km2": 21571,
       "densidad": 8.61,
       "idh": 0.856,
-      "export_total": 490.02
+      "export_total": 490.02,
+      "export_pp": 73.99,
+      "export_moa": 21.51,
+      "export_moi": 43.69,
+      "export_cye": 350.83,
+      "tipo_economia": "Energética / minera (72% del total)"
     },
     {
       "provincia": "Tucuman",
@@ -238,11 +352,17 @@
       "area_km2": 22524,
       "densidad": 75.24,
       "idh": 0.836,
-      "export_total": 1202.55
+      "export_total": 966.93,
+      "export_pp": 256.79,
+      "export_moa": 372.69,
+      "export_moi": 335.11,
+      "export_cye": 2.34,
+      "tipo_economia": "Diversificada"
     }
   ],
   "notes": {
     "idh": "Valores aproximados del último Informe Nacional sobre Desarrollo Humano disponible (datos Censo 2022). Se actualiza cada ~5 años con cada informe del PNUD/INDEC. Los rankings absolutos pueden variar ±0.01 según metodología exacta.",
-    "export_total": "Fuente: INDEC OPEX (anexo Excel). Valor anual o semestral según último publicado."
+    "export_total": "Fuente: INDEC OPEX (anexo Excel). Total anual + composición por gran rubro: PP (Productos primarios), MOA (Manuf. Origen Agropecuario), MOI (Manuf. Origen Industrial), CyE (Combustibles y Energía).",
+    "tipo_economia": "Clasificación derivada: si un rubro concentra >50% de las exportaciones, define el tipo de economía provincial."
   }
 }
