@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Logo Datalogía v4 — paridad con datalogia-portal.
+  fill="currentColor" para theming dinámico. Sombra: linear gradient negro
+  (transparente top → opacity 0.22 bottom). Dot con radial gradient.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="currentColor">
+  <defs>
+    <linearGradient id="bar-shadow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="black" stop-opacity="0"/>
+      <stop offset="1" stop-color="black" stop-opacity="0.22"/>
+    </linearGradient>
+    <radialGradient id="dot-shadow" cx="0.4" cy="0.35" r="0.7">
+      <stop offset="0.55" stop-color="black" stop-opacity="0"/>
+      <stop offset="1" stop-color="black" stop-opacity="0.28"/>
+    </radialGradient>
+  </defs>
+  <rect x="14" y="60" width="20" height="34" rx="2"/>
+  <rect x="38" y="44" width="20" height="50" rx="2"/>
+  <rect x="62" y="24" width="20" height="70" rx="2"/>
+  <circle cx="72" cy="12" r="8"/>
+  <rect x="14" y="60" width="20" height="34" rx="2" fill="url(#bar-shadow)"/>
+  <rect x="38" y="44" width="20" height="50" rx="2" fill="url(#bar-shadow)"/>
+  <rect x="62" y="24" width="20" height="70" rx="2" fill="url(#bar-shadow)"/>
+  <circle cx="72" cy="12" r="8" fill="url(#dot-shadow)"/>
+</svg>
