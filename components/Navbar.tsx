@@ -12,6 +12,7 @@ const navLinks = [
   { href: "/#mercado", label: "Mercado" },
   { href: "/#monetario", label: "BCRA" },
   { href: "/#comercio", label: "Comercio" },
+  { href: "/#deuda", label: "Deuda" },
   { href: "/#empleo", label: "Empleo" },
   { href: "/#social", label: "Social" },
   { href: "/analisis", label: "Análisis" },

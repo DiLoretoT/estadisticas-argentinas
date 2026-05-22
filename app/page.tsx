@@ -55,6 +55,12 @@ export default async function Home() {
     importConsumo,
     importCombustibles,
     importVehiculos,
+    // Deuda
+    deudaTotal,
+    deudaTitulos,
+    deudaPrestamos,
+    deudaOrganismosIntl,
+    deudaAdelantosBcra,
     lastUpdated,
   ] = await Promise.all([
     readIndicator("inflacion.json"),
@@ -101,6 +107,12 @@ export default async function Home() {
     readIndicator("comercio_import_consumo_summary.json"),
     readIndicator("comercio_import_combustibles_summary.json"),
     readIndicator("comercio_import_vehiculos_summary.json"),
+    // Deuda pública
+    readIndicator("deuda_total_summary.json"),
+    readIndicator("deuda_titulos_summary.json"),
+    readIndicator("deuda_prestamos_summary.json"),
+    readIndicator("deuda_organismos_intl_summary.json"),
+    readIndicator("deuda_adelantos_bcra_summary.json"),
     getLastUpdated(),
   ]);
 
@@ -147,6 +159,8 @@ export default async function Home() {
     exportTotalSeries,
     importTotalSeries,
     balanzaComercialSeries,
+    deudaTotalSeries,
+    deudaOrganismosIntlSeries,
   ] = await Promise.all([
     readSeries("inflacion_mensual.json"),
     readSeries("dolar_oficial_mensual.json"),
@@ -188,6 +202,9 @@ export default async function Home() {
     readSeries("comercio_exportaciones_total.json"),
     readSeries("comercio_importaciones_total.json"),
     readSeries("comercio_balanza_comercial.json"),
+    // Deuda — series anuales
+    readSeries("deuda_total.json"),
+    readSeries("deuda_organismos_intl.json"),
   ]);
 
   const salarioRealSeries = computeSalarioReal(ripteNivelSeries, inflacionSeries);
@@ -247,6 +264,13 @@ export default async function Home() {
         importCombustibles,
         importVehiculos,
       }}
+      deuda={{
+        total: deudaTotal,
+        titulos: deudaTitulos,
+        prestamos: deudaPrestamos,
+        organismosIntl: deudaOrganismosIntl,
+        adelantosBcra: deudaAdelantosBcra,
+      }}
       empleo={empleo}
       pobreza={pobreza}
       lastUpdated={lastUpdated ?? undefined}
@@ -285,6 +309,9 @@ export default async function Home() {
         exportTotal: tail(exportTotalSeries),
         importTotal: tail(importTotalSeries),
         balanzaComercial: tail(balanzaComercialSeries),
+        // Deuda — usamos todos los puntos (1992-2025, anual)
+        deudaTotal: deudaTotalSeries,
+        deudaOrganismosIntl: deudaOrganismosIntlSeries,
         // For MultiCurrencyChart — long histories used as-is
         comparativaMonedas: {
           ars: dolarOficialDiario,

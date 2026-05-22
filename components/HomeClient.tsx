@@ -50,6 +50,14 @@ interface MonetarioMap {
   remInflacion12m: Indicator;
 }
 
+interface DeudaMap {
+  total: Indicator;
+  titulos: Indicator;
+  prestamos: Indicator;
+  organismosIntl: Indicator;
+  adelantosBcra: Indicator;
+}
+
 interface ComercioMap {
   exportTotal: Indicator;
   importTotal: Indicator;
@@ -72,6 +80,7 @@ interface Props {
   mercado: MercadoMap;
   monetario: MonetarioMap;
   comercio: ComercioMap;
+  deuda: DeudaMap;
   empleo: Indicator;
   pobreza: Indicator;
   lastUpdated?: string;
@@ -107,6 +116,8 @@ interface Props {
     exportTotal: [string, number][];
     importTotal: [string, number][];
     balanzaComercial: [string, number][];
+    deudaTotal: [string, number][];
+    deudaOrganismosIntl: [string, number][];
     comparativaMonedas: {
       ars: [string, number][];
       brl: [string, number][];
@@ -225,6 +236,7 @@ export function HomeClient({
   mercado,
   monetario,
   comercio,
+  deuda,
   empleo,
   pobreza,
   lastUpdated,
@@ -1106,6 +1118,94 @@ export function HomeClient({
             format="index"
           />
         </div>
+      </section>
+
+      {/* ════════════════════════════ DEUDA PÚBLICA ════════════════════════════ */}
+      <section className="mx-auto max-w-6xl px-5 mt-20 scroll-mt-20" id="deuda">
+        <SectionHeader
+          eyebrow="Sector fiscal"
+          title="Deuda pública"
+          subtitle="Stock de deuda del Sector Público Nacional por instrumento y acreedor. Datos MECON, serie histórica 1992-2025."
+        />
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-8">
+          {[
+            {
+              label: "Deuda total bruta",
+              ind: deuda.total,
+              color: "var(--chart-7)",
+              spark: series.deudaTotal,
+            },
+            {
+              label: "Títulos públicos",
+              ind: deuda.titulos,
+              color: "var(--chart-6)",
+            },
+            {
+              label: "Préstamos",
+              ind: deuda.prestamos,
+              color: "var(--chart-3)",
+            },
+            {
+              label: "FMI / Organismos intl.",
+              ind: deuda.organismosIntl,
+              color: "var(--chart-1)",
+              spark: series.deudaOrganismosIntl,
+            },
+            {
+              label: "Adelantos BCRA",
+              ind: deuda.adelantosBcra,
+              color: "var(--chart-4)",
+            },
+          ].map((row) => (
+            <KpiCard
+              key={row.label}
+              label={row.label}
+              value={
+                val(row.ind, "value") != null
+                  ? `US$ ${Math.round(Number(val(row.ind, "value")) / 1000)} mil M`
+                  : "—"
+              }
+              period={
+                val(row.ind, "period")
+                  ? String(val(row.ind, "period")).slice(0, 4)
+                  : undefined
+              }
+              change={formatDeltaPct(val(row.ind, "yoy_change"))}
+              changeDirection={direction(val(row.ind, "yoy_change"))}
+              goodDirection="down"
+              accentColor={row.color}
+              sparkData={
+                row.spark ? row.spark.slice(-12).map((d) => d[1]) : undefined
+              }
+            />
+          ))}
+        </div>
+        <div className="grid md:grid-cols-2 gap-5">
+          <AreaChart
+            data={series.deudaTotal}
+            label="Deuda Pública Bruta Total (USD millones, anual)"
+            color="var(--chart-7)"
+            format="index"
+          />
+          <AreaChart
+            data={series.deudaOrganismosIntl}
+            label="Deuda con Organismos Internacionales — FMI/BIRF/BID (USD M)"
+            color="var(--chart-1)"
+            format="index"
+          />
+        </div>
+        <p
+          className="mt-4 text-xs leading-relaxed"
+          style={{ color: "var(--color-text-muted)" }}
+        >
+          <strong>Cómo leer:</strong> el stock total de la deuda incluye
+          deuda pendiente de reestructuración y valores negociables. Los
+          saltos grandes en 2002 (default) y 2018 (acuerdo FMI) muestran
+          eventos clave. La deuda con organismos internacionales subió
+          ~USD 21.000 M entre 2024 y 2025 por el desembolso del nuevo
+          acuerdo con el FMI (abril 2025). Datos del Ministerio de
+          Economía, hoja A.2.5 del Excel trimestral de deuda.
+        </p>
       </section>
 
       {/* ════════════════════════════ SOCIAL ════════════════════════════ */}
