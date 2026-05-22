@@ -25,3 +25,4 @@ playwright/.cache/
 
 # Vitest coverage
 coverage/
+etl/tmp/
