@@ -1,3 +1,5 @@
+import { SiteMark } from "@/components/SiteMark";
+
 export function Footer() {
   return (
     <footer
@@ -17,13 +19,12 @@ export function Footer() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 mb-3"
             >
-              <img
-                src="/branding/datalogia-isotipo.png"
-                alt="Datalogía"
-                width={24}
-                height={24}
-                className="rounded"
-              />
+              <span
+                className="inline-flex items-center justify-center"
+                style={{ color: "var(--mark-color)" }}
+              >
+                <SiteMark size={20} />
+              </span>
               <span
                 className="font-semibold text-sm"
                 style={{ color: "var(--color-text)" }}
