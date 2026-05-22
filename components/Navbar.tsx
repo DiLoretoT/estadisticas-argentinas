@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import { useTheme } from "@/components/ThemeProvider";
+import { SiteMark } from "@/components/SiteMark";
 
 interface NavItem {
   href: string;
@@ -297,13 +298,12 @@ export function Navbar() {
       <div className="mx-auto max-w-6xl h-full flex items-center justify-between px-5">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group flex-shrink-0">
-          <img
-            src="/branding/datalogia-isotipo.png"
-            alt="Datalogía"
-            width={22}
-            height={22}
-            className="rounded"
-          />
+          <span
+            className="inline-flex items-center justify-center"
+            style={{ color: "var(--mark-color)" }}
+          >
+            <SiteMark size={20} />
+          </span>
           <span
             className="text-lg font-bold tracking-tight"
             style={{ color: "var(--color-text)" }}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Logo Datalogía v4 — versión PWA squircle. Paleta fija negro+blanco.
+  Igual que en datalogia-portal: gradient sutil en squircle y barras.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bar-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fafafa"/>
+      <stop offset="1" stop-color="#d4d4d6"/>
+    </linearGradient>
+    <radialGradient id="dot-grad" cx="0.35" cy="0.3" r="0.85">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.6" stop-color="#f4f4f5"/>
+      <stop offset="1" stop-color="#c5c5c8"/>
+    </radialGradient>
+    <linearGradient id="square-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#161616"/>
+      <stop offset="1" stop-color="#050505"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#square-grad)"/>
+  <g>
+    <rect x="131" y="291" width="69" height="119" rx="7" fill="url(#bar-grad)"/>
+    <rect x="214" y="235" width="69" height="175" rx="7" fill="url(#bar-grad)"/>
+    <rect x="298" y="166" width="69" height="244" rx="7" fill="url(#bar-grad)"/>
+    <circle cx="333" cy="124" r="28" fill="url(#dot-grad)"/>
+  </g>
+</svg>
