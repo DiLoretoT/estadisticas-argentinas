@@ -17,6 +17,7 @@ const navLinks = [
   { href: "/#social", label: "Social" },
   { href: "/comparativa", label: "Comparativa" },
   { href: "/analisis", label: "Análisis" },
+  { href: "/calendario", label: "Calendario" },
 ];
 
 export function Navbar() {

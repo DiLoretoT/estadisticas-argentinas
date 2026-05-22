@@ -40,6 +40,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.85,
     },
     {
+      url: `${BASE_URL}/calendario`,
+      lastModified: now,
+      changeFrequency: "daily" as const,
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/calculadora`,
       lastModified: now,
       changeFrequency: "monthly" as const,

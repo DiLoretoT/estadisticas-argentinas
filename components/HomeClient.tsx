@@ -6,7 +6,8 @@ import { AreaChart } from "@/components/AreaChart";
 import { SectionHeader } from "@/components/SectionHeader";
 import { LinkCard } from "@/components/LinkCard";
 import { Footer } from "@/components/Footer";
-import { MultiCurrencyChart, type CurrencySeries } from "@/components/MultiCurrencyChart";
+import type { CurrencySeries } from "@/components/MultiCurrencyChart";
+import { MultiCurrencyChartLazy } from "@/components/MultiCurrencyChartLazy";
 
 type Indicator = Record<string, unknown>;
 
@@ -574,8 +575,8 @@ export function HomeClient({
           />
         </div>
 
-        {/* Comparativa normalizada */}
-        <MultiCurrencyChart
+        {/* Comparativa normalizada — lazy load (no bloquea LCP) */}
+        <MultiCurrencyChartLazy
           label="Devaluación comparada vs USD — base 100 en fecha elegida"
           series={comparativeSeries}
         />
