@@ -1,8 +1,11 @@
 import { readSeries } from "@/lib/readData";
 import { loadEvents, filterEventsForSeries } from "@/lib/events";
 import { DetailPage } from "@/components/DetailPage";
+import { detalleMetadata } from "@/lib/detalleSeo";
 
 export const revalidate = 1800;
+
+export const metadata = detalleMetadata("pobreza");
 
 export default async function PobrezaDetalle() {
   const [pobreza, lineaIndigencia, events] = await Promise.all([
@@ -17,6 +20,7 @@ export default async function PobrezaDetalle() {
 
   return (
     <DetailPage
+      slug="pobreza"
       eyebrow="Social"
       title="Pobreza e indigencia"
       subtitle="Tasa de pobreza semestral y línea de indigencia mensual (Canasta Básica Alimentaria)."

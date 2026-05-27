@@ -13,6 +13,8 @@ import {
   type ProvinciasStatsFile,
 } from "@/lib/provincias";
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbSchema } from "@/lib/structuredData";
 
 export const revalidate = 3600;
 
@@ -41,8 +43,9 @@ export async function generateMetadata({
   const prov = findBySlug(stats, slug);
   if (!prov) return { title: "Provincia no encontrada" };
   return {
-    title: `${prov.provincia}`,
+    title: `${prov.provincia}: economía, población y exportaciones`,
     description: `Perfil económico y social de ${prov.provincia}: población, IDH, exportaciones, tipo de economía. Datos del INDEC, MECON y PNUD.`,
+    alternates: { canonical: `/provincia/${slug}` },
   };
 }
 
@@ -99,6 +102,13 @@ export default async function ProvinciaPage({
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Inicio", path: "/" },
+          { name: "Mapa", path: "/mapa" },
+          { name: prov.provincia, path: `/provincia/${slug}` },
+        ])}
+      />
       <div
         className="mx-auto max-w-5xl px-5"
         style={{

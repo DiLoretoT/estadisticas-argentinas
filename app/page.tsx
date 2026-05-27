@@ -2,6 +2,11 @@ import { readIndicator, readSeries } from "@/lib/readData";
 import { getLastUpdated } from "@/lib/lastUpdated";
 import { computeSalarioReal } from "@/lib/salarioReal";
 import { HomeClient } from "@/components/HomeClient";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 // ISR: regenera la home cada 30 minutos en background. Los commits del ETL
 // al repo se reflejan automáticamente vía jsdelivr CDN, sin re-deploy.

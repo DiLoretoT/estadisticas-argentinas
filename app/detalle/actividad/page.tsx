@@ -1,8 +1,11 @@
 import { readSeries } from "@/lib/readData";
 import { loadEvents, filterEventsForSeries } from "@/lib/events";
 import { DetailPage } from "@/components/DetailPage";
+import { detalleMetadata } from "@/lib/detalleSeo";
 
 export const revalidate = 1800;
+
+export const metadata = detalleMetadata("actividad");
 
 export default async function ActividadDetalle() {
   const [emae, pbi, events] = await Promise.all([
@@ -16,6 +19,7 @@ export default async function ActividadDetalle() {
 
   return (
     <DetailPage
+      slug="actividad"
       eyebrow="Producción"
       title="Actividad económica"
       subtitle="Estimador Mensual de Actividad Económica (EMAE) y Producto Bruto Interno (PBI)."

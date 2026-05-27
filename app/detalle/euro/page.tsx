@@ -1,7 +1,10 @@
 import { readSeries } from "@/lib/readData";
 import { DetailPage } from "@/components/DetailPage";
+import { detalleMetadata } from "@/lib/detalleSeo";
 
 export const revalidate = 1800;
+
+export const metadata = detalleMetadata("euro");
 
 export default async function EuroDetalle() {
   const [euroDiario, euroMensual] = await Promise.all([
@@ -11,6 +14,7 @@ export default async function EuroDetalle() {
 
   return (
     <DetailPage
+      slug="euro"
       eyebrow="Tipo de cambio"
       title="Euro"
       subtitle="Cotización del euro publicada por el BCRA. Series diarias y mensuales."
