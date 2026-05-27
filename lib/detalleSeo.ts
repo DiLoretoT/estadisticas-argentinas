@@ -18,6 +18,8 @@ import {
 interface DetalleSeo {
   /** Va al <title> (el layout le agrega " · Estadísticas Argentinas"). */
   title: string;
+  /** H1 visible de la página: corto, con la keyword principal + "Argentina". */
+  h1: string;
   description: string;
   keywords: string[];
   /** Párrafo introductorio visible e indexable, con keywords naturales. */
@@ -36,6 +38,7 @@ interface DetalleSeo {
 export const DETALLE_SEO: Record<string, DetalleSeo> = {
   inflacion: {
     title: "Inflación en Argentina (IPC mensual)",
+    h1: "Inflación en Argentina",
     description:
       "Inflación mensual de Argentina (IPC, INDEC) desde 2016: variación porcentual, serie histórica, gráficos interactivos y datos descargables. Se actualiza con cada publicación oficial.",
     keywords: [
@@ -71,6 +74,7 @@ export const DETALLE_SEO: Record<string, DetalleSeo> = {
   },
   dolar: {
     title: "Dólar hoy: oficial, blue, MEP y CCL",
+    h1: "Dólar hoy en Argentina",
     description:
       "Cotización del dólar en Argentina: oficial, mayorista, blue, MEP, contado con liqui (CCL), tarjeta y cripto. Brecha cambiaria y evolución histórica, actualizado a diario.",
     keywords: [
@@ -116,6 +120,7 @@ export const DETALLE_SEO: Record<string, DetalleSeo> = {
   },
   euro: {
     title: "Euro hoy en Argentina",
+    h1: "Euro hoy en Argentina",
     description:
       "Cotización del euro en Argentina (BCRA) y su evolución histórica frente al peso. Series diaria y mensual con gráficos y datos descargables.",
     keywords: [
@@ -146,6 +151,7 @@ export const DETALLE_SEO: Record<string, DetalleSeo> = {
   },
   salarios: {
     title: "Salarios en Argentina: RIPTE y salario real",
+    h1: "Salarios en Argentina",
     description:
       "Evolución de los salarios en Argentina: índice RIPTE y salario real deflactado por inflación (IPC). Serie histórica, variación mensual y gráficos descargables.",
     keywords: [
@@ -180,6 +186,7 @@ export const DETALLE_SEO: Record<string, DetalleSeo> = {
   },
   actividad: {
     title: "Actividad económica en Argentina: EMAE y PBI",
+    h1: "Actividad económica de Argentina",
     description:
       "Actividad económica de Argentina: EMAE mensual (índice base 2004=100) y PBI trimestral a precios constantes (INDEC). Serie histórica, variación y gráficos interactivos.",
     keywords: [
@@ -215,6 +222,7 @@ export const DETALLE_SEO: Record<string, DetalleSeo> = {
   },
   empleo: {
     title: "Desempleo en Argentina (tasa de desocupación)",
+    h1: "Empleo y desempleo en Argentina",
     description:
       "Tasa de desocupación y de empleo en Argentina (EPH-INDEC): serie histórica trimestral, gráficos interactivos y datos descargables.",
     keywords: [
@@ -250,6 +258,7 @@ export const DETALLE_SEO: Record<string, DetalleSeo> = {
   },
   pobreza: {
     title: "Pobreza e indigencia en Argentina",
+    h1: "Pobreza e indigencia en Argentina",
     description:
       "Tasa de pobreza e indigencia en Argentina (INDEC) y valor de la línea de indigencia (Canasta Básica Alimentaria). Serie histórica semestral con gráficos.",
     keywords: [

@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   title: "Mapa de Argentina",
   description:
     "Argentina por provincia: población, superficie, densidad. Mapa choropleth interactivo con datos del INDEC Censo 2022.",
+  alternates: { canonical: "/mapa" },
 };
 
 interface IndicatorMeta {

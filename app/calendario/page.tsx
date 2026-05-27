@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Calendario de publicaciones",
   description:
     "Cuándo sale el próximo dato: IPC, EMAE, EPH, PBI, balanza comercial, pobreza. Cronograma estimado de INDEC y BCRA.",
+  alternates: { canonical: "/calendario" },
 };
 
 function formatDate(d: Date): string {

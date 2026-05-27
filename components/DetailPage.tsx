@@ -53,6 +53,7 @@ export function DetailPage({
   datasetRange,
 }: DetailPageProps) {
   const [span, setSpan] = useState("5A");
+  const heading = (slug && DETALLE_SEO[slug]?.h1) || title;
 
   return (
     <>
@@ -81,7 +82,7 @@ export function DetailPage({
           {eyebrow}
         </p>
         <h1 className="text-3xl md:text-4xl font-bold" style={{ color: "var(--color-text)" }}>
-          {title}
+          {heading}
         </h1>
         <p className="mt-2 text-sm max-w-xl" style={{ color: "var(--color-text-muted)" }}>
           {subtitle}
