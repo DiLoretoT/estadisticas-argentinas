@@ -2,8 +2,46 @@ import type { MetadataRoute } from "next";
 import { promises as fs } from "fs";
 import path from "path";
 import { listAllSlugs, type ProvinciasStatsFile } from "@/lib/provincias";
+import { readSeriesLocal } from "@/lib/readData";
 
 const BASE_URL = "https://estadisticas.datalogia.app";
+
+const DETALLE_ORDER = [
+  "inflacion",
+  "dolar",
+  "euro",
+  "salarios",
+  "actividad",
+  "empleo",
+  "pobreza",
+] as const;
+
+/**
+ * Serie(s) que fechan cada `/detalle/*`: el `lastModified` es el último dato
+ * real de la serie, no el momento del build. Cuando hay varias, se toma la más
+ * reciente (ej. pobreza usa la línea de indigencia mensual, más fresca que la
+ * tasa semestral).
+ */
+const DETALLE_SERIES: Record<string, string[]> = {
+  inflacion: ["inflacion_mensual.json"],
+  dolar: ["dolar_oficial_diario.json", "dolar_blue_diario.json"],
+  euro: ["euro_diario.json"],
+  salarios: ["ripte_mensual.json"],
+  actividad: ["emae_mensual.json", "pbi_trimestral.json"],
+  empleo: ["tasa_desocupacion.json", "tasa_empleo.json"],
+  pobreza: ["tasa_pobreza.json", "linea_indigencia.json"],
+};
+
+/** Fecha del dato más reciente entre varias series locales (data/series/*). */
+async function lastDateOf(files: string[]): Promise<Date | undefined> {
+  let max: string | undefined;
+  for (const file of files) {
+    const series = await readSeriesLocal(file);
+    const last = series[series.length - 1]?.[0];
+    if (last && (!max || last > max)) max = last;
+  }
+  return max ? new Date(max) : undefined;
+}
 
 /** Slugs de las 24 jurisdicciones, desde el mismo dataset que usa /provincia. */
 async function loadProvinciaSlugs(): Promise<string[]> {
@@ -19,34 +57,41 @@ async function loadProvinciaSlugs(): Promise<string[]> {
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
-  const detalle = [
-    "inflacion",
-    "dolar",
-    "euro",
-    "salarios",
-    "actividad",
-    "empleo",
-    "pobreza",
-  ];
 
-  const provincias = await loadProvinciaSlugs();
+  const [provincias, detalleDates] = await Promise.all([
+    loadProvinciaSlugs(),
+    Promise.all(
+      DETALLE_ORDER.map(
+        async (slug) =>
+          [slug, (await lastDateOf(DETALLE_SERIES[slug])) ?? now] as const,
+      ),
+    ),
+  ]);
+
+  // Frescura de los datos diarios del sitio: el dato más reciente de cualquier
+  // serie. Sirve para fechar las páginas agregadas (home, reporte, explorar...).
+  const freshest = detalleDates.reduce(
+    (max, [, d]) => (d > max ? d : max),
+    new Date(0),
+  );
+  const daily = freshest.getTime() > 0 ? freshest : now;
 
   return [
     {
       url: BASE_URL,
-      lastModified: now,
+      lastModified: daily,
       changeFrequency: "daily",
       priority: 1.0,
     },
     {
       url: `${BASE_URL}/reporte`,
-      lastModified: now,
+      lastModified: daily,
       changeFrequency: "daily" as const,
       priority: 0.9,
     },
-    ...detalle.map((slug) => ({
+    ...detalleDates.map(([slug, lastModified]) => ({
       url: `${BASE_URL}/detalle/${slug}`,
-      lastModified: now,
+      lastModified,
       changeFrequency: "daily" as const,
       priority: 0.8,
     })),
@@ -58,13 +103,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${BASE_URL}/explorar`,
-      lastModified: now,
+      lastModified: daily,
       changeFrequency: "weekly" as const,
       priority: 0.9,
     },
     {
       url: `${BASE_URL}/analisis`,
-      lastModified: now,
+      lastModified: daily,
       changeFrequency: "weekly" as const,
       priority: 0.85,
     },

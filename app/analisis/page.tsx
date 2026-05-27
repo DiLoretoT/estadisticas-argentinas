@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   title: "Análisis cruzado",
   description:
     "Compará cualquier par de indicadores económicos argentinos. Scatter plot con correlación, R² y regresión lineal sobre 50+ series.",
+  alternates: { canonical: "/analisis" },
 };
 
 const DEFAULT_X = "dolar_oficial_mensual";

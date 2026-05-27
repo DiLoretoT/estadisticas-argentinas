@@ -49,11 +49,11 @@ Vercel, con data que se actualiza a diario vía ETL.
 | **P1** | Párrafo intro indexable por detalle | 🔥🔥 | ✅ hecho |
 | **P1** | FAQ visible + `FAQPage` schema por detalle (3 Q&A c/u) | 🔥🔥 | ✅ hecho |
 | **P1** | `temporalCoverage` real en el schema Dataset (rango de cada serie) | 🔥 | ✅ hecho |
-| **P1** | H1 con keywords (enriquecer el título visible de detalle) | 🔥 | pendiente |
+| **P1** | H1 con keywords (enriquecer el título visible de detalle) | 🔥 | ✅ hecho |
 | **P1** | OG dinámica por indicador (con último valor) | 🔥🔥 | pendiente |
-| **P1** | `lastModified` real por serie en el sitemap | 🔥 | pendiente |
-| **P1** | Footer `<img>` → `next/image` | 🔥 | pendiente |
-| **P1** | `canonical` en el resto de las páginas (calculadora, calendario, comparativa, explorar, analisis, mapa, metodologia, status, reporte) | 🔥 | pendiente |
+| **P1** | `lastModified` real por serie en el sitemap | 🔥 | ✅ hecho |
+| **P1** | Footer `<img>` → `next/image` | 🔥 | ✅ ya estaba (footer usa SVG inline `SiteMark`, sin `<img>`) |
+| **P1** | `canonical` en el resto de las páginas (calculadora, calendario, comparativa, explorar, analisis, mapa, metodologia, status, reporte) | 🔥 | ✅ hecho |
 | **P2** | Páginas long-tail mensuales ("inflación marzo 2026") — cuidado con thin content | 🔥🔥 | pendiente |
 | **P2** | Estrategia de backlinks (charts embebibles + API + citaciones) | 🔥🔥🔥 | pendiente |
 | **P2** | Bing Webmaster + IndexNow (indexación instantánea) | 🔥 | pendiente |
@@ -83,6 +83,30 @@ Cambios:
 - `app/provincia/[slug]/page.tsx` — title con keywords + `canonical` +
   `BreadcrumbList`.
 - `app/sitemap.ts` — async, agrega las 24 provincias.
+
+---
+
+## 3b. Qué se implementó en P1
+
+Contenido indexable y rich results (PR #19):
+- `lib/detalleSeo.ts` — `intro` (párrafo indexable) y `faqs` (3 Q&A) por
+  indicador; `temporalCoverage` real en el Dataset desde el rango de cada serie.
+- `components/DetailPage.tsx` — render de la intro + FAQ visible + `FAQPage`.
+
+H1, canonical y frescura (PR #20):
+- `lib/detalleSeo.ts` + `components/DetailPage.tsx` — campo `h1` por indicador: el
+  título visible lleva la keyword principal + "Argentina" (antes era "Inflación",
+  "Dólar", etc.).
+- `alternates.canonical` en las 9 páginas que faltaban (calculadora, calendario,
+  comparativa, explorar, analisis, mapa, metodologia, status, reporte). El de
+  `/explorar` colapsa las variantes con query params (cierra el gap #3).
+- `app/sitemap.ts` — `lastModified` real: cada `/detalle/*` se fecha con el último
+  dato de su serie (`readSeriesLocal`); home/reporte/explorar/analisis usan el dato
+  más reciente del sitio en lugar de `now()`.
+- Footer: ya usaba SVG inline (`SiteMark`), sin `<img>` — gap #8 no requirió acción.
+
+Único P1 pendiente: **OG dinámica por indicador** (rutas `opengraph-image` con el
+último valor de cada serie).
 
 ---
 

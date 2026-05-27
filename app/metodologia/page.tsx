@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Metodología",
   description:
     "Cómo se construye Estadísticas Argentinas: fuentes oficiales, transformaciones aplicadas, frecuencia de actualización.",
+  alternates: { canonical: "/metodologia" },
 };
 
 interface IndicadorRow {

@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   title: "Estado del ETL",
   description:
     "Estado de la última corrida del pipeline de datos: qué series están actualizadas y cuáles tienen errores.",
+  alternates: { canonical: "/status" },
 };
 
 interface StatusEntry {

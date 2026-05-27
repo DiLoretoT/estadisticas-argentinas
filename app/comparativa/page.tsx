@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   title: "Comparativa LATAM",
   description:
     "Argentina vs LATAM en 9 indicadores comparables: PBI per cápita, inflación, desempleo, pobreza, Gini, deuda externa, esperanza de vida, exportaciones, urbanización. Datos del Banco Mundial.",
+  alternates: { canonical: "/comparativa" },
 };
 
 interface SnapshotRow {
