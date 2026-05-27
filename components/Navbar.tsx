@@ -45,6 +45,7 @@ const NAV_GROUPS: NavGroup[] = [
   {
     label: "Herramientas",
     items: [
+      { href: "/reporte", label: "Parte diario", description: "Qué se publicó hoy y qué se viene" },
       { href: "/calculadora", label: "Calculadora de inflación", description: "Convertir pesos entre fechas" },
       { href: "/calendario", label: "Calendario INDEC", description: "Próximas publicaciones de datos" },
     ],
@@ -223,12 +224,11 @@ function useActiveGroup(): string | null {
   const pathname = usePathname();
   const [activeAnchor, setActiveAnchor] = useState<string | null>(null);
 
-  // Scrollspy: detecta qué sección con id está visible en la home
+  // Scrollspy: detecta qué sección con id está visible en la home.
+  // Fuera de la home no actualizamos el anchor; el consumidor de abajo solo lo
+  // lee cuando pathname === "/", así que un valor viejo nunca se muestra.
   useEffect(() => {
-    if (pathname !== "/") {
-      setActiveAnchor(null);
-      return;
-    }
+    if (pathname !== "/") return;
     const sectionIds = NAV_GROUPS[0].items
       .filter((i) => i.href.startsWith("/#"))
       .map((i) => i.href.replace("/#", ""));
