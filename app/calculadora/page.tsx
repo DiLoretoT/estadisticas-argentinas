@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Calculadora de inflación",
   description:
     "Calculadora oficial de inflación argentina. Convertí pesos entre fechas usando el IPC INDEC.",
+  alternates: { canonical: "/calculadora" },
 };
 
 export const revalidate = 1800;

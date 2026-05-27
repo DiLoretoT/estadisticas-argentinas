@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   title: "Parte diario",
   description:
     "Qué datos económicos se publicaron hoy en Argentina y cuáles se vienen: inflación, actividad, empleo, pobreza, comercio exterior y confianza.",
+  alternates: { canonical: "/reporte" },
 };
 
 type Unit =

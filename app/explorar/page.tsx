@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   title: "Explorar series",
   description:
     "Explorá hasta 6 indicadores económicos argentinos juntos. Doble eje Y, filtros de período, URL compartible. Más de 40 series disponibles.",
+  alternates: { canonical: "/explorar" },
 };
 
 const DEFAULT_SERIES = ["ipc_mensual", "dolar_oficial_mensual"];
