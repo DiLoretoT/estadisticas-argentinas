@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-05-27T17:49:28+00:00",
+  "generated_at": "2026-05-27T17:55:52+00:00",
   "report_date": "2026-05-27",
   "novedades_count": 0,
   "indicadores": [
@@ -156,12 +156,12 @@
       "official": true,
       "source": "BCRA",
       "detail_path": null,
-      "period": "2026-05-19",
-      "value": 46190.0,
+      "period": "2026-05-21",
+      "value": 46748.0,
       "prev_period": "2026-04-30",
       "prev_value": 44516.0,
-      "change_abs": 1674.0,
-      "change_pct": 0.037604,
+      "change_abs": 2232.0,
+      "change_pct": 0.050139,
       "is_new": false
     },
     {
