@@ -1,7 +1,7 @@
 import { readSeries } from "@/lib/readData";
 import { loadEvents, filterEventsForSeries } from "@/lib/events";
 import { DetailPage } from "@/components/DetailPage";
-import { detalleMetadata } from "@/lib/detalleSeo";
+import { detalleMetadata, rangeOf } from "@/lib/detalleSeo";
 
 export const revalidate = 1800;
 
@@ -21,6 +21,7 @@ export default async function PobrezaDetalle() {
   return (
     <DetailPage
       slug="pobreza"
+      datasetRange={rangeOf(pobreza)}
       eyebrow="Social"
       title="Pobreza e indigencia"
       subtitle="Tasa de pobreza semestral y línea de indigencia mensual (Canasta Básica Alimentaria)."

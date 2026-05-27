@@ -2,7 +2,7 @@ import { readSeries } from "@/lib/readData";
 import { loadEvents, filterEventsForSeries } from "@/lib/events";
 import { computeSalarioReal } from "@/lib/salarioReal";
 import { DetailPage } from "@/components/DetailPage";
-import { detalleMetadata } from "@/lib/detalleSeo";
+import { detalleMetadata, rangeOf } from "@/lib/detalleSeo";
 
 export const revalidate = 1800;
 
@@ -22,6 +22,7 @@ export default async function SalariosDetalle() {
   return (
     <DetailPage
       slug="salarios"
+      datasetRange={rangeOf(ripteNivel)}
       eyebrow="Ingresos"
       title="Salarios"
       subtitle="RIPTE (Remuneración Imponible Promedio de los Trabajadores Estables): nominal vs real deflactado por IPC."
