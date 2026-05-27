@@ -1,8 +1,11 @@
 import { readSeries } from "@/lib/readData";
 import { loadEvents, filterEventsForSeries } from "@/lib/events";
 import { DetailPage } from "@/components/DetailPage";
+import { detalleMetadata } from "@/lib/detalleSeo";
 
 export const revalidate = 1800;
+
+export const metadata = detalleMetadata("empleo");
 
 export default async function EmpleoDetalle() {
   const [desocupacion, empleo, events] = await Promise.all([
@@ -15,6 +18,7 @@ export default async function EmpleoDetalle() {
 
   return (
     <DetailPage
+      slug="empleo"
       eyebrow="Mercado laboral"
       title="Empleo"
       subtitle="Tasas de desocupación y empleo trimestrales de la Encuesta Permanente de Hogares (EPH)."

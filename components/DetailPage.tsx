@@ -5,6 +5,8 @@ import Link from "next/link";
 import { AreaChart, type ChartEvent } from "@/components/AreaChart";
 import { DataTable } from "@/components/DataTable";
 import { SpanSelector, filterBySpan } from "@/components/SpanSelector";
+import { JsonLd } from "@/components/JsonLd";
+import { detalleJsonLd } from "@/lib/detalleSeo";
 import type { FormatType } from "@/lib/formatters";
 
 interface ChartConfig {
@@ -32,6 +34,8 @@ interface DetailPageProps {
   notes: string;
   source: string;
   frequency: string;
+  /** Slug de `/detalle/<slug>`: si está, inyecta JSON-LD Dataset + Breadcrumb. */
+  slug?: string;
 }
 
 export function DetailPage({
@@ -43,14 +47,17 @@ export function DetailPage({
   notes,
   source,
   frequency,
+  slug,
 }: DetailPageProps) {
   const [span, setSpan] = useState("5A");
 
   return (
-    <div
-      className="mx-auto max-w-5xl px-5"
-      style={{ paddingTop: "calc(var(--navbar-h) + 2.5rem)", paddingBottom: "4rem" }}
-    >
+    <>
+      {slug && <JsonLd data={detalleJsonLd(slug)} />}
+      <div
+        className="mx-auto max-w-5xl px-5"
+        style={{ paddingTop: "calc(var(--navbar-h) + 2.5rem)", paddingBottom: "4rem" }}
+      >
       <div>
         <Link
           href="/"
@@ -125,6 +132,7 @@ export function DetailPage({
           <span>Frecuencia: {frequency}</span>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }

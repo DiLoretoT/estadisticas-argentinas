@@ -3,6 +3,8 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { JsonLd } from "@/components/JsonLd";
+import { organizationSchema, websiteSchema } from "@/lib/structuredData";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -61,6 +63,11 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  // Se completa seteando GOOGLE_SITE_VERIFICATION en Vercel (ver docs/SEO.md).
+  // Si la env var no está, Next omite el tag.
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION,
+  },
 };
 
 export default function RootLayout({
@@ -80,6 +87,7 @@ export default function RootLayout({
             __html: `(function(){try{var t=localStorage.getItem("theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme:dark)").matches))document.documentElement.classList.add("dark")}catch{}})()`,
           }}
         />
+        <JsonLd data={[organizationSchema(), websiteSchema()]} />
       </head>
       <body className="min-h-full flex flex-col">
         <ThemeProvider>

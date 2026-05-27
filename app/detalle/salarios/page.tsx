@@ -2,8 +2,11 @@ import { readSeries } from "@/lib/readData";
 import { loadEvents, filterEventsForSeries } from "@/lib/events";
 import { computeSalarioReal } from "@/lib/salarioReal";
 import { DetailPage } from "@/components/DetailPage";
+import { detalleMetadata } from "@/lib/detalleSeo";
 
 export const revalidate = 1800;
+
+export const metadata = detalleMetadata("salarios");
 
 export default async function SalariosDetalle() {
   const [ripteMensual, ripteNivel, ipcMensual, events] = await Promise.all([
@@ -18,6 +21,7 @@ export default async function SalariosDetalle() {
 
   return (
     <DetailPage
+      slug="salarios"
       eyebrow="Ingresos"
       title="Salarios"
       subtitle="RIPTE (Remuneración Imponible Promedio de los Trabajadores Estables): nominal vs real deflactado por IPC."

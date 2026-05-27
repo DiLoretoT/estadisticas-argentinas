@@ -1,6 +1,9 @@
 import { readSeries } from "@/lib/readData";
 import { loadEvents, filterEventsForSeries } from "@/lib/events";
 import { DetailPage } from "@/components/DetailPage";
+import { detalleMetadata } from "@/lib/detalleSeo";
+
+export const metadata = detalleMetadata("dolar");
 
 /** Compute brecha cambiaria entre dos series de cierre mensual: (alt/oficial - 1) * 100 (%) */
 function computeBrecha(
@@ -58,6 +61,7 @@ export default async function DolarDetalle() {
 
   return (
     <DetailPage
+      slug="dolar"
       eyebrow="Tipo de cambio"
       title="Dólar"
       subtitle="Las 7 cotizaciones del peso argentino contra el USD + brecha cambiaria desagregada."
