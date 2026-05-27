@@ -147,7 +147,7 @@ export default async function ComparativaPage() {
                 <li>
                   Para inflación: el Banco Mundial usa CPI anual promedio. Para
                   países con alta inflación como Argentina, el valor anual puede
-                  diferir del "punta a punta" diciembre/diciembre que usamos
+                  diferir del &ldquo;punta a punta&rdquo; diciembre/diciembre que usamos
                   internamente.
                 </li>
                 <li>

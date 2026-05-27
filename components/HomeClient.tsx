@@ -603,7 +603,7 @@ export function HomeClient({
           dividida por el USD, normalizada a 100 en la fecha base. Si Argentina
           sube más rápido que Brasil, significa que el peso argentino se devaluó
           más que el real. Una línea plana indica estabilidad cambiaria. Probá
-          anclar a "Pre-Milei" para ver el comportamiento desde diciembre 2023.
+          anclar a &ldquo;Pre-Milei&rdquo; para ver el comportamiento desde diciembre 2023.
         </p>
       </section>
 

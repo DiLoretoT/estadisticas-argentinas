@@ -232,10 +232,6 @@ export function ArgentinaMap({
       }));
   }, [dataMap, indicatorMeta]);
 
-  if (!indicatorMeta) {
-    return <div>Sin indicadores disponibles.</div>;
-  }
-
   // Agrupar indicadores por categoría
   const categories = useMemo(() => {
     const map = new Map<string, IndicatorMeta[]>();
@@ -246,6 +242,10 @@ export function ArgentinaMap({
     }
     return Array.from(map.entries());
   }, [indicators]);
+
+  if (!indicatorMeta) {
+    return <div>Sin indicadores disponibles.</div>;
+  }
 
   return (
     <div className="space-y-4">
