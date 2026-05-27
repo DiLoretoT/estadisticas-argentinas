@@ -1,0 +1,16 @@
+{
+  "updated_at": "2026-05-27",
+  "source": {
+    "name": "UTDT",
+    "official": false,
+    "via": "datos.gob.ar"
+  },
+  "icg": {
+    "period": "2026-03-01",
+    "value": 2.3009
+  },
+  "icc": {
+    "period": "2026-03-01",
+    "value": 42.0259
+  }
+}

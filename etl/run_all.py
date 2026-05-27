@@ -17,6 +17,7 @@ from fetch_monetario_bcra import main as fetch_monetario_bcra
 from fetch_opex_provincial import main as fetch_opex_provincial
 from fetch_pbi import main as fetch_pbi
 from fetch_pobreza import main as fetch_pobreza
+from fetch_confianza import main as fetch_confianza
 from fetch_salarios import main as fetch_salarios
 from inflacion_empalme import main as build_inflacion_empalme
 
@@ -47,6 +48,7 @@ _STEPS: list[tuple[str, object]] = [
   ("pbi", fetch_pbi),
   ("empleo", fetch_empleo),
   ("pobreza", fetch_pobreza),
+  ("confianza", fetch_confianza),  # UTDT (Di Tella): ICG gobierno + ICC consumidor — NO oficial
 ]
 
 
