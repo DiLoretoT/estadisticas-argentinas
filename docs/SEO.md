@@ -50,7 +50,7 @@ Vercel, con data que se actualiza a diario vía ETL.
 | **P1** | FAQ visible + `FAQPage` schema por detalle (3 Q&A c/u) | 🔥🔥 | ✅ hecho |
 | **P1** | `temporalCoverage` real en el schema Dataset (rango de cada serie) | 🔥 | ✅ hecho |
 | **P1** | H1 con keywords (enriquecer el título visible de detalle) | 🔥 | ✅ hecho |
-| **P1** | OG dinámica por indicador (con último valor) | 🔥🔥 | pendiente |
+| **P1** | OG dinámica por indicador (con último valor) | 🔥🔥 | ✅ hecho |
 | **P1** | `lastModified` real por serie en el sitemap | 🔥 | ✅ hecho |
 | **P1** | Footer `<img>` → `next/image` | 🔥 | ✅ ya estaba (footer usa SVG inline `SiteMark`, sin `<img>`) |
 | **P1** | `canonical` en el resto de las páginas (calculadora, calendario, comparativa, explorar, analisis, mapa, metodologia, status, reporte) | 🔥 | ✅ hecho |
@@ -105,8 +105,15 @@ H1, canonical y frescura (PR #20):
   más reciente del sitio en lugar de `now()`.
 - Footer: ya usaba SVG inline (`SiteMark`), sin `<img>` — gap #8 no requirió acción.
 
-Único P1 pendiente: **OG dinámica por indicador** (rutas `opengraph-image` con el
-último valor de cada serie).
+OG dinámica por indicador (PR #21):
+- `lib/ogDetalle.tsx` — config por slug + renderer compartido. Runtime Node (lee la
+  serie con `readSeriesLocal` y formatea con `Intl` es-AR).
+- `app/detalle/<slug>/opengraph-image.tsx` (×7) — cada `/detalle` genera su tarjeta
+  OG con el último valor real como héroe (inflación 3,4 %, dólar oficial $1.413…),
+  sobreescribiendo la OG global de marca.
+
+Con esto **el P1 queda cerrado**. Lo que sigue es P2 (long-tail mensual, backlinks,
+Bing/IndexNow, `SearchAction`).
 
 ---
 
