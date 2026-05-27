@@ -1,7 +1,7 @@
 import { readSeries } from "@/lib/readData";
 import { loadEvents, filterEventsForSeries } from "@/lib/events";
 import { DetailPage } from "@/components/DetailPage";
-import { detalleMetadata } from "@/lib/detalleSeo";
+import { detalleMetadata, rangeOf } from "@/lib/detalleSeo";
 
 export const revalidate = 1800;
 
@@ -18,6 +18,7 @@ export default async function InflacionDetalle() {
   return (
     <DetailPage
       slug="inflacion"
+      datasetRange={rangeOf(mensual)}
       eyebrow="Precios"
       title="Inflación"
       subtitle="Índice de Precios al Consumidor (IPC). Variación porcentual mensual desde 2016."

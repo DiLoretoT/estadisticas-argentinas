@@ -1,7 +1,7 @@
 import { readSeries } from "@/lib/readData";
 import { loadEvents, filterEventsForSeries } from "@/lib/events";
 import { DetailPage } from "@/components/DetailPage";
-import { detalleMetadata } from "@/lib/detalleSeo";
+import { detalleMetadata, rangeOf } from "@/lib/detalleSeo";
 
 export const revalidate = 1800;
 
@@ -19,6 +19,7 @@ export default async function EmpleoDetalle() {
   return (
     <DetailPage
       slug="empleo"
+      datasetRange={rangeOf(desocupacion)}
       eyebrow="Mercado laboral"
       title="Empleo"
       subtitle="Tasas de desocupación y empleo trimestrales de la Encuesta Permanente de Hogares (EPH)."

@@ -1,6 +1,6 @@
 import { readSeries } from "@/lib/readData";
 import { DetailPage } from "@/components/DetailPage";
-import { detalleMetadata } from "@/lib/detalleSeo";
+import { detalleMetadata, rangeOf } from "@/lib/detalleSeo";
 
 export const revalidate = 1800;
 
@@ -15,6 +15,7 @@ export default async function EuroDetalle() {
   return (
     <DetailPage
       slug="euro"
+      datasetRange={rangeOf(euroDiario)}
       eyebrow="Tipo de cambio"
       title="Euro"
       subtitle="Cotización del euro publicada por el BCRA. Series diarias y mensuales."

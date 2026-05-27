@@ -60,6 +60,27 @@ export function breadcrumbSchema(
   };
 }
 
+export interface FaqItem {
+  q: string;
+  a: string;
+}
+
+/**
+ * FAQPage: habilita rich results de preguntas frecuentes. Google exige que el
+ * mismo contenido sea VISIBLE en la página (no solo en el JSON-LD).
+ */
+export function faqSchema(faqs: FaqItem[]): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+}
+
 export interface DatasetInput {
   name: string;
   description: string;

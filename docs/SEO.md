@@ -46,11 +46,12 @@ Vercel, con data que se actualiza a diario vía ETL.
 | **P0** | `canonical` en home, detalle y provincia | 🔥🔥 | ✅ hecho |
 | **P0** | 24 provincias al sitemap | 🔥 | ✅ hecho |
 | **P0** | Hook de verificación de Search Console (env `GOOGLE_SITE_VERIFICATION`) | 🔥🔥🔥 | ✅ código listo · falta el token (acción del owner) |
-| **P1** | H1 con keywords + párrafo intro indexable por detalle | 🔥🔥 | pendiente |
-| **P1** | `temporalCoverage` real en el schema Dataset (rango de cada serie) | 🔥 | pendiente |
+| **P1** | Párrafo intro indexable por detalle | 🔥🔥 | ✅ hecho |
+| **P1** | FAQ visible + `FAQPage` schema por detalle (3 Q&A c/u) | 🔥🔥 | ✅ hecho |
+| **P1** | `temporalCoverage` real en el schema Dataset (rango de cada serie) | 🔥 | ✅ hecho |
+| **P1** | H1 con keywords (enriquecer el título visible de detalle) | 🔥 | pendiente |
 | **P1** | OG dinámica por indicador (con último valor) | 🔥🔥 | pendiente |
 | **P1** | `lastModified` real por serie en el sitemap | 🔥 | pendiente |
-| **P1** | Bloques FAQ + `FAQPage` schema en detalle/metodología | 🔥🔥 | pendiente |
 | **P1** | Footer `<img>` → `next/image` | 🔥 | pendiente |
 | **P1** | `canonical` en el resto de las páginas (calculadora, calendario, comparativa, explorar, analisis, mapa, metodologia, status, reporte) | 🔥 | pendiente |
 | **P2** | Páginas long-tail mensuales ("inflación marzo 2026") — cuidado con thin content | 🔥🔥 | pendiente |

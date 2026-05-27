@@ -6,7 +6,7 @@ import { AreaChart, type ChartEvent } from "@/components/AreaChart";
 import { DataTable } from "@/components/DataTable";
 import { SpanSelector, filterBySpan } from "@/components/SpanSelector";
 import { JsonLd } from "@/components/JsonLd";
-import { detalleJsonLd } from "@/lib/detalleSeo";
+import { DETALLE_SEO, detalleJsonLd, type DatasetRange } from "@/lib/detalleSeo";
 import type { FormatType } from "@/lib/formatters";
 
 interface ChartConfig {
@@ -34,8 +34,10 @@ interface DetailPageProps {
   notes: string;
   source: string;
   frequency: string;
-  /** Slug de `/detalle/<slug>`: si está, inyecta JSON-LD Dataset + Breadcrumb. */
+  /** Slug de `/detalle/<slug>`: si está, inyecta JSON-LD + intro + FAQ. */
   slug?: string;
+  /** Rango temporal de la serie principal, para el temporalCoverage del Dataset. */
+  datasetRange?: DatasetRange;
 }
 
 export function DetailPage({
@@ -48,12 +50,13 @@ export function DetailPage({
   source,
   frequency,
   slug,
+  datasetRange,
 }: DetailPageProps) {
   const [span, setSpan] = useState("5A");
 
   return (
     <>
-      {slug && <JsonLd data={detalleJsonLd(slug)} />}
+      {slug && <JsonLd data={detalleJsonLd(slug, datasetRange)} />}
       <div
         className="mx-auto max-w-5xl px-5"
         style={{ paddingTop: "calc(var(--navbar-h) + 2.5rem)", paddingBottom: "4rem" }}
@@ -83,6 +86,14 @@ export function DetailPage({
         <p className="mt-2 text-sm max-w-xl" style={{ color: "var(--color-text-muted)" }}>
           {subtitle}
         </p>
+        {slug && DETALLE_SEO[slug]?.intro && (
+          <p
+            className="mt-4 text-base max-w-2xl leading-relaxed"
+            style={{ color: "var(--color-text-muted)" }}
+          >
+            {DETALLE_SEO[slug].intro}
+          </p>
+        )}
       </div>
 
       {/* Span selector */}
@@ -132,6 +143,36 @@ export function DetailPage({
           <span>Frecuencia: {frequency}</span>
         </div>
       </div>
+
+      {slug && DETALLE_SEO[slug]?.faqs?.length ? (
+        <section className="mt-10">
+          <h2 className="text-lg font-bold mb-4" style={{ color: "var(--color-text)" }}>
+            Preguntas frecuentes
+          </h2>
+          <div className="space-y-3">
+            {DETALLE_SEO[slug].faqs.map((f) => (
+              <details
+                key={f.q}
+                className="rounded-xl border p-4"
+                style={{ background: "var(--color-card)", borderColor: "var(--color-border)" }}
+              >
+                <summary
+                  className="text-sm font-semibold cursor-pointer"
+                  style={{ color: "var(--color-text)" }}
+                >
+                  {f.q}
+                </summary>
+                <p
+                  className="mt-2 text-sm leading-relaxed"
+                  style={{ color: "var(--color-text-muted)" }}
+                >
+                  {f.a}
+                </p>
+              </details>
+            ))}
+          </div>
+        </section>
+      ) : null}
       </div>
     </>
   );

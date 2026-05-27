@@ -1,7 +1,7 @@
 import { readSeries } from "@/lib/readData";
 import { loadEvents, filterEventsForSeries } from "@/lib/events";
 import { DetailPage } from "@/components/DetailPage";
-import { detalleMetadata } from "@/lib/detalleSeo";
+import { detalleMetadata, rangeOf } from "@/lib/detalleSeo";
 
 export const metadata = detalleMetadata("dolar");
 
@@ -62,6 +62,7 @@ export default async function DolarDetalle() {
   return (
     <DetailPage
       slug="dolar"
+      datasetRange={rangeOf(oficialDiario)}
       eyebrow="Tipo de cambio"
       title="Dólar"
       subtitle="Las 7 cotizaciones del peso argentino contra el USD + brecha cambiaria desagregada."
