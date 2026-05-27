@@ -28,7 +28,8 @@ export type SeriesCategory =
   | "monetario"
   | "mercado"
   | "comercio"
-  | "salarios";
+  | "salarios"
+  | "confianza";
 
 export interface SeriesEntry {
   id: string;
@@ -75,6 +76,10 @@ export const SERIES_CATALOG: SeriesEntry[] = [
   { id: "tasa_pobreza", label: "Tasa de pobreza (%)", category: "social", unit: "percent_decimal", file: "tasa_pobreza.json" },
   { id: "linea_indigencia", label: "Línea de indigencia ($ adulto/mes)", category: "social", unit: "peso_ars", file: "linea_indigencia.json" },
 
+  // ─── Confianza / expectativas (UTDT · Di Tella, NO oficial) ───
+  { id: "icg_mensual", label: "Confianza en el Gobierno — ICG (0-5)", category: "confianza", unit: "indice", file: "icg_mensual.json" },
+  { id: "icc_mensual", label: "Confianza del Consumidor — ICC (0-100)", category: "confianza", unit: "indice", file: "icc_mensual.json" },
+
   // ─── Monetario BCRA ────────────────────────────────────
   { id: "base_monetaria", label: "Base monetaria (mill. $)", category: "monetario", unit: "millones_pesos", file: "monetario_base_monetaria_mensual.json" },
   { id: "reservas_bcra", label: "Reservas internacionales BCRA (USD M)", category: "monetario", unit: "millones_usd", file: "monetario_reservas_mensual.json" },
@@ -111,6 +116,7 @@ export const CATEGORY_LABELS: Record<SeriesCategory, string> = {
   mercado: "Mercado de capitales",
   comercio: "Comercio exterior",
   salarios: "Salarios",
+  confianza: "Confianza y expectativas",
 };
 
 export function getSeriesById(id: string): SeriesEntry | undefined {

@@ -21,6 +21,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "daily",
       priority: 1.0,
     },
+    {
+      url: `${BASE_URL}/reporte`,
+      lastModified: now,
+      changeFrequency: "daily" as const,
+      priority: 0.9,
+    },
     ...detalle.map((slug) => ({
       url: `${BASE_URL}/detalle/${slug}`,
       lastModified: now,

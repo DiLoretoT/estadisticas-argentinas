@@ -82,6 +82,10 @@ jobs:
         run: python etl/generate_status.py
         working-directory: ${{ github.workspace }}
 
+      - name: Generate reporte.json
+        run: python etl/generate_report.py
+        working-directory: ${{ github.workspace }}
+
       - name: Configure git
         run: |
           git config user.name "github-actions[bot]"

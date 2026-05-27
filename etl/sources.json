@@ -49,5 +49,11 @@
     "series_api": "https://apis.datos.gob.ar/series/api/series",
     "tasa_pobreza_id": "64.2_POBLACION_NUA_0_0_34_74",
     "linea_indigencia_id": "150.1_LA_INDICIA_0_D_16"
+  },
+  "confianza": {
+    "series_api": "https://apis.datos.gob.ar/series/api/series",
+    "icg_id": "370.3_ICG_NIVEL_RAL_0_0_17_94",
+    "icc_id": "380.3_ICC_NACIONNAL_0_T_12",
+    "_comment": "Índices UTDT (Di Tella) re-publicados por SSPM en datos.gob.ar. ICG: confianza en el gobierno (escala 0-5), mensual desde 2001-11. ICC: confianza del consumidor (escala 0-100), mensual desde 2001-03. NO oficiales — consenso/encuesta."
   }
 }
