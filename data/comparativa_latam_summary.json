@@ -1,6 +1,6 @@
 {
   "updated_at": "2026-05-28",
-  "updated_at_time": "2026-05-28T10:33:14",
+  "updated_at_time": "2026-05-28T23:33:16",
   "countries": [
     "ARG",
     "BRA",
@@ -159,74 +159,6 @@
           "country": "Ecuador",
           "year": "2024",
           "value": 1.55
-        }
-      ]
-    },
-    {
-      "key": "desempleo",
-      "display_name": "Desempleo (% fuerza laboral)",
-      "unit": "%",
-      "higher_is_better": false,
-      "snapshot": [
-        {
-          "iso3": "ARG",
-          "country": "Argentina",
-          "year": "2025",
-          "value": 7.14
-        },
-        {
-          "iso3": "BRA",
-          "country": "Brasil",
-          "year": "2025",
-          "value": 5.97
-        },
-        {
-          "iso3": "CHL",
-          "country": "Chile",
-          "year": "2025",
-          "value": 8.97
-        },
-        {
-          "iso3": "URY",
-          "country": "Uruguay",
-          "year": "2025",
-          "value": 7.52
-        },
-        {
-          "iso3": "COL",
-          "country": "Colombia",
-          "year": "2025",
-          "value": 8.29
-        },
-        {
-          "iso3": "MEX",
-          "country": "México",
-          "year": "2025",
-          "value": 2.67
-        },
-        {
-          "iso3": "PER",
-          "country": "Perú",
-          "year": "2025",
-          "value": 5.12
-        },
-        {
-          "iso3": "BOL",
-          "country": "Bolivia",
-          "year": "2025",
-          "value": 2.97
-        },
-        {
-          "iso3": "PRY",
-          "country": "Paraguay",
-          "year": "2025",
-          "value": 4.8
-        },
-        {
-          "iso3": "ECU",
-          "country": "Ecuador",
-          "year": "2025",
-          "value": 3.31
         }
       ]
     },
@@ -567,6 +499,74 @@
           "country": "Ecuador",
           "year": "2024",
           "value": 26.92
+        }
+      ]
+    },
+    {
+      "key": "urbanizacion",
+      "display_name": "Urbanización (% población)",
+      "unit": "%",
+      "higher_is_better": true,
+      "snapshot": [
+        {
+          "iso3": "ARG",
+          "country": "Argentina",
+          "year": "2024",
+          "value": 92.27
+        },
+        {
+          "iso3": "BRA",
+          "country": "Brasil",
+          "year": "2024",
+          "value": 87.9
+        },
+        {
+          "iso3": "CHL",
+          "country": "Chile",
+          "year": "2024",
+          "value": 89.0
+        },
+        {
+          "iso3": "URY",
+          "country": "Uruguay",
+          "year": "2024",
+          "value": 95.6
+        },
+        {
+          "iso3": "COL",
+          "country": "Colombia",
+          "year": "2024",
+          "value": 78.52
+        },
+        {
+          "iso3": "MEX",
+          "country": "México",
+          "year": "2024",
+          "value": 79.75
+        },
+        {
+          "iso3": "PER",
+          "country": "Perú",
+          "year": "2024",
+          "value": 85.19
+        },
+        {
+          "iso3": "BOL",
+          "country": "Bolivia",
+          "year": "2024",
+          "value": 71.24
+        },
+        {
+          "iso3": "PRY",
+          "country": "Paraguay",
+          "year": "2024",
+          "value": 69.86
+        },
+        {
+          "iso3": "ECU",
+          "country": "Ecuador",
+          "year": "2024",
+          "value": 63.24
         }
       ]
     }

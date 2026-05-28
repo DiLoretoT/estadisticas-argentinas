@@ -6,11 +6,11 @@
     "via": "datos.gob.ar"
   },
   "icg": {
-    "period": "2026-03-01",
-    "value": 2.3009
+    "period": "2026-05-01",
+    "value": 1.99
   },
   "icc": {
-    "period": "2026-03-01",
-    "value": 42.0259
+    "period": "2026-05-01",
+    "value": 40.1379
   }
 }
