@@ -1,9 +1,9 @@
 {
   "updated_at": "2026-05-29",
-  "updated_at_time": "2026-05-29T19:47:57",
+  "updated_at_time": "2026-05-29T21:34:21",
   "period": "2026-05-29",
-  "value": 85.54,
-  "monthly_change": 3.22,
+  "value": 85.25,
+  "monthly_change": 2.87,
   "unit": "usd",
   "source": {
     "name": "Yahoo Finance",
