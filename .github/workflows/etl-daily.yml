@@ -91,6 +91,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
+      - name: Pull latest before commit
+        run: git pull --rebase --autostash origin main
+
       - name: Commit and push if changed
         run: |
           if git diff --quiet --exit-code data/; then
