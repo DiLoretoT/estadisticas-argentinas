@@ -9,6 +9,8 @@ import { Footer } from "@/components/Footer";
 import type { CurrencySeries } from "@/components/MultiCurrencyChart";
 import { MultiCurrencyChartLazy } from "@/components/MultiCurrencyChartLazy";
 import { AnalysisPanel } from "@/components/AnalysisPanel";
+import { DolarLiveBadge } from "@/components/DolarLiveBadge";
+import { useDolarLive } from "@/lib/useDolarLive";
 
 type Indicator = Record<string, unknown>;
 
@@ -244,6 +246,10 @@ export function HomeClient({
   lastUpdated,
   series,
 }: Props) {
+  // Cotizaciones intradía (polling client-side a /api/dolar). Mientras no haya
+  // dato fresco, las cards muestran el valor estático server-rendered.
+  const dolarLive = useDolarLive();
+
   const infl = inflacion as Record<string, unknown>;
   const empl = empleo as Record<string, unknown>;
   const pobr = pobreza as Record<string, unknown>;
@@ -354,6 +360,13 @@ export function HomeClient({
     },
   ];
 
+  // Overlay del dato intradía sobre el valor estático cuando hay cotización en
+  // vivo para ese label. La variación mensual queda con el dato oficial estático.
+  const dolaresArsLive = dolaresArs.map((d) => {
+    const live = dolarLive.values[d.label];
+    return live != null ? { ...d, value: live, live: true } : { ...d, live: false };
+  });
+
   // ----- KPI monedas LATAM -----
   const monedasLatamCards: Array<{
     flag: string;
@@ -435,14 +448,20 @@ export function HomeClient({
           subtitle="Todas las cotizaciones del peso argentino vs el dólar estadounidense."
         />
 
+        {dolarLive.fetchedAt != null && (
+          <div className="-mt-3 mb-5 flex justify-center">
+            <DolarLiveBadge fetchedAt={dolarLive.fetchedAt} />
+          </div>
+        )}
+
         {/* 7 KPI cards de dólares ARS */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          {dolaresArs.map((d, i) => (
+          {dolaresArsLive.map((d, i) => (
             <KpiCard
               key={d.label}
               label={d.label}
               value={peso(d.value)}
-              period={formatPeriod(d.period)}
+              period={d.live ? "Intradía" : formatPeriod(d.period)}
               change={formatDeltaPct(d.change)}
               changeDirection={direction(d.change)}
               goodDirection="down"
