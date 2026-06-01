@@ -1,4 +1,4 @@
-requests>=2.33.0
+requests>=2.34.2
 certifi>=2024.12.14
 psycopg[binary]>=3.3.4
 openpyxl
