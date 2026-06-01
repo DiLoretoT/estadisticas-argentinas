@@ -87,6 +87,7 @@ interface Props {
   deuda: DeudaMap;
   empleo: Indicator;
   pobreza: Indicator;
+  confianza: Indicator;
   lastUpdated?: string;
   series: {
     inflacion: [string, number][];
@@ -106,6 +107,8 @@ interface Props {
     empleo: [string, number][];
     pobreza: [string, number][];
     indigencia: [string, number][];
+    icc: [string, number][];
+    icg: [string, number][];
     riesgoPais: [string, number][];
     merval: [string, number][];
     ggal: [string, number][];
@@ -243,6 +246,7 @@ export function HomeClient({
   deuda,
   empleo,
   pobreza,
+  confianza,
   lastUpdated,
   series,
 }: Props) {
@@ -290,6 +294,13 @@ export function HomeClient({
 
   const indigenciaLast = series.indigencia[series.indigencia.length - 1];
   const indigenciaDeltaPct = deltaPctSeries(series.indigencia);
+
+  // ----- Confianza (UTDT): ICC consumidor + ICG gobierno -----
+  const conf = confianza as Record<string, unknown>;
+  const iccObj = (conf.icc as Record<string, unknown>) || {};
+  const icgObj = (conf.icg as Record<string, unknown>) || {};
+  const iccDeltaPct = deltaPctSeries(series.icc);
+  const icgDeltaPct = deltaPctSeries(series.icg);
 
   // ----- KPI dólares ARS (7 cards) -----
   const dolaresArs: Array<{
@@ -857,6 +868,65 @@ export function HomeClient({
             noun="la tasa de desocupación"
             format="percent"
             goodDirection="down"
+          />
+        </div>
+      </section>
+
+      {/* ════════════════════════════ CONFIANZA ════════════════════════════ */}
+      <section className="mx-auto max-w-6xl px-5 mt-20 scroll-mt-20" id="confianza">
+        <SectionHeader
+          eyebrow="Expectativas"
+          title="Confianza"
+          subtitle="Índice de Confianza del Consumidor (ICC) y de Confianza en el Gobierno (ICG), relevados mensualmente por la UTDT. Valores más altos indican mayor optimismo."
+        />
+        <div className="grid grid-cols-2 gap-4 mb-8">
+          <KpiCard
+            label="Confianza del consumidor (ICC)"
+            value={iccObj.value != null ? decimal1(iccObj.value) : "—"}
+            period={formatPeriod(iccObj.period)}
+            change={formatDeltaPct(iccDeltaPct)}
+            changeDirection={direction(iccDeltaPct)}
+            goodDirection="up"
+            accentColor="var(--chart-3)"
+            delay={0}
+            sparkData={series.icc.slice(-12).map((d) => d[1])}
+          />
+          <KpiCard
+            label="Confianza en el gobierno (ICG)"
+            value={icgObj.value != null ? decimal2(icgObj.value) : "—"}
+            period={formatPeriod(icgObj.period)}
+            change={formatDeltaPct(icgDeltaPct)}
+            changeDirection={direction(icgDeltaPct)}
+            goodDirection="up"
+            accentColor="var(--chart-6)"
+            delay={0.05}
+            sparkData={series.icg.slice(-12).map((d) => d[1])}
+          />
+        </div>
+        <div className="grid md:grid-cols-2 gap-5">
+          <AreaChart
+            data={series.icc}
+            label="Confianza del consumidor (ICC)"
+            color="var(--chart-3)"
+            format="index"
+            description="Índice de Confianza del Consumidor de la UTDT. Surge de una encuesta mensual sobre la situación personal, la del país y la predisposición a comprar bienes durables. Sube cuando el optimismo de los hogares crece."
+            source="UTDT (CIF) vía datos.gob.ar"
+          />
+          <AreaChart
+            data={series.icg}
+            label="Confianza en el gobierno (ICG)"
+            color="var(--chart-6)"
+            format="index"
+            description="Índice de Confianza en el Gobierno de la UTDT, en una escala de 0 a 5. Mide la valoración de la gestión de gobierno a partir de una encuesta mensual."
+            source="UTDT vía datos.gob.ar"
+          />
+        </div>
+        <div className="mt-6">
+          <AnalysisPanel
+            data={series.icc}
+            noun="la confianza del consumidor"
+            format="index"
+            goodDirection="up"
           />
         </div>
       </section>

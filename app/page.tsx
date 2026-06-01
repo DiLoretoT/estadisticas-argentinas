@@ -24,6 +24,7 @@ export default async function Home() {
     dolarTarjeta,
     empleo,
     pobreza,
+    confianza,
     monedaBrl,
     monedaClp,
     monedaUyu,
@@ -78,6 +79,7 @@ export default async function Home() {
     readIndicator("dolar_tarjeta.json"),
     readIndicator("empleo.json"),
     readIndicator("pobreza.json"),
+    readIndicator("confianza.json"),
     readIndicator("moneda_brl.json"),
     readIndicator("moneda_clp.json"),
     readIndicator("moneda_uyu.json"),
@@ -147,6 +149,8 @@ export default async function Home() {
     empleoSeries,
     pobrezaSeries,
     indigenciaSeries,
+    iccSeries,
+    icgSeries,
     // Mercado
     riesgoPaisSeries,
     mervalSeries,
@@ -192,6 +196,8 @@ export default async function Home() {
     readSeries("tasa_empleo.json"),
     readSeries("tasa_pobreza.json"),
     readSeries("linea_indigencia.json"),
+    readSeries("icc_mensual.json"),
+    readSeries("icg_mensual.json"),
     readSeries("mercado_riesgo_pais_mensual.json"),
     readSeries("mercado_merval_mensual.json"),
     readSeries("mercado_ggal_mensual.json"),
@@ -278,6 +284,7 @@ export default async function Home() {
       }}
       empleo={empleo}
       pobreza={pobreza}
+      confianza={confianza}
       lastUpdated={lastUpdated ?? undefined}
       series={{
         inflacion: tail(inflacionSeries),
@@ -297,6 +304,8 @@ export default async function Home() {
         empleo: empleoSeries.slice(-20),
         pobreza: pobrezaSeries,
         indigencia: indigenciaSeries.slice(-60),
+        icc: tail(iccSeries),
+        icg: tail(icgSeries),
         // Mercado financiero
         riesgoPais: tail(riesgoPaisSeries),
         merval: tail(mervalSeries),

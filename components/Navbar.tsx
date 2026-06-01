@@ -30,6 +30,7 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/#comercio", label: "Sector externo", description: "Exportaciones, importaciones, balanza" },
       { href: "/#deuda", label: "Deuda pública", description: "Stock total 1992-2025" },
       { href: "/#empleo", label: "Empleo e ingresos", description: "Desocupación, empleo, salario real" },
+      { href: "/#confianza", label: "Confianza", description: "ICC consumidor + ICG gobierno (UTDT)" },
       { href: "/#social", label: "Social", description: "Pobreza e indigencia" },
     ],
   },
