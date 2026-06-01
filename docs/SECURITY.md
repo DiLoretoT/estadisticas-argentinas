@@ -35,10 +35,16 @@
 | 10 | `permissions:` declarado explícito por workflow (least privilege) | ✅ |
 | 11 | Whitelist en `/api/series?name=X` contra valores arbitrarios | ✅ |
 | 12 | Sin secrets en código (validado con grep + GitLeaks en CI) | ✅ |
+| 13 | Push del ETL a `main` protegido vía fine-grained PAT `ETL_PUSH_TOKEN` (scope: solo este repo, Contents RW). El bot bypassa "require PR" por `enforce_admins=false`. Repos personales no admiten bypass por app. | ✅ |
 
 ## Acciones manuales pendientes (UI de plataformas)
 
 Estas requieren clicks en dashboards, no se pueden automatizar desde el repo.
+
+### ⏰ Rotación del PAT del ETL — antes de ~2026-08-30
+- [ ] El fine-grained PAT `ETL_PUSH_TOKEN` (creado 2026-06-01, exp. 90 días) vence **~2026-08-30**. Si expira, `etl-daily` y `etl-fx` vuelven a fallar en el push a `main` (`GH006`).
+  - Regenerar en https://github.com/settings/personal-access-tokens (mismo scope: repo `estadisticas-argentinas`, Contents: Read and write).
+  - Recargar: `gh secret set ETL_PUSH_TOKEN --repo DiLoretoT/estadisticas-argentinas`.
 
 ### En GitHub → Settings → Code security
 - [ ] **Secret scanning**: activar (free para repos públicos).
@@ -100,7 +106,7 @@ Estas requieren clicks en dashboards, no se pueden automatizar desde el repo.
 
 - **Mensual**: revisar Dependabot PRs y mergear las que aplican.
 - **Trimestral**: pegar la URL del sitio en https://securityheaders.com/ y https://observatory.mozilla.org/ — confirmar score A+.
-- **Anual**: rotar tokens (no aplica hoy — no tenemos).
+- **Trimestral**: rotar el PAT `ETL_PUSH_TOKEN` (vence cada 90 días — próximo: ~2026-08-30; ver "Acciones manuales pendientes").
 
 ## Referencias
 
