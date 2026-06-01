@@ -41,7 +41,7 @@ export function Hero({ lastUpdated }: HeroProps) {
         className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight max-w-3xl relative"
         style={{ color: "var(--color-text)" }}
       >
-        La Argentina{" "}
+        La economía argentina,{" "}
         <span style={{ color: "var(--color-primary)" }}>en datos</span>
       </motion.h1>
 
