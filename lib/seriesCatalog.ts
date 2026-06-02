@@ -53,6 +53,16 @@ export const SERIES_CATALOG: SeriesEntry[] = [
   { id: "dolar_tarjeta_mensual", label: "Dólar tarjeta ($ ARS)", category: "dolar", unit: "peso_ars", file: "dolar_tarjeta_mensual.json" },
   { id: "euro_mensual", label: "Euro ($ ARS)", category: "dolar", unit: "peso_ars", file: "euro_mensual.json" },
 
+  // ─── Dólar — series diarias (para valuación por fecha exacta) ───────────
+  { id: "dolar_oficial_diario", label: "Dólar oficial diario ($ ARS)", category: "dolar", unit: "peso_ars", file: "dolar_oficial_diario.json" },
+  { id: "dolar_blue_diario", label: "Dólar blue diario ($ ARS)", category: "dolar", unit: "peso_ars", file: "dolar_blue_diario.json" },
+  { id: "dolar_mep_diario", label: "Dólar MEP diario ($ ARS)", category: "dolar", unit: "peso_ars", file: "dolar_mep_diario.json" },
+  { id: "dolar_ccl_diario", label: "Dólar CCL diario ($ ARS)", category: "dolar", unit: "peso_ars", file: "dolar_ccl_diario.json" },
+  { id: "dolar_mayorista_diario", label: "Dólar mayorista diario ($ ARS)", category: "dolar", unit: "peso_ars", file: "dolar_mayorista_diario.json" },
+  { id: "dolar_cripto_diario", label: "Dólar cripto diario ($ ARS)", category: "dolar", unit: "peso_ars", file: "dolar_cripto_diario.json" },
+  { id: "dolar_tarjeta_diario", label: "Dólar tarjeta diario ($ ARS)", category: "dolar", unit: "peso_ars", file: "dolar_tarjeta_diario.json" },
+  { id: "euro_diario", label: "Euro diario ($ ARS)", category: "dolar", unit: "peso_ars", file: "euro_diario.json" },
+
   // ─── Monedas LATAM ──────────────────────────────────────
   { id: "brl_per_usd", label: "Real brasileño (BRL por USD)", category: "monedas_latam", unit: "usd_per_local", file: "moneda_brl_mensual.json" },
   { id: "clp_per_usd", label: "Peso chileno (CLP por USD)", category: "monedas_latam", unit: "usd_per_local", file: "moneda_clp_mensual.json" },
