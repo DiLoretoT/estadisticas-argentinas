@@ -29,6 +29,36 @@ export function formatDate(iso: string): string {
   return `${MESES[mi] ?? m} ${y}`;
 }
 
+/** Cotización FX en pesos: muestra decimales sólo si los tiene (1452,2 / 1.435). */
+export function formatPesoFx(v: number | null | undefined): string {
+  if (v == null || isNaN(v)) return "—";
+  return "$" + v.toLocaleString("es-AR", { maximumFractionDigits: 2 });
+}
+
+/** ISO → "14:32" en hora de Buenos Aires. */
+export function formatHoraBA(iso: string | null | undefined): string {
+  if (!iso) return "—";
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return "—";
+  return d.toLocaleTimeString("es-AR", {
+    timeZone: "America/Argentina/Buenos_Aires",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
+/** ISO → "3 jun" en hora de Buenos Aires. */
+export function formatDiaBA(iso: string | null | undefined): string {
+  if (!iso) return "—";
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return "—";
+  return d.toLocaleDateString("es-AR", {
+    timeZone: "America/Argentina/Buenos_Aires",
+    day: "numeric",
+    month: "short",
+  });
+}
+
 /** Compact large numbers: 517893412 → "517,9M" */
 export function formatCompact(n: number): string {
   const abs = Math.abs(n);

@@ -1,7 +1,11 @@
 "use client";
 
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Hero } from "@/components/Hero";
 import { KpiCard } from "@/components/KpiCard";
+import { DolarCard } from "@/components/DolarCard";
+import { DolarIntradiaPanel, type IntradiaPoint } from "@/components/DolarIntradiaPanel";
 import { AreaChart } from "@/components/AreaChart";
 import { SectionHeader } from "@/components/SectionHeader";
 import { LinkCard } from "@/components/LinkCard";
@@ -77,6 +81,12 @@ interface ComercioMap {
   importVehiculos: Indicator;
 }
 
+interface DolarIntradia {
+  date?: string;
+  updatedAt?: string | null;
+  casas?: Record<string, IntradiaPoint[]>;
+}
+
 interface Props {
   inflacion: Indicator;
   dolares: DolaresMap;
@@ -88,6 +98,7 @@ interface Props {
   empleo: Indicator;
   pobreza: Indicator;
   confianza: Indicator;
+  dolarIntradia?: DolarIntradia;
   lastUpdated?: string;
   series: {
     inflacion: [string, number][];
@@ -247,12 +258,16 @@ export function HomeClient({
   empleo,
   pobreza,
   confianza,
+  dolarIntradia,
   lastUpdated,
   series,
 }: Props) {
   // Cotizaciones intradía (polling client-side a /api/dolar). Mientras no haya
   // dato fresco, las cards muestran el valor estático server-rendered.
   const dolarLive = useDolarLive();
+
+  // Card de dólar con el panel de detalle abierto (null = ninguna).
+  const [expandedDolar, setExpandedDolar] = useState<string | null>(null);
 
   const infl = inflacion as Record<string, unknown>;
   const empl = empleo as Record<string, unknown>;
@@ -371,12 +386,43 @@ export function HomeClient({
     },
   ];
 
-  // Overlay del dato intradía sobre el valor estático cuando hay cotización en
-  // vivo para ese label. La variación mensual queda con el dato oficial estático.
-  const dolaresArsLive = dolaresArs.map((d) => {
-    const live = dolarLive.values[d.label];
-    return live != null ? { ...d, value: live, live: true } : { ...d, live: false };
+  // Día de hoy en hora de Buenos Aires (YYYY-MM-DD) para validar que el log
+  // intradía server-rendered sea de hoy y no de una jornada anterior.
+  const todayBA = new Date().toLocaleDateString("en-CA", {
+    timeZone: "America/Argentina/Buenos_Aires",
   });
+  const intradiaIsToday = dolarIntradia?.date === todayBA;
+
+  // Overlay del dato intradía (compra/venta) sobre el valor estático. La
+  // variación mensual queda con el dato oficial estático.
+  const dolaresArsLive = dolaresArs.map((d) => {
+    const detail = dolarLive.details[d.label];
+    const liveVenta = dolarLive.values[d.label];
+    const isLive = liveVenta != null;
+    const venta = detail?.venta ?? (liveVenta ?? (d.value != null ? Number(d.value) : null));
+    const compra = detail?.compra ?? null;
+    return { ...d, venta, compra, live: isLive };
+  });
+
+  // Puntos del día para una casa: log server-rendered (sólo si es de hoy) +
+  // el punto en vivo actual si todavía no quedó persistido por el cron.
+  function intradiaPoints(label: string): IntradiaPoint[] {
+    const base = intradiaIsToday ? (dolarIntradia?.casas?.[label] ?? []) : [];
+    const points: IntradiaPoint[] = base.map((p) => ({ ...p }));
+    const detail = dolarLive.details[label];
+    if (detail && (detail.compra != null || detail.venta != null)) {
+      const last = points[points.length - 1];
+      if (!last || last.compra !== detail.compra || last.venta !== detail.venta) {
+        points.push({
+          t: detail.fechaActualizacion,
+          compra: detail.compra,
+          venta: detail.venta,
+          live: true,
+        });
+      }
+    }
+    return points;
+  }
 
   // ----- KPI monedas LATAM -----
   const monedasLatamCards: Array<{
@@ -465,23 +511,51 @@ export function HomeClient({
           </div>
         )}
 
-        {/* 7 KPI cards de dólares ARS */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          {dolaresArsLive.map((d, i) => (
-            <KpiCard
+        {/* 7 cards de dólares ARS — click para ver la jornada */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-3">
+          {dolaresArsLive.map((d) => (
+            <DolarCard
               key={d.label}
               label={d.label}
-              value={peso(d.value)}
+              venta={d.venta}
+              compra={d.compra}
               period={d.live ? "Intradía" : formatPeriod(d.period)}
               change={formatDeltaPct(d.change)}
               changeDirection={direction(d.change)}
-              goodDirection="down"
               accentColor={d.color}
-              delay={i * 0.04}
               sparkData={d.sparkData}
+              live={d.live}
+              expanded={expandedDolar === d.label}
+              onToggle={() =>
+                setExpandedDolar((cur) => (cur === d.label ? null : d.label))
+              }
             />
           ))}
         </div>
+
+        {/* Panel de detalle de la jornada para la card abierta */}
+        <AnimatePresence initial={false}>
+          {expandedDolar && (
+            <motion.div
+              key={expandedDolar}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              style={{ overflow: "hidden" }}
+              className="mb-6"
+            >
+              <DolarIntradiaPanel
+                label={expandedDolar}
+                accentColor={
+                  dolaresArsLive.find((d) => d.label === expandedDolar)?.color ??
+                  "var(--color-primary)"
+                }
+                points={intradiaPoints(expandedDolar)}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Brecha cambiaria — card destacado */}
         <div

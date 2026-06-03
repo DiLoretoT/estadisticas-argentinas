@@ -115,7 +115,7 @@ export function KpiCard({
   );
 }
 
-function Sparkline({ data, color }: { data: number[]; color: string }) {
+export function Sparkline({ data, color }: { data: number[]; color: string }) {
   const w = 64;
   const h = 28;
   const min = Math.min(...data);

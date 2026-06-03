@@ -67,6 +67,7 @@ export default async function Home() {
     deudaPrestamos,
     deudaOrganismosIntl,
     deudaAdelantosBcra,
+    dolarIntradia,
     lastUpdated,
   ] = await Promise.all([
     readIndicator("inflacion.json"),
@@ -120,6 +121,7 @@ export default async function Home() {
     readIndicator("deuda_prestamos_summary.json"),
     readIndicator("deuda_organismos_intl_summary.json"),
     readIndicator("deuda_adelantos_bcra_summary.json"),
+    readIndicator("dolar_intradia.json"),
     getLastUpdated(),
   ]);
 
@@ -285,6 +287,7 @@ export default async function Home() {
       empleo={empleo}
       pobreza={pobreza}
       confianza={confianza}
+      dolarIntradia={dolarIntradia}
       lastUpdated={lastUpdated ?? undefined}
       series={{
         inflacion: tail(inflacionSeries),

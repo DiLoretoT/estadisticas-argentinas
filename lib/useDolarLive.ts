@@ -29,9 +29,19 @@ interface DolarApiResponse {
   stale?: boolean;
 }
 
+/** Detalle por casa: compra/venta + timestamp de la fuente. */
+export interface DolarLiveDetail {
+  compra: number | null;
+  venta: number | null;
+  /** Timestamp (ISO) que informa la fuente para esa casa. */
+  fechaActualizacion: string;
+}
+
 export interface DolarLiveState {
   /** { "Oficial": 1050, "Blue": 1430, ... } — solo labels con dato fresco. */
   values: Record<string, number>;
+  /** { "Oficial": { compra, venta, fechaActualizacion }, ... } por casa. */
+  details: Record<string, DolarLiveDetail>;
   /** Timestamp de la fuente (ISO) del dato más reciente. */
   updatedAt: string | null;
   /** Momento del último fetch exitoso (ms cliente), para "hace X min". */
@@ -42,6 +52,7 @@ export interface DolarLiveState {
 export function useDolarLive(): DolarLiveState {
   const [state, setState] = useState<DolarLiveState>({
     values: {},
+    details: {},
     updatedAt: null,
     fetchedAt: null,
     loading: true,
@@ -57,12 +68,19 @@ export function useDolarLive(): DolarLiveState {
         const json = (await res.json()) as DolarApiResponse;
         if (cancelled || json.stale) return;
         const values: Record<string, number> = {};
+        const details: Record<string, DolarLiveDetail> = {};
         for (const [label, item] of Object.entries(json.dolares ?? {})) {
           if (typeof item?.value === "number") values[label] = item.value;
+          details[label] = {
+            compra: item?.compra ?? null,
+            venta: item?.venta ?? null,
+            fechaActualizacion: item?.fechaActualizacion ?? "",
+          };
         }
         if (Object.keys(values).length === 0) return;
         setState({
           values,
+          details,
           updatedAt: json.updatedAt ?? null,
           fetchedAt: Date.now(),
           loading: false,
