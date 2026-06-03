@@ -5,7 +5,10 @@
  * El color se controla desde el padre con `color: var(--mark-color)` que
  * apunta a `var(--color-primary)` en light y dark.
  *
- * Mantiene paridad con datalogia-portal/components/site-mark.tsx (v4).
+ * v5: glifo achatado y centrado dentro del viewBox (tinta en y[19,81], centro
+ * 50,50) con el punto pegado a las barras. Así, renderizado con `items-center`
+ * junto al wordmark, la marca queda dentro de la banda de mayúsculas del texto
+ * (no sobresale arriba/abajo) sin necesidad de alinear a la baseline.
  */
 export function SiteMark({
   size = 20,
@@ -38,14 +41,14 @@ export function SiteMark({
           <stop offset="1" stopColor="black" stopOpacity="0.28" />
         </radialGradient>
       </defs>
-      <rect x="14" y="60" width="20" height="34" rx="2" />
-      <rect x="38" y="44" width="20" height="50" rx="2" />
-      <rect x="62" y="24" width="20" height="70" rx="2" />
-      <circle cx="72" cy="12" r="8" />
-      <rect x="14" y="60" width="20" height="34" rx="2" fill={`url(#${uid}-bar-shadow)`} />
-      <rect x="38" y="44" width="20" height="50" rx="2" fill={`url(#${uid}-bar-shadow)`} />
-      <rect x="62" y="24" width="20" height="70" rx="2" fill={`url(#${uid}-bar-shadow)`} />
-      <circle cx="72" cy="12" r="8" fill={`url(#${uid}-dot-shadow)`} />
+      <rect x="16" y="57" width="20" height="24" rx="2.5" />
+      <rect x="40" y="47" width="20" height="34" rx="2.5" />
+      <rect x="64" y="35" width="20" height="46" rx="2.5" />
+      <circle cx="74" cy="27" r="8" />
+      <rect x="16" y="57" width="20" height="24" rx="2.5" fill={`url(#${uid}-bar-shadow)`} />
+      <rect x="40" y="47" width="20" height="34" rx="2.5" fill={`url(#${uid}-bar-shadow)`} />
+      <rect x="64" y="35" width="20" height="46" rx="2.5" fill={`url(#${uid}-bar-shadow)`} />
+      <circle cx="74" cy="27" r="8" fill={`url(#${uid}-dot-shadow)`} />
     </svg>
   );
 }
