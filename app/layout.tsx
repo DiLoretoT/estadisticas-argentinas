@@ -1,9 +1,11 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { JsonLd } from "@/components/JsonLd";
+import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
+import { InstallPrompt } from "@/components/InstallPrompt";
 import { organizationSchema, websiteSchema } from "@/lib/structuredData";
 
 const inter = Inter({
@@ -57,8 +59,17 @@ export const metadata: Metadata = {
     description:
       "Indicadores macroeconómicos y sociales de Argentina con datos oficiales.",
   },
-  // Next.js detecta automáticamente app/icon.png como favicon en todos los
-  // tamaños. No declaramos icons aquí para evitar duplicar/contradecir.
+  // Next.js detecta automáticamente app/icon.png como favicon. Acá sólo
+  // agregamos el apple-touch-icon (para "Agregar a inicio" en iOS).
+  icons: {
+    apple: [{ url: "/branding/apple-touch-icon.png", sizes: "180x180" }],
+  },
+  // PWA: app instalable en mobile/desktop.
+  appleWebApp: {
+    capable: true,
+    title: "Estadísticas AR",
+    statusBarStyle: "default",
+  },
   robots: {
     index: true,
     follow: true,
@@ -68,6 +79,13 @@ export const metadata: Metadata = {
   verification: {
     google: process.env.GOOGLE_SITE_VERIFICATION,
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#faf9f7" },
+    { media: "(prefers-color-scheme: dark)", color: "#14110e" },
+  ],
 };
 
 export default function RootLayout({
@@ -93,7 +111,9 @@ export default function RootLayout({
         <ThemeProvider>
           <Navbar />
           <main className="flex-1">{children}</main>
+          <InstallPrompt />
         </ThemeProvider>
+        <ServiceWorkerRegister />
       </body>
     </html>
   );
