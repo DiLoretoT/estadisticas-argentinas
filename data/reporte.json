@@ -1,9 +1,25 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-06-05T10:27:28+00:00",
+  "generated_at": "2026-06-05T23:32:11+00:00",
   "report_date": "2026-06-05",
-  "novedades_count": 0,
+  "novedades_count": 1,
   "indicadores": [
+    {
+      "series_id": "reservas_bcra",
+      "label": "Reservas internacionales BCRA",
+      "category": "monetario",
+      "unit": "millones_usd",
+      "official": true,
+      "source": "BCRA",
+      "detail_path": null,
+      "period": "2026-06-03",
+      "value": 48414.0,
+      "prev_period": "2026-05-29",
+      "prev_value": 48193.0,
+      "change_abs": 221.0,
+      "change_pct": 0.004586,
+      "is_new": true
+    },
     {
       "series_id": "ipc_mensual",
       "label": "Inflación mensual (IPC)",
@@ -146,22 +162,6 @@
       "prev_value": 6115.895278,
       "change_abs": 87.641389,
       "change_pct": 0.01433,
-      "is_new": false
-    },
-    {
-      "series_id": "reservas_bcra",
-      "label": "Reservas internacionales BCRA",
-      "category": "monetario",
-      "unit": "millones_usd",
-      "official": true,
-      "source": "BCRA",
-      "detail_path": null,
-      "period": "2026-06-02",
-      "value": 48430.0,
-      "prev_period": "2026-05-29",
-      "prev_value": 48193.0,
-      "change_abs": 237.0,
-      "change_pct": 0.004918,
       "is_new": false
     },
     {
