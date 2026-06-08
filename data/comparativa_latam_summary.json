@@ -1,6 +1,6 @@
 {
   "updated_at": "2026-06-08",
-  "updated_at_time": "2026-06-08T10:45:30",
+  "updated_at_time": "2026-06-08T23:29:43",
   "countries": [
     "ARG",
     "BRA",
@@ -567,6 +567,74 @@
           "country": "Ecuador",
           "year": "2024",
           "value": 26.92
+        }
+      ]
+    },
+    {
+      "key": "urbanizacion",
+      "display_name": "Urbanización (% población)",
+      "unit": "%",
+      "higher_is_better": true,
+      "snapshot": [
+        {
+          "iso3": "ARG",
+          "country": "Argentina",
+          "year": "2024",
+          "value": 92.27
+        },
+        {
+          "iso3": "BRA",
+          "country": "Brasil",
+          "year": "2024",
+          "value": 87.9
+        },
+        {
+          "iso3": "CHL",
+          "country": "Chile",
+          "year": "2024",
+          "value": 89.0
+        },
+        {
+          "iso3": "URY",
+          "country": "Uruguay",
+          "year": "2024",
+          "value": 95.6
+        },
+        {
+          "iso3": "COL",
+          "country": "Colombia",
+          "year": "2024",
+          "value": 78.52
+        },
+        {
+          "iso3": "MEX",
+          "country": "México",
+          "year": "2024",
+          "value": 79.75
+        },
+        {
+          "iso3": "PER",
+          "country": "Perú",
+          "year": "2024",
+          "value": 85.19
+        },
+        {
+          "iso3": "BOL",
+          "country": "Bolivia",
+          "year": "2024",
+          "value": 71.24
+        },
+        {
+          "iso3": "PRY",
+          "country": "Paraguay",
+          "year": "2024",
+          "value": 69.86
+        },
+        {
+          "iso3": "ECU",
+          "country": "Ecuador",
+          "year": "2024",
+          "value": 63.24
         }
       ]
     }
