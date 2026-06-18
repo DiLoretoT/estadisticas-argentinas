@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-17",
-  "updated_at_time": "2026-06-17T23:35:50",
+  "updated_at": "2026-06-18",
+  "updated_at_time": "2026-06-18T10:37:21",
   "countries": [
     "ARG",
     "BRA",
@@ -363,74 +363,6 @@
           "country": "Ecuador",
           "year": "2024",
           "value": 77.58
-        }
-      ]
-    },
-    {
-      "key": "deuda_externa",
-      "display_name": "Deuda externa total (USD M)",
-      "unit": "USD M",
-      "higher_is_better": false,
-      "snapshot": [
-        {
-          "iso3": "ARG",
-          "country": "Argentina",
-          "year": "2024",
-          "value": 242357155703.1
-        },
-        {
-          "iso3": "BRA",
-          "country": "Brasil",
-          "year": "2024",
-          "value": 605463780812.8
-        },
-        {
-          "iso3": "CHL",
-          "country": "Chile",
-          "year": null,
-          "value": null
-        },
-        {
-          "iso3": "URY",
-          "country": "Uruguay",
-          "year": null,
-          "value": null
-        },
-        {
-          "iso3": "COL",
-          "country": "Colombia",
-          "year": "2024",
-          "value": 201763641280.4
-        },
-        {
-          "iso3": "MEX",
-          "country": "México",
-          "year": "2024",
-          "value": 591255026725.0
-        },
-        {
-          "iso3": "PER",
-          "country": "Perú",
-          "year": "2024",
-          "value": 93268743431.7
-        },
-        {
-          "iso3": "BOL",
-          "country": "Bolivia",
-          "year": "2024",
-          "value": 15717587538.6
-        },
-        {
-          "iso3": "PRY",
-          "country": "Paraguay",
-          "year": "2024",
-          "value": 29963457224.3
-        },
-        {
-          "iso3": "ECU",
-          "country": "Ecuador",
-          "year": "2024",
-          "value": 60364730466.4
         }
       ]
     },
