@@ -1,10 +1,10 @@
 {
   "updated_at": "2026-06-19",
-  "updated_at_time": "2026-06-19T10:34:11",
-  "period": "2026-04-01",
-  "value": 1120.86,
-  "monthly_change": 3.53,
-  "yoy_change": -17.43,
+  "updated_at_time": "2026-06-19T23:25:48",
+  "period": "2026-05-01",
+  "value": 1034.8,
+  "monthly_change": -7.68,
+  "yoy_change": -26.55,
   "unit": "millones_USD",
   "categoria": "import_uso",
   "source": {
