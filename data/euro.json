@@ -1,10 +1,10 @@
 {
   "updated_at": "2026-06-24",
-  "updated_at_time": "2026-06-24T10:07:12",
-  "period": "2026-06-23",
-  "monthly_period": "2026-06-23",
-  "value": 1674.57,
-  "monthly_change": 1.98,
+  "updated_at_time": "2026-06-24T23:28:04",
+  "period": "2026-06-24",
+  "monthly_period": "2026-06-24",
+  "value": 1678.96,
+  "monthly_change": 2.25,
   "source": {
     "name": "BCRA",
     "official": true
