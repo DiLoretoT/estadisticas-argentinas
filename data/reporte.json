@@ -1,23 +1,23 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-06-29T23:26:43+00:00",
-  "report_date": "2026-06-29",
+  "generated_at": "2026-06-30T10:17:14+00:00",
+  "report_date": "2026-06-30",
   "novedades_count": 1,
   "indicadores": [
     {
-      "series_id": "reservas_bcra",
-      "label": "Reservas internacionales BCRA",
-      "category": "monetario",
-      "unit": "millones_usd",
+      "series_id": "emae_mensual",
+      "label": "Actividad económica (EMAE)",
+      "category": "actividad",
+      "unit": "indice",
       "official": true,
-      "source": "BCRA",
-      "detail_path": null,
-      "period": "2026-06-25",
-      "value": 46968.0,
-      "prev_period": "2026-05-29",
-      "prev_value": 48193.0,
-      "change_abs": -1225.0,
-      "change_pct": -0.025419,
+      "source": "INDEC",
+      "detail_path": "/detalle/actividad",
+      "period": "2026-04-01",
+      "value": 161.538865,
+      "prev_period": "2026-03-01",
+      "prev_value": 159.96271,
+      "change_abs": 1.576154,
+      "change_pct": 0.009853,
       "is_new": true
     },
     {
@@ -34,22 +34,6 @@
       "prev_value": 0.02765,
       "change_abs": -0.004892,
       "change_pct": -0.176929,
-      "is_new": false
-    },
-    {
-      "series_id": "emae_mensual",
-      "label": "Actividad económica (EMAE)",
-      "category": "actividad",
-      "unit": "indice",
-      "official": true,
-      "source": "INDEC",
-      "detail_path": "/detalle/actividad",
-      "period": "2026-03-01",
-      "value": 158.648717,
-      "prev_period": "2026-02-01",
-      "prev_value": 138.342572,
-      "change_abs": 20.306146,
-      "change_pct": 0.146782,
       "is_new": false
     },
     {
@@ -162,6 +146,22 @@
       "prev_value": 6203.139714,
       "change_abs": -170.295943,
       "change_pct": -0.027453,
+      "is_new": false
+    },
+    {
+      "series_id": "reservas_bcra",
+      "label": "Reservas internacionales BCRA",
+      "category": "monetario",
+      "unit": "millones_usd",
+      "official": true,
+      "source": "BCRA",
+      "detail_path": null,
+      "period": "2026-06-25",
+      "value": 46968.0,
+      "prev_period": "2026-05-29",
+      "prev_value": 48193.0,
+      "change_abs": -1225.0,
+      "change_pct": -0.025419,
       "is_new": false
     },
     {
