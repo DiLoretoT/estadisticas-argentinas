@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-30",
-  "updated_at_time": "2026-06-30T23:34:16",
+  "updated_at": "2026-07-01",
+  "updated_at_time": "2026-07-01T10:28:05",
   "countries": [
     "ARG",
     "BRA",
@@ -163,70 +163,138 @@
       ]
     },
     {
-      "key": "gini",
-      "display_name": "Gini (desigualdad)",
-      "unit": "índice",
+      "key": "desempleo",
+      "display_name": "Desempleo (% fuerza laboral)",
+      "unit": "%",
       "higher_is_better": false,
       "snapshot": [
         {
           "iso3": "ARG",
           "country": "Argentina",
-          "year": "2024",
-          "value": 42.4
+          "year": "2025",
+          "value": 7.14
         },
         {
           "iso3": "BRA",
           "country": "Brasil",
-          "year": "2024",
-          "value": 50.3
+          "year": "2025",
+          "value": 5.97
         },
         {
           "iso3": "CHL",
           "country": "Chile",
-          "year": "2024",
-          "value": 43.0
+          "year": "2025",
+          "value": 8.97
         },
         {
           "iso3": "URY",
           "country": "Uruguay",
-          "year": "2024",
-          "value": 40.0
+          "year": "2025",
+          "value": 7.52
         },
         {
           "iso3": "COL",
           "country": "Colombia",
-          "year": "2024",
-          "value": 54.4
+          "year": "2025",
+          "value": 8.29
         },
         {
           "iso3": "MEX",
           "country": "México",
-          "year": "2024",
-          "value": 42.6
+          "year": "2025",
+          "value": 2.67
         },
         {
           "iso3": "PER",
           "country": "Perú",
-          "year": "2024",
-          "value": 40.1
+          "year": "2025",
+          "value": 5.12
         },
         {
           "iso3": "BOL",
           "country": "Bolivia",
-          "year": "2024",
-          "value": 40.9
+          "year": "2025",
+          "value": 2.97
         },
         {
           "iso3": "PRY",
           "country": "Paraguay",
-          "year": "2024",
-          "value": 44.2
+          "year": "2025",
+          "value": 4.8
         },
         {
           "iso3": "ECU",
           "country": "Ecuador",
           "year": "2025",
-          "value": 45.9
+          "value": 3.31
+        }
+      ]
+    },
+    {
+      "key": "esperanza_vida",
+      "display_name": "Esperanza de vida (años)",
+      "unit": "años",
+      "higher_is_better": true,
+      "snapshot": [
+        {
+          "iso3": "ARG",
+          "country": "Argentina",
+          "year": "2024",
+          "value": 77.54
+        },
+        {
+          "iso3": "BRA",
+          "country": "Brasil",
+          "year": "2024",
+          "value": 76.02
+        },
+        {
+          "iso3": "CHL",
+          "country": "Chile",
+          "year": "2024",
+          "value": 81.36
+        },
+        {
+          "iso3": "URY",
+          "country": "Uruguay",
+          "year": "2024",
+          "value": 78.29
+        },
+        {
+          "iso3": "COL",
+          "country": "Colombia",
+          "year": "2024",
+          "value": 77.91
+        },
+        {
+          "iso3": "MEX",
+          "country": "México",
+          "year": "2024",
+          "value": 75.26
+        },
+        {
+          "iso3": "PER",
+          "country": "Perú",
+          "year": "2024",
+          "value": 77.94
+        },
+        {
+          "iso3": "BOL",
+          "country": "Bolivia",
+          "year": "2024",
+          "value": 68.74
+        },
+        {
+          "iso3": "PRY",
+          "country": "Paraguay",
+          "year": "2024",
+          "value": 73.98
+        },
+        {
+          "iso3": "ECU",
+          "country": "Ecuador",
+          "year": "2024",
+          "value": 77.58
         }
       ]
     },
