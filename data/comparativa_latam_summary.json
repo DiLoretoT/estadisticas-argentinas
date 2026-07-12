@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-07-11",
-  "updated_at_time": "2026-07-11T23:21:06",
+  "updated_at": "2026-07-12",
+  "updated_at_time": "2026-07-12T09:40:46",
   "countries": [
     "ARG",
     "BRA",
@@ -431,74 +431,6 @@
           "country": "Ecuador",
           "year": "2024",
           "value": 60364730466.4
-        }
-      ]
-    },
-    {
-      "key": "exports_total",
-      "display_name": "Exportaciones bienes y servicios (USD)",
-      "unit": "USD",
-      "higher_is_better": true,
-      "snapshot": [
-        {
-          "iso3": "ARG",
-          "country": "Argentina",
-          "year": "2025",
-          "value": 105190456634.98
-        },
-        {
-          "iso3": "BRA",
-          "country": "Brasil",
-          "year": "2025",
-          "value": 404920874516.39
-        },
-        {
-          "iso3": "CHL",
-          "country": "Chile",
-          "year": "2025",
-          "value": 123375218482.92
-        },
-        {
-          "iso3": "URY",
-          "country": "Uruguay",
-          "year": "2025",
-          "value": 23471287064.1
-        },
-        {
-          "iso3": "COL",
-          "country": "Colombia",
-          "year": "2025",
-          "value": 71083014420.06
-        },
-        {
-          "iso3": "MEX",
-          "country": "México",
-          "year": "2025",
-          "value": 729562753894.0
-        },
-        {
-          "iso3": "PER",
-          "country": "Perú",
-          "year": "2025",
-          "value": 101635913139.72
-        },
-        {
-          "iso3": "BOL",
-          "country": "Bolivia",
-          "year": "2025",
-          "value": 10774966879.35
-        },
-        {
-          "iso3": "PRY",
-          "country": "Paraguay",
-          "year": "2025",
-          "value": 19145773249.95
-        },
-        {
-          "iso3": "ECU",
-          "country": "Ecuador",
-          "year": "2025",
-          "value": 41560544834.24
         }
       ]
     },
