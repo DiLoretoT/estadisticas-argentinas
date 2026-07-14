@@ -1,6 +1,6 @@
 {
   "updated_at": "2026-07-14",
-  "updated_at_time": "2026-07-14T09:37:22",
+  "updated_at_time": "2026-07-14T23:21:59",
   "countries": [
     "ARG",
     "BRA",
@@ -35,62 +35,130 @@
         {
           "iso3": "ARG",
           "country": "Argentina",
-          "year": "2024",
-          "value": 30431.19
+          "year": "2025",
+          "value": 32586.63
         },
         {
           "iso3": "BRA",
           "country": "Brasil",
-          "year": "2024",
-          "value": 22338.48
+          "year": "2025",
+          "value": 23433.29
         },
         {
           "iso3": "CHL",
           "country": "Chile",
-          "year": "2024",
-          "value": 36181.16
+          "year": "2025",
+          "value": 37774.09
         },
         {
           "iso3": "URY",
           "country": "Uruguay",
-          "year": "2024",
-          "value": 36417.87
+          "year": "2025",
+          "value": 38314.89
         },
         {
           "iso3": "COL",
           "country": "Colombia",
-          "year": "2024",
-          "value": 22349.44
+          "year": "2025",
+          "value": 22640.42
         },
         {
           "iso3": "MEX",
           "country": "México",
-          "year": "2024",
-          "value": 26185.36
+          "year": "2025",
+          "value": 25868.48
         },
         {
           "iso3": "PER",
           "country": "Perú",
-          "year": "2024",
-          "value": 17802.42
+          "year": "2025",
+          "value": 18816.1
         },
         {
           "iso3": "BOL",
           "country": "Bolivia",
-          "year": "2024",
-          "value": 12877.64
+          "year": "2025",
+          "value": 12873.04
         },
         {
           "iso3": "PRY",
           "country": "Paraguay",
-          "year": "2024",
-          "value": 18523.68
+          "year": "2025",
+          "value": 20181.42
         },
         {
           "iso3": "ECU",
           "country": "Ecuador",
+          "year": "2025",
+          "value": 16756.65
+        }
+      ]
+    },
+    {
+      "key": "inflacion_anual",
+      "display_name": "Inflación anual (% IPC)",
+      "unit": "%",
+      "higher_is_better": false,
+      "snapshot": [
+        {
+          "iso3": "ARG",
+          "country": "Argentina",
           "year": "2024",
-          "value": 15840.27
+          "value": 219.88
+        },
+        {
+          "iso3": "BRA",
+          "country": "Brasil",
+          "year": "2025",
+          "value": 5.02
+        },
+        {
+          "iso3": "CHL",
+          "country": "Chile",
+          "year": "2025",
+          "value": 4.21
+        },
+        {
+          "iso3": "URY",
+          "country": "Uruguay",
+          "year": "2025",
+          "value": 4.65
+        },
+        {
+          "iso3": "COL",
+          "country": "Colombia",
+          "year": "2025",
+          "value": 5.14
+        },
+        {
+          "iso3": "MEX",
+          "country": "México",
+          "year": "2025",
+          "value": 3.81
+        },
+        {
+          "iso3": "PER",
+          "country": "Perú",
+          "year": "2025",
+          "value": 1.53
+        },
+        {
+          "iso3": "BOL",
+          "country": "Bolivia",
+          "year": "2025",
+          "value": 19.52
+        },
+        {
+          "iso3": "PRY",
+          "country": "Paraguay",
+          "year": "2025",
+          "value": 4.04
+        },
+        {
+          "iso3": "ECU",
+          "country": "Ecuador",
+          "year": "2025",
+          "value": 0.71
         }
       ]
     },
