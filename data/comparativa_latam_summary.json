@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-07-13",
-  "updated_at_time": "2026-07-13T23:21:13",
+  "updated_at": "2026-07-14",
+  "updated_at_time": "2026-07-14T09:37:22",
   "countries": [
     "ARG",
     "BRA",
@@ -91,74 +91,6 @@
           "country": "Ecuador",
           "year": "2024",
           "value": 15840.27
-        }
-      ]
-    },
-    {
-      "key": "inflacion_anual",
-      "display_name": "Inflación anual (% IPC)",
-      "unit": "%",
-      "higher_is_better": false,
-      "snapshot": [
-        {
-          "iso3": "ARG",
-          "country": "Argentina",
-          "year": "2024",
-          "value": 219.88
-        },
-        {
-          "iso3": "BRA",
-          "country": "Brasil",
-          "year": "2025",
-          "value": 5.02
-        },
-        {
-          "iso3": "CHL",
-          "country": "Chile",
-          "year": "2025",
-          "value": 4.21
-        },
-        {
-          "iso3": "URY",
-          "country": "Uruguay",
-          "year": "2025",
-          "value": 4.65
-        },
-        {
-          "iso3": "COL",
-          "country": "Colombia",
-          "year": "2025",
-          "value": 5.14
-        },
-        {
-          "iso3": "MEX",
-          "country": "México",
-          "year": "2025",
-          "value": 3.81
-        },
-        {
-          "iso3": "PER",
-          "country": "Perú",
-          "year": "2025",
-          "value": 1.53
-        },
-        {
-          "iso3": "BOL",
-          "country": "Bolivia",
-          "year": "2025",
-          "value": 19.52
-        },
-        {
-          "iso3": "PRY",
-          "country": "Paraguay",
-          "year": "2025",
-          "value": 4.04
-        },
-        {
-          "iso3": "ECU",
-          "country": "Ecuador",
-          "year": "2025",
-          "value": 0.71
         }
       ]
     },
