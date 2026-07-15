@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-14",
+  "updated_at": "2026-07-15",
   "source": {
     "name": "INDEC",
     "official": true
@@ -9,7 +9,7 @@
     "value": 0.282
   },
   "linea_indigencia": {
-    "period": "2026-05-01",
-    "value": 681246.09
+    "period": "2026-06-01",
+    "value": 689852.67
   }
 }
