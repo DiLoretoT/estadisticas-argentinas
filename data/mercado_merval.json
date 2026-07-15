@@ -1,9 +1,9 @@
 {
   "updated_at": "2026-07-15",
-  "updated_at_time": "2026-07-15T13:31:44",
-  "period": "2026-07-14",
-  "value": 3229323.5,
-  "monthly_change": 1.92,
+  "updated_at_time": "2026-07-15T15:30:32",
+  "period": "2026-07-15",
+  "value": 3249314.5,
+  "monthly_change": 2.55,
   "unit": "indice_ars",
   "source": {
     "name": "Yahoo Finance",
