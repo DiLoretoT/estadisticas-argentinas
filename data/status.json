@@ -1,64 +1,216 @@
 [
   {
-    "series_id": "dolar_blue",
+    "series_id": "comercio_balanza_comercial",
     "last_status": "success",
-    "last_run_at": "2026-07-17T18:15:44.815821-03:00",
-    "last_date": "2026-07-16",
-    "row_count": 5674,
+    "last_run_at": "2026-07-17T20:18:58.198570-03:00",
+    "last_date": "2026-05-01",
+    "row_count": 413,
     "error_message": null
+  },
+  {
+    "series_id": "comercio_exportaciones_total",
+    "last_status": "success",
+    "last_run_at": "2026-07-17T20:18:55.703717-03:00",
+    "last_date": "2026-05-01",
+    "row_count": 413,
+    "error_message": null
+  },
+  {
+    "series_id": "comercio_export_combustibles",
+    "last_status": "success",
+    "last_run_at": "2026-07-17T20:19:02.815701-03:00",
+    "last_date": "2026-05-01",
+    "row_count": 413,
+    "error_message": null
+  },
+  {
+    "series_id": "comercio_export_moa",
+    "last_status": "success",
+    "last_run_at": "2026-07-17T20:19:00.795170-03:00",
+    "last_date": "2026-05-01",
+    "row_count": 413,
+    "error_message": null
+  },
+  {
+    "series_id": "comercio_export_moi",
+    "last_status": "success",
+    "last_run_at": "2026-07-17T20:19:01.806813-03:00",
+    "last_date": "2026-05-01",
+    "row_count": 413,
+    "error_message": null
+  },
+  {
+    "series_id": "comercio_export_primarios",
+    "last_status": "success",
+    "last_run_at": "2026-07-17T20:18:59.777316-03:00",
+    "last_date": "2026-05-01",
+    "row_count": 413,
+    "error_message": null
+  },
+  {
+    "series_id": "comercio_importaciones_total",
+    "last_status": "success",
+    "last_run_at": "2026-07-17T20:18:57.170556-03:00",
+    "last_date": "2026-05-01",
+    "row_count": 413,
+    "error_message": null
+  },
+  {
+    "series_id": "comercio_import_bk_y_piezas",
+    "last_status": "success",
+    "last_run_at": "2026-07-17T20:19:04.856988-03:00",
+    "last_date": "2026-05-01",
+    "row_count": 413,
+    "error_message": null
+  },
+  {
+    "series_id": "comercio_import_combustibles",
+    "last_status": "success",
+    "last_run_at": "2026-07-17T20:19:06.889735-03:00",
+    "last_date": "2026-05-01",
+    "row_count": 413,
+    "error_message": null
+  },
+  {
+    "series_id": "comercio_import_consumo",
+    "last_status": "success",
+    "last_run_at": "2026-07-17T20:19:07.894788-03:00",
+    "last_date": "2026-05-01",
+    "row_count": 413,
+    "error_message": null
+  },
+  {
+    "series_id": "comercio_import_intermedios",
+    "last_status": "success",
+    "last_run_at": "2026-07-17T20:19:03.827869-03:00",
+    "last_date": "2026-05-01",
+    "row_count": 413,
+    "error_message": null
+  },
+  {
+    "series_id": "comercio_import_piezas_bk",
+    "last_status": "success",
+    "last_run_at": "2026-07-17T20:19:05.868754-03:00",
+    "last_date": "2026-05-01",
+    "row_count": 413,
+    "error_message": null
+  },
+  {
+    "series_id": "comercio_import_resto",
+    "last_status": "success",
+    "last_run_at": "2026-07-17T20:19:09.917937-03:00",
+    "last_date": "2026-05-01",
+    "row_count": 413,
+    "error_message": null
+  },
+  {
+    "series_id": "comercio_import_vehiculos",
+    "last_status": "success",
+    "last_run_at": "2026-07-17T20:19:08.910195-03:00",
+    "last_date": "2026-05-01",
+    "row_count": 413,
+    "error_message": null
+  },
+  {
+    "series_id": "dolar_blue",
+    "last_status": "error",
+    "last_run_at": "2026-07-17T20:18:38.212604-03:00",
+    "last_date": null,
+    "row_count": 0,
+    "error_message": "502 Server Error: Bad Gateway for url: https://api.argentinadatos.com/v1/cotizaciones/dolares/blue"
   },
   {
     "series_id": "dolar_ccl",
-    "last_status": "success",
-    "last_run_at": "2026-07-17T18:15:46.385968-03:00",
-    "last_date": "2026-07-16",
-    "row_count": 4944,
-    "error_message": null
+    "last_status": "error",
+    "last_run_at": "2026-07-17T20:18:39.324156-03:00",
+    "last_date": null,
+    "row_count": 0,
+    "error_message": "502 Server Error: Bad Gateway for url: https://api.argentinadatos.com/v1/cotizaciones/dolares/contadoconliqui"
   },
   {
     "series_id": "dolar_cripto",
-    "last_status": "success",
-    "last_run_at": "2026-07-17T18:15:47.116732-03:00",
-    "last_date": "2026-07-16",
-    "row_count": 1256,
-    "error_message": null
+    "last_status": "error",
+    "last_run_at": "2026-07-17T20:18:40.426936-03:00",
+    "last_date": null,
+    "row_count": 0,
+    "error_message": "502 Server Error: Bad Gateway for url: https://api.argentinadatos.com/v1/cotizaciones/dolares/cripto"
   },
   {
     "series_id": "dolar_mayorista",
-    "last_status": "success",
-    "last_run_at": "2026-07-17T18:15:46.876949-03:00",
-    "last_date": "2026-07-16",
-    "row_count": 5674,
-    "error_message": null
+    "last_status": "error",
+    "last_run_at": "2026-07-17T20:18:39.881552-03:00",
+    "last_date": null,
+    "row_count": 0,
+    "error_message": "502 Server Error: Bad Gateway for url: https://api.argentinadatos.com/v1/cotizaciones/dolares/mayorista"
   },
   {
     "series_id": "dolar_mep",
-    "last_status": "success",
-    "last_run_at": "2026-07-17T18:15:45.526923-03:00",
-    "last_date": "2026-07-16",
-    "row_count": 2818,
-    "error_message": null
+    "last_status": "error",
+    "last_run_at": "2026-07-17T20:18:38.772577-03:00",
+    "last_date": null,
+    "row_count": 0,
+    "error_message": "502 Server Error: Bad Gateway for url: https://api.argentinadatos.com/v1/cotizaciones/dolares/bolsa"
   },
   {
     "series_id": "dolar_oficial",
     "last_status": "success",
-    "last_run_at": "2026-07-17T18:15:43.565395-03:00",
+    "last_run_at": "2026-07-17T20:18:37.494983-03:00",
     "last_date": "2026-07-17",
     "row_count": 415,
     "error_message": null
   },
   {
     "series_id": "dolar_tarjeta",
+    "last_status": "error",
+    "last_run_at": "2026-07-17T20:18:40.970472-03:00",
+    "last_date": null,
+    "row_count": 0,
+    "error_message": "502 Server Error: Bad Gateway for url: https://api.argentinadatos.com/v1/cotizaciones/dolares/tarjeta"
+  },
+  {
+    "series_id": "emae",
     "last_status": "success",
-    "last_run_at": "2026-07-17T18:15:47.806702-03:00",
-    "last_date": "2026-07-16",
-    "row_count": 2398,
+    "last_run_at": "2026-07-17T20:21:20.967905-03:00",
+    "last_date": "2026-04-01",
+    "row_count": 172,
+    "error_message": null
+  },
+  {
+    "series_id": "icc_mensual",
+    "last_status": "success",
+    "last_run_at": "2026-07-17T20:21:29.090218-03:00",
+    "last_date": "2026-06-01",
+    "row_count": 304,
+    "error_message": null
+  },
+  {
+    "series_id": "icg_mensual",
+    "last_status": "success",
+    "last_run_at": "2026-07-17T20:21:28.069083-03:00",
+    "last_date": "2026-06-01",
+    "row_count": 296,
+    "error_message": null
+  },
+  {
+    "series_id": "inflacion",
+    "last_status": "success",
+    "last_run_at": "2026-07-17T20:18:36.306640-03:00",
+    "last_date": "2026-06-01",
+    "row_count": 122,
+    "error_message": null
+  },
+  {
+    "series_id": "linea_indigencia",
+    "last_status": "success",
+    "last_run_at": "2026-07-17T20:21:27.036715-03:00",
+    "last_date": "2026-06-01",
+    "row_count": 123,
     "error_message": null
   },
   {
     "series_id": "mercado_bma",
     "last_status": "success",
-    "last_run_at": "2026-07-17T18:15:51.197217-03:00",
+    "last_run_at": "2026-07-17T20:18:53.662161-03:00",
     "last_date": "2026-07-17",
     "row_count": 2514,
     "error_message": null
@@ -66,7 +218,7 @@
   {
     "series_id": "mercado_ggal",
     "last_status": "success",
-    "last_run_at": "2026-07-17T18:15:50.339692-03:00",
+    "last_run_at": "2026-07-17T20:18:51.753764-03:00",
     "last_date": "2026-07-17",
     "row_count": 2514,
     "error_message": null
@@ -74,7 +226,7 @@
   {
     "series_id": "mercado_merval",
     "last_status": "success",
-    "last_run_at": "2026-07-17T18:15:50.065905-03:00",
+    "last_run_at": "2026-07-17T20:18:51.197973-03:00",
     "last_date": "2026-07-17",
     "row_count": 2435,
     "error_message": null
@@ -82,23 +234,23 @@
   {
     "series_id": "mercado_pam",
     "last_status": "success",
-    "last_run_at": "2026-07-17T18:15:50.902227-03:00",
+    "last_run_at": "2026-07-17T20:18:53.028694-03:00",
     "last_date": "2026-07-17",
     "row_count": 2514,
     "error_message": null
   },
   {
     "series_id": "mercado_riesgo_pais",
-    "last_status": "success",
-    "last_run_at": "2026-07-17T18:15:49.781730-03:00",
-    "last_date": "2026-07-15",
-    "row_count": 7658,
-    "error_message": null
+    "last_status": "error",
+    "last_run_at": "2026-07-17T20:18:50.608327-03:00",
+    "last_date": null,
+    "row_count": 0,
+    "error_message": "502 Server Error: Bad Gateway for url: https://api.argentinadatos.com/v1/finanzas/indices/riesgo-pais"
   },
   {
     "series_id": "mercado_teo",
     "last_status": "success",
-    "last_run_at": "2026-07-17T18:15:51.472695-03:00",
+    "last_run_at": "2026-07-17T20:18:54.236523-03:00",
     "last_date": "2026-07-17",
     "row_count": 2514,
     "error_message": null
@@ -106,7 +258,7 @@
   {
     "series_id": "mercado_ypf",
     "last_status": "success",
-    "last_run_at": "2026-07-17T18:15:50.611703-03:00",
+    "last_run_at": "2026-07-17T20:18:52.362582-03:00",
     "last_date": "2026-07-17",
     "row_count": 2514,
     "error_message": null
@@ -114,7 +266,7 @@
   {
     "series_id": "moneda_brl",
     "last_status": "success",
-    "last_run_at": "2026-07-17T18:15:48.148820-03:00",
+    "last_run_at": "2026-07-17T20:18:42.219342-03:00",
     "last_date": "2026-07-17",
     "row_count": 2813,
     "error_message": null
@@ -122,7 +274,7 @@
   {
     "series_id": "moneda_clp",
     "last_status": "success",
-    "last_run_at": "2026-07-17T18:15:48.281881-03:00",
+    "last_run_at": "2026-07-17T20:18:42.358662-03:00",
     "last_date": "2026-07-17",
     "row_count": 2813,
     "error_message": null
@@ -130,7 +282,7 @@
   {
     "series_id": "moneda_cop",
     "last_status": "success",
-    "last_run_at": "2026-07-17T18:15:48.723116-03:00",
+    "last_run_at": "2026-07-17T20:18:42.825728-03:00",
     "last_date": "2026-07-17",
     "row_count": 2813,
     "error_message": null
@@ -138,7 +290,7 @@
   {
     "series_id": "moneda_mxn",
     "last_status": "success",
-    "last_run_at": "2026-07-17T18:15:48.999990-03:00",
+    "last_run_at": "2026-07-17T20:18:43.185429-03:00",
     "last_date": "2026-07-17",
     "row_count": 2813,
     "error_message": null
@@ -146,7 +298,7 @@
   {
     "series_id": "moneda_pen",
     "last_status": "success",
-    "last_run_at": "2026-07-17T18:15:48.556152-03:00",
+    "last_run_at": "2026-07-17T20:18:42.689029-03:00",
     "last_date": "2026-07-17",
     "row_count": 2813,
     "error_message": null
@@ -154,7 +306,7 @@
   {
     "series_id": "moneda_pyg",
     "last_status": "success",
-    "last_run_at": "2026-07-17T18:15:48.861311-03:00",
+    "last_run_at": "2026-07-17T20:18:43.039032-03:00",
     "last_date": "2026-07-17",
     "row_count": 2813,
     "error_message": null
@@ -162,9 +314,89 @@
   {
     "series_id": "moneda_uyu",
     "last_status": "success",
-    "last_run_at": "2026-07-17T18:15:48.422859-03:00",
+    "last_run_at": "2026-07-17T20:18:42.531244-03:00",
     "last_date": "2026-07-17",
     "row_count": 2813,
+    "error_message": null
+  },
+  {
+    "series_id": "monetario_badlar",
+    "last_status": "success",
+    "last_run_at": "2026-07-17T20:18:47.182416-03:00",
+    "last_date": "2026-07-16",
+    "row_count": 1569,
+    "error_message": null
+  },
+  {
+    "series_id": "monetario_base_monetaria",
+    "last_status": "success",
+    "last_run_at": "2026-07-17T20:18:44.360189-03:00",
+    "last_date": "2026-07-15",
+    "row_count": 2805,
+    "error_message": null
+  },
+  {
+    "series_id": "monetario_m2_privado_yoy",
+    "last_status": "success",
+    "last_run_at": "2026-07-17T20:18:49.563286-03:00",
+    "last_date": "2026-07-15",
+    "row_count": 4214,
+    "error_message": null
+  },
+  {
+    "series_id": "monetario_plazo_fijo_30d",
+    "last_status": "success",
+    "last_run_at": "2026-07-17T20:18:48.348797-03:00",
+    "last_date": "2026-07-16",
+    "row_count": 2806,
+    "error_message": null
+  },
+  {
+    "series_id": "monetario_rem_inflacion_12m",
+    "last_status": "success",
+    "last_run_at": "2026-07-17T20:18:50.317128-03:00",
+    "last_date": "2026-06-30",
+    "row_count": 121,
+    "error_message": null
+  },
+  {
+    "series_id": "monetario_reservas",
+    "last_status": "success",
+    "last_run_at": "2026-07-17T20:18:45.223278-03:00",
+    "last_date": "2026-07-15",
+    "row_count": 2805,
+    "error_message": null
+  },
+  {
+    "series_id": "monetario_tpm",
+    "last_status": "success",
+    "last_run_at": "2026-07-17T20:18:46.060756-03:00",
+    "last_date": "2025-07-10",
+    "row_count": 2329,
+    "error_message": null
+  },
+  {
+    "series_id": "tasa_desocupacion",
+    "last_status": "success",
+    "last_run_at": "2026-07-17T20:21:23.887812-03:00",
+    "last_date": "2026-01-01",
+    "row_count": 91,
+    "error_message": null
+  },
+  {
+    "series_id": "tasa_empleo",
+    "last_status": "success",
+    "last_run_at": "2026-07-17T20:21:24.896771-03:00",
+    "last_date": "2026-01-01",
+    "row_count": 91,
+    "error_message": null
+  },
+  {
+    "series_id": "tasa_pobreza",
+    "last_status": "success",
+    "last_run_at": "2026-07-17T20:21:25.912712-03:00",
+    "last_date": "2026-01-01",
+    "row_count": 28,
     "error_message": null
   }
 ]
