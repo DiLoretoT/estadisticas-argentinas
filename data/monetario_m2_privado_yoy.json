@@ -1,9 +1,9 @@
 {
   "updated_at": "2026-07-24",
-  "updated_at_time": "2026-07-24T09:49:46",
-  "period": "2026-07-21",
-  "value": 20.4,
-  "monthly_change": 6.25,
+  "updated_at_time": "2026-07-24T23:23:37",
+  "period": "2026-07-22",
+  "value": 20.3,
+  "monthly_change": 5.73,
   "unit": "porcentaje_yoy",
   "source": {
     "name": "BCRA",
