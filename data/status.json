@@ -2,7 +2,7 @@
   {
     "series_id": "dolar_blue",
     "last_status": "success",
-    "last_run_at": "2026-07-27T14:32:11.094922-03:00",
+    "last_run_at": "2026-07-27T16:30:06.526035-03:00",
     "last_date": "2026-07-26",
     "row_count": 5684,
     "error_message": null
@@ -10,7 +10,7 @@
   {
     "series_id": "dolar_ccl",
     "last_status": "success",
-    "last_run_at": "2026-07-27T14:32:12.581488-03:00",
+    "last_run_at": "2026-07-27T16:30:09.371367-03:00",
     "last_date": "2026-07-26",
     "row_count": 4954,
     "error_message": null
@@ -18,7 +18,7 @@
   {
     "series_id": "dolar_cripto",
     "last_status": "success",
-    "last_run_at": "2026-07-27T14:32:13.434363-03:00",
+    "last_run_at": "2026-07-27T16:30:12.188979-03:00",
     "last_date": "2026-07-26",
     "row_count": 1266,
     "error_message": null
@@ -26,7 +26,7 @@
   {
     "series_id": "dolar_mayorista",
     "last_status": "success",
-    "last_run_at": "2026-07-27T14:32:13.095322-03:00",
+    "last_run_at": "2026-07-27T16:30:10.286687-03:00",
     "last_date": "2026-07-26",
     "row_count": 5684,
     "error_message": null
@@ -34,7 +34,7 @@
   {
     "series_id": "dolar_mep",
     "last_status": "success",
-    "last_run_at": "2026-07-27T14:32:12.133683-03:00",
+    "last_run_at": "2026-07-27T16:30:07.929111-03:00",
     "last_date": "2026-07-26",
     "row_count": 2828,
     "error_message": null
@@ -42,15 +42,15 @@
   {
     "series_id": "dolar_oficial",
     "last_status": "success",
-    "last_run_at": "2026-07-27T14:32:09.531158-03:00",
-    "last_date": "2026-07-24",
+    "last_run_at": "2026-07-27T16:30:04.855518-03:00",
+    "last_date": "2026-07-27",
     "row_count": 415,
     "error_message": null
   },
   {
     "series_id": "dolar_tarjeta",
     "last_status": "success",
-    "last_run_at": "2026-07-27T14:32:13.833497-03:00",
+    "last_run_at": "2026-07-27T16:30:12.739348-03:00",
     "last_date": "2026-07-26",
     "row_count": 2408,
     "error_message": null
@@ -58,7 +58,7 @@
   {
     "series_id": "mercado_bma",
     "last_status": "success",
-    "last_run_at": "2026-07-27T14:32:26.481494-03:00",
+    "last_run_at": "2026-07-27T16:30:23.506315-03:00",
     "last_date": "2026-07-27",
     "row_count": 2512,
     "error_message": null
@@ -66,7 +66,7 @@
   {
     "series_id": "mercado_ggal",
     "last_status": "success",
-    "last_run_at": "2026-07-27T14:32:25.625929-03:00",
+    "last_run_at": "2026-07-27T16:30:22.385909-03:00",
     "last_date": "2026-07-27",
     "row_count": 2512,
     "error_message": null
@@ -74,7 +74,7 @@
   {
     "series_id": "mercado_merval",
     "last_status": "success",
-    "last_run_at": "2026-07-27T14:32:25.324170-03:00",
+    "last_run_at": "2026-07-27T16:30:21.983055-03:00",
     "last_date": "2026-07-27",
     "row_count": 2433,
     "error_message": null
@@ -82,7 +82,7 @@
   {
     "series_id": "mercado_pam",
     "last_status": "success",
-    "last_run_at": "2026-07-27T14:32:26.196917-03:00",
+    "last_run_at": "2026-07-27T16:30:23.183104-03:00",
     "last_date": "2026-07-27",
     "row_count": 2512,
     "error_message": null
@@ -90,7 +90,7 @@
   {
     "series_id": "mercado_riesgo_pais",
     "last_status": "success",
-    "last_run_at": "2026-07-27T14:32:25.097459-03:00",
+    "last_run_at": "2026-07-27T16:30:21.566923-03:00",
     "last_date": "2026-07-24",
     "row_count": 7665,
     "error_message": null
@@ -98,7 +98,7 @@
   {
     "series_id": "mercado_teo",
     "last_status": "success",
-    "last_run_at": "2026-07-27T14:32:26.763477-03:00",
+    "last_run_at": "2026-07-27T16:30:23.951341-03:00",
     "last_date": "2026-07-27",
     "row_count": 2512,
     "error_message": null
@@ -106,7 +106,7 @@
   {
     "series_id": "mercado_ypf",
     "last_status": "success",
-    "last_run_at": "2026-07-27T14:32:25.924666-03:00",
+    "last_run_at": "2026-07-27T16:30:22.778148-03:00",
     "last_date": "2026-07-27",
     "row_count": 2512,
     "error_message": null
@@ -114,57 +114,57 @@
   {
     "series_id": "moneda_brl",
     "last_status": "success",
-    "last_run_at": "2026-07-27T14:32:15.727302-03:00",
-    "last_date": "2026-07-24",
-    "row_count": 2818,
+    "last_run_at": "2026-07-27T16:30:14.162307-03:00",
+    "last_date": "2026-07-27",
+    "row_count": 2819,
     "error_message": null
   },
   {
     "series_id": "moneda_clp",
     "last_status": "success",
-    "last_run_at": "2026-07-27T14:32:16.715038-03:00",
-    "last_date": "2026-07-24",
-    "row_count": 2818,
+    "last_run_at": "2026-07-27T16:30:15.264598-03:00",
+    "last_date": "2026-07-27",
+    "row_count": 2819,
     "error_message": null
   },
   {
     "series_id": "moneda_cop",
     "last_status": "success",
-    "last_run_at": "2026-07-27T14:32:20.988916-03:00",
-    "last_date": "2026-07-24",
-    "row_count": 2818,
+    "last_run_at": "2026-07-27T16:30:18.281806-03:00",
+    "last_date": "2026-07-27",
+    "row_count": 2819,
     "error_message": null
   },
   {
     "series_id": "moneda_mxn",
     "last_status": "success",
-    "last_run_at": "2026-07-27T14:32:23.751505-03:00",
-    "last_date": "2026-07-24",
-    "row_count": 2818,
+    "last_run_at": "2026-07-27T16:30:20.569360-03:00",
+    "last_date": "2026-07-27",
+    "row_count": 2819,
     "error_message": null
   },
   {
     "series_id": "moneda_pen",
     "last_status": "success",
-    "last_run_at": "2026-07-27T14:32:19.793988-03:00",
-    "last_date": "2026-07-24",
-    "row_count": 2818,
+    "last_run_at": "2026-07-27T16:30:17.391595-03:00",
+    "last_date": "2026-07-27",
+    "row_count": 2819,
     "error_message": null
   },
   {
     "series_id": "moneda_pyg",
     "last_status": "success",
-    "last_run_at": "2026-07-27T14:32:22.402621-03:00",
-    "last_date": "2026-07-24",
-    "row_count": 2818,
+    "last_run_at": "2026-07-27T16:30:19.342826-03:00",
+    "last_date": "2026-07-27",
+    "row_count": 2819,
     "error_message": null
   },
   {
     "series_id": "moneda_uyu",
     "last_status": "success",
-    "last_run_at": "2026-07-27T14:32:18.091303-03:00",
-    "last_date": "2026-07-24",
-    "row_count": 2818,
+    "last_run_at": "2026-07-27T16:30:16.479978-03:00",
+    "last_date": "2026-07-27",
+    "row_count": 2819,
     "error_message": null
   }
 ]
