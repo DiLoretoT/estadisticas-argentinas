@@ -1,41 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-28T23:25:50+00:00",
-  "report_date": "2026-07-28",
-  "novedades_count": 2,
+  "generated_at": "2026-07-29T10:01:58+00:00",
+  "report_date": "2026-07-29",
+  "novedades_count": 0,
   "indicadores": [
-    {
-      "series_id": "reservas_bcra",
-      "label": "Reservas internacionales BCRA",
-      "category": "monetario",
-      "unit": "millones_usd",
-      "official": true,
-      "source": "BCRA",
-      "detail_path": null,
-      "period": "2026-07-24",
-      "value": 49187.0,
-      "prev_period": "2026-06-30",
-      "prev_value": 44870.0,
-      "change_abs": 4317.0,
-      "change_pct": 0.096211,
-      "is_new": true
-    },
-    {
-      "series_id": "icg_mensual",
-      "label": "Confianza en el Gobierno (ICG)",
-      "category": "confianza",
-      "unit": "indice",
-      "official": false,
-      "source": "UTDT",
-      "detail_path": null,
-      "period": "2026-07-01",
-      "value": 1.94,
-      "prev_period": "2026-06-01",
-      "prev_value": 2.07,
-      "change_abs": -0.13,
-      "change_pct": -0.062802,
-      "is_new": true
-    },
     {
       "series_id": "ipc_mensual",
       "label": "Inflación mensual (IPC)",
@@ -181,6 +149,22 @@
       "is_new": false
     },
     {
+      "series_id": "reservas_bcra",
+      "label": "Reservas internacionales BCRA",
+      "category": "monetario",
+      "unit": "millones_usd",
+      "official": true,
+      "source": "BCRA",
+      "detail_path": null,
+      "period": "2026-07-24",
+      "value": 49187.0,
+      "prev_period": "2026-06-30",
+      "prev_value": 44870.0,
+      "change_abs": 4317.0,
+      "change_pct": 0.096211,
+      "is_new": false
+    },
+    {
       "series_id": "ripte_mensual",
       "label": "Salarios RIPTE (var. mensual)",
       "category": "salarios",
@@ -210,6 +194,22 @@
       "prev_value": 42.708965,
       "change_abs": -2.039898,
       "change_pct": -0.047763,
+      "is_new": false
+    },
+    {
+      "series_id": "icg_mensual",
+      "label": "Confianza en el Gobierno (ICG)",
+      "category": "confianza",
+      "unit": "indice",
+      "official": false,
+      "source": "UTDT",
+      "detail_path": null,
+      "period": "2026-07-01",
+      "value": 1.94,
+      "prev_period": "2026-06-01",
+      "prev_value": 2.07,
+      "change_abs": -0.13,
+      "change_pct": -0.062802,
       "is_new": false
     }
   ],
