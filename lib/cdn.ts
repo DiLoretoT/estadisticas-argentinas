@@ -12,6 +12,18 @@ const FALLBACK_BASE =
 
 const DEFAULT_TIMEOUT_MS = 4000;
 
+/**
+ * Archivos que cambian varias veces por día y leen de GitHub raw PRIMERO.
+ * Mismo criterio (y mismo motivo) que `LIVE_FILES` en `readData.ts`: jsdelivr
+ * cachea los URLs `@main` 12 h y purgar no alcanza, porque el purge limpia el
+ * edge pero no la resolución de rama del origen.
+ *
+ * `status.json` se regenera en cada corrida del ETL y alimenta la página
+ * /status, que declara `revalidate = 300`. Leerlo de un CDN que puede estar
+ * 12 h atrasado vuelve ese revalidate de 5 min puramente decorativo.
+ */
+const LIVE_FILES = new Set(["status.json"]);
+
 async function fetchWithTimeout(
   url: string,
   revalidate: number,
@@ -36,7 +48,11 @@ export async function fetchDataJson<T>(
   relativePath: string,
   revalidate: number = 1800,
 ): Promise<T | null> {
-  for (const base of [PRIMARY_BASE, FALLBACK_BASE]) {
+  const bases = LIVE_FILES.has(relativePath)
+    ? [FALLBACK_BASE, PRIMARY_BASE]
+    : [PRIMARY_BASE, FALLBACK_BASE];
+
+  for (const base of bases) {
     try {
       const res = await fetchWithTimeout(`${base}/${relativePath}`, revalidate);
       if (res.ok) {

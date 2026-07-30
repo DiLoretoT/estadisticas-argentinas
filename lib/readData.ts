@@ -26,6 +26,27 @@ const FALLBACK_BASE =
 const FETCH_REVALIDATE_SECONDS = 30 * 60; // 30 min
 const FETCH_TIMEOUT_MS = 4000; // bail-out a fallback si tarda más
 
+/**
+ * Archivos que cambian varias veces por día y leen de GitHub raw PRIMERO,
+ * invirtiendo el orden normal.
+ *
+ * Motivo: jsdelivr cachea los URLs pinneados a rama (`@main`) con
+ * `s-maxage=43200` — 12 horas — y purgar no alcanza. Medido: tras dos purges
+ * (uno devolviendo `status: finished` con Cloudflare y Fastly confirmados) el
+ * CDN siguió sirviendo una versión vieja más de 10 minutos, con `Age` bajo. O
+ * sea que el edge sí refetchea, pero el origen de jsdelivr resuelve `@main` a
+ * un commit anterior y el purge no lo toca.
+ *
+ * Para el log intradía eso rompía la feature entera: el front descarta el log
+ * si no es del día, así que un archivo de ayer dejaba la tabla vacía.
+ *
+ * El costo de ir a raw es despreciable: son dos archivos chicos, y del lado del
+ * servidor cada fetch queda cacheado 30 min. jsdelivr sigue de fallback por si
+ * raw falla, y sigue siendo el primario para todo el resto (las series
+ * históricas cambian una vez por día y ahí el CDN rinde).
+ */
+const LIVE_FILES = new Set(["dolar_intradia.json"]);
+
 const dataDir = path.join(process.cwd(), "data");
 const seriesDir = path.join(dataDir, "series");
 
@@ -59,8 +80,13 @@ async function fetchJson<T>(relativeUrl: string, fallback: T): Promise<T> {
     }
   }
 
-  // Producción: jsdelivr primero, GitHub raw como fallback.
-  for (const base of [PRIMARY_BASE, FALLBACK_BASE]) {
+  // Producción: normalmente jsdelivr primero y GitHub raw como fallback, pero
+  // al revés para los archivos intradía (ver LIVE_FILES).
+  const bases = LIVE_FILES.has(relativeUrl)
+    ? [FALLBACK_BASE, PRIMARY_BASE]
+    : [PRIMARY_BASE, FALLBACK_BASE];
+
+  for (const base of bases) {
     try {
       const res = await fetchWithTimeout(`${base}/${relativeUrl}`);
       if (res.ok) {
