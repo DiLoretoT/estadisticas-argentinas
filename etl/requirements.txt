@@ -7,6 +7,6 @@ openpyxl>=3.1.5
 # disfrazado de xls por pandas.read_html. Verificado: produce el mismo
 # provincias_stats.json que xlrd 1.2.
 xlrd>=2.0.2
-pandas>=3.0.3
+pandas>=3.0.5
 html5lib>=1.1
 lxml>=6.1.1
