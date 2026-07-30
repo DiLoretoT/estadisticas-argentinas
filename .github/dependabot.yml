@@ -15,6 +15,19 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
+    ignore:
+      # eslint 10 rompe el lint: eslint-config-next trae un eslint-plugin-react
+      # que usa context.getFilename(), removido en v10 ("TypeError: Error while
+      # loading rule 'react/display-name'"). Destrabar cuando Next actualice el
+      # plugin.
+      - dependency-name: "eslint"
+        update-types: ["version-update:semver-major"]
+      # TypeScript 7 (el port nativo) todavía no expone la compiler API que usa
+      # `next build`: "TypeScript 7.0.2 does not provide the compiler API
+      # required by Next.js". La alternativa es el flag experimental
+      # useTypeScriptCli, que no justifica el salto. Revisar con Next 17.
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
     groups:
       next:
         patterns:

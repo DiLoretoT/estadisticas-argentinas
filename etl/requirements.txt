@@ -1,8 +1,12 @@
 requests>=2.34.2
-certifi>=2026.5.20
+certifi>=2026.7.22
 psycopg[binary]>=3.3.4
-openpyxl
-xlrd==1.2.0
-pandas>=2.0
-html5lib
-lxml
+openpyxl>=3.1.5
+# xlrd 2.x sólo lee .xls (BIFF), no .xlsx — que es exactamente el uso acá:
+# fetch_opex_provincial.py abre el .xls binario de INDEC y rutea el HTML
+# disfrazado de xls por pandas.read_html. Verificado: produce el mismo
+# provincias_stats.json que xlrd 1.2.
+xlrd>=2.0.2
+pandas>=3.0.3
+html5lib>=1.1
+lxml>=6.1.1
