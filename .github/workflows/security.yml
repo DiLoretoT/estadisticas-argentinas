@@ -3,6 +3,11 @@ name: Security checks
 on:
   push:
     branches: [main]
+    # Los ETL commitean a main solos (etl-fx 5x/día hábil, etl-daily 2x/día).
+    # Sin esto, cada refresh de datos re-dispara el scan completo y, si algo
+    # falla, manda un mail por commit. El código no cambia en esos pushes.
+    paths-ignore:
+      - "data/**"
   pull_request:
     branches: [main]
   schedule:
