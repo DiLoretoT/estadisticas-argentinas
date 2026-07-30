@@ -3,6 +3,13 @@ name: CI
 on:
   push:
     branches: [main]
+    # Los ETL commitean a main ~7 veces por dia habil. Correr lint/typecheck/
+    # build sobre un commit que solo toca data/ no valida nada: en produccion
+    # `next build` lee los JSON desde el CDN, no desde el working tree, asi que
+    # el build ni siquiera ve los archivos nuevos. Un commit que toque codigo
+    # (aunque tambien toque data/) dispara igual.
+    paths-ignore:
+      - "data/**"
   pull_request:
     branches: [main]
 
