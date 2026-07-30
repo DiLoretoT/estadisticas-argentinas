@@ -59,6 +59,30 @@ export function formatDiaBA(iso: string | null | undefined): string {
   });
 }
 
+/** Hoy en hora de Buenos Aires, formato "YYYY-MM-DD". */
+export function hoyBA(): string {
+  return new Date().toLocaleDateString("en-CA", {
+    timeZone: "America/Argentina/Buenos_Aires",
+  });
+}
+
+/**
+ * ISO → "YYYY-MM-DD" del día en hora de Buenos Aires (null si es inválido).
+ *
+ * Se usa para descartar cotizaciones cuyo `fechaActualizacion` es de una
+ * jornada anterior: DolarApi devuelve el último cambio conocido de cada casa,
+ * así que las que no cotizan (mayorista fuera de rueda) arrastran la fecha de
+ * días previos y no deben mezclarse con los movimientos de hoy.
+ */
+export function fechaBA(iso: string | null | undefined): string | null {
+  if (!iso) return null;
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return null;
+  return d.toLocaleDateString("en-CA", {
+    timeZone: "America/Argentina/Buenos_Aires",
+  });
+}
+
 /** Compact large numbers: 517893412 → "517,9M" */
 export function formatCompact(n: number): string {
   const abs = Math.abs(n);

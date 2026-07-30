@@ -1,0 +1,84 @@
+name: ETL dólar intradía
+
+# Muestreo frecuente del log intradía de cotizaciones (data/dolar_intradia.json).
+#
+# Vive separado de `etl-fx.yml` a propósito: ese workflow levanta un Postgres
+# efímero e instala pandas/lxml para el resto de las series, lo que no tiene
+# sentido pagar cada 30 minutos. Este fetcher no toca Postgres y sólo necesita
+# requests + certifi, así que la corrida es de segundos.
+#
+# `fetch_dolar_intradia.py` corre ACÁ y no en etl-fx.yml, para que un único
+# workflow sea dueño del archivo y no haya dos procesos escribiéndolo.
+#
+# Costo: $0 — GitHub Actions es ilimitado en repos públicos.
+
+on:
+  schedule:
+    # Cada 30 min entre 13 y 21 UTC (= 10:15 a 18:45 hora Buenos Aires UTC-3),
+    # cubriendo la rueda cambiaria. Los minutos :15/:45 evitan chocar con
+    # etl-fx.yml, que corre en punto.
+    - cron: "15,45 13-21 * * 1-5"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Serializa contra los otros ETL: todos commitean a main y sin esto dos pushes
+# simultáneos se pisan. Si llegara a haber cola, GitHub descarta el run pendiente
+# del medio — perder una muestra intradía es inocuo, la siguiente va en 30 min.
+concurrency:
+  group: etl-data-push
+  cancel-in-progress: false
+
+jobs:
+  etl-intradia:
+    name: Refresh log intradía
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          token: ${{ secrets.ETL_PUSH_TOKEN }}
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        # Sólo lo que importa fetch_dolar_intradia.py. Rangos espejados de
+        # etl/requirements.txt; si el fetcher suma un import, actualizar acá.
+        run: pip install "requests>=2.34.2" "certifi>=2026.5.20"
+
+      - name: Run intradía fetcher
+        run: python etl/fetch_dolar_intradia.py
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Pull latest before commit
+        run: git pull --rebase --autostash origin main
+
+      - name: Commit and push if changed
+        id: commit
+        run: |
+          if git diff --quiet --exit-code data/dolar_intradia.json; then
+            echo "Sin movimientos nuevos. Skipping commit."
+            echo "committed=false" >> "$GITHUB_OUTPUT"
+          else
+            git add data/dolar_intradia.json
+            git commit -m "data: dolar intradia $(date -u +'%Y-%m-%dT%H:%MZ')"
+            git push origin HEAD:main
+            echo "committed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Purgar cache de jsdelivr
+        # jsdelivr cachea los URLs @main 12 h (s-maxage=43200). Sin este purge
+        # la web sigue leyendo el JSON viejo aunque el commit ya esté en main, y
+        # el front descarta el log entero por no ser del día.
+        if: steps.commit.outputs.committed == 'true'
+        continue-on-error: true
+        run: git diff --name-only HEAD~1 HEAD -- data/ | python etl/purge_jsdelivr.py

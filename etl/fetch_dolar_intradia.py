@@ -14,6 +14,10 @@ Diseño (acordado con el producto):
   - Sólo se agrega un punto cuando compra **o** venta cambió respecto del último
     registrado para esa casa. Las lecturas sin variación no generan fila —así la
     tabla queda chica aunque el cron corra seguido.
+  - Se descartan las lecturas cuyo `fechaActualizacion` no sea del día en curso
+    (hora de Buenos Aires). DolarApi informa el último cambio conocido de cada
+    casa, no una lectura del momento: las que no cotizaron todavía arrastran la
+    fecha de jornadas anteriores y ensuciarían el log de hoy.
   - Tope de seguridad de _MAX_POINTS por casa por si algún día subimos la
     frecuencia del cron.
 
@@ -99,6 +103,19 @@ def _load_existing(today: str) -> dict[str, Any]:
     return {"date": today, "updatedAt": None, "source": "dolarapi.com", "casas": {}}
 
 
+def _fecha_ba(iso: str | None) -> str | None:
+    """ISO (UTC) → 'YYYY-MM-DD' del día en hora de Buenos Aires."""
+    if not iso:
+        return None
+    from datetime import datetime
+
+    try:
+        parsed = datetime.fromisoformat(iso.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    return parsed.astimezone(_TZ).date().isoformat()
+
+
 def _coerce_number(value: Any) -> float | None:
     if value is None:
         return None
@@ -117,8 +134,17 @@ def fetch_dolar_intradia() -> dict[str, Any]:
     if not isinstance(items, list):
         raise ValueError("Respuesta inesperada de DolarApi (no es lista)")
 
+    # Limpieza de puntos de jornadas anteriores que hayan quedado guardados por
+    # corridas previas a este filtro (p. ej. mayorista con la fecha de ayer).
+    dropped_stale = 0
+    for label, series in casas.items():
+        fresh = [p for p in series if _fecha_ba(p.get("t")) == today]
+        dropped_stale += len(series) - len(fresh)
+        casas[label] = fresh
+
     latest_updated = log.get("updatedAt")
     appended = 0
+    skipped_stale = 0
 
     for item in items:
         label = _CASA_TO_LABEL.get(item.get("casa", ""))
@@ -131,6 +157,16 @@ def fetch_dolar_intradia() -> dict[str, Any]:
             continue
 
         ts = item.get("fechaActualizacion")
+
+        # DolarApi informa el ÚLTIMO cambio conocido de cada casa, no una
+        # lectura de ahora. Las casas que todavía no cotizaron hoy (mayorista
+        # fuera de rueda, fines de semana) devuelven la fecha de días
+        # anteriores: si las guardáramos, el log "de hoy" quedaría con
+        # timestamps de otra jornada.
+        if _fecha_ba(ts) != today:
+            skipped_stale += 1
+            continue
+
         point = {"t": ts, "compra": compra, "venta": venta}
 
         series = casas.setdefault(label, [])
@@ -155,9 +191,12 @@ def fetch_dolar_intradia() -> dict[str, Any]:
         json.dump(log, handle, ensure_ascii=False, indent=2)
 
     logger.info(
-        "dolar_intradia: %d casas, %d puntos nuevos (día %s)",
+        "dolar_intradia: %d casas, %d puntos nuevos, %d lecturas de otra "
+        "jornada descartadas, %d puntos viejos purgados (día %s)",
         len(casas),
         appended,
+        skipped_stale,
+        dropped_stale,
         today,
     )
     return log

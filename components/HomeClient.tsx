@@ -15,6 +15,7 @@ import { MultiCurrencyChartLazy } from "@/components/MultiCurrencyChartLazy";
 import { AnalysisPanel } from "@/components/AnalysisPanel";
 import { DolarLiveBadge } from "@/components/DolarLiveBadge";
 import { useDolarLive } from "@/lib/useDolarLive";
+import { fechaBA, hoyBA } from "@/lib/formatters";
 
 type Indicator = Record<string, unknown>;
 
@@ -388,9 +389,7 @@ export function HomeClient({
 
   // Día de hoy en hora de Buenos Aires (YYYY-MM-DD) para validar que el log
   // intradía server-rendered sea de hoy y no de una jornada anterior.
-  const todayBA = new Date().toLocaleDateString("en-CA", {
-    timeZone: "America/Argentina/Buenos_Aires",
-  });
+  const todayBA = hoyBA();
   const intradiaIsToday = dolarIntradia?.date === todayBA;
 
   // Overlay del dato intradía (compra/venta) sobre el valor estático. La
@@ -406,11 +405,22 @@ export function HomeClient({
 
   // Puntos del día para una casa: log server-rendered (sólo si es de hoy) +
   // el punto en vivo actual si todavía no quedó persistido por el cron.
+  //
+  // En ambas fuentes se descartan los puntos cuyo timestamp no sea de hoy en
+  // hora de Buenos Aires: DolarApi informa el último cambio conocido de cada
+  // casa, así que las que todavía no cotizaron en la jornada (mayorista fuera
+  // de rueda, por ejemplo) arrastran la fecha de días anteriores.
   function intradiaPoints(label: string): IntradiaPoint[] {
     const base = intradiaIsToday ? (dolarIntradia?.casas?.[label] ?? []) : [];
-    const points: IntradiaPoint[] = base.map((p) => ({ ...p }));
+    const points: IntradiaPoint[] = base
+      .filter((p) => fechaBA(p.t) === todayBA)
+      .map((p) => ({ ...p }));
     const detail = dolarLive.details[label];
-    if (detail && (detail.compra != null || detail.venta != null)) {
+    if (
+      detail &&
+      (detail.compra != null || detail.venta != null) &&
+      fechaBA(detail.fechaActualizacion) === todayBA
+    ) {
       const last = points[points.length - 1];
       if (!last || last.compra !== detail.compra || last.venta !== detail.venta) {
         points.push({

@@ -9,6 +9,12 @@ on:
 permissions:
   contents: write
 
+# Serializa contra los otros ETL: todos commitean a main y sin esto dos pushes
+# simultáneos se pisan.
+concurrency:
+  group: etl-data-push
+  cancel-in-progress: false
+
 jobs:
   etl:
     name: Refresh data
@@ -95,12 +101,22 @@ jobs:
         run: git pull --rebase --autostash origin main
 
       - name: Commit and push if changed
+        id: commit
         run: |
           if git diff --quiet --exit-code data/; then
             echo "No hay cambios en data/. Skipping commit."
+            echo "committed=false" >> "$GITHUB_OUTPUT"
           else
             git add data/
             git commit -m "data: refresh automático $(date -u +'%Y-%m-%dT%H:%MZ')"
             git push origin HEAD:main
             echo "Cambios commiteados a main."
+            echo "committed=true" >> "$GITHUB_OUTPUT"
           fi
+
+      - name: Purgar cache de jsdelivr
+        # jsdelivr cachea los URLs @main 12 h (s-maxage=43200): sin purgar, la
+        # web sigue leyendo el JSON viejo aunque el commit ya esté en main.
+        if: steps.commit.outputs.committed == 'true'
+        continue-on-error: true
+        run: git diff --name-only HEAD~1 HEAD -- data/ | python etl/purge_jsdelivr.py
