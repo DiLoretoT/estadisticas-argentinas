@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-08-01",
-  "updated_at_time": "2026-08-01T23:24:25",
+  "updated_at": "2026-08-02",
+  "updated_at_time": "2026-08-02T09:49:20",
   "countries": [
     "ARG",
     "BRA",
@@ -227,6 +227,74 @@
           "country": "Ecuador",
           "year": "2025",
           "value": 3.31
+        }
+      ]
+    },
+    {
+      "key": "gini",
+      "display_name": "Gini (desigualdad)",
+      "unit": "índice",
+      "higher_is_better": false,
+      "snapshot": [
+        {
+          "iso3": "ARG",
+          "country": "Argentina",
+          "year": "2024",
+          "value": 42.4
+        },
+        {
+          "iso3": "BRA",
+          "country": "Brasil",
+          "year": "2024",
+          "value": 50.3
+        },
+        {
+          "iso3": "CHL",
+          "country": "Chile",
+          "year": "2024",
+          "value": 43.0
+        },
+        {
+          "iso3": "URY",
+          "country": "Uruguay",
+          "year": "2024",
+          "value": 40.0
+        },
+        {
+          "iso3": "COL",
+          "country": "Colombia",
+          "year": "2024",
+          "value": 54.4
+        },
+        {
+          "iso3": "MEX",
+          "country": "México",
+          "year": "2024",
+          "value": 42.6
+        },
+        {
+          "iso3": "PER",
+          "country": "Perú",
+          "year": "2024",
+          "value": 40.1
+        },
+        {
+          "iso3": "BOL",
+          "country": "Bolivia",
+          "year": "2024",
+          "value": 40.9
+        },
+        {
+          "iso3": "PRY",
+          "country": "Paraguay",
+          "year": "2024",
+          "value": 44.2
+        },
+        {
+          "iso3": "ECU",
+          "country": "Ecuador",
+          "year": "2025",
+          "value": 45.9
         }
       ]
     },
