@@ -1,9 +1,9 @@
 {
   "updated_at": "2026-08-04",
-  "updated_at_time": "2026-08-04T09:55:34",
-  "period": "2026-07-31",
-  "value": 19.76,
-  "monthly_change": -2.71,
+  "updated_at_time": "2026-08-04T23:24:08",
+  "period": "2026-08-03",
+  "value": 20.58,
+  "monthly_change": 4.15,
   "unit": "porcentaje_anual",
   "source": {
     "name": "BCRA",
