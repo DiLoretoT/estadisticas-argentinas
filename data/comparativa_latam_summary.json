@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-08-05",
-  "updated_at_time": "2026-08-05T23:59:01",
+  "updated_at": "2026-08-06",
+  "updated_at_time": "2026-08-06T11:28:01",
   "countries": [
     "ARG",
     "BRA",
@@ -499,74 +499,6 @@
           "country": "Ecuador",
           "year": "2025",
           "value": 41560544834.24
-        }
-      ]
-    },
-    {
-      "key": "imports_pct_gdp",
-      "display_name": "Importaciones (% del PBI)",
-      "unit": "%",
-      "higher_is_better": false,
-      "snapshot": [
-        {
-          "iso3": "ARG",
-          "country": "Argentina",
-          "year": "2025",
-          "value": 14.81
-        },
-        {
-          "iso3": "BRA",
-          "country": "Brasil",
-          "year": "2025",
-          "value": 17.47
-        },
-        {
-          "iso3": "CHL",
-          "country": "Chile",
-          "year": "2025",
-          "value": 30.42
-        },
-        {
-          "iso3": "URY",
-          "country": "Uruguay",
-          "year": "2025",
-          "value": 22.65
-        },
-        {
-          "iso3": "COL",
-          "country": "Colombia",
-          "year": "2025",
-          "value": 20.38
-        },
-        {
-          "iso3": "MEX",
-          "country": "México",
-          "year": "2025",
-          "value": 40.28
-        },
-        {
-          "iso3": "PER",
-          "country": "Perú",
-          "year": "2025",
-          "value": 21.85
-        },
-        {
-          "iso3": "BOL",
-          "country": "Bolivia",
-          "year": "2024",
-          "value": 25.54
-        },
-        {
-          "iso3": "PRY",
-          "country": "Paraguay",
-          "year": "2025",
-          "value": 39.3
-        },
-        {
-          "iso3": "ECU",
-          "country": "Ecuador",
-          "year": "2025",
-          "value": 27.92
         }
       ]
     },
