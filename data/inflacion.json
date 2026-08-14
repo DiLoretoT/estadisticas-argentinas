@@ -1,14 +1,14 @@
 {
   "updated_at": "2026-08-14",
   "monthly": {
-    "period": "2026-06",
-    "value": 1.87,
-    "vs_prev_month": -0.41,
-    "vs_prev_year": -0.16
+    "period": "2026-07",
+    "value": 2.27,
+    "vs_prev_month": 0.4,
+    "vs_prev_year": 0.4
   },
   "ytd": {
-    "period": "2026-06",
-    "value": 16.76
+    "period": "2026-07",
+    "value": 19.41
   },
   "source": {
     "name": "INDEC (IPC)",
