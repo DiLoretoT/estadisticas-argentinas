@@ -1,9 +1,41 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-20T09:35:17+00:00",
+  "generated_at": "2026-08-20T23:25:52+00:00",
   "report_date": "2026-08-20",
-  "novedades_count": 0,
+  "novedades_count": 2,
   "indicadores": [
+    {
+      "series_id": "reservas_bcra",
+      "label": "Reservas internacionales BCRA",
+      "category": "monetario",
+      "unit": "millones_usd",
+      "official": true,
+      "source": "BCRA",
+      "detail_path": null,
+      "period": "2026-08-18",
+      "value": 49593.0,
+      "prev_period": "2026-07-31",
+      "prev_value": 47599.0,
+      "change_abs": 1994.0,
+      "change_pct": 0.041892,
+      "is_new": true
+    },
+    {
+      "series_id": "icc_mensual",
+      "label": "Confianza del Consumidor (ICC)",
+      "category": "confianza",
+      "unit": "indice",
+      "official": false,
+      "source": "UTDT",
+      "detail_path": null,
+      "period": "2026-08-01",
+      "value": 40.229443,
+      "prev_period": "2026-07-01",
+      "prev_value": 40.669067,
+      "change_abs": -0.439625,
+      "change_pct": -0.01081,
+      "is_new": true
+    },
     {
       "series_id": "ipc_mensual",
       "label": "Inflación mensual (IPC)",
@@ -149,22 +181,6 @@
       "is_new": false
     },
     {
-      "series_id": "reservas_bcra",
-      "label": "Reservas internacionales BCRA",
-      "category": "monetario",
-      "unit": "millones_usd",
-      "official": true,
-      "source": "BCRA",
-      "detail_path": null,
-      "period": "2026-08-14",
-      "value": 49505.0,
-      "prev_period": "2026-07-31",
-      "prev_value": 47599.0,
-      "change_abs": 1906.0,
-      "change_pct": 0.040043,
-      "is_new": false
-    },
-    {
       "series_id": "ripte_mensual",
       "label": "Salarios RIPTE (var. mensual)",
       "category": "salarios",
@@ -178,22 +194,6 @@
       "prev_value": 0.006595,
       "change_abs": 0.029168,
       "change_pct": 4.42285,
-      "is_new": false
-    },
-    {
-      "series_id": "icc_mensual",
-      "label": "Confianza del Consumidor (ICC)",
-      "category": "confianza",
-      "unit": "indice",
-      "official": false,
-      "source": "UTDT",
-      "detail_path": null,
-      "period": "2026-07-01",
-      "value": 40.669067,
-      "prev_period": "2026-06-01",
-      "prev_value": 42.708965,
-      "change_abs": -2.039898,
-      "change_pct": -0.047763,
       "is_new": false
     },
     {
