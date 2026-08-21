@@ -1,23 +1,23 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-21T09:40:29+00:00",
+  "generated_at": "2026-08-21T23:31:04+00:00",
   "report_date": "2026-08-21",
   "novedades_count": 1,
   "indicadores": [
     {
-      "series_id": "emae_mensual",
-      "label": "Actividad económica (EMAE)",
-      "category": "actividad",
-      "unit": "indice",
+      "series_id": "reservas_bcra",
+      "label": "Reservas internacionales BCRA",
+      "category": "monetario",
+      "unit": "millones_usd",
       "official": true,
-      "source": "INDEC",
-      "detail_path": "/detalle/actividad",
-      "period": "2026-06-01",
-      "value": 161.013319,
-      "prev_period": "2026-05-01",
-      "prev_value": 165.668084,
-      "change_abs": -4.654765,
-      "change_pct": -0.028097,
+      "source": "BCRA",
+      "detail_path": null,
+      "period": "2026-08-19",
+      "value": 50006.0,
+      "prev_period": "2026-07-31",
+      "prev_value": 47599.0,
+      "change_abs": 2407.0,
+      "change_pct": 0.050568,
       "is_new": true
     },
     {
@@ -34,6 +34,22 @@
       "prev_value": 0.018664,
       "change_abs": 0.004009,
       "change_pct": 0.214828,
+      "is_new": false
+    },
+    {
+      "series_id": "emae_mensual",
+      "label": "Actividad económica (EMAE)",
+      "category": "actividad",
+      "unit": "indice",
+      "official": true,
+      "source": "INDEC",
+      "detail_path": "/detalle/actividad",
+      "period": "2026-06-01",
+      "value": 161.013319,
+      "prev_period": "2026-05-01",
+      "prev_value": 165.668084,
+      "change_abs": -4.654765,
+      "change_pct": -0.028097,
       "is_new": false
     },
     {
@@ -146,22 +162,6 @@
       "prev_value": 6128.02646,
       "change_abs": 733.111068,
       "change_pct": 0.119632,
-      "is_new": false
-    },
-    {
-      "series_id": "reservas_bcra",
-      "label": "Reservas internacionales BCRA",
-      "category": "monetario",
-      "unit": "millones_usd",
-      "official": true,
-      "source": "BCRA",
-      "detail_path": null,
-      "period": "2026-08-18",
-      "value": 49593.0,
-      "prev_period": "2026-07-31",
-      "prev_value": 47599.0,
-      "change_abs": 1994.0,
-      "change_pct": 0.041892,
       "is_new": false
     },
     {
