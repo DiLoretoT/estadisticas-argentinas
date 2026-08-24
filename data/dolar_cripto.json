@@ -1,9 +1,9 @@
 {
   "updated_at": "2026-08-24",
-  "updated_at_time": "2026-08-24T21:20:27",
-  "period": "2026-08-23",
-  "value": 1586.08,
-  "monthly_change": 0.83,
+  "updated_at_time": "2026-08-24T23:20:20",
+  "period": "2026-08-24",
+  "value": 1595.24,
+  "monthly_change": 1.41,
   "source": {
     "name": "ArgentinaDatos",
     "official": false
