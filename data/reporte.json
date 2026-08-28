@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-28T06:54:19+00:00",
+  "generated_at": "2026-08-28T20:45:47+00:00",
   "report_date": "2026-08-28",
   "novedades_count": 1,
   "indicadores": [
@@ -12,12 +12,12 @@
       "official": true,
       "source": "BCRA",
       "detail_path": null,
-      "period": "2026-08-25",
-      "value": 50913.0,
+      "period": "2026-08-26",
+      "value": 50784.0,
       "prev_period": "2026-07-31",
       "prev_value": 47599.0,
-      "change_abs": 3314.0,
-      "change_pct": 0.069623,
+      "change_abs": 3185.0,
+      "change_pct": 0.066913,
       "is_new": true
     },
     {
