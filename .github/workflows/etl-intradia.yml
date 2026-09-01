@@ -22,6 +22,9 @@ on:
 
 permissions:
   contents: write
+  # Necesario para que el ETL abra y mergee su propio PR de datos:
+  # la proteccion de main no deja pushear directo salvo a admins.
+  pull-requests: write
 
 # Serializa contra los otros ETL: todos commitean a main y sin esto dos pushes
 # simultáneos se pisan. Si llegara a haber cola, GitHub descarta el run pendiente
@@ -43,10 +46,9 @@ jobs:
           # descarta al terminar, asi que no vence. El PAT anterior murio el
           # 2026-08-30 y dejo los tres ETL fallando en el Checkout durante dos
           # dias ("could not read Username for https://github.com").
-          # Alcanza con el `permissions: contents: write` declarado arriba.
-          # Sus pushes no disparan otros workflows, que aca es lo deseado: los
-          # commits de data/ ya estan excluidos por paths-ignore en ci.yml y
-          # security.yml.
+          # No puede pushear directo a main (la proteccion exige PR y solo
+          # exime a admins), asi que el commit va por .github/scripts/
+          # commit-via-pr.sh: rama efimera + PR + merge, todo con este token.
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Python 3.11
@@ -70,18 +72,15 @@ jobs:
       - name: Pull latest before commit
         run: git pull --rebase --autostash origin main
 
-      - name: Commit and push if changed
+      - name: Commit via PR efimero
         id: commit
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          if git diff --quiet --exit-code data/dolar_intradia.json; then
-            echo "Sin movimientos nuevos. Skipping commit."
-            echo "committed=false" >> "$GITHUB_OUTPUT"
-          else
-            git add data/dolar_intradia.json
-            git commit -m "data: dolar intradia $(date -u +'%Y-%m-%dT%H:%MZ')"
-            git push origin HEAD:main
-            echo "committed=true" >> "$GITHUB_OUTPUT"
-          fi
+          bash .github/scripts/commit-via-pr.sh \
+            "data: dolar intradia $(date -u +'%Y-%m-%dT%H:%MZ')" \
+            "etl/intradia" \
+            data/dolar_intradia.json
 
       - name: Purgar cache de jsdelivr
         # jsdelivr cachea los URLs @main 12 h (s-maxage=43200). Sin este purge
@@ -89,4 +88,6 @@ jobs:
         # el front descarta el log entero por no ser del día.
         if: steps.commit.outputs.committed == 'true'
         continue-on-error: true
-        run: git diff --name-only HEAD~1 HEAD -- data/ | python etl/purge_jsdelivr.py
+        # La lista la deja commit-via-pr.sh: tras el merge el checkout local
+        # no refleja el squash, asi que `git diff HEAD~1 HEAD` no sirve.
+        run: python etl/purge_jsdelivr.py < "$RUNNER_TEMP/changed-data-files.txt"
