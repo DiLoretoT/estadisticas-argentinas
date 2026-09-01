@@ -58,7 +58,15 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
-          token: ${{ secrets.ETL_PUSH_TOKEN }}
+          # GITHUB_TOKEN en vez de un PAT: GitHub lo genera por corrida y lo
+          # descarta al terminar, asi que no vence. El PAT anterior murio el
+          # 2026-08-30 y dejo los tres ETL fallando en el Checkout durante dos
+          # dias ("could not read Username for https://github.com").
+          # Alcanza con el `permissions: contents: write` declarado arriba.
+          # Sus pushes no disparan otros workflows, que aca es lo deseado: los
+          # commits de data/ ya estan excluidos por paths-ignore en ci.yml y
+          # security.yml.
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Python 3.11
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
