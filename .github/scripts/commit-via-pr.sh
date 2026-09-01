@@ -78,6 +78,12 @@ gh pr create \
 # asi que el primer intento puede rebotar sin que haya nada mal.
 for attempt in 1 2 3 4 5; do
   if gh pr merge "$BRANCH" --squash; then
+    # El delete_branch_on_merge del repo NO dispara cuando el merge lo hace el
+    # token del workflow (verificado: la rama del run 33555554962 quedo viva
+    # despues de mergear). Sin esto se acumularian ~7 ramas por dia habil.
+    # Borramos solo la remota: --delete-branch de gh tambien mueve el checkout
+    # local, y el paso de purge todavia necesita el arbol como esta.
+    git push origin --delete "$BRANCH" || echo "aviso: no se pudo borrar $BRANCH"
     pushed=0
     echo "committed=true" >> "$GITHUB_OUTPUT"
     exit 0
