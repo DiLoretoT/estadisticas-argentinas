@@ -1,13 +1,13 @@
 {
-  "updated_at": "2026-08-30",
+  "updated_at": "2026-09-02",
   "source": {
     "name": "UTDT",
     "official": false,
     "via": "datos.gob.ar"
   },
   "icg": {
-    "period": "2026-07-01",
-    "value": 1.94
+    "period": "2026-08-01",
+    "value": 2.0587
   },
   "icc": {
     "period": "2026-08-01",
