@@ -1,41 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-12T23:09:26+00:00",
-  "report_date": "2026-09-12",
-  "novedades_count": 2,
+  "generated_at": "2026-09-13T09:34:35+00:00",
+  "report_date": "2026-09-13",
+  "novedades_count": 0,
   "indicadores": [
-    {
-      "series_id": "linea_indigencia",
-      "label": "Línea de indigencia",
-      "category": "social",
-      "unit": "peso_ars",
-      "official": true,
-      "source": "INDEC",
-      "detail_path": "/detalle/pobreza",
-      "period": "2026-08-01",
-      "value": 726469.3824,
-      "prev_period": "2026-07-01",
-      "prev_value": 708016.2423,
-      "change_abs": 18453.1401,
-      "change_pct": 0.026063,
-      "is_new": true
-    },
-    {
-      "series_id": "ripte_mensual",
-      "label": "Salarios RIPTE (var. mensual)",
-      "category": "salarios",
-      "unit": "percent_decimal",
-      "official": true,
-      "source": "MTEySS",
-      "detail_path": "/detalle/salarios",
-      "period": "2026-07-01",
-      "value": 0.015737,
-      "prev_period": "2026-06-01",
-      "prev_value": 0.035762,
-      "change_abs": -0.020026,
-      "change_pct": -0.559969,
-      "is_new": true
-    },
     {
       "series_id": "ipc_mensual",
       "label": "Inflación mensual (IPC)",
@@ -98,6 +66,22 @@
       "prev_value": 0.075,
       "change_abs": 0.003,
       "change_pct": 0.04,
+      "is_new": false
+    },
+    {
+      "series_id": "linea_indigencia",
+      "label": "Línea de indigencia",
+      "category": "social",
+      "unit": "peso_ars",
+      "official": true,
+      "source": "INDEC",
+      "detail_path": "/detalle/pobreza",
+      "period": "2026-08-01",
+      "value": 726469.3824,
+      "prev_period": "2026-07-01",
+      "prev_value": 708016.2423,
+      "change_abs": 18453.1401,
+      "change_pct": 0.026063,
       "is_new": false
     },
     {
@@ -178,6 +162,22 @@
       "prev_value": 48259.0,
       "change_abs": 2358.0,
       "change_pct": 0.048861,
+      "is_new": false
+    },
+    {
+      "series_id": "ripte_mensual",
+      "label": "Salarios RIPTE (var. mensual)",
+      "category": "salarios",
+      "unit": "percent_decimal",
+      "official": true,
+      "source": "MTEySS",
+      "detail_path": "/detalle/salarios",
+      "period": "2026-07-01",
+      "value": 0.015737,
+      "prev_period": "2026-06-01",
+      "prev_value": 0.035762,
+      "change_abs": -0.020026,
+      "change_pct": -0.559969,
       "is_new": false
     },
     {
