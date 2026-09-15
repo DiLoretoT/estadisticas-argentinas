@@ -1,10 +1,10 @@
 {
   "updated_at": "2026-09-15",
-  "updated_at_time": "2026-09-15T09:12:21",
-  "period": "2026-06-01",
-  "value": 3344.37,
-  "monthly_change": 11.58,
-  "yoy_change": 31.56,
+  "updated_at_time": "2026-09-15T23:09:43",
+  "period": "2026-07-01",
+  "value": 3068.09,
+  "monthly_change": -8.89,
+  "yoy_change": 4.86,
   "unit": "millones_USD",
   "categoria": "export_rubro",
   "source": {
