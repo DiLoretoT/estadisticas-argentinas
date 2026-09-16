@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-09-15",
-  "updated_at_time": "2026-09-15T23:09:35",
-  "period": "2026-09-14",
-  "value": 490.0,
-  "monthly_change": -4.3,
+  "updated_at": "2026-09-16",
+  "updated_at_time": "2026-09-16T09:11:45",
+  "period": "2026-09-15",
+  "value": 506.0,
+  "monthly_change": -1.17,
   "unit": "puntos_basicos",
   "source": {
     "name": "ArgentinaDatos (Ámbito)",
