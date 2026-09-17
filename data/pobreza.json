@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-16",
+  "updated_at": "2026-09-17",
   "source": {
     "name": "INDEC",
     "official": true
@@ -7,9 +7,5 @@
   "tasa_pobreza": {
     "period": "2026-01-01",
     "value": 0.282
-  },
-  "linea_indigencia": {
-    "period": "2026-08-01",
-    "value": 726469.38
   }
 }
