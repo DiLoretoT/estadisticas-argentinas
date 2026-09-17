@@ -4,5 +4,13 @@
     "name": "UTDT",
     "official": false,
     "via": "datos.gob.ar"
+  },
+  "icg": {
+    "period": "2026-08-01",
+    "value": 2.0587
+  },
+  "icc": {
+    "period": "2026-09-01",
+    "value": 41.1829
   }
 }
