@@ -1,23 +1,23 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-18T09:12:30+00:00",
+  "generated_at": "2026-09-18T23:10:04+00:00",
   "report_date": "2026-09-18",
   "novedades_count": 1,
   "indicadores": [
     {
-      "series_id": "pbi_trimestral",
-      "label": "PBI trimestral",
-      "category": "actividad",
-      "unit": "millones_pesos",
+      "series_id": "reservas_bcra",
+      "label": "Reservas internacionales BCRA",
+      "category": "monetario",
+      "unit": "millones_usd",
       "official": true,
-      "source": "INDEC",
-      "detail_path": "/detalle/actividad",
-      "period": "2026-04-01",
-      "value": 792800.341478,
-      "prev_period": "2026-01-01",
-      "prev_value": 726163.281251,
-      "change_abs": 66637.060227,
-      "change_pct": 0.091766,
+      "source": "BCRA",
+      "detail_path": null,
+      "period": "2026-09-16",
+      "value": 50003.0,
+      "prev_period": "2026-08-31",
+      "prev_value": 48259.0,
+      "change_abs": 1744.0,
+      "change_pct": 0.036138,
       "is_new": true
     },
     {
@@ -50,6 +50,22 @@
       "prev_value": 165.668084,
       "change_abs": -4.654765,
       "change_pct": -0.028097,
+      "is_new": false
+    },
+    {
+      "series_id": "pbi_trimestral",
+      "label": "PBI trimestral",
+      "category": "actividad",
+      "unit": "millones_pesos",
+      "official": true,
+      "source": "INDEC",
+      "detail_path": "/detalle/actividad",
+      "period": "2026-04-01",
+      "value": 792800.341478,
+      "prev_period": "2026-01-01",
+      "prev_value": 726163.281251,
+      "change_abs": 66637.060227,
+      "change_pct": 0.091766,
       "is_new": false
     },
     {
@@ -146,22 +162,6 @@
       "prev_value": 6876.661623,
       "change_abs": -137.985759,
       "change_pct": -0.020066,
-      "is_new": false
-    },
-    {
-      "series_id": "reservas_bcra",
-      "label": "Reservas internacionales BCRA",
-      "category": "monetario",
-      "unit": "millones_usd",
-      "official": true,
-      "source": "BCRA",
-      "detail_path": null,
-      "period": "2026-09-15",
-      "value": 49954.0,
-      "prev_period": "2026-08-31",
-      "prev_value": 48259.0,
-      "change_abs": 1695.0,
-      "change_pct": 0.035123,
       "is_new": false
     },
     {
