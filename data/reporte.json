@@ -1,9 +1,25 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-19T09:11:14+00:00",
+  "generated_at": "2026-09-19T23:09:44+00:00",
   "report_date": "2026-09-19",
-  "novedades_count": 0,
+  "novedades_count": 1,
   "indicadores": [
+    {
+      "series_id": "tasa_desocupacion",
+      "label": "Tasa de desocupación",
+      "category": "empleo",
+      "unit": "percent_decimal",
+      "official": true,
+      "source": "INDEC",
+      "detail_path": "/detalle/empleo",
+      "period": "2026-04-01",
+      "value": 0.079,
+      "prev_period": "2026-01-01",
+      "prev_value": 0.078,
+      "change_abs": 0.001,
+      "change_pct": 0.012821,
+      "is_new": true
+    },
     {
       "series_id": "ipc_mensual",
       "label": "Inflación mensual (IPC)",
@@ -50,22 +66,6 @@
       "prev_value": 726163.281251,
       "change_abs": 66637.060227,
       "change_pct": 0.091766,
-      "is_new": false
-    },
-    {
-      "series_id": "tasa_desocupacion",
-      "label": "Tasa de desocupación",
-      "category": "empleo",
-      "unit": "percent_decimal",
-      "official": true,
-      "source": "INDEC",
-      "detail_path": "/detalle/empleo",
-      "period": "2026-01-01",
-      "value": 0.078,
-      "prev_period": "2025-10-01",
-      "prev_value": 0.075,
-      "change_abs": 0.003,
-      "change_pct": 0.04,
       "is_new": false
     },
     {

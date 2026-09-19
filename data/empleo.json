@@ -5,11 +5,11 @@
     "official": true
   },
   "tasa_desocupacion": {
-    "period": "2026-01-01",
-    "value": 0.078
+    "period": "2026-04-01",
+    "value": 0.079
   },
   "tasa_empleo": {
-    "period": "2026-01-01",
-    "value": 0.448
+    "period": "2026-04-01",
+    "value": 0.45
   }
 }
