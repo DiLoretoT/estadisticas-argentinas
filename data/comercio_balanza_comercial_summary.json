@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-09-21",
-  "updated_at_time": "2026-09-21T23:09:55",
-  "period": "2026-07-01",
-  "value": 2115.18,
-  "monthly_change": -5.37,
-  "yoy_change": 133.24,
+  "updated_at": "2026-09-22",
+  "updated_at_time": "2026-09-22T09:12:03",
+  "period": "2026-08-01",
+  "value": 2186.59,
+  "monthly_change": 4.22,
+  "yoy_change": 51.82,
   "unit": "millones_USD",
   "categoria": "balanza",
   "source": {
