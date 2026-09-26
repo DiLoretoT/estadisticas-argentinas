@@ -5,8 +5,8 @@
     "official": true
   },
   "tasa_pobreza": {
-    "period": "2026-01-01",
-    "value": 0.282
+    "period": "2026-07-01",
+    "value": 0.323
   },
   "linea_indigencia": {
     "period": "2026-08-01",
