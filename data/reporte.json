@@ -1,25 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-26T23:12:00+00:00",
-  "report_date": "2026-09-26",
-  "novedades_count": 1,
+  "generated_at": "2026-09-27T09:12:34+00:00",
+  "report_date": "2026-09-27",
+  "novedades_count": 0,
   "indicadores": [
-    {
-      "series_id": "tasa_pobreza",
-      "label": "Tasa de pobreza",
-      "category": "social",
-      "unit": "percent_decimal",
-      "official": true,
-      "source": "INDEC",
-      "detail_path": "/detalle/pobreza",
-      "period": "2026-07-01",
-      "value": 0.323,
-      "prev_period": "2026-01-01",
-      "prev_value": 0.282,
-      "change_abs": 0.041,
-      "change_pct": 0.14539,
-      "is_new": true
-    },
     {
       "series_id": "ipc_mensual",
       "label": "Inflación mensual (IPC)",
@@ -98,6 +82,22 @@
       "prev_value": 708016.2423,
       "change_abs": 18453.1401,
       "change_pct": 0.026063,
+      "is_new": false
+    },
+    {
+      "series_id": "tasa_pobreza",
+      "label": "Tasa de pobreza",
+      "category": "social",
+      "unit": "percent_decimal",
+      "official": true,
+      "source": "INDEC",
+      "detail_path": "/detalle/pobreza",
+      "period": "2026-07-01",
+      "value": 0.323,
+      "prev_period": "2026-01-01",
+      "prev_value": 0.282,
+      "change_abs": 0.041,
+      "change_pct": 0.14539,
       "is_new": false
     },
     {
