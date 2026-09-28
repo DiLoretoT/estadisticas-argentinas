@@ -134,6 +134,14 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Foco visible con el color de marca en todo elemento navegable por teclado.
+   Solo aparece con teclado (focus-visible), no al hacer click. */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 /* Headings estilo Datalogía — letter-spacing negativo */
 h1 {
   letter-spacing: -0.02em;
