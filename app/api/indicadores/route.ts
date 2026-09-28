@@ -1,6 +1,10 @@
 import { readIndicator } from "@/lib/readData";
 import { NextResponse } from "next/server";
 
+// Sin esto la ruta era dinamica (una funcion por request) aunque no lee nada
+// del request. Mismo valor que el fetch de readData.
+export const revalidate = 1800;
+
 export async function GET() {
   const [inflacion, dolarOficial, dolarBlue, empleo, pobreza] =
     await Promise.all([

@@ -74,7 +74,12 @@ export async function GET() {
 
     return NextResponse.json(
       { dolares, updatedAt, source: "dolarapi.com", stale: false },
-      { status: 200 },
+      {
+        status: 200,
+        // Pisa el catch-all de next.config.ts para /api/:path* (s-maxage=3600):
+        // esta es la cotizacion en vivo y el fetch revalida cada 300 s.
+        headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=300" },
+      },
     );
   } catch {
     return NextResponse.json({ dolares: {}, stale: true }, { status: 200 });

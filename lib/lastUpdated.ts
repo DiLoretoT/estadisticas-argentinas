@@ -13,7 +13,13 @@ interface StatusEntry {
 
 const DEV = process.env.NODE_ENV === "development";
 
-async function loadStatus(): Promise<StatusEntry[]> {
+/**
+ * `revalidate` lo decide cada caller. Importa porque Next toma el minimo
+ * revalidate entre todos los fetch de una ruta: la home pedia status.json a
+ * 300 s solo para mostrar "Ultima actualizacion: <fecha>" y eso la hacia
+ * regenerar cada 5 minutos en vez de cada 30.
+ */
+async function loadStatus(revalidate: number): Promise<StatusEntry[]> {
   if (DEV) {
     try {
       const filePath = path.join(process.cwd(), "data", "status.json");
@@ -24,7 +30,7 @@ async function loadStatus(): Promise<StatusEntry[]> {
       return [];
     }
   }
-  const data = await fetchDataJson<StatusEntry[]>("status.json", 300);
+  const data = await fetchDataJson<StatusEntry[]>("status.json", revalidate);
   return data ?? [];
 }
 
@@ -32,7 +38,8 @@ async function loadStatus(): Promise<StatusEntry[]> {
  * Devuelve la fecha del último refresh exitoso del ETL, formateado en español.
  */
 export async function getLastUpdated(): Promise<string | null> {
-  const entries = await loadStatus();
+  // La fecha se muestra sin hora (dia/mes/anio): 30 min alcanza de sobra.
+  const entries = await loadStatus(1800);
   const successful = entries
     .filter((e) => e.last_status === "success" && e.last_run_at)
     .map((e) => new Date(e.last_run_at as string).getTime())
@@ -53,5 +60,6 @@ export async function getLastUpdated(): Promise<string | null> {
 }
 
 export async function getStatusEntries(): Promise<StatusEntry[]> {
-  return loadStatus();
+  // /status declara revalidate = 300 y muestra estado por serie.
+  return loadStatus(300);
 }

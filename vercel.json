@@ -2,7 +2,8 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "git": {
     "deploymentEnabled": {
-      "etl/*": false
+      "etl/*": false,
+      "dependabot/pip/**": false
     }
   }
 }

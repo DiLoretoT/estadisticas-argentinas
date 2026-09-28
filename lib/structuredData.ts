@@ -23,7 +23,7 @@ export function organizationSchema(): Record<string, unknown> {
     "@type": "Organization",
     name: "Datalogía",
     url: "https://datalogia.app",
-    logo: `${SITE_URL}/icon-512.png`,
+    logo: `${SITE_URL}/branding/icon-512.png`,
   };
 }
 
