@@ -10,6 +10,10 @@ on:
       - "data/**"
   pull_request:
     branches: [main]
+    # Los PRs efimeros del ETL (ramas etl/*) solo tocan data/: no hay codigo
+    # que escanear. Ver el mismo bloque en ci.yml.
+    paths-ignore:
+      - "data/**"
   schedule:
     # Lunes 13 UTC = 10 AR
     - cron: "0 13 * * 1"

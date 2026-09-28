@@ -12,6 +12,12 @@ on:
       - "data/**"
   pull_request:
     branches: [main]
+    # Mismo criterio para los PRs efimeros del ETL (ramas etl/*, solo tocan
+    # data/). Sin esto, cada PR de datos creaba un run que terminaba en
+    # `failure` con 0 jobs a los 2 segundos (la rama ya estaba borrada tras el
+    # merge) o en `action_required`: ~470 runs basura en septiembre.
+    paths-ignore:
+      - "data/**"
 
 permissions:
   contents: read
