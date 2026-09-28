@@ -1,6 +1,4 @@
 import Link from "next/link";
-import { promises as fs } from "fs";
-import path from "path";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { ProvinciaRubrosChart } from "@/components/ProvinciaRubrosChart";
@@ -8,6 +6,7 @@ import { FinanzasCTA } from "@/components/FinanzasCTA";
 import {
   findBySlug,
   listAllSlugs,
+  loadProvinciasStats,
   provinciaSlug,
   rankIn,
   type ProvinciasStatsFile,
@@ -18,10 +17,8 @@ import { breadcrumbSchema } from "@/lib/structuredData";
 
 export const revalidate = 3600;
 
-async function loadStats(): Promise<ProvinciasStatsFile> {
-  const filePath = path.join(process.cwd(), "data", "provincias_stats.json");
-  const content = await fs.readFile(filePath, "utf-8");
-  return JSON.parse(content) as ProvinciasStatsFile;
+function loadStats(): Promise<ProvinciasStatsFile> {
+  return loadProvinciasStats();
 }
 
 interface Params {

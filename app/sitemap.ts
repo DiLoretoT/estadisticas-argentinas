@@ -1,8 +1,6 @@
 import type { MetadataRoute } from "next";
-import { promises as fs } from "fs";
-import path from "path";
-import { listAllSlugs, type ProvinciasStatsFile } from "@/lib/provincias";
-import { readSeriesLocal } from "@/lib/readData";
+import { listAllSlugs, loadProvinciasStats } from "@/lib/provincias";
+import { readSeries } from "@/lib/readData";
 
 const BASE_URL = "https://estadisticas.datalogia.app";
 
@@ -32,11 +30,11 @@ const DETALLE_SERIES: Record<string, string[]> = {
   pobreza: ["tasa_pobreza.json", "linea_indigencia.json"],
 };
 
-/** Fecha del dato más reciente entre varias series locales (data/series/*). */
+/** Fecha del dato más reciente entre varias series (data/series/*). */
 async function lastDateOf(files: string[]): Promise<Date | undefined> {
   let max: string | undefined;
   for (const file of files) {
-    const series = await readSeriesLocal(file);
+    const series = await readSeries(file);
     const last = series[series.length - 1]?.[0];
     if (last && (!max || last > max)) max = last;
   }
@@ -45,14 +43,7 @@ async function lastDateOf(files: string[]): Promise<Date | undefined> {
 
 /** Slugs de las 24 jurisdicciones, desde el mismo dataset que usa /provincia. */
 async function loadProvinciaSlugs(): Promise<string[]> {
-  try {
-    const filePath = path.join(process.cwd(), "data", "provincias_stats.json");
-    const content = await fs.readFile(filePath, "utf-8");
-    const stats = JSON.parse(content) as ProvinciasStatsFile;
-    return listAllSlugs(stats).map((p) => p.slug);
-  } catch {
-    return [];
-  }
+  return listAllSlugs(await loadProvinciasStats()).map((p) => p.slug);
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

@@ -2,6 +2,29 @@
  * Helpers para perfiles provinciales.
  */
 
+import { readIndicator } from "./readData";
+
+/**
+ * Lee provincias_stats.json por el mismo camino que el resto del sitio
+ * (readData: filesystem en dev, CDN con fallback en prod).
+ *
+ * Antes /mapa, /provincia/[slug] y sitemap.xml lo leian con fs.readFile, o sea
+ * la copia empaquetada en el ultimo deploy. Como los commits de datos no
+ * redeployan (Ignored Build Step), esas paginas no veian lo que publicaba el
+ * ETL hasta el proximo cambio de codigo.
+ *
+ * Si el fetch falla devuelve un archivo vacio en vez de reventar: las paginas
+ * quedan sin provincias hasta la proxima revalidacion.
+ */
+export async function loadProvinciasStats(): Promise<ProvinciasStatsFile> {
+  const raw = (await readIndicator("provincias_stats.json")) as Partial<ProvinciasStatsFile>;
+  return {
+    indicators: Array.isArray(raw.indicators) ? raw.indicators : [],
+    data: Array.isArray(raw.data) ? raw.data : [],
+    notes: raw.notes,
+  };
+}
+
 export interface ProvinciaStat {
   provincia: string;
   poblacion?: number;

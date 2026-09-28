@@ -3,6 +3,7 @@ import { promises as fs } from "fs";
 import path from "path";
 import type { FeatureCollection } from "@/components/ArgentinaMap";
 import { ArgentinaMapLazy } from "@/components/ArgentinaMapLazy";
+import { loadProvinciasStats } from "@/lib/provincias";
 import { Footer } from "@/components/Footer";
 import type { Metadata } from "next";
 
@@ -42,9 +43,7 @@ async function loadGeoJson(): Promise<FeatureCollection> {
 }
 
 async function loadStats(): Promise<StatsFile> {
-  const filePath = path.join(process.cwd(), "data", "provincias_stats.json");
-  const content = await fs.readFile(filePath, "utf-8");
-  return JSON.parse(content) as StatsFile;
+  return (await loadProvinciasStats()) as unknown as StatsFile;
 }
 
 export default async function MapaPage() {
