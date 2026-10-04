@@ -2,7 +2,7 @@
   {
     "series_id": "comercio_balanza_comercial",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:24:03.618609-03:00",
+    "last_run_at": "2026-10-04T11:37:30.369335-03:00",
     "last_date": "2026-08-01",
     "row_count": 416,
     "error_message": null
@@ -10,7 +10,7 @@
   {
     "series_id": "comercio_export_combustibles",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:24:07.957226-03:00",
+    "last_run_at": "2026-10-04T11:37:33.991963-03:00",
     "last_date": "2026-08-01",
     "row_count": 416,
     "error_message": null
@@ -18,7 +18,7 @@
   {
     "series_id": "comercio_export_moa",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:24:05.550430-03:00",
+    "last_run_at": "2026-10-04T11:37:32.204849-03:00",
     "last_date": "2026-08-01",
     "row_count": 416,
     "error_message": null
@@ -26,7 +26,7 @@
   {
     "series_id": "comercio_export_moi",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:24:06.988995-03:00",
+    "last_run_at": "2026-10-04T11:37:33.105209-03:00",
     "last_date": "2026-08-01",
     "row_count": 416,
     "error_message": null
@@ -34,7 +34,7 @@
   {
     "series_id": "comercio_export_primarios",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:24:04.594930-03:00",
+    "last_run_at": "2026-10-04T11:37:31.295080-03:00",
     "last_date": "2026-08-01",
     "row_count": 416,
     "error_message": null
@@ -42,7 +42,7 @@
   {
     "series_id": "comercio_exportaciones_total",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:24:00.575629-03:00",
+    "last_run_at": "2026-10-04T11:37:28.121479-03:00",
     "last_date": "2026-08-01",
     "row_count": 416,
     "error_message": null
@@ -50,7 +50,7 @@
   {
     "series_id": "comercio_import_bk_y_piezas",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:24:10.458847-03:00",
+    "last_run_at": "2026-10-04T11:37:36.160970-03:00",
     "last_date": "2026-08-01",
     "row_count": 416,
     "error_message": null
@@ -58,7 +58,7 @@
   {
     "series_id": "comercio_import_combustibles",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:24:12.392069-03:00",
+    "last_run_at": "2026-10-04T11:37:38.007889-03:00",
     "last_date": "2026-08-01",
     "row_count": 416,
     "error_message": null
@@ -66,7 +66,7 @@
   {
     "series_id": "comercio_import_consumo",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:24:13.923972-03:00",
+    "last_run_at": "2026-10-04T11:37:39.361587-03:00",
     "last_date": "2026-08-01",
     "row_count": 416,
     "error_message": null
@@ -74,7 +74,7 @@
   {
     "series_id": "comercio_import_intermedios",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:24:09.508190-03:00",
+    "last_run_at": "2026-10-04T11:37:34.865890-03:00",
     "last_date": "2026-08-01",
     "row_count": 416,
     "error_message": null
@@ -82,7 +82,7 @@
   {
     "series_id": "comercio_import_piezas_bk",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:24:11.428059-03:00",
+    "last_run_at": "2026-10-04T11:37:37.082946-03:00",
     "last_date": "2026-08-01",
     "row_count": 416,
     "error_message": null
@@ -90,7 +90,7 @@
   {
     "series_id": "comercio_import_resto",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:24:15.815095-03:00",
+    "last_run_at": "2026-10-04T11:37:41.207827-03:00",
     "last_date": "2026-08-01",
     "row_count": 416,
     "error_message": null
@@ -98,7 +98,7 @@
   {
     "series_id": "comercio_import_vehiculos",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:24:14.893711-03:00",
+    "last_run_at": "2026-10-04T11:37:40.279166-03:00",
     "last_date": "2026-08-01",
     "row_count": 416,
     "error_message": null
@@ -106,7 +106,7 @@
   {
     "series_id": "comercio_importaciones_total",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:24:02.106651-03:00",
+    "last_run_at": "2026-10-04T11:37:29.464238-03:00",
     "last_date": "2026-08-01",
     "row_count": 416,
     "error_message": null
@@ -114,7 +114,7 @@
   {
     "series_id": "dolar_blue",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:23:42.821327-03:00",
+    "last_run_at": "2026-10-04T11:37:09.201779-03:00",
     "last_date": "2026-10-04",
     "row_count": 5754,
     "error_message": null
@@ -122,7 +122,7 @@
   {
     "series_id": "dolar_ccl",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:23:43.816331-03:00",
+    "last_run_at": "2026-10-04T11:37:09.950847-03:00",
     "last_date": "2026-10-04",
     "row_count": 5024,
     "error_message": null
@@ -130,7 +130,7 @@
   {
     "series_id": "dolar_cripto",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:23:44.657838-03:00",
+    "last_run_at": "2026-10-04T11:37:10.877097-03:00",
     "last_date": "2026-10-04",
     "row_count": 1336,
     "error_message": null
@@ -138,7 +138,7 @@
   {
     "series_id": "dolar_mayorista",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:23:44.187763-03:00",
+    "last_run_at": "2026-10-04T11:37:10.400187-03:00",
     "last_date": "2026-10-04",
     "row_count": 5754,
     "error_message": null
@@ -146,23 +146,23 @@
   {
     "series_id": "dolar_mep",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:23:43.288492-03:00",
+    "last_run_at": "2026-10-04T11:37:09.521624-03:00",
     "last_date": "2026-10-04",
     "row_count": 2898,
     "error_message": null
   },
   {
     "series_id": "dolar_oficial",
-    "last_status": "error",
-    "last_run_at": "2026-10-03T23:23:42.152441-03:00",
-    "last_date": null,
-    "row_count": 0,
-    "error_message": "400 Client Error: Bad Request for url: https://api.bcra.gob.ar/estadisticascambiarias/v1.0/Cotizaciones/USD?fechadesde=2026-10-02&fechahasta=2026-10-04&limit=1000&offset=0"
+    "last_status": "success",
+    "last_run_at": "2026-10-04T11:37:08.500748-03:00",
+    "last_date": "2026-10-02",
+    "row_count": 418,
+    "error_message": null
   },
   {
     "series_id": "dolar_tarjeta",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:23:45.009338-03:00",
+    "last_run_at": "2026-10-04T11:37:11.194268-03:00",
     "last_date": "2026-10-04",
     "row_count": 2478,
     "error_message": null
@@ -170,7 +170,7 @@
   {
     "series_id": "emae",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:24:58.965441-03:00",
+    "last_run_at": "2026-10-04T11:38:17.784230-03:00",
     "last_date": "2026-07-01",
     "row_count": 175,
     "error_message": null
@@ -178,7 +178,7 @@
   {
     "series_id": "icc_mensual",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:25:05.954401-03:00",
+    "last_run_at": "2026-10-04T11:38:24.061752-03:00",
     "last_date": "2026-09-01",
     "row_count": 307,
     "error_message": null
@@ -186,7 +186,7 @@
   {
     "series_id": "icg_mensual",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:25:04.999011-03:00",
+    "last_run_at": "2026-10-04T11:38:23.145429-03:00",
     "last_date": "2026-09-01",
     "row_count": 299,
     "error_message": null
@@ -194,7 +194,7 @@
   {
     "series_id": "inflacion",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:23:41.269050-03:00",
+    "last_run_at": "2026-10-04T11:37:07.553266-03:00",
     "last_date": "2026-08-01",
     "row_count": 124,
     "error_message": null
@@ -202,7 +202,7 @@
   {
     "series_id": "linea_indigencia",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:25:03.990172-03:00",
+    "last_run_at": "2026-10-04T11:38:22.220589-03:00",
     "last_date": "2026-08-01",
     "row_count": 125,
     "error_message": null
@@ -210,7 +210,7 @@
   {
     "series_id": "mercado_bma",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:23:59.359776-03:00",
+    "last_run_at": "2026-10-04T11:37:26.913550-03:00",
     "last_date": "2026-10-02",
     "row_count": 2514,
     "error_message": null
@@ -218,7 +218,7 @@
   {
     "series_id": "mercado_ggal",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:23:58.666700-03:00",
+    "last_run_at": "2026-10-04T11:37:26.058187-03:00",
     "last_date": "2026-10-02",
     "row_count": 2514,
     "error_message": null
@@ -226,7 +226,7 @@
   {
     "series_id": "mercado_merval",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:23:58.450676-03:00",
+    "last_run_at": "2026-10-04T11:37:25.788247-03:00",
     "last_date": "2026-10-02",
     "row_count": 2435,
     "error_message": null
@@ -234,7 +234,7 @@
   {
     "series_id": "mercado_pam",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:23:59.130937-03:00",
+    "last_run_at": "2026-10-04T11:37:26.629401-03:00",
     "last_date": "2026-10-02",
     "row_count": 2514,
     "error_message": null
@@ -242,7 +242,7 @@
   {
     "series_id": "mercado_riesgo_pais",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:23:58.175510-03:00",
+    "last_run_at": "2026-10-04T11:37:25.516532-03:00",
     "last_date": "2026-10-02",
     "row_count": 7715,
     "error_message": null
@@ -250,7 +250,7 @@
   {
     "series_id": "mercado_teo",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:23:59.602076-03:00",
+    "last_run_at": "2026-10-04T11:37:27.254785-03:00",
     "last_date": "2026-10-02",
     "row_count": 2514,
     "error_message": null
@@ -258,71 +258,71 @@
   {
     "series_id": "mercado_ypf",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:23:58.875938-03:00",
+    "last_run_at": "2026-10-04T11:37:26.380198-03:00",
     "last_date": "2026-10-02",
     "row_count": 2514,
     "error_message": null
   },
   {
     "series_id": "moneda_brl",
-    "last_status": "error",
-    "last_run_at": "2026-10-03T23:23:46.610500-03:00",
-    "last_date": null,
-    "row_count": 0,
-    "error_message": "400 Client Error: Bad Request for url: https://api.bcra.gob.ar/estadisticascambiarias/v1.0/Cotizaciones/BRL?fechaDesde=2026-10-03&fechaHasta=2026-10-04&limit=1000&offset=0"
+    "last_status": "success",
+    "last_run_at": "2026-10-04T11:37:12.942370-03:00",
+    "last_date": "2026-10-02",
+    "row_count": 2867,
+    "error_message": null
   },
   {
     "series_id": "moneda_clp",
-    "last_status": "error",
-    "last_run_at": "2026-10-03T23:23:47.497276-03:00",
-    "last_date": null,
-    "row_count": 0,
-    "error_message": "400 Client Error: Bad Request for url: https://api.bcra.gob.ar/estadisticascambiarias/v1.0/Cotizaciones/CLP?fechaDesde=2026-10-03&fechaHasta=2026-10-04&limit=1000&offset=0"
+    "last_status": "success",
+    "last_run_at": "2026-10-04T11:37:13.935028-03:00",
+    "last_date": "2026-10-02",
+    "row_count": 2867,
+    "error_message": null
   },
   {
     "series_id": "moneda_cop",
-    "last_status": "error",
-    "last_run_at": "2026-10-03T23:23:50.164008-03:00",
-    "last_date": null,
-    "row_count": 0,
-    "error_message": "400 Client Error: Bad Request for url: https://api.bcra.gob.ar/estadisticascambiarias/v1.0/Cotizaciones/COP?fechaDesde=2026-10-03&fechaHasta=2026-10-04&limit=1000&offset=0"
+    "last_status": "success",
+    "last_run_at": "2026-10-04T11:37:16.820365-03:00",
+    "last_date": "2026-10-02",
+    "row_count": 2867,
+    "error_message": null
   },
   {
     "series_id": "moneda_mxn",
-    "last_status": "error",
-    "last_run_at": "2026-10-03T23:23:51.790586-03:00",
-    "last_date": null,
-    "row_count": 0,
-    "error_message": "400 Client Error: Bad Request for url: https://api.bcra.gob.ar/estadisticascambiarias/v1.0/Cotizaciones/MXP?fechaDesde=2026-10-03&fechaHasta=2026-10-04&limit=1000&offset=0"
+    "last_status": "success",
+    "last_run_at": "2026-10-04T11:37:18.828143-03:00",
+    "last_date": "2026-10-02",
+    "row_count": 2867,
+    "error_message": null
   },
   {
     "series_id": "moneda_pen",
-    "last_status": "error",
-    "last_run_at": "2026-10-03T23:23:49.298821-03:00",
-    "last_date": null,
-    "row_count": 0,
-    "error_message": "400 Client Error: Bad Request for url: https://api.bcra.gob.ar/estadisticascambiarias/v1.0/Cotizaciones/PEN?fechaDesde=2026-10-03&fechaHasta=2026-10-04&limit=1000&offset=0"
+    "last_status": "success",
+    "last_run_at": "2026-10-04T11:37:15.963158-03:00",
+    "last_date": "2026-10-02",
+    "row_count": 2867,
+    "error_message": null
   },
   {
     "series_id": "moneda_pyg",
-    "last_status": "error",
-    "last_run_at": "2026-10-03T23:23:51.050858-03:00",
-    "last_date": null,
-    "row_count": 0,
-    "error_message": "400 Client Error: Bad Request for url: https://api.bcra.gob.ar/estadisticascambiarias/v1.0/Cotizaciones/PYG?fechaDesde=2026-10-03&fechaHasta=2026-10-04&limit=1000&offset=0"
+    "last_status": "success",
+    "last_run_at": "2026-10-04T11:37:17.852299-03:00",
+    "last_date": "2026-10-02",
+    "row_count": 2867,
+    "error_message": null
   },
   {
     "series_id": "moneda_uyu",
-    "last_status": "error",
-    "last_run_at": "2026-10-03T23:23:48.396065-03:00",
-    "last_date": null,
-    "row_count": 0,
-    "error_message": "400 Client Error: Bad Request for url: https://api.bcra.gob.ar/estadisticascambiarias/v1.0/Cotizaciones/UYU?fechaDesde=2026-10-03&fechaHasta=2026-10-04&limit=1000&offset=0"
+    "last_status": "success",
+    "last_run_at": "2026-10-04T11:37:14.971249-03:00",
+    "last_date": "2026-10-02",
+    "row_count": 2867,
+    "error_message": null
   },
   {
     "series_id": "monetario_badlar",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:23:55.365819-03:00",
+    "last_run_at": "2026-10-04T11:37:22.322946-03:00",
     "last_date": "2026-10-01",
     "row_count": 1623,
     "error_message": null
@@ -330,7 +330,7 @@
   {
     "series_id": "monetario_base_monetaria",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:23:52.581344-03:00",
+    "last_run_at": "2026-10-04T11:37:19.737989-03:00",
     "last_date": "2026-09-30",
     "row_count": 2859,
     "error_message": null
@@ -338,7 +338,7 @@
   {
     "series_id": "monetario_m2_privado_yoy",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:23:57.031898-03:00",
+    "last_run_at": "2026-10-04T11:37:24.111637-03:00",
     "last_date": "2026-09-30",
     "row_count": 4291,
     "error_message": null
@@ -346,7 +346,7 @@
   {
     "series_id": "monetario_plazo_fijo_30d",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:23:56.166117-03:00",
+    "last_run_at": "2026-10-04T11:37:23.117963-03:00",
     "last_date": "2026-10-01",
     "row_count": 2860,
     "error_message": null
@@ -354,7 +354,7 @@
   {
     "series_id": "monetario_rem_inflacion_12m",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:23:57.797524-03:00",
+    "last_run_at": "2026-10-04T11:37:24.938176-03:00",
     "last_date": "2026-08-31",
     "row_count": 123,
     "error_message": null
@@ -362,7 +362,7 @@
   {
     "series_id": "monetario_reservas",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:23:53.560078-03:00",
+    "last_run_at": "2026-10-04T11:37:20.659129-03:00",
     "last_date": "2026-09-30",
     "row_count": 2859,
     "error_message": null
@@ -370,7 +370,7 @@
   {
     "series_id": "monetario_tpm",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:23:54.439021-03:00",
+    "last_run_at": "2026-10-04T11:37:21.454652-03:00",
     "last_date": "2025-07-10",
     "row_count": 2329,
     "error_message": null
@@ -378,7 +378,7 @@
   {
     "series_id": "tasa_desocupacion",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:25:00.859004-03:00",
+    "last_run_at": "2026-10-04T11:38:19.464489-03:00",
     "last_date": "2026-04-01",
     "row_count": 92,
     "error_message": null
@@ -386,7 +386,7 @@
   {
     "series_id": "tasa_empleo",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:25:01.836045-03:00",
+    "last_run_at": "2026-10-04T11:38:20.385050-03:00",
     "last_date": "2026-04-01",
     "row_count": 92,
     "error_message": null
@@ -394,7 +394,7 @@
   {
     "series_id": "tasa_pobreza",
     "last_status": "success",
-    "last_run_at": "2026-10-03T23:25:02.788373-03:00",
+    "last_run_at": "2026-10-04T11:38:21.296552-03:00",
     "last_date": "2026-07-01",
     "row_count": 29,
     "error_message": null
