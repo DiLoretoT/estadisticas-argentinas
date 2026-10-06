@@ -1,6 +1,6 @@
 {
   "updated_at": "2026-10-06",
-  "updated_at_time": "2026-10-06T02:45:24",
+  "updated_at_time": "2026-10-06T15:42:35",
   "countries": [
     "ARG",
     "BRA",
@@ -26,6 +26,74 @@
     "ECU": "Ecuador"
   },
   "indicators": [
+    {
+      "key": "pbi_pc_ppp",
+      "display_name": "PBI per cápita (USD PPP)",
+      "unit": "USD",
+      "higher_is_better": true,
+      "snapshot": [
+        {
+          "iso3": "ARG",
+          "country": "Argentina",
+          "year": "2025",
+          "value": 32586.63
+        },
+        {
+          "iso3": "BRA",
+          "country": "Brasil",
+          "year": "2025",
+          "value": 23433.29
+        },
+        {
+          "iso3": "CHL",
+          "country": "Chile",
+          "year": "2025",
+          "value": 37774.09
+        },
+        {
+          "iso3": "URY",
+          "country": "Uruguay",
+          "year": "2025",
+          "value": 38314.89
+        },
+        {
+          "iso3": "COL",
+          "country": "Colombia",
+          "year": "2025",
+          "value": 22640.42
+        },
+        {
+          "iso3": "MEX",
+          "country": "México",
+          "year": "2025",
+          "value": 25868.48
+        },
+        {
+          "iso3": "PER",
+          "country": "Perú",
+          "year": "2025",
+          "value": 18816.1
+        },
+        {
+          "iso3": "BOL",
+          "country": "Bolivia",
+          "year": "2025",
+          "value": 12873.04
+        },
+        {
+          "iso3": "PRY",
+          "country": "Paraguay",
+          "year": "2025",
+          "value": 20181.42
+        },
+        {
+          "iso3": "ECU",
+          "country": "Ecuador",
+          "year": "2025",
+          "value": 16756.65
+        }
+      ]
+    },
     {
       "key": "inflacion_anual",
       "display_name": "Inflación anual (% IPC)",
