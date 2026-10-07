@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-10-06",
-  "updated_at_time": "2026-10-06T15:41:30",
-  "period": "2026-10-01",
-  "value": 46654181.0,
-  "monthly_change": -0.54,
+  "updated_at": "2026-10-07",
+  "updated_at_time": "2026-10-07T02:05:11",
+  "period": "2026-10-02",
+  "value": 46002173.0,
+  "monthly_change": -1.93,
   "unit": "millones_pesos",
   "source": {
     "name": "BCRA",

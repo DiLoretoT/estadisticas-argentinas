@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-10-06",
-  "updated_at_time": "2026-10-06T15:41:36",
-  "period": "2026-08-31",
-  "value": 21.0,
-  "monthly_change": -3.67,
+  "updated_at": "2026-10-07",
+  "updated_at_time": "2026-10-07T02:05:17",
+  "period": "2026-09-30",
+  "value": 21.1,
+  "monthly_change": 0.48,
   "unit": "porcentaje_yoy",
   "source": {
     "name": "BCRA-REM",
