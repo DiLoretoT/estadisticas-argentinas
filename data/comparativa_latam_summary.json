@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-10-09",
-  "updated_at_time": "2026-10-09T15:49:56",
+  "updated_at": "2026-10-10",
+  "updated_at_time": "2026-10-10T02:05:17",
   "countries": [
     "ARG",
     "BRA",
@@ -444,7 +444,7 @@
           "iso3": "ARG",
           "country": "Argentina",
           "year": "2025",
-          "value": 105190456634.98
+          "value": 105492540538.72
         },
         {
           "iso3": "BRA",
@@ -462,19 +462,19 @@
           "iso3": "URY",
           "country": "Uruguay",
           "year": "2025",
-          "value": 23471287064.1
+          "value": 23492898626.85
         },
         {
           "iso3": "COL",
           "country": "Colombia",
           "year": "2025",
-          "value": 71083014420.06
+          "value": 71456221443.22
         },
         {
           "iso3": "MEX",
           "country": "México",
           "year": "2025",
-          "value": 729562753894.0
+          "value": 730829209260.0
         },
         {
           "iso3": "PER",
@@ -486,19 +486,19 @@
           "iso3": "BOL",
           "country": "Bolivia",
           "year": "2025",
-          "value": 10774966879.35
+          "value": 11706724187.62
         },
         {
           "iso3": "PRY",
           "country": "Paraguay",
           "year": "2025",
-          "value": 19145773249.95
+          "value": 19475491883.0
         },
         {
           "iso3": "ECU",
           "country": "Ecuador",
           "year": "2025",
-          "value": 41560544834.24
+          "value": 41623947149.12
         }
       ]
     },
