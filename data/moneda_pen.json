@@ -1,9 +1,9 @@
 {
   "updated_at": "2026-11-04",
-  "updated_at_time": "2026-11-04T16:49:46",
-  "period": "2026-11-03",
-  "value": 3.4622,
-  "monthly_change": -0.1,
+  "updated_at_time": "2026-11-04T20:09:19",
+  "period": "2026-11-04",
+  "value": 3.4428,
+  "monthly_change": -0.66,
   "unit": "unidades_locales_por_USD",
   "source": {
     "name": "BCRA",
