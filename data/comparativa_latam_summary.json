@@ -1,6 +1,6 @@
 {
   "updated_at": "2026-11-15",
-  "updated_at_time": "2026-11-15T09:07:58",
+  "updated_at_time": "2026-11-15T23:11:37",
   "countries": [
     "ARG",
     "BRA",
@@ -363,74 +363,6 @@
           "country": "Ecuador",
           "year": "2024",
           "value": 77.58
-        }
-      ]
-    },
-    {
-      "key": "deuda_externa",
-      "display_name": "Deuda externa total (USD M)",
-      "unit": "USD M",
-      "higher_is_better": false,
-      "snapshot": [
-        {
-          "iso3": "ARG",
-          "country": "Argentina",
-          "year": "2025",
-          "value": 261653029112.8
-        },
-        {
-          "iso3": "BRA",
-          "country": "Brasil",
-          "year": "2025",
-          "value": 659802995338.9
-        },
-        {
-          "iso3": "CHL",
-          "country": "Chile",
-          "year": null,
-          "value": null
-        },
-        {
-          "iso3": "URY",
-          "country": "Uruguay",
-          "year": null,
-          "value": null
-        },
-        {
-          "iso3": "COL",
-          "country": "Colombia",
-          "year": "2025",
-          "value": 255956267520.8
-        },
-        {
-          "iso3": "MEX",
-          "country": "México",
-          "year": "2025",
-          "value": 645042309550.6
-        },
-        {
-          "iso3": "PER",
-          "country": "Perú",
-          "year": "2025",
-          "value": 94269896873.5
-        },
-        {
-          "iso3": "BOL",
-          "country": "Bolivia",
-          "year": "2025",
-          "value": 16630197873.1
-        },
-        {
-          "iso3": "PRY",
-          "country": "Paraguay",
-          "year": "2025",
-          "value": 34300267461.9
-        },
-        {
-          "iso3": "ECU",
-          "country": "Ecuador",
-          "year": "2025",
-          "value": 66615722994.9
         }
       ]
     },
